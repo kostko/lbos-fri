@@ -22,3 +22,12 @@
 .equ M_RTCB, M_COUNT + 4   /* requesting tcb address */
 .equ M_STAT, M_RTCB + 4    /* status word */
 .equ MCBSIZE, M_STAT + 4   /* size of mcb */
+
+/* ================================================================
+                          ERROR CODES
+   ================================================================
+*/
+.equ E_BADSVC, -1     /* Invalid SVC number in SWI */
+.equ E_NOMCB, -2      /* No MCB available for request */
+.equ E_BADTASK, -3    /* Invalid task number */
+.equ E_BADMCB, -4     /* Invalid MCB address on reply */
