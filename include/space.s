@@ -19,5 +19,5 @@ TASK10: .space TCBSIZE
 
 /* Kernel stacks (Supervisor and IRQ modes have separate stacks). For
    memory locations see lbos.ind linker script! */
-STACK_SUPM_END: .long __STACK_END__ - 2*8*4
+STACK_SUPM_END: .long __STACK_END__ - 256*4
 STACK_IRQM_END: .long __STACK_END__

@@ -61,7 +61,9 @@ init_sysc_irq:
      Interrupt" (peripheral = 1) type interrupt which is shared with
      some other devices (such as the debug unit)! */
 init_pit:
-  /* TODO */
+  ldr r0, =PIT_BASE
+  mov r1, #0x030FFFFF   /* PITEN = 1, PITIEN = 1, PIV = FFFFF */
+  str r1, [r0, #PIT_MIR]
 
   /* Initialize LED */
 init_led:
