@@ -4,10 +4,12 @@
 */
 .data
 
-TCBLIST: .space 4
-CURRENT: .space 4
-MCBLIST: .space 4
+TINDEX: .space 4    /* Current task index */
+TCBLIST: .space 4   /* Pointer to list of TCBs */
+CURRENT: .space 4   /* Pointer to current task's TCB */
+MCBLIST: .space 4   /* Pointer to free list of MCBs */
 
+/* Task TCB placeholders */
 TASK1: .space TCBSIZE
 TASK2: .space TCBSIZE
 TASK3: .space TCBSIZE
@@ -18,6 +20,17 @@ TASK7: .space TCBSIZE
 TASK8: .space TCBSIZE
 TASK9: .space TCBSIZE
 TASK10: .space TCBSIZE
+
+/* Place for message control block allocation */
+.equ NMCBS, 5
+MCBAREA:  .space MCBSIZE*NMCBS
+
+/* Task initialization data (see main.s/task_init) */
+.global task_dummy
+TASK_INITDATA:
+      /* TCB | Program counter | Status register */ 
+.long TASK1,   task_dummy,       0x0
+.long 0
 
 /* Kernel stacks (Supervisor and IRQ modes have separate stacks). For
    memory locations see lbos.ind linker script! */

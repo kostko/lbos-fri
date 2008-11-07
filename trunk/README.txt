@@ -27,11 +27,46 @@ into r0, r1, r2, r3.
 3. Macros
 ----------------------------------------------------------------------
 The following macros are currently defined (in include/macros.s):
-  ENABLE_IRQ(r0)  - Enables CPU interrupts
-  DISABLE_IRQ(r0) - Disables CPU interrupts
-  LED_ON(r0, r1)  - Turns the LED on
-  LED_OFF(r0, r1) - Turns the LED off
 
-Values in parenthesis represent registers that get used by the macro
-and should be expected to contain garbage after the macro has been
+        Macro name          | Description                | Regs 
+  --------------------------+----------------------------+----------
+  ENABLE_IRQ                | Enables CPU interrupts.    | r0
+  --------------------------+----------------------------+----------
+  DISABLE_IRQ               | Disables CPU interrupts.   | r0
+  --------------------------+----------------------------+----------
+  LED_ON                    | Turns the LED on.          | r0, r1
+  --------------------------+----------------------------+----------
+  LED_OFF                   | Turns the LED off.         | r0, r1
+  --------------------------+----------------------------+----------
+  SAVE_CURRENT_CONTEXT      | Saves current context to   | -
+                            | local stack.               |
+  --------------------------+----------------------------+----------
+  SWITCH_TO_CONTEXT <sp>    | Switches to some saved     | -
+                            | context; <sp> as above     |
+  --------------------------+----------------------------+----------
+  GET_SP <mode>             | Retrieves the sp as set in | r0, r1, 
+                            | the specified <mode> and   | r2
+                            | places it into r0          |
+
+"Regs" values represent registers that get used by the macro and
+should be expected to contain garbage after the macro has been
 invoked.
+
+4. Context structure on the stack
+----------------------------------------------------------------------
+Stack grows towards lower addresses. Context is pushed up as in the
+following example:
+
+  0x0FC8 PSR   <-- sp'
+  0x0FCC LR
+  0x0FD0 R12
+    ...
+  0x0FF8 R2
+  0x0FFC R1
+  0x1000 R0
+  0x1004 .    <-- sp
+
+Where registers are as follows:
+ R0-R12 - general purpuse registers
+ PSR    - program status register (in SPSR after mode switch)
+ LR     - link register (contains current task PC)

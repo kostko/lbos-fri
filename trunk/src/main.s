@@ -14,6 +14,7 @@
 
 .global start
 .global sys_irq_handler
+.global dispatch
 start:
   /* Switch to IRQ mode to setup the stack */
   mrs r0, cpsr         /* Load CPSR to r0 */
@@ -77,7 +78,53 @@ init_led:
 
   /* Initializes task structures */
 init_tasks:
+  ldr r0, =TASK_INITDATA
+  ldr r1, =TCBLIST
+  
+  /* Reset current task index */
+  ldr r2, =TINDEX   /* Load TINDEX address */
+  mov r3, #0
+  str r3, [r2]      /* Write 0 to TINDEX */
+  
+  /* Initialize all task TCBs */
+__init_tcb:
+  ldr r2, [r0], #4  /* Load first long move r0 to next field */
+  cmp r2, #0
+  beq __init_done   /* We are done if r2 is zero */
+  
+  /* r2 now contains pointer to task's TCB */
+  str r3, [r2, #T_USP]    /* Clear task's User Stack Pointer */
+  add r4, r2, #T_STACK    /* r4 now holds the task's stack pointer */
+  str r3, [r2, #T_FLAG]   /* Mark the task "dispatchable" - clear flags */
+  
+  /* Push context to stack */
+  sub r4, r4, #(13 << 2)  /* Move stack pointer since regs should be there */
+  ldr r5, [r0], #4        /* Load task's PC */
+  ldr r6, [r0], #4        /* Load task's status register */
+  stmfd r4!, {r5,r6}      /* Push task's PC and PSR to the stack */
+  
+  /* Set r4 to be task's System Stack Pointer */
+  str r4, [r2, #T_SSP]
+  
+  /* Setup TCB linkage */
+  str r2, [r1, #T_LINK]   /* Set previous TCB link word; note that first loop
+                             iteration only works because T_LINK is 0! */
+  mov r1, r2              /* Save current TCB address for later */
+  b __init_tcb
+  
+__init_done:
+  /* TCB init completed, clear last T_LINK */
+  ldr r3, [r1, #T_LINK]
+
+  /* Initializes message passing structures */
+init_messages:
   /* TODO */
 
-  /* All initializations completed, enable interrupts */
-  ENABLE_IRQ
+  /* All initializations completed */
+done:
+  ldr r0, =CURRENT
+  mov r1, #0
+  str r1, [r0]    /* Clear current task */
+  
+  /* Enter task dispatcher */
+  b dispatch
