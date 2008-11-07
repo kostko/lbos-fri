@@ -7,12 +7,13 @@
 
 /* Include structure definitions and static variables */
 .include "include/structures.s"
+.include "include/macros.s"
 
 .text
 .code 32
 syscall_handler:
   /* System call handler/dispatcher */
-  stmfd r13!, {r0-r12,r14}
+  SAVE_CURRENT_CONTEXT
   
   /* Get interrupt number from SWI instruction */
   ldr r0, [r14, #-4]      /* Load SWI instruction opcode + arg to r0 */
@@ -31,7 +32,7 @@ __bad_svc:
   /* Return E_BADSVC error code in r0 */
   mov r0, #E_BADSVC
   str r0, [r13]
-  ldmfd r13!, {r0-r12,pc}^
+  SWITCH_TO_CONTEXT sp
 
 /* ================================================================
                        SYSTEM CALLS GO HERE

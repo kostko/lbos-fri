@@ -38,7 +38,7 @@ The following macros are currently defined (in include/macros.s):
   --------------------------+----------------------------+----------
   LED_OFF                   | Turns the LED off.         | r0, r1
   --------------------------+----------------------------+----------
-  SAVE_CURRENT_CONTEXT      | Saves current context to   | -
+  SAVE_CURRENT_CONTEXT      | Saves current context to   | r12
                             | local stack.               |
   --------------------------+----------------------------+----------
   SWITCH_TO_CONTEXT <sp>    | Switches to some saved     | -
