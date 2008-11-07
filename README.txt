@@ -1,5 +1,5 @@
 ======================================================================
-  LBOS-FRI DEVELOPMENT GUIDELINES - READ BEFORE COMMITING ANY CODE !
+  LBOS-FRI DEVELOPMENT GUIDELINES - READ BEFORE COMMITTING ANY CODE !
 ======================================================================
 
 1. Memory layout
