@@ -69,7 +69,11 @@ init_pit:
 
   /* Initialize LED */
 init_led:
-  /* TODO */
+  ldr r0, =PIOC_BASE
+  mov r1, #1 << 1
+  str r1, [r0, #PIO_PER]  /* Enable LED pin control by PIO */
+  str r1, [r0, #PIO_OER]  /* Enable output on the I/O line */
+  str r1, [r0, #PIO_SODR] /* Turn the LED off for now */
 
   /* Initializes task structures */
 init_tasks:
