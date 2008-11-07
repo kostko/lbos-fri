@@ -1,0 +1,54 @@
+OUTPUT_FORMAT("elf32-littlearm", "elf32-bigarm", "elf32-littlearm")
+OUTPUT_ARCH(arm)
+ENTRY(_boot)
+
+INPUT(&& &&Assembler Files&)   
+INPUT(&& &&Source Files&)
+
+__TEXT_START__ = 0x00000000;
+__DATA_START__ = 0x20000000;
+__STACK_END__  = 0x20100000;
+
+SECTIONS
+{
+  .text __TEXT_START__ :
+  {
+    *vectors.o(.text)
+    *(.text)
+    *(.text.*)
+  }
+  
+  PROVIDE (__etext = .);
+  
+  .rodata   : 
+  { 
+    *(.rodata) 
+    *(.rodata.*) 
+  }
+  
+  /* append .data; it will be copied by crt0 to final __DATA_START__ */        
+  . = ALIGN(4);  
+  __INIT_DATA_START__ = .;  
+  .data __DATA_START__ : AT ( __INIT_DATA_START__ )
+  {
+    *(.data)
+    *(.data.*)
+    SORT(CONSTRUCTORS)
+  }
+  . = ALIGN(4);  
+  __DATA_END__ = .;
+  
+  /* noninitialized data; will be zeroed by crt0*/
+  __bss_start__ = .;
+  .bss       :
+  {
+   *(.bss)
+   *(.bss.*)
+   *(COMMON)
+   . = ALIGN(4);
+  }
+  . = ALIGN(4);
+  __bss_end__ = . ;
+  PROVIDE (end = .);
+}
+
