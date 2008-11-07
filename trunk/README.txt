@@ -27,5 +27,11 @@ into r0, r1, r2, r3.
 3. Macros
 ----------------------------------------------------------------------
 The following macros are currently defined (in include/macros.s):
-  ENABLE_IRQ - Enables CPU interrupts
-  DISABLE_IRQ - Disables CPU interrupts
+  ENABLE_IRQ(r0)  - Enables CPU interrupts
+  DISABLE_IRQ(r0) - Disables CPU interrupts
+  LED_ON(r0, r1)  - Turns the LED on
+  LED_OFF(r0, r1) - Turns the LED off
+
+Values in parenthesis represent registers that get used by the macro
+and should be expected to contain garbage after the macro has been
+invoked.
