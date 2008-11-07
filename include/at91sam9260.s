@@ -67,3 +67,12 @@
 .equ PIT_PIVR, 0x08  /* PIT Periodic Interval Value Register */
 .equ PIT_PIIR, 0x0C  /* PIT Periodic Interval  Image Register */
 .equ PIT_MODE, 0x030FFFFF /* PITEN = 1, PITIEN = 1, PIV = FFFFF */
+
+.equ PSR_MODE_MASK, 0x1F /* Mode mask */
+.equ PSR_MODE_USER, 0x10 /* User mode */
+.equ PSR_MODE_FIQ, 0x11  /* FIQ mode */
+.equ PSR_MODE_IRQ, 0x12  /* IRQ mode */
+.equ PSR_MODE_SVC, 0x13  /* SVC mode */
+.equ PSR_MODE_ABT, 0x17  /* Abort mode */
+.equ PSR_MODE_UND, 0x1B  /* Undef mode */
+.equ PSR_MODE_SYS, 0x1F  /* System mode */
