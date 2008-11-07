@@ -8,6 +8,8 @@
 /* Include structure definitions and static variables */
 .include "include/at91sam9260.s"
 
+.text
+.code 32
 sys_irq_handler:
   /* System controller interrupt handler */
   sub r14, r14, #4

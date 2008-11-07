@@ -61,8 +61,9 @@
 .equ DBGU_PTCR, 0x120 /* (DBGU) Periph. Transfer Control Register */
 .equ DBGU_PTSR, 0x124 /* (DBGU) Periph. Transfer Status Register */
 
-.equ PIT_BASE 0xFFFFFD40 /* PIT Base address */
-.equ PIT_MR 0x00    /* PIT Mode Register */
-.equ PIT_SR 0x04    /* PIT Status Register */
-.equ PIT_PIVR 0x08  /* PIT Periodic Interval Value Register */
-.equ PIT_PIIR 0x0C  /* PIT Periodic Interval  Image Register */
+.equ PIT_BASE, 0xFFFFFD40 /* PIT Base address */
+.equ PIT_MR, 0x00    /* PIT Mode Register */
+.equ PIT_SR, 0x04    /* PIT Status Register */
+.equ PIT_PIVR, 0x08  /* PIT Periodic Interval Value Register */
+.equ PIT_PIIR, 0x0C  /* PIT Periodic Interval  Image Register */
+.equ PIT_MODE, 0x030FFFFF /* PITEN = 1, PITIEN = 1, PIV = FFFFF */

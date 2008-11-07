@@ -2,6 +2,8 @@
              CONSTROL STRUCTURES SPACE RESERVATION
    ================================================================
 */
+.data
+
 TCBLIST: .space 4
 CURRENT: .space 4
 MCBLIST: .space 4
