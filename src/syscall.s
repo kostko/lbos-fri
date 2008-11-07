@@ -22,7 +22,7 @@ sycall_handler:
   
   /* Get SVC address and jump to it */
   ldr r1, =SYSCALL_TABLE
-  ldr r1, [r0, r1]
+  ldr r1, [r0, r1, lsl #2]
   bx r1
   
 __bad_svc:
