@@ -2,13 +2,15 @@
  * FRI-LBOS ;-)
  * general OS framework (C) 2008 by FRI/OS1/Group8
  */
-.global sycall_handler
+.global syscall_handler
 .global svc_newtask
 
 /* Include structure definitions and static variables */
 .include "include/structures.s"
 
-sycall_handler:
+.text
+.code 32
+syscall_handler:
   /* System call handler/dispatcher */
   stmfd r13!, {r0-r12,r14}
   
@@ -43,6 +45,7 @@ svc_newtask:
                            SYCALL TABLE
    ================================================================
 */
+.data
 SYSCALL_TABLE:
 .long svc_newtask   /* (0) enter dispatcher */
 

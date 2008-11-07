@@ -22,7 +22,8 @@ start:
   msr cpsr, r0         /* Write r0 to CPSR */
   
   /* Setup the stack pointer */
-  ldr sp, STACK_IRQM_END
+  ldr r0, =STACK_IRQM_END
+  ldr sp, [r0]
   
   /* Switch to supervisor mode to setup the stack and perform init */
   mrs r0, cpsr        /* Load CPSR to r0 */
@@ -30,10 +31,11 @@ start:
   msr cpsr, r0        /* Write r0 to CPSR */
   
   /* Setup the stack pointer */
-  ldr sp, STACK_SUPM_END
+  ldr r0, =STACK_SUPM_END
+  ldr sp, [r0]
   
   /* Setup system clocks */
-  .include "include/clock_setup.s"
+  .include "include/clock_init.s"
   
   /* Enable instruction and data caches */
   mrc p15, 0, r0, c1, c0, 0 
@@ -62,11 +64,15 @@ init_sysc_irq:
      some other devices (such as the debug unit)! */
 init_pit:
   ldr r0, =PIT_BASE
-  mov r1, #0x030FFFFF   /* PITEN = 1, PITIEN = 1, PIV = FFFFF */
-  str r1, [r0, #PIT_MIR]
+  ldr r1, =PIT_MODE     /* PITEN = 1, PITIEN = 1, PIV = FFFFF */
+  str r1, [r0, #PIT_MR] /* Write mode to PIT Mode Register */
 
   /* Initialize LED */
 init_led:
+  /* TODO */
+
+  /* Initializes task structures */
+init_tasks:
   /* TODO */
 
   /* All initializations completed, enable interrupts */
