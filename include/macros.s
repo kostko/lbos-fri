@@ -32,13 +32,13 @@
   stmfd sp!, {r12}        /* Push SPSR to stack */
 .endm
 
-.macro SWITCH_TO_CONTEXT a
-  ldmfd \a, {r12}         /* Pop PSR from stack */
+.macro SWITCH_TO_CONTEXT
+  ldmfd sp, {r12}         /* Pop PSR from stack */
   msr spsr_all, r12       /* Save PSR in SPSR */
-  ldmfd \a, {r0-r12,pc}^  /* Restore registers, PC and CPSR */
+  ldmfd sp, {r0-r12,pc}^  /* Restore registers, PC and CPSR */
 .endm
 
-.macro GET_SP mode
+.macro GET_SP mode reg
   /* Switch to specified mode */
   mrs r2, cpsr_all
   bic r1, r2, #PSR_MODE_MASK
@@ -46,6 +46,19 @@
   msr cpsr_all, r1
   
   /* Get the stack pointer and restore the mode */
-  mov r0, sp
+  mov \reg, sp
   msr cpsr_all, r2
 .endm
+
+.macro SET_SP mode, reg
+  /* Switch to specified mode */
+  mrs r2, cpsr_all
+  bic r1, r2, #PSR_MODE_MASK
+  orr r1, r1, #\mode
+  msr cpsr_all, r1
+  
+  /* Set stack pointer and restore the mode */
+  mov sp, \reg
+  msr cpsr_all, r2
+.endm
+

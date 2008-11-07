@@ -29,7 +29,7 @@ sys_irq_handler:
   ldr r0, =AIC_BASE
   str r0, [r0, #AIC_EOICR]
   
-  SWITCH_TO_CONTEXT sp
+  SWITCH_TO_CONTEXT
 
 __pit_irq_handler:
   /* PIT handler, just switch to next task */

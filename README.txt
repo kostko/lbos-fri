@@ -41,12 +41,19 @@ The following macros are currently defined (in include/macros.s):
   SAVE_CURRENT_CONTEXT      | Saves current context to   | r12
                             | local stack.               |
   --------------------------+----------------------------+----------
-  SWITCH_TO_CONTEXT <sp>    | Switches to some saved     | -
-                            | context; <sp> as above     |
+  SWITCH_TO_CONTEXT         | Switches to some saved     | -
+                            | context.                   |
   --------------------------+----------------------------+----------
-  GET_SP <mode>             | Retrieves the sp as set in | r0, r1, 
-                            | the specified <mode> and   | r2
-                            | places it into r0          |
+  GET_SP <mode> <reg>       | Retrieves the sp as set in | r1, r2
+                            | the specified <mode> and   | 
+                            | places it into <reg>, which|
+                            | MUST NOT be one of the     |
+                            | used registers.            |
+  --------------------------+----------------------------+----------
+  SET_SP <mode> <reg>       | Sets the sp to contents of | r1, r2
+                            | <reg> for <mode>. The used |
+                            | <reg> MUST NOT be one of   |
+                            | the used registers.        |
 
 "Regs" values represent registers that get used by the macro and
 should be expected to contain garbage after the macro has been

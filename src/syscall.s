@@ -32,7 +32,7 @@ __bad_svc:
   /* Return E_BADSVC error code in r0 */
   mov r0, #E_BADSVC
   str r0, [r13]
-  SWITCH_TO_CONTEXT sp
+  SWITCH_TO_CONTEXT
 
 /* ================================================================
                        SYSTEM CALLS GO HERE
