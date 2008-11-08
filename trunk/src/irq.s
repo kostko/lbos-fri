@@ -20,7 +20,7 @@ sys_irq_handler:
       SYSC IRQ channel is shared) */
   ldr r0, =PIT_BASE
   ldr r1, [r0, #PIT_SR]
-  tst r1, #1
+  cmp r1, #1
   beq __pit_irq_handler
   
   /* Nothing matched */
@@ -33,6 +33,12 @@ sys_irq_handler:
 
 __pit_irq_handler:
   /* PIT handler, just switch to next task */
+  
+  /* Acknowledge interrupt */
+  ldr r0, =PIT_BASE
+  ldr r0, [r0, #PIT_PIVR]
+  
+  /* Signal end of interrupt handling to AIC */
   ldr r0, =AIC_BASE
   str r0, [r0, #AIC_EOICR]
   b svc_newtask
