@@ -2,7 +2,7 @@
                           GENERAL CONSTANTS
    ================================================================
 */
-.equ STACKSIZE, 0x200
+.equ STACKSIZE, 0x100
 
 /* ================================================================
                 TASK CONTROL BLOCK STRUCTURE / OFFSETS 

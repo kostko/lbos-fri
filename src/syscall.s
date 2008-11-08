@@ -4,18 +4,21 @@
  */
 .global syscall_handler
 .global svc_newtask
+.global dispatch
 
 /* Include structure definitions and static variables */
 .include "include/structures.s"
 .include "include/macros.s"
+.include "include/at91sam9260.s"
+.include "include/globals.s"
 
 .text
 .code 32
 syscall_handler:
   /* System call handler/dispatcher */
-  SAVE_CURRENT_CONTEXT
+  PUSH_CONTEXT
   
-  /* Get interrupt number from SWI instruction */
+  /* Get syscall number from SWI instruction */
   ldr r0, [r14, #-4]      /* Load SWI instruction opcode + arg to r0 */
   bic r0, r0, #0xFF000000 /* Clear upper 8 bits */
   
@@ -32,15 +35,27 @@ __bad_svc:
   /* Return E_BADSVC error code in r0 */
   mov r0, #E_BADSVC
   str r0, [r13]
-  SWITCH_TO_CONTEXT
+  POP_CONTEXT
 
 /* ================================================================
                        SYSTEM CALLS GO HERE
    ================================================================
 */
+
+/* New task syscall */
 svc_newtask:
-  /* New task syscall */
-  b svc_newtask
+  /* Load current task TCB pointer */
+  ldr r0, =CURRENT
+  ldr r0, [r0]
+  cmp r0, #0
+  beq dispatch      /* No current process, enter dispatch */
+  
+  /* Save current taks's context. */
+  GET_SP #PSR_MODE_USER, r3   /* Get USP */
+  str r3, [r0, #T_USP]        /* Store USP */
+  str sp, [r0, #T_SSP]        /* Store SSP */
+
+  b dispatch
 
 /* ================================================================
                            SYCALL TABLE

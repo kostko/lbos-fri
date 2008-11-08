@@ -98,10 +98,11 @@ __init_tcb:
   str r3, [r2, #T_FLAG]   /* Mark the task "dispatchable" - clear flags */
   
   /* Push context to stack */
-  sub r4, r4, #(13 << 2)  /* Move stack pointer since regs should be there */
   ldr r5, [r0], #4        /* Load task's PC */
+  str r5, [r4, #-4]!      /* Push task's PC to the stack */
+  sub r4, r4, #(13 << 2)  /* Move stack pointer since regs should be there */
   ldr r6, [r0], #4        /* Load task's status register */
-  stmfd r4!, {r5,r6}      /* Push task's PC and PSR to the stack */
+  str r6, [r4, #-4]!      /* Push task's PC and PSR to the stack */
   
   /* Set r4 to be task's System Stack Pointer */
   str r4, [r2, #T_SSP]
