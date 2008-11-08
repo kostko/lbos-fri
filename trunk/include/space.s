@@ -3,6 +3,7 @@
    ================================================================
 */
 .data
+.include "include/globals.s"
 
 TINDEX: .space 4    /* Current task index */
 TCBLIST: .space 4   /* Pointer to list of TCBs */
@@ -21,6 +22,10 @@ TASK8: .space TCBSIZE
 TASK9: .space TCBSIZE
 TASK10: .space TCBSIZE
 
+/* Task map table (if you change this, please update MAXTASK in globals.s) */
+TASKTAB: .long TASK1
+ENDTASKTAB:
+
 /* Place for message control block allocation */
 .equ NMCBS, 5
 MCBAREA:  .space MCBSIZE*NMCBS
@@ -29,7 +34,7 @@ MCBAREA:  .space MCBSIZE*NMCBS
 .global task_dummy
 TASK_INITDATA:
       /* TCB | Program counter | Status register */ 
-.long TASK1,   task_dummy,       0x0
+.long TASK1,   task_dummy,       PSR_MODE_USER
 .long 0
 
 /* Kernel stacks (Supervisor and IRQ modes have separate stacks). For

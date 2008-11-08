@@ -38,10 +38,14 @@ The following macros are currently defined (in include/macros.s):
   --------------------------+----------------------------+----------
   LED_OFF                   | Turns the LED off.         | r0, r1
   --------------------------+----------------------------+----------
-  SAVE_CURRENT_CONTEXT      | Saves current context to   | r12
+  PUSH_CONTEXT              | Saves current context to   | r12
                             | local stack.               |
   --------------------------+----------------------------+----------
-  SWITCH_TO_CONTEXT         | Switches to some saved     | -
+  PUSH_CONTEXT_SVC          | Saves current context to   | r0-r3,
+                            | SVC stack by first making  | r9-r12
+                            | a switch to SVC mode.      |
+  --------------------------+----------------------------+----------
+  POP_CONTEXT               | Switches to some saved     | -
                             | context.                   |
   --------------------------+----------------------------+----------
   GET_SP <mode> <reg>       | Retrieves the sp as set in | r1, r2
@@ -65,13 +69,14 @@ Stack grows towards lower addresses. Context is pushed up as in the
 following example:
 
   0x0FC8 PSR   <-- sp'
-  0x0FCC LR
-  0x0FD0 R12
+  0x0FCC R0
+  0x0FD0 R1
     ...
-  0x0FF8 R2
-  0x0FFC R1
-  0x1000 R0
+  0x0FF8 R11
+  0x0FFC R12
+  0x1000 LR
   0x1004 .    <-- sp
+
 
 Where registers are as follows:
  R0-R12 - general purpuse registers
