@@ -51,7 +51,7 @@ svc_newtask:
   beq dispatch      /* No current process, enter dispatch */
   
   /* Save current taks's context. */
-  GET_SP #PSR_MODE_USER, r3   /* Get USP */
+  GET_SP #PSR_MODE_SYS, r3    /* Get USP */
   str r3, [r0, #T_USP]        /* Store USP */
   str sp, [r0, #T_SSP]        /* Store SSP */
 
