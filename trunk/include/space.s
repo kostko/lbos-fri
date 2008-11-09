@@ -23,7 +23,7 @@ TASK9: .space TCBSIZE
 TASK10: .space TCBSIZE
 
 /* Task map table (if you change this, please update MAXTASK in globals.s) */
-TASKTAB: .long TASK1
+TASKTAB: .long TASK1, TASK2
 ENDTASKTAB:
 
 /* Place for message control block allocation */
@@ -32,9 +32,11 @@ MCBAREA:  .space MCBSIZE*NMCBS
 
 /* Task initialization data (see main.s/task_init) */
 .global task_dummy
+.global task_msgtest
 TASK_INITDATA:
       /* TCB | Program counter | Status register */ 
 .long TASK1,   task_dummy,       PSR_MODE_USER
+.long TASK2,   task_msgtest,     PSR_MODE_USER
 .long 0
 
 /* Kernel stacks (Supervisor and IRQ modes have separate stacks). For
@@ -43,7 +45,7 @@ STACK_SUPM_END: .long __STACK_END__ - 256*4
 STACK_IRQM_END: .long __STACK_END__
 
 /* Messages */
-MSG_PREINIT: .asciz "LBOS-FRI v0.1 for AT91SAM9260 starting up...\n\r"
+MSG_PREINIT: .asciz "\n\rLBOS-FRI v0.1 for AT91SAM9260 starting up...\n\r"
 MSG_INIT_PER: .asciz ">>> Initializing peripherals...\n\r"
 MSG_INIT_TCB: .asciz ">>> Initializing tasks...\n\r"
 MSG_INIT_MCB: .asciz ">>> Initializing message passing...\n\r"
