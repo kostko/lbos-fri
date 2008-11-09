@@ -5,6 +5,9 @@
 .text
 .code 32
 
+/* Include structure definitions and static variables */
+.include "include/structures.s"
+
 .global task_msgtest
 task_msgtest:
   mov r0, #14
@@ -20,4 +23,16 @@ task_msgtest:
   mov r10, #24
   mov r11, #25
   mov r12, #26
+  
+  /* Receive data from the other task */
+  swi #SYS_RECV
+  /* Got something (pointer to MCB in r0) */
+  /* Just leave it there */
+  nop
+  nop
+  nop
+  nop
+  nop
+  swi #SYS_REPLY
+  
   b task_msgtest

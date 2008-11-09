@@ -150,7 +150,20 @@ __init_done:
   ldr r0, =MSG_INIT_MCB
   bl printk
 init_messages:
-  /* TODO */
+  mov r0, #(NMCBS - 1)
+  ldr r1, =MCBAREA
+  ldr r2, =MCBLIST
+  str r1, [r2]        /* Point MCBLIST to first free MCB */
+
+__init_mcb:
+  mov r3, r1            /* Save current MCB address */
+  add r1, r1, #MCBSIZE  /* Compute next MCB address */
+  str r1, [r3, #M_LINK] /* Link current MCB to next MCB */
+  subs r0, r0, #1       /* Decrement MCB counter */
+  bne __init_mcb        /* If no more MCBs, stop */
+  
+  /* Clear last M_LINK */
+  str r0, [r3, #M_LINK]
 
   /* All initializations completed */
 done:

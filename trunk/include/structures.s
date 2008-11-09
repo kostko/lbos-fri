@@ -33,9 +33,9 @@
                            PROCESS FLAGS
    ================================================================
 */
-.equ IWAIT, 1
-.equ MWAIT, 2
-.equ RWAIT, 4
+.equ IWAIT, 1 /* Waiting on interrupt */
+.equ MWAIT, 2 /* Waiting on message completion */
+.equ RWAIT, 4 /* Waiting on message receipt */
 
 /* ================================================================
                           ERROR CODES
@@ -45,3 +45,14 @@
 .equ E_NOMCB, -2      /* No MCB available for request */
 .equ E_BADTASK, -3    /* Invalid task number */
 .equ E_BADMCB, -4     /* Invalid MCB address on reply */
+
+/* ================================================================
+                    SYSCALL NUMBERS FOR USERSPACE
+   ================================================================
+*/
+.equ SYS_NEWTASK, 0
+.equ SYS_PRINTLN, 1
+.equ SYS_DELAY, 2
+.equ SYS_SEND, 3
+.equ SYS_RECV, 4
+.equ SYS_REPLY, 5

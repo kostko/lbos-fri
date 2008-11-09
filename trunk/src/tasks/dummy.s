@@ -5,6 +5,9 @@
 .text
 .code 32
 
+/* Include structure definitions and static variables */
+.include "include/structures.s"
+
 .global task_dummy
 task_dummy:
   mov r0, #1
@@ -20,4 +23,13 @@ task_dummy:
   mov r10, #11
   mov r11, #12
   mov r12, #13
+  
+  /* Send something to other task */
+  mov r0, #TESTBUF
+  mov r1, #6
+  mov r2, #1
+  swi #SYS_SEND
+  
   b task_dummy
+
+TESTBUF: .asciz "Hello"

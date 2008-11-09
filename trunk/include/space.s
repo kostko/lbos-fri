@@ -27,7 +27,6 @@ TASKTAB: .long TASK1, TASK2
 ENDTASKTAB:
 
 /* Place for message control block allocation */
-.equ NMCBS, 5
 MCBAREA:  .space MCBSIZE*NMCBS
 
 /* Task initialization data (see main.s/task_init) */

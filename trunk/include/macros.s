@@ -82,3 +82,7 @@
   msr cpsr_all, r2
 .endm
 
+.macro SVC_RETURN_CODE code
+  mov r0, \code
+  str r0, [sp, #4]    /* Modify r0 on the stack */
+.endm
