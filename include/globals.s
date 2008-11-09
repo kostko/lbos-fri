@@ -20,4 +20,4 @@
 .global NMCBS
 .global MCBAREA
 
-.equ MAXTASK, 1
+.equ MAXTASK, 2

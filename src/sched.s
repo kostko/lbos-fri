@@ -23,9 +23,9 @@ dispatch:
   cmp r1, #MAXTASK
   bne __no_wrap
   mov r1, #0
-  str r1, [r0]
 
 __no_wrap:
+  str r1, [r0]
   mov r1, r1, lsl #2    /* Multiply r1 by 4 to get proper offset */
   ldr r2, =TASKTAB
   ldr r2, [r2, r1]      /* Load TCB address into r2 */
