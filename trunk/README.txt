@@ -62,6 +62,9 @@ The following macros are currently defined (in include/macros.s):
   SVC_RETURN_CODE <code>    | Sets r0 value on the local | r0
                             | stack to <code> (which may |
                             | be an immediate or a reg.) |
+  --------------------------+----------------------------+----------
+  LOAD_CURRENT_TCB <reg>    | Load current task's TCB    | -
+                            | pointer into <reg>.        |
 
 "Regs" values represent registers that get used by the macro and
 should be expected to contain garbage after the macro has been

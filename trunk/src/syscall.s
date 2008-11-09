@@ -46,8 +46,7 @@ __bad_svc:
  */
 svc_newtask:
   /* Load current task TCB pointer */
-  ldr r0, =CURRENT
-  ldr r0, [r0]
+  LOAD_CURRENT_TCB r0
   cmp r0, #0
   beq dispatch      /* No current process, enter dispatch */
   
@@ -102,8 +101,7 @@ svc_send:
   str r0, [r4, #M_BUFF]   /* Put buffer address into MCB */
   str r1, [r4, #M_COUNT]  /* Put buffer length into MCB */
   
-  ldr r0, =CURRENT
-  ldr r0, [r0]            /* Get pointer to current task's TCB */
+  LOAD_CURRENT_TCB r0     /* Get pointer to current task's TCB */
   str r0, [r4, #M_RTCB]   /* Save task TCB into MCB */
   
   /* Alter task flags so it gets eliminated from dispatch
@@ -152,8 +150,7 @@ __err_badtask:
  */
 svc_recv:
   /* Get current task's TCB */
-  ldr r0, =CURRENT
-  ldr r0, [r0]
+  LOAD_CURRENT_TCB r0
   
   /* DISABLE_IRQ */
   ldr r1, [r0, #T_MSG]
@@ -187,8 +184,7 @@ __wait_for_msg:
  */
 svc_reply:
   /* Get current task's TCB */
-  ldr r1, =CURRENT
-  ldr r1, [r1]
+  LOAD_CURRENT_TCB r1
   
   /* Get list header and start MCB search to find the MCB
      directly before us */

@@ -86,3 +86,8 @@
   mov r0, \code
   str r0, [sp, #4]    /* Modify r0 on the stack */
 .endm
+
+.macro LOAD_CURRENT_TCB reg
+  ldr reg, =CURRENT
+  ldr r0, [r0]
+.endm
