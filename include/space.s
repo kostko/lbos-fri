@@ -41,3 +41,10 @@ TASK_INITDATA:
    memory locations see lbos.ind linker script! */
 STACK_SUPM_END: .long __STACK_END__ - 256*4
 STACK_IRQM_END: .long __STACK_END__
+
+/* Messages */
+MSG_PREINIT: .asciz "LBOS-FRI v0.1 for AT91SAM9260 starting up...\n\r"
+MSG_INIT_PER: .asciz ">>> Initializing peripherals...\n\r"
+MSG_INIT_TCB: .asciz ">>> Initializing tasks...\n\r"
+MSG_INIT_MCB: .asciz ">>> Initializing message passing...\n\r"
+MSG_INIT_DONE: .asciz "All done! Entering the dispatcher.\n\r"

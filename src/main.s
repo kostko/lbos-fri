@@ -15,6 +15,7 @@
 .global start
 .global sys_irq_handler
 .global dispatch
+.global printk
 start:
   /* Switch to IRQ mode to setup the stack */
   mrs r0, cpsr         /* Load CPSR to r0 */
@@ -43,6 +44,32 @@ start:
   orr r0, r0, #(0x1 << 12)      /* Instruction cache bit */
   orr r0, r0, #(0x1 << 2)       /* Data cache bit */
   mcr p15, 0, r0, c1, c0, 0
+  
+  /* Initialize the debug unit so we can output stuff */
+init_dbgu:
+  ldr r0, =DBGU_BASE
+  mov r1, #0x1A             /* Set baud rate to 115384 (CD=26) */
+  str r1, [r0, #DBGU_BRGR]
+  
+  /* Enable TX and RX */
+  ldr r1, [r0, #DBGU_CR]
+  orr r1, r1, #(1 << 6)
+  orr r1, r1, #(1 << 4)
+  str r1, [r0, #DBGU_CR]
+  
+  /* Set no-parity mode */
+  ldr r1, [r0, #DBGU_MR]
+  orr r1, r1, #(1 << 11)
+  str r1, [r0, #DBGU_MR]
+  
+  /* Enable interrupts on character receive */
+  /*mov r1, #1
+  str r1, [r0, #DBGU_IER]*/
+  
+  ldr r0, =MSG_PREINIT
+  bl printk
+  ldr r0, =MSG_INIT_PER
+  bl printk
   
   /* Initialize system controller interrupt handler by programming AIC */
 init_sysc_irq:
@@ -77,6 +104,8 @@ init_led:
   str r1, [r0, #PIO_SODR] /* Turn the LED off for now */
 
   /* Initializes task structures */
+  ldr r0, =MSG_INIT_TCB
+  bl printk
 init_tasks:
   ldr r0, =TASK_INITDATA
   ldr r1, =TCBLIST
@@ -118,11 +147,16 @@ __init_done:
   ldr r3, [r1, #T_LINK]
 
   /* Initializes message passing structures */
+  ldr r0, =MSG_INIT_MCB
+  bl printk
 init_messages:
   /* TODO */
 
   /* All initializations completed */
 done:
+  ldr r0, =MSG_INIT_DONE
+  bl printk
+  
   ldr r0, =CURRENT
   mov r1, #0
   str r1, [r0]    /* Clear current task */
