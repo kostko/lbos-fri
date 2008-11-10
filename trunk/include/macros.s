@@ -88,6 +88,6 @@
 .endm
 
 .macro LOAD_CURRENT_TCB reg
-  ldr reg, =CURRENT
-  ldr reg, [reg]
+  ldr \reg, =CURRENT
+  ldr \reg, [\reg]
 .endm
