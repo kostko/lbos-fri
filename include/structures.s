@@ -30,12 +30,22 @@
 .equ MCBSIZE, M_STAT + 4   /* size of mcb */
 
 /* ================================================================
+                        TIMER CONTROL STRUCTURE
+   ================================================================
+*/
+.equ TM_LINK, 0
+.equ TM_COUNT, TM_LINK + 4
+.equ TM_TASK, TM_COUNT + 4
+.equ TMSIZE, TM_TASK
+
+/* ================================================================
                            PROCESS FLAGS
    ================================================================
 */
 .equ IWAIT, 1 /* Waiting on interrupt */
 .equ MWAIT, 2 /* Waiting on message completion */
 .equ RWAIT, 4 /* Waiting on message receipt */
+.equ TWAIT, 8 /* Waiting on timer */
 
 /* ================================================================
                           ERROR CODES
@@ -56,3 +66,4 @@
 .equ SYS_SEND, 3
 .equ SYS_RECV, 4
 .equ SYS_REPLY, 5
+.equ SYS_LED, 6

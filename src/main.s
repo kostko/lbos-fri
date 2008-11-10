@@ -14,6 +14,7 @@
 
 .global start
 .global sys_irq_handler
+.global timer_irq_handler
 .global dispatch
 .global printk
 start:
@@ -83,7 +84,7 @@ init_sysc_irq:
   str r1, [r0, #AIC_SVR1]
   
   /* Enable interrupts for SYSC */
-  mov r1, #1 << 1
+  mov r1, #(1 << 1)
   str r1, [r0, #AIC_IECR]
   
   /* Initialize the Periodic Interval Timer (PIT) that will be used by
@@ -94,6 +95,73 @@ init_pit:
   ldr r0, =PIT_BASE
   ldr r1, =PIT_MODE     /* PITEN = 1, PITIEN = 1, PIV = FFFFF */
   str r1, [r0, #PIT_MR] /* Write mode to PIT Mode Register */
+
+  /* Initialize TC0 to be used as time source for kernel timers and
+     task delay implementation. */
+init_timer:
+  /* Setup priorities for TC0 (device 17) */
+  ldr r0, =AIC_BASE
+  mov r1, #4
+  str r1, [r0, #AIC_SMR17]
+  
+  /* Setup handler address for TC0 */
+  ldr r1, =timer_irq_handler
+  str r1, [r0, #AIC_SVR17]
+  
+  /* Enable interrupts for TC0 */
+  mov r1, #(1 << 17)
+  str r1, [r0, #AIC_IECR]
+  
+  /* AIC is now programmed, let's setup the timer itself */
+  ldr r0, =PMC_BASE
+  mov r1, #(1 << 17)        /* Enable TC0 (device 17) */
+  str r1, [r0, #PMC_PCER]   /* by configuring PMC */
+  
+  /* Select TIMER_CLOCK5 (SLCK) */
+  ldr r0, =TC0_BASE
+  mov r1, #4
+  str r1, [r0, #TC_CMR]
+  
+  /* Enable timer */
+  mov r1, #1
+  str r1, [r0, #TC_CCR]
+  
+  /* Enable TC0 interrupts */
+  mov r1, #(1 << 4)
+  str r1, [r0, #TC_IER]
+  
+  /* Activate timer */
+  mov r1, #(1 << 2)
+  str r1, [r0, #TC_CCR]
+  
+  /* Configure mode (WAVE = 1, WAVESEL =  10) and frequency */
+  ldr r1, [r0, #TC_CMR]
+  orr r1, r1, #(6 << 13)
+  str r1, [r0, #TC_CMR]
+  
+  mov r1, #65               /* Set frequency to 1 ms */
+  str r1, [r0, #TC_RC]      /* by writing to RC */
+  
+  /* Reset jiffies value */
+  ldr r0, =CUR_JIFFIES
+  mov r1, #0
+  str r1, [r0]
+  
+  /* Initialize timer queue */
+  mov r0, #MAXTASK
+  ldr r1, =TIMERAREA
+  ldr r2, =TIMERFREE
+  str r1, [r2]        /* Point TIMERFREE to first free timer */
+
+__init_timer:
+  mov r3, r1              /* Save current timer address */
+  add r1, r1, #TMSIZE     /* Compute next timer address */
+  str r1, [r3, #TM_LINK]  /* Link current timer to next timer */
+  subs r0, r0, #1         /* Decrement timer counter */
+  bne __init_timer        /* If no more timer slots, stop */
+  
+  /* Clear last TM_LINK */
+  str r0, [r3, #TM_LINK]
 
   /* Initialize LED */
 init_led:

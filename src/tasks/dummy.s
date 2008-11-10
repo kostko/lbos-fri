@@ -15,6 +15,23 @@ task_dummy:
   mov r2, #3
   mov r3, #4
   mov r4, #5
+  
+  /* Delay 500 ms */
+  mov r0, #500
+  swi #SYS_DELAY
+  
+  /* Turn LED on */
+  mov r0, #1
+  swi #SYS_LED
+  
+  /* Delay 500 ms */
+  mov r0, #500
+  swi #SYS_DELAY
+  
+  /* Turn LED off */
+  mov r0, #0
+  swi #SYS_LED
+  
   mov r5, #6
   mov r6, #7
   mov r7, #8
@@ -33,3 +50,4 @@ task_dummy:
   b task_dummy
 
 TESTBUF: .asciz "Hello"
+

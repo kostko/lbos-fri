@@ -2,28 +2,42 @@
                              USEFUL MACROS
    ================================================================
 */
-.macro ENABLE_IRQ
-  mrs r0, cpsr          /* Load CPSR to r0 */
-  orr r0, r0, #1 << 7   /* Set IRQ disable bit (7) */
-  msr cpsr_c, r0        /* Write r0 to CPSR */
+.macro DISABLE_IRQ
+  mrs r12, cpsr           /* Load CPSR to r12 */
+  orr r12, r12, #3 << 6   /* Set IRQ, FIQ disable bits (7, 8) */
+  msr cpsr_c, r12         /* Write r12 to CPSR */
 .endm
 
-.macro DISABLE_IRQ
-  mrs r0, cpsr          /* Load CPSR to r0 */
-  bic r0, r0, #1 << 7   /* Clear IRQ disable bit (7) */
-  msr cpsr_c, r0        /* Write r0 to CPSR */
+.macro ENABLE_IRQ
+  mrs r12, cpsr           /* Load CPSR to r12 */
+  bic r12, r12, #3 << 6   /* Clear IRQ, FIQ disable bits (7, 8) */
+  msr cpsr_c, r12         /* Write r12 to CPSR */
+.endm
+
+.macro DISABLE_PIT_IRQ
+  ldr r11, =PIT_BASE
+  ldr r12, [r11, #PIT_MR]
+  bic r12, r12, #(1 << 25)  /* Clear PITIEN bit */
+  str r12, [r11, #PIT_MR]
+.endm
+
+.macro ENABLE_PIT_IRQ
+  ldr r11, =PIT_BASE
+  ldr r12, [r11, #PIT_MR]
+  orr r12, r12, #(1 << 25)  /* Set PITIEN bit */
+  str r12, [r11, #PIT_MR]
 .endm
 
 .macro LED_ON
   ldr r0, =PIOC_BASE
   mov r1, #1 << 1
-  strne r1, [r0, #PIO_CODR]
+  str r1, [r0, #PIO_CODR]
 .endm
 
 .macro LED_OFF
   ldr r0, =PIOC_BASE
   mov r1, #1 << 1
-  strne r1, [r0, #PIO_SODR]
+  str r1, [r0, #PIO_SODR]
 .endm
 
 .macro PUSH_CONTEXT
