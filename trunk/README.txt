@@ -30,9 +30,15 @@ The following macros are currently defined (in include/macros.s):
 
         Macro name          | Description                | Regs 
   --------------------------+----------------------------+----------
-  ENABLE_IRQ                | Enables CPU interrupts.    | r0
+  ENABLE_IRQ                | Enables CPU interrupts.    | r12
   --------------------------+----------------------------+----------
-  DISABLE_IRQ               | Disables CPU interrupts.   | r0
+  DISABLE_IRQ               | Disables CPU interrupts.   | r12
+  --------------------------+----------------------------+----------
+  ENABLE_PIT_IRQ            | Enable scheduler to enter  | r11, r12
+                            | svc_newtask on PIT IRQ.    |
+  --------------------------+----------------------------+----------
+  DISABLE_PIT_IRQ           | Disable scheduler to enter | r11, r12
+                            | svc_newtask on PIT IRQ.    |
   --------------------------+----------------------------+----------
   LED_ON                    | Turns the LED on.          | r0, r1
   --------------------------+----------------------------+----------

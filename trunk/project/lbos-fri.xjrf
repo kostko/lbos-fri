@@ -13,16 +13,12 @@
             <ASMSyntaxFile type="String"></ASMSyntaxFile>
           </ColorSyntax>
           <PI.0>
-            <C type="Integer">12</C>
-            <L type="Integer">24</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\sched.s</P>
-            <VL type="Integer">14</VL>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\vectors.s</P>
           </PI.0>
           <PI.1>
-            <C type="Integer">13</C>
-            <L type="Integer">35</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\structures.s</P>
-            <VL type="Integer">29</VL>
+            <L type="Integer">9</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\msgtest.s</P>
+            <VL type="Integer">9</VL>
           </PI.1>
           <PI.10>
             <L type="Integer">35</L>
@@ -72,9 +68,10 @@
             <P type="String">C:\Users\Kostko\Desktop\asm.new\sms.ind</P>
           </PI.19>
           <PI.2>
-            <L type="Integer">9</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\msgtest.s</P>
-            <VL type="Integer">9</VL>
+            <C type="Integer">13</C>
+            <L type="Integer">10</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\dummy.s</P>
+            <VL type="Integer">5</VL>
           </PI.2>
           <PI.20>
             <C type="Integer">2</C>
@@ -123,7 +120,9 @@
             <VL type="Integer">122</VL>
           </PI.29>
           <PI.3>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\vectors.s</P>
+            <L type="Integer">57</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\syscall.s</P>
+            <VL type="Integer">44</VL>
           </PI.3>
           <PI.30>
             <P type="String">Z:\ars2\asm.new\naloga10.s</P>
@@ -169,10 +168,10 @@
             <P type="String">D:\PROJ1\intvec.s</P>
           </PI.39>
           <PI.4>
-            <C type="Integer">13</C>
-            <L type="Integer">10</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\dummy.s</P>
-            <VL type="Integer">5</VL>
+            <C type="Integer">12</C>
+            <L type="Integer">24</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\sched.s</P>
+            <VL type="Integer">14</VL>
           </PI.4>
           <PI.40>
             <L type="Integer">7</L>
@@ -211,24 +210,25 @@
             <P type="String">D:\TESTASM\init.ini</P>
           </PI.49>
           <PI.5>
-            <L type="Integer">57</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\syscall.s</P>
-            <VL type="Integer">44</VL>
-          </PI.5>
-          <PI.6>
             <L type="Integer">29</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\printk.s</P>
             <VL type="Integer">15</VL>
-          </PI.6>
-          <PI.7>
+          </PI.5>
+          <PI.6>
             <L type="Integer">20</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\main.s</P>
             <VL type="Integer">20</VL>
-          </PI.7>
-          <PI.8>
+          </PI.6>
+          <PI.7>
             <L type="Integer">43</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\irq.s</P>
             <VL type="Integer">34</VL>
+          </PI.7>
+          <PI.8>
+            <C type="Integer">13</C>
+            <L type="Integer">35</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\structures.s</P>
+            <VL type="Integer">29</VL>
           </PI.8>
           <PI.9>
             <C type="Integer">61</C>
@@ -261,7 +261,7 @@
             <RelativeFileName type="String">..\src\tasks\dummy.s</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
-            <FileBarIndex type="Integer">5</FileBarIndex>
+            <FileBarIndex type="Integer">1</FileBarIndex>
             <RectPosBottom type="Integer">310</RectPosBottom>
             <RectPosLeft type="Integer">92</RectPosLeft>
             <RectPosRight type="Integer">813</RectPosRight>
@@ -269,7 +269,7 @@
             <RelativeFileName type="String">..\config\layout.ind</RelativeFileName>
           </Editor.0>
           <Editor.1>
-            <FileBarIndex type="Integer">7</FileBarIndex>
+            <FileBarIndex type="Integer">3</FileBarIndex>
             <RectPosBottom type="Integer">264</RectPosBottom>
             <RectPosLeft type="Integer">46</RectPosLeft>
             <RectPosRight type="Integer">767</RectPosRight>
@@ -285,7 +285,7 @@
             <RelativeFileName type="String">..\src\tasks\msgtest.s</RelativeFileName>
           </Editor.10>
           <Editor.11>
-            <FileBarIndex type="Integer">9</FileBarIndex>
+            <FileBarIndex type="Integer">8</FileBarIndex>
             <RectPosBottom type="Integer">264</RectPosBottom>
             <RectPosLeft type="Integer">46</RectPosLeft>
             <RectPosRight type="Integer">767</RectPosRight>
@@ -293,7 +293,7 @@
             <RelativeFileName type="String">..\src\vectors.s</RelativeFileName>
           </Editor.11>
           <Editor.2>
-            <FileBarIndex type="Integer">3</FileBarIndex>
+            <FileBarIndex type="Integer">4</FileBarIndex>
             <RectPosBottom type="Integer">287</RectPosBottom>
             <RectPosLeft type="Integer">69</RectPosLeft>
             <RectPosRight type="Integer">790</RectPosRight>
@@ -301,7 +301,7 @@
             <RelativeFileName type="String">..\include\space.s</RelativeFileName>
           </Editor.2>
           <Editor.3>
-            <FileBarIndex type="Integer">1</FileBarIndex>
+            <FileBarIndex type="Integer">5</FileBarIndex>
             <RectPosBottom type="Integer">218</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">721</RectPosRight>
@@ -309,7 +309,7 @@
             <RelativeFileName type="String">..\include\structures.s</RelativeFileName>
           </Editor.3>
           <Editor.4>
-            <FileBarIndex type="Integer">8</FileBarIndex>
+            <FileBarIndex type="Integer">6</FileBarIndex>
             <RectPosBottom type="Integer">218</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">721</RectPosRight>
@@ -317,7 +317,7 @@
             <RelativeFileName type="String">..\src\irq.s</RelativeFileName>
           </Editor.4>
           <Editor.5>
-            <FileBarIndex type="Integer">10</FileBarIndex>
+            <FileBarIndex type="Integer">7</FileBarIndex>
             <RectPosBottom type="Integer">241</RectPosBottom>
             <RectPosLeft type="Integer">23</RectPosLeft>
             <RectPosRight type="Integer">744</RectPosRight>
@@ -325,7 +325,7 @@
             <RelativeFileName type="String">..\src\main.s</RelativeFileName>
           </Editor.5>
           <Editor.6>
-            <FileBarIndex type="Integer">4</FileBarIndex>
+            <FileBarIndex type="Integer">10</FileBarIndex>
             <RectPosBottom type="Integer">264</RectPosBottom>
             <RectPosLeft type="Integer">46</RectPosLeft>
             <RectPosRight type="Integer">767</RectPosRight>
@@ -349,7 +349,7 @@
             <RelativeFileName type="String">..\src\syscall.s</RelativeFileName>
           </Editor.8>
           <Editor.9>
-            <FileBarIndex type="Integer">6</FileBarIndex>
+            <FileBarIndex type="Integer">9</FileBarIndex>
             <RectPosBottom type="Integer">241</RectPosBottom>
             <RectPosLeft type="Integer">23</RectPosLeft>
             <RectPosRight type="Integer">744</RectPosRight>
@@ -1037,7 +1037,7 @@
                     <Options type="Integer">5</Options>
                     <Items.0>
                       <__>
-                        <Name type="String">dummy.s</Name>
+                        <Name type="String">debugger.s</Name>
                         <Options type="Integer">4</Options>
                       </__>
                     </Items.0>

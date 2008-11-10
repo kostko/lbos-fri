@@ -5,6 +5,7 @@
 .global syscall_handler
 .global svc_newtask
 .global dispatch
+.global register_timer
 
 /* Include structure definitions and static variables */
 .include "include/structures.s"
@@ -17,6 +18,7 @@
 syscall_handler:
   /* System call handler/dispatcher */
   PUSH_CONTEXT
+  ENABLE_IRQ
   
   /* Get syscall number from SWI instruction */
   ldr r12, [r14, #-4]       /* Load SWI instruction opcode + arg to r0 */
@@ -50,7 +52,8 @@ svc_newtask:
   cmp r0, #0
   beq dispatch      /* No current process, enter dispatch */
   
-  /* Save current taks's context. */
+  /* Save current task's context. */
+  DISABLE_PIT_IRQ
   GET_SP #PSR_MODE_SYS, r3    /* Get USP */
   str r3, [r0, #T_USP]        /* Store USP */
   str sp, [r0, #T_SSP]        /* Store SSP */
@@ -67,10 +70,26 @@ svc_println:
 
 /**
  * Delay syscall.
+ *
+ * @param r0 Number of jiffies to delay execution for
  */
 svc_delay:
-  /* TODO */
-  b svc_delay
+  /* Load current task TCB pointer */
+  LOAD_CURRENT_TCB r1
+  
+  /* Mark current task undispatchable */
+  DISABLE_IRQ
+  ldr r2, [r1, #T_FLAG]
+  orr r2, r2, #TWAIT
+  str r2, [r1, #T_FLAG]
+  ENABLE_IRQ
+  
+  /* Register a new timer */
+  bl register_timer
+  
+  /* Switch to some other task */
+  SVC_RETURN_CODE #0
+  b svc_newtask
 
 /**
  * Send message syscall.
@@ -86,14 +105,14 @@ svc_send:
   cmp r2, #MAXTASK
   bhs __err_badtask
   
-  /* DISABLE_IRQ */
+  DISABLE_IRQ
   ldr r3, =MCBLIST
   ldr r4, [r3]          /* Load first MCB base into r3 */
   cmp r4, #0            /* Check if it is not NULL */
   beq __err_nomcbs
   ldr r5, [r4, #M_LINK] /* Get next MCB in line */
   str r5, [r3]          /* Now we hold our own MCB */
-  /* ENABLE_IRQ */
+  ENABLE_IRQ
   
   /* Transfer data to MCB */
   mov r3, #0
@@ -106,9 +125,11 @@ svc_send:
   
   /* Alter task flags so it gets eliminated from dispatch
      process */
+  DISABLE_IRQ
   ldr r1, [r0, #T_FLAG]
   orr r1, r1, #MWAIT
   str r1, [r0, #T_FLAG]
+  ENABLE_IRQ
   
   /* Grab destination task */
   ldr r1, =TASKTAB
@@ -116,7 +137,7 @@ svc_send:
   add r3, r1, #T_MSG        /* Calculate destination message queue address */
   
   /* Find end of queue to insert our MCB */
-  /* DISABLE_IRQ */
+  DISABLE_IRQ
 __find_mcb:
   ldr r0, [r3, #M_LINK]   /* Load link to next into r0 */
   cmp r0, #0
@@ -125,12 +146,12 @@ __find_mcb:
 
 __found_mcb:
   str r4, [r3, #M_LINK]   /* Append our MCB to end of queue */
-  /* ENABLE_IRQ */
   
   /* Clear target task RWAIT flag */
   ldr r0, [r1, #T_FLAG]
   bic r0, r0, #RWAIT
   str r0, [r1, #T_FLAG]
+  ENABLE_IRQ
   
   /* Switch to some other task */
   b svc_newtask
@@ -152,7 +173,7 @@ svc_recv:
   /* Get current task's TCB */
   LOAD_CURRENT_TCB r0
   
-  /* DISABLE_IRQ */
+  DISABLE_IRQ
   ldr r1, [r0, #T_MSG]
   cmp r1, #0            /* Check if there are any messages */
   beq __wait_for_msg    /* If none, wait */
@@ -189,7 +210,8 @@ svc_reply:
   /* Get list header and start MCB search to find the MCB
      directly before us */
   add r2, r1, #T_RPLY
-  /* DISABLE_IRQ */
+  
+  DISABLE_IRQ
 __find_mcb_reply:
   ldr r3, [r2, #M_LINK]
   cmp r3, #0              /* Check if we have reached the end */
@@ -219,12 +241,30 @@ __found_mcb_reply:
   str r2, [r0, #M_LINK]
   str r0, [r1]
   
-  /* ENABLE_IRQ */
+  ENABLE_IRQ
   b svc_newtask   /* Switch to some other task */
 
 __err_badmcb:
   /* Return E_BADMCB error code in r0 */
   SVC_RETURN_CODE #E_BADMCB
+  POP_CONTEXT
+
+/**
+ * LED status switch syscall.
+ *
+ * @param r0 LED status (0 - off, 1 - on)
+ */
+svc_led:
+  cmp r0, #0
+  beq __led_off
+  LED_ON
+  b __led_done
+  
+__led_off:
+  LED_OFF
+  
+__led_done:
+  SVC_RETURN_CODE #0
   POP_CONTEXT
 
 /* ================================================================
@@ -239,6 +279,7 @@ SYSCALL_TABLE:
 .long svc_send      /* (3) send message */
 .long svc_recv      /* (4) receive message */
 .long svc_reply     /* (5) reply to a message */
+.long svc_led       /* (6) LED manipulation syscall */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4

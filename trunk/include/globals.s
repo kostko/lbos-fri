@@ -19,6 +19,9 @@
 .global TASKTAB
 .global NMCBS
 .global MCBAREA
+.global TIMERQUEUE
+.global TIMERFREE
+.global CUR_JIFFIES
 
 .equ MAXTASK, 2
 .equ NMCBS, 5

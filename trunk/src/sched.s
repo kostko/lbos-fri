@@ -16,6 +16,8 @@
 dispatch:
   /* Task dispatcher */
   ldr r0, =TINDEX
+  
+  DISABLE_IRQ
   ldr r1, [r0]
   add r1, r1, #1    /* Increment task index */
   
@@ -26,6 +28,8 @@ dispatch:
 
 __no_wrap:
   str r1, [r0]
+  ENABLE_IRQ
+  
   mov r1, r1, lsl #2    /* Multiply r1 by 4 to get proper offset */
   ldr r2, =TASKTAB
   ldr r2, [r2, r1]      /* Load TCB address into r2 */
@@ -34,6 +38,8 @@ __no_wrap:
   bne dispatch          /* It's not, try another one */
   
   /* Found a task to switch to (TCB in r2) */
+  DISABLE_IRQ
+  ENABLE_PIT_IRQ
   ldr r3, =CURRENT
   str r2, [r3]
   ldr r3, [r2, #T_USP]      /* Load task's User Stack Pointer */

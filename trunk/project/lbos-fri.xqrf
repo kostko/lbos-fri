@@ -83,7 +83,7 @@
           <UseExternalFilter type="String">False</UseExternalFilter>
         </AdvancedLinkerOptions>
         <Target.0>
-          <IsChanged type="String">False</IsChanged>
+          <IsChanged type="String">True</IsChanged>
           <TargetName type="String">LBOS-FRI</TargetName>
           <FileOptios>
             <AssemblerOptions type="String">$(EDNAME) -marm7tdmi -gdwarf2 -o $(NOEXT).o -I$(IRFDIR).. -I$(IRFDIR)../include</AssemblerOptions>
@@ -230,6 +230,38 @@
                 <RunAssemblerWR type="String">False</RunAssemblerWR>
               </FileOptios>
             </File.7>
+            <File.8>
+              <FileName type="String">$(IRFDIR)..\src\timers.s</FileName>
+              <IsChanged type="String">False</IsChanged>
+              <FileOptios>
+                <AssemblerOptions type="String">$(EDNAME) -marm7tdmi -gdwarf2 -o $(NOEXT).o -I$(IRFDIR).. -I$(IRFDIR)../include</AssemblerOptions>
+                <AssemblerOptionsWR type="String">False</AssemblerOptionsWR>
+                <CompilerDefines type="String"></CompilerDefines>
+                <CompilerDefinesWR type="String">False</CompilerDefinesWR>
+                <CompilerOptions type="String">$(EDNAME) -gdwarf-2 -c -O -I$(IRFDIR)..\include</CompilerOptions>
+                <CompilerOptionsWR type="String">False</CompilerOptionsWR>
+                <ExcludeFromMake type="String">No</ExcludeFromMake>
+                <ExcludeFromMakeWR type="String">No</ExcludeFromMakeWR>
+                <RunAssembler type="String">No</RunAssembler>
+                <RunAssemblerWR type="String">False</RunAssemblerWR>
+              </FileOptios>
+            </File.8>
+            <File.9>
+              <FileName type="String">$(IRFDIR)..\src\debugger.s</FileName>
+              <IsChanged type="String">False</IsChanged>
+              <FileOptios>
+                <AssemblerOptions type="String">$(EDNAME) -marm7tdmi -gdwarf2 -o $(NOEXT).o -I$(IRFDIR).. -I$(IRFDIR)../include</AssemblerOptions>
+                <AssemblerOptionsWR type="String">False</AssemblerOptionsWR>
+                <CompilerDefines type="String"></CompilerDefines>
+                <CompilerDefinesWR type="String">False</CompilerDefinesWR>
+                <CompilerOptions type="String">$(EDNAME) -gdwarf-2 -c -O -I$(IRFDIR)..\include</CompilerOptions>
+                <CompilerOptionsWR type="String">False</CompilerOptionsWR>
+                <ExcludeFromMake type="String">No</ExcludeFromMake>
+                <ExcludeFromMakeWR type="String">No</ExcludeFromMakeWR>
+                <RunAssembler type="String">No</RunAssembler>
+                <RunAssemblerWR type="String">False</RunAssemblerWR>
+              </FileOptios>
+            </File.9>
           </LinkGroup.1>
           <LinkGroup.2>
             <LinkGroupName type="String">Init files</LinkGroupName>
