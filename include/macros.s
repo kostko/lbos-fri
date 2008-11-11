@@ -98,7 +98,7 @@
 
 .macro SVC_RETURN_CODE code
   mov r0, \code
-  str r0, [sp, #4]    /* Modify r0 on the stack */
+  str r0, [sp, #SCTX_REG]    /* Modify r0 on the stack */
 .endm
 
 .macro LOAD_CURRENT_TCB reg

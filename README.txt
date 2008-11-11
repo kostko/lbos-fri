@@ -81,25 +81,31 @@ invoked.
 Stack grows towards lower addresses. Context is pushed up as in the
 following example:
 
-  SP offset | Content
-  ----------+---------
-     0x00   | PSR
-     0x04   | R0
-     0x08   | R1
-     0x0C   | R2
-     0x10   | R3
-     0x14   | R4
-     0x18   | R5
-     0x1C   | R6
-     0x20   | R7
-     0x24   | R8
-     0x28   | R9
-     0x2C   | R10
-     0x30   | R11
-     0x34   | R12
-     0x38   | PC
+  SP offset | Content | Offset constant
+  ----------+---------+----------------
+     0x00   | PSR     | SCTX_PSR
+     0x04   | R0      | SCTX_REG
+     0x08   | R1      |
+     0x0C   | R2      |
+     0x10   | R3      | 
+     0x14   | R4      |
+     0x18   | R5      |
+     0x1C   | R6      |
+     0x20   | R7      |
+     0x24   | R8      |
+     0x28   | R9      |
+     0x2C   | R10     |
+     0x30   | R11     |
+     0x34   | R12     |
+     0x38   | PC      | SCTX_PC
 
 Where registers are as follows:
  R0-R12 - general purpuse registers
  PSR    - program status register (in SPSR after mode switch)
  PC     - task program counter
+
+If you change the layout don't forget to fix *_CONTEXT macros and all
+SCTX_* constants defined in include/structures.s. Also note that you
+should only add new stuff at the top, above SCTX_REG, because context
+switches are faster if we can load R0-PC in one instruction and switch
+SPSR to CPSR at the same time.
