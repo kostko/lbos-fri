@@ -45,7 +45,7 @@ TIMERQUEUE: .space 4              /* Timer queue pending firing */
 CUR_JIFFIES: .space 4             /* Current jiffies value */
 
 /* Kernel stacks (Supervisor and IRQ modes have separate stacks). For
-   memory locations see lbos.ind linker script! */
+   memory locations see layout.ind linker script! */
 STACK_SUPM_END: .long __STACK_END__ - 256*4
 STACK_IRQM_END: .long __STACK_END__
 
