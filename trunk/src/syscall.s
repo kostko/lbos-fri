@@ -230,7 +230,7 @@ __found_mcb_reply:
   ldr r3, [r0, #M_RTCB]   /* Load sender's TCB pointer to r3 */
   ldr r4, [r3, #T_SSP]    /* Load sender's stack pointer to r4 */
   ldr r5, [r0, #M_STAT]   /* Load status code */
-  str r5, [r4, #4]        /* Put status code to sender's r0 on stack */
+  str r5, [r4, #SCTX_REG] /* Put status code to sender's r0 on stack */
   ldr r5, [r3, #T_FLAG]   /* Load sender's flags to r5 */
   bic r5, r5, #MWAIT      /* Clear MWAIT flag */
   str r5, [r3, #T_FLAG]   /* Store flags back */
