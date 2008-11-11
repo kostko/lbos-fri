@@ -9,7 +9,8 @@ Currently the memory layout is as follows:
   [4KB ] 0x00300000 - 0x00301000 SRAM1
   [16MB] 0x20000000 - 0x21000000 SDRAM
            0x20000000            DATA START
-           0x20100000            KERNEL STACK END
+           0x20080000            KERNEL STACK END
+           0x20100000            PAGE OFFSET
 
 To load high-memory data structures you have to use something like:
   ldr r0, =STRUCTURE_LABEL

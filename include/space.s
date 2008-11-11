@@ -44,6 +44,13 @@ TIMERFREE: .space 4               /* Pointer to list of free timers */
 TIMERQUEUE: .space 4              /* Timer queue pending firing */
 CUR_JIFFIES: .space 4             /* Current jiffies value */
 
+/* Terminal I/O structures */
+TERMDESC: .space TERMSIZE
+
+/* Memory allocation structures */
+PAGEBITMAP: .space MAXPAGES/8, 255
+PAGEOFFSET: .long __PAGE_OFFSET__
+
 /* Kernel stacks (Supervisor and IRQ modes have separate stacks). For
    memory locations see layout.ind linker script! */
 STACK_SUPM_END: .long __STACK_END__ - 256*4
