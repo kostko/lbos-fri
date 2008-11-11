@@ -39,6 +39,23 @@
 .equ TMSIZE, TM_TASK
 
 /* ================================================================
+                        TERMINAL DESCRIPTOR
+   ================================================================
+*/
+.equ TERM_IBUF, 0
+.equ TERM_IBUF_START, TERM_IBUF + 4
+.equ TERM_IBUF_END, TERM_IBUF_START + 4
+.equ TERM_OBUF, TERM_IBUF_END + 4
+.equ TERM_OBUF_START, TERM_OBUF + 4
+.equ TERM_OBUF_END, TERM_OBUF_START + 4
+.equ TERMSIZE, TERM_OBUF_END
+
+.equ IO_RQ_OPER, 0
+.equ IO_RQ_BUF, IO_RQ_OPER + 4
+.equ IO_RQ_LEN, IO_RQ_BUF + 4
+.equ IORQSIZE, IO_RQ_LEN
+
+/* ================================================================
                            PROCESS FLAGS
    ================================================================
 */

@@ -22,6 +22,9 @@
 .global TIMERQUEUE
 .global TIMERFREE
 .global CUR_JIFFIES
+.global PAGEBITMAP
+.global PAGEOFFSET
 
+.equ MAXPAGES, 3840
 .equ MAXTASK, 2
 .equ NMCBS, 5
