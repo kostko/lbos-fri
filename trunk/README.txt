@@ -81,17 +81,25 @@ invoked.
 Stack grows towards lower addresses. Context is pushed up as in the
 following example:
 
-  0x0FC8 PSR   <-- sp'
-  0x0FCC R0
-  0x0FD0 R1
-    ...
-  0x0FF8 R11
-  0x0FFC R12
-  0x1000 LR
-  0x1004 .    <-- sp
-
+  SP offset | Content
+  ----------+---------
+     0x00   | PSR
+     0x04   | R0
+     0x08   | R1
+     0x0C   | R2
+     0x10   | R3
+     0x14   | R4
+     0x18   | R5
+     0x1C   | R6
+     0x20   | R7
+     0x24   | R8
+     0x28   | R9
+     0x2C   | R10
+     0x30   | R11
+     0x34   | R12
+     0x38   | PC
 
 Where registers are as follows:
  R0-R12 - general purpuse registers
  PSR    - program status register (in SPSR after mode switch)
- LR     - link register (contains current task PC)
+ PC     - task program counter
