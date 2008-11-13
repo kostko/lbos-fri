@@ -7,3 +7,4 @@ What needs to be done (or undone).
   * Document task stack usage (USP) ?
   * Add T_PRIO to TCB struct (4 bytes) - *kostko*
   * Implement task terminal I/O and a simple shell ?
+  * Research possibility of implementing a MMC driver - *kostko*
