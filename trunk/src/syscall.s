@@ -77,15 +77,15 @@ svc_delay:
   /* Load current task TCB pointer */
   LOAD_CURRENT_TCB r1
   
+  /* Register a new timer */
+  bl register_timer
+  
   /* Mark current task undispatchable */
   DISABLE_IRQ
   ldr r2, [r1, #T_FLAG]
   orr r2, r2, #TWAIT
   str r2, [r1, #T_FLAG]
   ENABLE_IRQ
-  
-  /* Register a new timer */
-  bl register_timer
   
   /* Switch to some other task */
   SVC_RETURN_CODE #0
