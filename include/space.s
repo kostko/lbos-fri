@@ -57,8 +57,9 @@ STACK_SUPM_END: .long __STACK_END__ - 256*4
 STACK_IRQM_END: .long __STACK_END__
 
 /* Messages */
-MSG_PREINIT: .asciz "\n\rLBOS-FRI v0.1 for AT91SAM9260 starting up...\n\r"
+MSG_PREINIT: .asciz "\n\rLBOS-FRI v0.1 for AT91SAM9260/FRI-SMS starting up...\n\r"
 MSG_INIT_PER: .asciz ">>> Initializing peripherals (LED, timers)...\n\r"
 MSG_INIT_TCB: .asciz ">>> Initializing tasks...\n\r"
 MSG_INIT_MCB: .asciz ">>> Initializing message passing...\n\r"
+MSG_INIT_MMC: .asciz ">>> Initializing MMC driver...\n\r"
 MSG_INIT_DONE: .asciz "All done! Entering the dispatcher.\n\r"

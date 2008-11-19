@@ -37,7 +37,7 @@
 .equ TM_LINK, 0
 .equ TM_COUNT, TM_LINK + 4
 .equ TM_TASK, TM_COUNT + 4
-.equ TMSIZE, TM_TASK
+.equ TMSIZE, TM_TASK + 4
 
 /* ================================================================
                         TERMINAL DESCRIPTOR
@@ -49,12 +49,12 @@
 .equ TERM_OBUF, TERM_IBUF_END + 4
 .equ TERM_OBUF_START, TERM_OBUF + 4
 .equ TERM_OBUF_END, TERM_OBUF_START + 4
-.equ TERMSIZE, TERM_OBUF_END
+.equ TERMSIZE, TERM_OBUF_END + 4
 
 .equ IO_RQ_OPER, 0
 .equ IO_RQ_BUF, IO_RQ_OPER + 4
 .equ IO_RQ_LEN, IO_RQ_BUF + 4
-.equ IORQSIZE, IO_RQ_LEN
+.equ IORQSIZE, IO_RQ_LEN + 4
 
 /* ================================================================
                            PROCESS FLAGS
