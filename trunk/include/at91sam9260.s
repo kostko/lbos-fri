@@ -4,11 +4,20 @@
 .equ PMC_SR,	0xFFFFFC68 /* (PMC) Status Register */
 .equ PMC_MCKR,	0xFFFFFC30 /* (PMC) Master Clock Register */
 
+.equ PIOA_BASE, 0xFFFFF400
+.equ PIOB_BASE, 0xFFFFF600
 .equ PIOC_BASE, 0xFFFFF800
 .equ PIO_PER, 0x00
+.equ PIO_PDR, 0x04
 .equ PIO_OER, 0x10
 .equ PIO_SODR, 0x30
 .equ PIO_CODR, 0x34
+.equ PIO_IER, 0x40
+.equ PIO_IDR, 0x44
+.equ PIO_PUDR, 0x60
+.equ PIO_PUER, 0x64
+.equ PIO_ASR, 0x70
+.equ PIO_BSR, 0x74
 
 .equ TC0_BASE, 0xFFFA0000	/* TC0 Channel Registers */
 .equ TC_IMR, 0x02C	/* TC0 Interrupt Mask Register */
@@ -22,13 +31,17 @@
 .equ TC_CV, 0x10		/* TC0 Counter Value */
 .equ TC_CCR, 0x00	  /* TC0 Channel Control Register */
 
-.equ AIC_BASE, 	0xFFFFF000 	/* Zacetek AIC */
-.equ AIC_SMR17, 	0x044 		/* odmiki */
-.equ AIC_SVR17, 	0x0C4
+.equ AIC_BASE, 	0xFFFFF000
+.equ AIC_SMR17, 	0x44
+.equ AIC_SVR17, 	0xC4
 .equ AIC_SMR1,  0x04
 .equ AIC_SVR1,  0x84
+.equ AIC_SMR9,  0x24
+.equ AIC_SVR9,  0xA4
 .equ AIC_IVR, 	0x100
 .equ AIC_IECR, 	0x120
+.equ AIC_IDCR, 0x124
+.equ AIC_ICCR, 0x128
 .equ AIC_EOICR, 	0x130
 
 .equ PMC_BASE, 0xFFFFFC00
@@ -50,16 +63,16 @@
 .equ DBGU_IER, 0x08 /* (DBGU) Interrupt Enable Register */
 .equ DBGU_CR, 0x00 /* (DBGU) Control Register */
 
-.equ DBGU_RPR, 0x100 /* (DBGU) Receive Pointer Register */
-.equ DBGU_RCR, 0x104 /* (DBGU) Receive Counter Register */
-.equ DBGU_TPR, 0x108 /* (DBGU) Transmit Pointer Register */
-.equ DBGU_TCR, 0x10C /* (DBGU) Transmit Counter Register */
-.equ DBGU_RNPR, 0x110 /* (DBGU) Receive Next Pointer Register */
-.equ DBGU_RNCR, 0x114 /* (DBGU) Receive Next Counter Register */
-.equ DBGU_TNPR, 0x118 /* (DBGU) Transmit Next Pointer Register */
-.equ DBGU_TNCR, 0x11C /* (DBGU) Transmit Next Counter Register */
-.equ DBGU_PTCR, 0x120 /* (DBGU) Periph. Transfer Control Register */
-.equ DBGU_PTSR, 0x124 /* (DBGU) Periph. Transfer Status Register */
+.equ PDC_RPR, 0x100 /* (PDC) Receive Pointer Register */
+.equ PDC_RCR, 0x104 /* (PDC) Receive Counter Register */
+.equ PDC_TPR, 0x108 /* (PDC) Transmit Pointer Register */
+.equ PDC_TCR, 0x10C /* (PDC) Transmit Counter Register */
+.equ PDC_RNPR, 0x110 /* (PDC) Receive Next Pointer Register */
+.equ PDC_RNCR, 0x114 /* (PDC) Receive Next Counter Register */
+.equ PDC_TNPR, 0x118 /* (PDC) Transmit Next Pointer Register */
+.equ PDC_TNCR, 0x11C /* (PDC) Transmit Next Counter Register */
+.equ PDC_PTCR, 0x120 /* (PDC) Periph. Transfer Control Register */
+.equ PDC_PTSR, 0x124 /* (PDC) Periph. Transfer Status Register */
 
 .equ PIT_BASE, 0xFFFFFD30 /* PIT Base address */
 .equ PIT_MR, 0x00    /* PIT Mode Register */
@@ -67,6 +80,19 @@
 .equ PIT_PIVR, 0x08  /* PIT Periodic Interval Value Register */
 .equ PIT_PIIR, 0x0C  /* PIT Periodic Interval  Image Register */
 .equ PIT_MODE, 0x030FFFFF /* PITEN = 1, PITIEN = 1, PIV = FFFFF */
+
+.equ MCI_BASE, 0xFFFA8000
+.equ MCI_CR, 0x00
+.equ MCI_MR, 0x04
+.equ MCI_DTOR, 0x08
+.equ MCI_SDCR, 0x0C
+.equ MCI_ARGR, 0x10
+.equ MCI_CMDR, 0x14
+.equ MCI_BLKR, 0x18
+.equ MCI_RSPR, 0x20
+.equ MCI_SR, 0x40
+.equ MCI_IER, 0x44
+.equ MCI_IDR, 0x48
 
 .equ PSR_MODE_MASK, 0x1F /* Mode mask */
 .equ PSR_MODE_USER, 0x10 /* User mode */

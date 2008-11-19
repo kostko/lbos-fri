@@ -233,6 +233,14 @@ __init_mcb:
   /* Clear last M_LINK */
   str r0, [r3, #M_LINK]
 
+  /* Initialize Multimedia Memory Card driver */
+init_mmc:
+  ldr r0, =MSG_INIT_MMC
+  bl printk
+  
+  /* Call the init function */
+  bl mmc_init
+
   /* All initializations completed */
 done:
   ldr r0, =MSG_INIT_DONE
