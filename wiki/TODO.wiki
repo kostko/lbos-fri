@@ -4,6 +4,7 @@ What needs to be done (or undone).
 = TODO =
   * Improve the debugger to output registers (reg0-reg12 and SPSR/CPSR) - *kernc*
   * Improve printk routine so it uses DMA - *kernc*
+  * Implement _vsprintf_-like function - *kernc*
   * Implement protected memory - *zomb*
   * Document task stack usage (USP) ?
   * ~~Add T_PRIO to TCB struct (4 bytes) - *kostko*~~
