@@ -145,6 +145,11 @@ __mmc_init_failed:
   mov r1, #0
   str r1, [r0, #MMC_F_CardInserted]
   
+  /* Disable MCI interrupt */
+  ldr r0, =AIC_BASE
+  mov r1, #(1 << 9)
+  str r1, [r0, #AIC_IDCR]
+  
 __mmc_init_done:  
   ldmfd sp!, {r0-r6,pc}
 
