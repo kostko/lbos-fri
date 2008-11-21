@@ -13,230 +13,236 @@
             <ASMSyntaxFile type="String"></ASMSyntaxFile>
           </ColorSyntax>
           <PI.0>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\vectors.s</P>
+            <C type="Integer">47</C>
+            <L type="Integer">12</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\config\init.ini</P>
           </PI.0>
           <PI.1>
-            <L type="Integer">9</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\msgtest.s</P>
-            <VL type="Integer">9</VL>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\vectors.s</P>
           </PI.1>
           <PI.10>
-            <C type="Integer">39</C>
-            <L type="Integer">41</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\space.s</P>
-            <VL type="Integer">39</VL>
-          </PI.10>
-          <PI.11>
-            <L type="Integer">35</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\clock_init.s</P>
-            <VL type="Integer">24</VL>
-          </PI.11>
-          <PI.12>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\config\layout.ind</P>
-          </PI.12>
-          <PI.13>
-            <L type="Integer">35</L>
-            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\include\clock_init.s</P>
-            <VL type="Integer">26</VL>
-          </PI.13>
-          <PI.14>
-            <C type="Integer">11</C>
-            <L type="Integer">2</L>
-            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\config\layout.ind</P>
-          </PI.14>
-          <PI.15>
-            <C type="Integer">31</C>
-            <L type="Integer">15</L>
-            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\src\syscall.s</P>
-          </PI.15>
-          <PI.16>
-            <L type="Integer">13</L>
-            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\src\vectors.s</P>
-            <VL type="Integer">6</VL>
-          </PI.16>
-          <PI.17>
-            <L type="Integer">18</L>
-            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\src\main.s</P>
-            <VL type="Integer">18</VL>
-          </PI.17>
-          <PI.18>
-            <C type="Integer">18</C>
-            <L type="Integer">8</L>
-            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\src\irq.s</P>
-            <VL type="Integer">3</VL>
-          </PI.18>
-          <PI.19>
-            <P type="String">C:\Users\Kostko\Desktop\asm.new\start.s</P>
-          </PI.19>
-          <PI.2>
-            <C type="Integer">16</C>
-            <L type="Integer">10</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\dummy.s</P>
-            <VL type="Integer">5</VL>
-          </PI.2>
-          <PI.20>
-            <C type="Integer">11</C>
-            <L type="Integer">7</L>
-            <P type="String">C:\Users\Kostko\Desktop\asm.new\sms.ind</P>
-          </PI.20>
-          <PI.21>
-            <C type="Integer">2</C>
-            <L type="Integer">356</L>
-            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga16.s</P>
-            <VL type="Integer">345</VL>
-          </PI.21>
-          <PI.22>
-            <C type="Integer">20</C>
-            <L type="Integer">6</L>
-            <P type="String">C:\Users\Kostko\Desktop\asm.new\intvec.s</P>
-          </PI.22>
-          <PI.23>
-            <P type="String">C:\Users\Kostko\Desktop\asm.new\init.ini</P>
-          </PI.23>
-          <PI.24>
-            <C type="Integer">20</C>
-            <L type="Integer">163</L>
-            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga13.s</P>
-            <VL type="Integer">158</VL>
-          </PI.24>
-          <PI.25>
-            <C type="Integer">10</C>
-            <L type="Integer">206</L>
-            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga14.s</P>
-            <VL type="Integer">194</VL>
-          </PI.25>
-          <PI.26>
-            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga10.s</P>
-          </PI.26>
-          <PI.27>
-            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga11.s</P>
-          </PI.27>
-          <PI.28>
-            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga12.s</P>
-          </PI.28>
-          <PI.29>
-            <L type="Integer">170</L>
-            <P type="String">Z:\ars2\asm.new\naloga13.s</P>
-            <VL type="Integer">161</VL>
-          </PI.29>
-          <PI.3>
-            <L type="Integer">57</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\syscall.s</P>
-            <VL type="Integer">44</VL>
-          </PI.3>
-          <PI.30>
-            <C type="Integer">23</C>
-            <L type="Integer">137</L>
-            <P type="String">Z:\ars2\asm.new\naloga14.s</P>
-            <VL type="Integer">122</VL>
-          </PI.30>
-          <PI.31>
-            <P type="String">Z:\ars2\asm.new\naloga10.s</P>
-          </PI.31>
-          <PI.32>
-            <L type="Integer">148</L>
-            <P type="String">Z:\ars2\asm.new\naloga11.s</P>
-            <VL type="Integer">139</VL>
-          </PI.32>
-          <PI.33>
-            <C type="Integer">13</C>
-            <L type="Integer">132</L>
-            <P type="String">Z:\ars2\asm.new\naloga12.s</P>
-            <VL type="Integer">115</VL>
-          </PI.33>
-          <PI.34>
-            <C type="Integer">15</C>
-            <L type="Integer">39</L>
-            <P type="String">Z:\ars2\asm.new\start.s</P>
-            <VL type="Integer">30</VL>
-          </PI.34>
-          <PI.35>
-            <P type="String">Z:\ars2\asm.new\sms.ind</P>
-          </PI.35>
-          <PI.36>
-            <P type="String">Z:\ars2\asm.new\intvec.s</P>
-          </PI.36>
-          <PI.37>
-            <P type="String">Z:\ars2\asm.new\init.ini</P>
-          </PI.37>
-          <PI.38>
-            <C type="Integer">42</C>
-            <L type="Integer">79</L>
-            <P type="String">D:\PROJ1\start.s</P>
-            <VL type="Integer">92</VL>
-          </PI.38>
-          <PI.39>
-            <P type="String">D:\PROJ1\sms.ind</P>
-          </PI.39>
-          <PI.4>
-            <L type="Integer">25</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\sched.s</P>
-            <VL type="Integer">14</VL>
-          </PI.4>
-          <PI.40>
-            <C type="Integer">7</C>
-            <L type="Integer">10</L>
-            <P type="String">D:\PROJ1\intvec.s</P>
-          </PI.40>
-          <PI.41>
-            <L type="Integer">7</L>
-            <P type="String">D:\PROJ1\init.ini</P>
-          </PI.41>
-          <PI.42>
-            <P type="String">D:\TESTASM2\start.s</P>
-            <VL type="Integer">4</VL>
-          </PI.42>
-          <PI.43>
-            <P type="String">D:\TESTASM2\sms.ind</P>
-          </PI.43>
-          <PI.44>
-            <C type="Integer">21</C>
-            <L type="Integer">11</L>
-            <P type="String">D:\TESTASM2\intvec.s</P>
-          </PI.44>
-          <PI.45>
-            <P type="String">D:\TESTASM2\init.ini</P>
-          </PI.45>
-          <PI.46>
-            <L type="Integer">40</L>
-            <P type="String">D:\TESTASM1\start.s</P>
-            <VL type="Integer">17</VL>
-          </PI.46>
-          <PI.47>
-            <P type="String">D:\TESTASM1\sms.ind</P>
-          </PI.47>
-          <PI.48>
-            <P type="String">D:\TESTASM1\intvec.s</P>
-          </PI.48>
-          <PI.49>
-            <P type="String">D:\TESTASM1\init.ini</P>
-          </PI.49>
-          <PI.5>
-            <L type="Integer">29</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\printk.s</P>
-            <VL type="Integer">15</VL>
-          </PI.5>
-          <PI.6>
-            <C type="Integer">13</C>
-            <L type="Integer">86</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\memory.s</P>
-            <VL type="Integer">81</VL>
-          </PI.6>
-          <PI.7>
-            <L type="Integer">21</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\main.s</P>
-            <VL type="Integer">21</VL>
-          </PI.7>
-          <PI.8>
-            <L type="Integer">43</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\irq.s</P>
-            <VL type="Integer">34</VL>
-          </PI.8>
-          <PI.9>
             <C type="Integer">13</C>
             <L type="Integer">35</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\structures.s</P>
             <VL type="Integer">29</VL>
+          </PI.10>
+          <PI.11>
+            <C type="Integer">39</C>
+            <L type="Integer">41</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\space.s</P>
+            <VL type="Integer">39</VL>
+          </PI.11>
+          <PI.12>
+            <L type="Integer">35</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\clock_init.s</P>
+            <VL type="Integer">24</VL>
+          </PI.12>
+          <PI.13>
+            <C type="Integer">4</C>
+            <L type="Integer">36</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\config\layout.ind</P>
+            <VL type="Integer">9</VL>
+          </PI.13>
+          <PI.14>
+            <L type="Integer">35</L>
+            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\include\clock_init.s</P>
+            <VL type="Integer">26</VL>
+          </PI.14>
+          <PI.15>
+            <C type="Integer">11</C>
+            <L type="Integer">2</L>
+            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\config\layout.ind</P>
+          </PI.15>
+          <PI.16>
+            <C type="Integer">31</C>
+            <L type="Integer">15</L>
+            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\src\syscall.s</P>
+          </PI.16>
+          <PI.17>
+            <L type="Integer">13</L>
+            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\src\vectors.s</P>
+            <VL type="Integer">6</VL>
+          </PI.17>
+          <PI.18>
+            <L type="Integer">18</L>
+            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\src\main.s</P>
+            <VL type="Integer">18</VL>
+          </PI.18>
+          <PI.19>
+            <C type="Integer">18</C>
+            <L type="Integer">8</L>
+            <P type="String">C:\Users\Kostko\Desktop\lbos-fri\src\irq.s</P>
+            <VL type="Integer">3</VL>
+          </PI.19>
+          <PI.2>
+            <L type="Integer">9</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\msgtest.s</P>
+            <VL type="Integer">9</VL>
+          </PI.2>
+          <PI.20>
+            <P type="String">C:\Users\Kostko\Desktop\asm.new\start.s</P>
+          </PI.20>
+          <PI.21>
+            <C type="Integer">11</C>
+            <L type="Integer">7</L>
+            <P type="String">C:\Users\Kostko\Desktop\asm.new\sms.ind</P>
+          </PI.21>
+          <PI.22>
+            <C type="Integer">2</C>
+            <L type="Integer">356</L>
+            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga16.s</P>
+            <VL type="Integer">345</VL>
+          </PI.22>
+          <PI.23>
+            <C type="Integer">20</C>
+            <L type="Integer">6</L>
+            <P type="String">C:\Users\Kostko\Desktop\asm.new\intvec.s</P>
+          </PI.23>
+          <PI.24>
+            <P type="String">C:\Users\Kostko\Desktop\asm.new\init.ini</P>
+          </PI.24>
+          <PI.25>
+            <C type="Integer">20</C>
+            <L type="Integer">163</L>
+            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga13.s</P>
+            <VL type="Integer">158</VL>
+          </PI.25>
+          <PI.26>
+            <C type="Integer">10</C>
+            <L type="Integer">206</L>
+            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga14.s</P>
+            <VL type="Integer">194</VL>
+          </PI.26>
+          <PI.27>
+            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga10.s</P>
+          </PI.27>
+          <PI.28>
+            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga11.s</P>
+          </PI.28>
+          <PI.29>
+            <P type="String">C:\Users\Kostko\Desktop\asm.new\naloga12.s</P>
+          </PI.29>
+          <PI.3>
+            <C type="Integer">16</C>
+            <L type="Integer">10</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\dummy.s</P>
+            <VL type="Integer">5</VL>
+          </PI.3>
+          <PI.30>
+            <L type="Integer">170</L>
+            <P type="String">Z:\ars2\asm.new\naloga13.s</P>
+            <VL type="Integer">161</VL>
+          </PI.30>
+          <PI.31>
+            <C type="Integer">23</C>
+            <L type="Integer">137</L>
+            <P type="String">Z:\ars2\asm.new\naloga14.s</P>
+            <VL type="Integer">122</VL>
+          </PI.31>
+          <PI.32>
+            <P type="String">Z:\ars2\asm.new\naloga10.s</P>
+          </PI.32>
+          <PI.33>
+            <L type="Integer">148</L>
+            <P type="String">Z:\ars2\asm.new\naloga11.s</P>
+            <VL type="Integer">139</VL>
+          </PI.33>
+          <PI.34>
+            <C type="Integer">13</C>
+            <L type="Integer">132</L>
+            <P type="String">Z:\ars2\asm.new\naloga12.s</P>
+            <VL type="Integer">115</VL>
+          </PI.34>
+          <PI.35>
+            <C type="Integer">15</C>
+            <L type="Integer">39</L>
+            <P type="String">Z:\ars2\asm.new\start.s</P>
+            <VL type="Integer">30</VL>
+          </PI.35>
+          <PI.36>
+            <P type="String">Z:\ars2\asm.new\sms.ind</P>
+          </PI.36>
+          <PI.37>
+            <P type="String">Z:\ars2\asm.new\intvec.s</P>
+          </PI.37>
+          <PI.38>
+            <P type="String">Z:\ars2\asm.new\init.ini</P>
+          </PI.38>
+          <PI.39>
+            <C type="Integer">42</C>
+            <L type="Integer">79</L>
+            <P type="String">D:\PROJ1\start.s</P>
+            <VL type="Integer">92</VL>
+          </PI.39>
+          <PI.4>
+            <L type="Integer">57</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\syscall.s</P>
+            <VL type="Integer">44</VL>
+          </PI.4>
+          <PI.40>
+            <P type="String">D:\PROJ1\sms.ind</P>
+          </PI.40>
+          <PI.41>
+            <C type="Integer">7</C>
+            <L type="Integer">10</L>
+            <P type="String">D:\PROJ1\intvec.s</P>
+          </PI.41>
+          <PI.42>
+            <L type="Integer">7</L>
+            <P type="String">D:\PROJ1\init.ini</P>
+          </PI.42>
+          <PI.43>
+            <P type="String">D:\TESTASM2\start.s</P>
+            <VL type="Integer">4</VL>
+          </PI.43>
+          <PI.44>
+            <P type="String">D:\TESTASM2\sms.ind</P>
+          </PI.44>
+          <PI.45>
+            <C type="Integer">21</C>
+            <L type="Integer">11</L>
+            <P type="String">D:\TESTASM2\intvec.s</P>
+          </PI.45>
+          <PI.46>
+            <P type="String">D:\TESTASM2\init.ini</P>
+          </PI.46>
+          <PI.47>
+            <L type="Integer">40</L>
+            <P type="String">D:\TESTASM1\start.s</P>
+            <VL type="Integer">17</VL>
+          </PI.47>
+          <PI.48>
+            <P type="String">D:\TESTASM1\sms.ind</P>
+          </PI.48>
+          <PI.49>
+            <P type="String">D:\TESTASM1\intvec.s</P>
+          </PI.49>
+          <PI.5>
+            <L type="Integer">25</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\sched.s</P>
+            <VL type="Integer">14</VL>
+          </PI.5>
+          <PI.6>
+            <L type="Integer">29</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\printk.s</P>
+            <VL type="Integer">15</VL>
+          </PI.6>
+          <PI.7>
+            <C type="Integer">13</C>
+            <L type="Integer">86</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\memory.s</P>
+            <VL type="Integer">81</VL>
+          </PI.7>
+          <PI.8>
+            <C type="Integer">28</C>
+            <L type="Integer">22</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\main.s</P>
+            <VL type="Integer">21</VL>
+          </PI.8>
+          <PI.9>
+            <L type="Integer">43</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\irq.s</P>
+            <VL type="Integer">34</VL>
           </PI.9>
         </REG_ROOT>
       </EditorOptions>
@@ -260,63 +266,71 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\src\main.s</RelativeFileName>
+            <RelativeFileName type="String">..\config\init.ini</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
-            <FileBarIndex type="Integer">2</FileBarIndex>
-            <RectPosBottom type="Integer">310</RectPosBottom>
-            <RectPosLeft type="Integer">92</RectPosLeft>
-            <RectPosRight type="Integer">813</RectPosRight>
-            <RectPosTop type="Integer">92</RectPosTop>
-            <RelativeFileName type="String">..\config\layout.ind</RelativeFileName>
+            <FileBarIndex type="Integer">0</FileBarIndex>
+            <RectPosBottom type="Integer">287</RectPosBottom>
+            <RectPosLeft type="Integer">69</RectPosLeft>
+            <RectPosRight type="Integer">790</RectPosRight>
+            <RectPosTop type="Integer">69</RectPosTop>
+            <RelativeFileName type="String">..\config\init.ini</RelativeFileName>
           </Editor.0>
           <Editor.1>
-            <FileBarIndex type="Integer">4</FileBarIndex>
-            <RectPosBottom type="Integer">264</RectPosBottom>
-            <RectPosLeft type="Integer">46</RectPosLeft>
-            <RectPosRight type="Integer">767</RectPosRight>
-            <RectPosTop type="Integer">46</RectPosTop>
-            <RelativeFileName type="String">..\include\clock_init.s</RelativeFileName>
-          </Editor.1>
-          <Editor.10>
-            <FileBarIndex type="Integer">12</FileBarIndex>
-            <RectPosBottom type="Integer">241</RectPosBottom>
-            <RectPosLeft type="Integer">23</RectPosLeft>
-            <RectPosRight type="Integer">744</RectPosRight>
-            <RectPosTop type="Integer">23</RectPosTop>
-            <RelativeFileName type="String">..\src\tasks\dummy.s</RelativeFileName>
-          </Editor.10>
-          <Editor.11>
             <FileBarIndex type="Integer">3</FileBarIndex>
             <RectPosBottom type="Integer">310</RectPosBottom>
             <RectPosLeft type="Integer">92</RectPosLeft>
             <RectPosRight type="Integer">813</RectPosRight>
             <RectPosTop type="Integer">92</RectPosTop>
-            <RelativeFileName type="String">..\src\tasks\msgtest.s</RelativeFileName>
+            <RelativeFileName type="String">..\config\layout.ind</RelativeFileName>
+          </Editor.1>
+          <Editor.10>
+            <FileBarIndex type="Integer">12</FileBarIndex>
+            <RectPosBottom type="Integer">287</RectPosBottom>
+            <RectPosLeft type="Integer">69</RectPosLeft>
+            <RectPosRight type="Integer">790</RectPosRight>
+            <RectPosTop type="Integer">69</RectPosTop>
+            <RelativeFileName type="String">..\src\syscall.s</RelativeFileName>
+          </Editor.10>
+          <Editor.11>
+            <FileBarIndex type="Integer">13</FileBarIndex>
+            <RectPosBottom type="Integer">241</RectPosBottom>
+            <RectPosLeft type="Integer">23</RectPosLeft>
+            <RectPosRight type="Integer">744</RectPosRight>
+            <RectPosTop type="Integer">23</RectPosTop>
+            <RelativeFileName type="String">..\src\tasks\dummy.s</RelativeFileName>
           </Editor.11>
           <Editor.12>
-            <FileBarIndex type="Integer">8</FileBarIndex>
+            <FileBarIndex type="Integer">4</FileBarIndex>
+            <RectPosBottom type="Integer">310</RectPosBottom>
+            <RectPosLeft type="Integer">92</RectPosLeft>
+            <RectPosRight type="Integer">813</RectPosRight>
+            <RectPosTop type="Integer">92</RectPosTop>
+            <RelativeFileName type="String">..\src\tasks\msgtest.s</RelativeFileName>
+          </Editor.12>
+          <Editor.13>
+            <FileBarIndex type="Integer">9</FileBarIndex>
             <RectPosBottom type="Integer">264</RectPosBottom>
             <RectPosLeft type="Integer">46</RectPosLeft>
             <RectPosRight type="Integer">767</RectPosRight>
             <RectPosTop type="Integer">46</RectPosTop>
             <RelativeFileName type="String">..\src\vectors.s</RelativeFileName>
-          </Editor.12>
+          </Editor.13>
           <Editor.2>
             <FileBarIndex type="Integer">5</FileBarIndex>
+            <RectPosBottom type="Integer">264</RectPosBottom>
+            <RectPosLeft type="Integer">46</RectPosLeft>
+            <RectPosRight type="Integer">767</RectPosRight>
+            <RectPosTop type="Integer">46</RectPosTop>
+            <RelativeFileName type="String">..\include\clock_init.s</RelativeFileName>
+          </Editor.2>
+          <Editor.3>
+            <FileBarIndex type="Integer">6</FileBarIndex>
             <RectPosBottom type="Integer">287</RectPosBottom>
             <RectPosLeft type="Integer">69</RectPosLeft>
             <RectPosRight type="Integer">790</RectPosRight>
             <RectPosTop type="Integer">69</RectPosTop>
             <RelativeFileName type="String">..\include\space.s</RelativeFileName>
-          </Editor.2>
-          <Editor.3>
-            <FileBarIndex type="Integer">6</FileBarIndex>
-            <RectPosBottom type="Integer">218</RectPosBottom>
-            <RectPosLeft type="Integer">0</RectPosLeft>
-            <RectPosRight type="Integer">721</RectPosRight>
-            <RectPosTop type="Integer">0</RectPosTop>
-            <RelativeFileName type="String">..\include\structures.s</RelativeFileName>
           </Editor.3>
           <Editor.4>
             <FileBarIndex type="Integer">7</FileBarIndex>
@@ -324,47 +338,47 @@
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">721</RectPosRight>
             <RectPosTop type="Integer">0</RectPosTop>
-            <RelativeFileName type="String">..\src\irq.s</RelativeFileName>
+            <RelativeFileName type="String">..\include\structures.s</RelativeFileName>
           </Editor.4>
           <Editor.5>
-            <FileBarIndex type="Integer">9</FileBarIndex>
+            <FileBarIndex type="Integer">8</FileBarIndex>
+            <RectPosBottom type="Integer">218</RectPosBottom>
+            <RectPosLeft type="Integer">0</RectPosLeft>
+            <RectPosRight type="Integer">721</RectPosRight>
+            <RectPosTop type="Integer">0</RectPosTop>
+            <RelativeFileName type="String">..\src\irq.s</RelativeFileName>
+          </Editor.5>
+          <Editor.6>
+            <FileBarIndex type="Integer">10</FileBarIndex>
             <RectPosBottom type="Integer">241</RectPosBottom>
             <RectPosLeft type="Integer">23</RectPosLeft>
             <RectPosRight type="Integer">744</RectPosRight>
             <RectPosTop type="Integer">23</RectPosTop>
             <RelativeFileName type="String">..\src\main.s</RelativeFileName>
-          </Editor.5>
-          <Editor.6>
-            <FileBarIndex type="Integer">0</FileBarIndex>
+          </Editor.6>
+          <Editor.7>
+            <FileBarIndex type="Integer">1</FileBarIndex>
             <RectPosBottom type="Integer">264</RectPosBottom>
             <RectPosLeft type="Integer">46</RectPosLeft>
             <RectPosRight type="Integer">767</RectPosRight>
             <RectPosTop type="Integer">46</RectPosTop>
             <RelativeFileName type="String">..\src\memory.s</RelativeFileName>
-          </Editor.6>
-          <Editor.7>
-            <FileBarIndex type="Integer">10</FileBarIndex>
+          </Editor.7>
+          <Editor.8>
+            <FileBarIndex type="Integer">11</FileBarIndex>
             <RectPosBottom type="Integer">264</RectPosBottom>
             <RectPosLeft type="Integer">46</RectPosLeft>
             <RectPosRight type="Integer">767</RectPosRight>
             <RectPosTop type="Integer">46</RectPosTop>
             <RelativeFileName type="String">..\src\printk.s</RelativeFileName>
-          </Editor.7>
-          <Editor.8>
-            <FileBarIndex type="Integer">1</FileBarIndex>
+          </Editor.8>
+          <Editor.9>
+            <FileBarIndex type="Integer">2</FileBarIndex>
             <RectPosBottom type="Integer">241</RectPosBottom>
             <RectPosLeft type="Integer">23</RectPosLeft>
             <RectPosRight type="Integer">744</RectPosRight>
             <RectPosTop type="Integer">23</RectPosTop>
             <RelativeFileName type="String">..\src\sched.s</RelativeFileName>
-          </Editor.8>
-          <Editor.9>
-            <FileBarIndex type="Integer">11</FileBarIndex>
-            <RectPosBottom type="Integer">287</RectPosBottom>
-            <RectPosLeft type="Integer">69</RectPosLeft>
-            <RectPosRight type="Integer">790</RectPosRight>
-            <RectPosTop type="Integer">69</RectPosTop>
-            <RelativeFileName type="String">..\src\syscall.s</RelativeFileName>
           </Editor.9>
           <EditorHistoryFile.0>
             <RelativeFileName type="String">naloga10.s</RelativeFileName>
@@ -519,7 +533,7 @@
             <TypeOfWnd type="Integer">-1</TypeOfWnd>
             <DockRect.0>
               <AreHorz type="Integer">1</AreHorz>
-              <Percent type="Integer">939</Percent>
+              <Percent type="Integer">574</Percent>
               <strTypeOfWnd type="String">Disassembly</strTypeOfWnd>
               <Type type="Integer">0</Type>
               <TypeOfWnd type="Integer">5</TypeOfWnd>
@@ -546,12 +560,12 @@
             </DockRect.1>
             <DockRect.2>
               <AreHorz type="Integer">1</AreHorz>
-              <Percent type="Integer">228</Percent>
+              <Percent type="Integer">445</Percent>
               <strTypeOfWnd type="String">Memory</strTypeOfWnd>
               <Type type="Integer">0</Type>
               <TypeOfWnd type="Integer">6</TypeOfWnd>
               <Data>
-                <Address type="Integer">-2048</Address>
+                <Address type="Integer">536870912</Address>
                 <AddrMode type="Integer">1</AddrMode>
                 <Area type="Integer">0</Area>
                 <Bits type="Integer">8</Bits>
@@ -560,12 +574,12 @@
                 <LimitMAUsPerLine type="Integer">0</LimitMAUsPerLine>
                 <Low type="Integer">0</Low>
                 <RealTime type="Integer">0</RealTime>
-                <strAddress type="String">0xfffff800</strAddress>
+                <strAddress type="String">0x20000000</strAddress>
                 <SwapFloat type="String">True</SwapFloat>
                 <SwapInt type="String">True</SwapInt>
                 <API.0>
-                  <Address type="Integer">-2048</Address>
-                  <AddressOffset type="Integer">-2048</AddressOffset>
+                  <Address type="Integer">536870912</Address>
+                  <AddressOffset type="Integer">536870912</AddressOffset>
                   <DisplayMode type="Integer">0</DisplayMode>
                   <FloatLowFirst type="Integer">1</FloatLowFirst>
                   <IntLowFirst type="Integer">1</IntLowFirst>
@@ -1061,11 +1075,11 @@
             <Items.0>
               <__>
                 <Name type="String">Files</Name>
-                <Options type="Integer">5</Options>
+                <Options type="Integer">1</Options>
                 <Items.0>
                   <__>
                     <Name type="String">assembler files</Name>
-                    <Options type="Integer">5</Options>
+                    <Options type="Integer">1</Options>
                     <Items.0>
                       <__>
                         <Name type="String">debugger.s</Name>
@@ -1074,6 +1088,36 @@
                     </Items.0>
                   </__>
                 </Items.0>
+                <Items.1>
+                  <__>
+                    <Name type="String">Init files</Name>
+                    <Options type="Integer">5</Options>
+                    <Items.0>
+                      <__>
+                        <Name type="String">init.ini</Name>
+                        <Options type="Integer">4</Options>
+                      </__>
+                    </Items.0>
+                  </__>
+                </Items.1>
+                <Items.2>
+                  <__>
+                    <Name type="String">Linker files</Name>
+                    <Options type="Integer">1</Options>
+                    <Items.0>
+                      <__>
+                        <Name type="String">layout.ind</Name>
+                        <Options type="Integer">4</Options>
+                      </__>
+                    </Items.0>
+                  </__>
+                </Items.2>
+                <Items.3>
+                  <__>
+                    <Name type="String">Tasks</Name>
+                    <Options type="Integer">1</Options>
+                  </__>
+                </Items.3>
               </__>
             </Items.0>
           </ProjectWindow>
