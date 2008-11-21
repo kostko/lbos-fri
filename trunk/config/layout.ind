@@ -38,14 +38,12 @@ SECTIONS
   /***********************************************
    *            KERNEL DATA SECTION              *
    ***********************************************/
-  . = ALIGN(4);  
-  __INIT_DATA_START__ = .;
-  .data __DATA_START__ : AT ( __INIT_DATA_START__ )
+  .data __DATA_START__ :
   {
     *(.data)
     *(.data.*)
   }
-  . = ALIGN(4);  
+  . = ALIGN(4);
   __DATA_END__ = .;
   
   /***********************************************
