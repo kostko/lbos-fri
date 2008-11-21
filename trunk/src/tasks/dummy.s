@@ -2,7 +2,7 @@
  * FRI-LBOS ;-)
  * general OS framework (C) 2008 by FRI/OS1/Group8
  */
-.text
+.section task_code, "ax"
 .code 32
 
 /* Include structure definitions and static variables */
@@ -49,5 +49,10 @@ task_dummy:
   
   b task_dummy
 
-TESTBUF: .asciz "Hello"
+/*************************************************************
+ *      TASK DATA SECTION - For static task structures       *
+ *************************************************************/
+.section task_data, "aw"
+/* Per-task data structures may be defined below */
 
+TESTBUF: .asciz "Hello"

@@ -38,6 +38,14 @@ TASK_INITDATA:
 .long TASK2,   task_msgtest,     PSR_MODE_USER
 .long 0
 
+/* WARNING ABOUT ADDING NEW TASKS
+ *
+ * If you wish to add more tasks, you need to edit the linker script and
+ * define a new task section. Note that all task sections must be aligned
+ * to proper 256K boundaries!
+ */
+
+
 /* Timer structures */
 TIMERAREA: .space TMSIZE*MAXTASK  /* Area for timer alocation */
 TIMERFREE: .space 4               /* Pointer to list of free timers */
