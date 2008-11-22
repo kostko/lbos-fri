@@ -24,6 +24,7 @@
 .global CUR_JIFFIES
 .global PAGEBITMAP
 .global PAGEOFFSET
+.global STACK_SUPM_END
 
 .equ MAXPAGES, 3840
 .equ MAXTASK, 2
