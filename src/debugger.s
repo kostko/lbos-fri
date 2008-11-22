@@ -73,8 +73,8 @@ __panic_loop:
 
   
 .data
-MSG_DBGU_DBGU: .asciz "\n\rEntered debugger...\n\r Register contents:\n\r"
+MSG_DBGU_DBGU: .asciz "\n\rAIEEE! Unhandled CPU exception! Entered debugger...\n\r Register contents:\n\r"
 MSG_DBGU_REGS: .asciz "  R%d:\t%x\n\r"
-MSG_DBGU_xPSR: .asciz "  %cPSR:%x\n\r"
+MSG_DBGU_xPSR: .asciz "  %cPSR:\t%x\n\r"
 MSG_DBGU_STCK: .asciz "\n\r  On stack:\n\r\t%x\n\r\t%x\n\r\t%x\n\r\t%x\n\r  __...%x__\n\r"
 MSG_DBGU_EXIT: .asciz "\n\rThe Quick deBuGger Jumped oVer iNTo teh NoT-laZy l00p.\n\r"
