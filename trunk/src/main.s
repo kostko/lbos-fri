@@ -16,7 +16,6 @@
 .global sys_irq_handler
 .global timer_irq_handler
 .global dispatch
-.global printk
 start:
   /* Switch to IRQ mode to setup the stack */
   mrs r0, cpsr         /* Load CPSR to r0 */
@@ -53,15 +52,18 @@ init_dbgu:
   str r1, [r0, #DBGU_BRGR]
   
   /* Enable TX and RX */
-  ldr r1, [r0, #DBGU_CR]
-  orr r1, r1, #(1 << 6)
+  mov r1, #(1 << 6)
   orr r1, r1, #(1 << 4)
   str r1, [r0, #DBGU_CR]
   
   /* Set no-parity mode */
-  ldr r1, [r0, #DBGU_MR]
-  orr r1, r1, #(1 << 11)
+  mov r1, #(1 << 11)
   str r1, [r0, #DBGU_MR]
+
+  /* Enable DMA transmition - both ways */
+  mov r1, #(1 << 8)
+  add r1, r1, #1   
+  str r1, [r0, #PDC_PTCR]
   
   /* Enable interrupts on character receive */
   /*mov r1, #1

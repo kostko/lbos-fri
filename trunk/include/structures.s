@@ -2,7 +2,7 @@
                           GENERAL CONSTANTS
    ================================================================
 */
-.equ STACKSIZE, 0x100
+.equ STACK_SIZE, 0x100
 
 /* ================================================================
                 TASK CONTROL BLOCK STRUCTURE / OFFSETS 
@@ -15,7 +15,7 @@
 .equ T_SSP, T_USP + 4                 /* system stack pointer area */
 .equ T_FLAG, T_SSP + 4                /* flag word */
 .equ T_PRIO, T_FLAG + 4               /* task priority or something */
-.equ T_STACK, T_PRIO + 4 + STACKSIZE  /* end of stack area */
+.equ T_STACK, T_PRIO + 4 + STACK_SIZE /* end of stack area */
 .equ TCBSIZE, T_STACK                 /* size of tcb in bytes */
 
 
