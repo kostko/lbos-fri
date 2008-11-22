@@ -272,6 +272,7 @@ __led_done:
    ================================================================
 */
 .data
+.align 4
 SYSCALL_TABLE:
 .long svc_newtask   /* (0) enter dispatcher */
 .long svc_println   /* (1) print line to serial console */
