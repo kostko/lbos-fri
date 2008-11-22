@@ -4,13 +4,13 @@
 */
 .macro DISABLE_IRQ
   mrs r12, cpsr           /* Load CPSR to r12 */
-  orr r12, r12, #3 << 6   /* Set IRQ, FIQ disable bits (7, 8) */
+  orr r12, r12, #(3 << 6) /* Set IRQ, FIQ disable bits (7, 8) */
   msr cpsr_c, r12         /* Write r12 to CPSR */
 .endm
 
 .macro ENABLE_IRQ
   mrs r12, cpsr           /* Load CPSR to r12 */
-  bic r12, r12, #3 << 6   /* Clear IRQ, FIQ disable bits (7, 8) */
+  bic r12, r12, #(3 << 6) /* Clear IRQ, FIQ disable bits (7, 8) */
   msr cpsr_c, r12         /* Write r12 to CPSR */
 .endm
 
@@ -30,13 +30,13 @@
 
 .macro LED_ON
   ldr r0, =PIOC_BASE
-  mov r1, #1 << 1
+  mov r1, #(1 << 1)
   str r1, [r0, #PIO_CODR]
 .endm
 
 .macro LED_OFF
   ldr r0, =PIOC_BASE
-  mov r1, #1 << 1
+  mov r1, #(1 << 1)
   str r1, [r0, #PIO_SODR]
 .endm
 
@@ -105,3 +105,4 @@
   ldr \reg, =CURRENT
   ldr \reg, [\reg]
 .endm
+

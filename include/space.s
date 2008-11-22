@@ -4,6 +4,7 @@
 */
 .data
 .include "include/globals.s"
+.include "include/structures.s"
 
 TINDEX: .space 4    /* Current task index */
 TCBLIST: .space 4   /* Pointer to list of TCBs */
@@ -61,7 +62,7 @@ PAGEOFFSET: .long __PAGE_OFFSET__
 
 /* Kernel stacks (Supervisor and IRQ modes have separate stacks). For
    memory locations see layout.ind linker script! */
-STACK_SUPM_END: .long __STACK_END__ - 256*4
+STACK_SUPM_END: .long __STACK_END__ - STACK_SIZE*4
 STACK_IRQM_END: .long __STACK_END__
 
 /* Messages */
