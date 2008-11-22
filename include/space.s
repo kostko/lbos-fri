@@ -6,12 +6,14 @@
 .include "include/globals.s"
 .include "include/structures.s"
 
+.align 4
 TINDEX: .space 4    /* Current task index */
 TCBLIST: .space 4   /* Pointer to list of TCBs */
 CURRENT: .space 4   /* Pointer to current task's TCB */
 MCBLIST: .space 4   /* Pointer to free list of MCBs */
 
 /* Task TCB placeholders */
+.align 4
 TASK1: .space TCBSIZE
 TASK2: .space TCBSIZE
 TASK3: .space TCBSIZE
@@ -24,6 +26,7 @@ TASK9: .space TCBSIZE
 TASK10: .space TCBSIZE
 
 /* Task map table (if you change this, please update MAXTASK in globals.s) */
+.align 4
 TASKTAB: .long TASK1, TASK2
 ENDTASKTAB:
 
@@ -33,6 +36,7 @@ MCBAREA:  .space MCBSIZE*NMCBS
 /* Task initialization data (see main.s/task_init) */
 .global task_dummy
 .global task_msgtest
+.align 4
 TASK_INITDATA:
       /* TCB | Program counter | Status register */ 
 .long TASK1,   task_dummy,       PSR_MODE_USER
@@ -48,20 +52,24 @@ TASK_INITDATA:
 
 
 /* Timer structures */
+.align 4
 TIMERAREA: .space TMSIZE*MAXTASK  /* Area for timer alocation */
 TIMERFREE: .space 4               /* Pointer to list of free timers */
 TIMERQUEUE: .space 4              /* Timer queue pending firing */
 CUR_JIFFIES: .space 4             /* Current jiffies value */
 
 /* Terminal I/O structures */
+.align 4
 TERMDESC: .space TERMSIZE
 
 /* Memory allocation structures */
+.align 4
 PAGEBITMAP: .space MAXPAGES/8, 255
 PAGEOFFSET: .long __PAGE_OFFSET__
 
 /* Kernel stacks (Supervisor and IRQ modes have separate stacks). For
    memory locations see layout.ind linker script! */
+.align 4
 STACK_SUPM_END: .long __STACK_END__ - STACK_SIZE*4
 STACK_IRQM_END: .long __STACK_END__
 

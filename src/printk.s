@@ -57,6 +57,8 @@ __pk_wait:
 /* Circular list of three buffers */
 .equ PK_BUFFER_SIZE, 512
 .equ PK_BUFFER_BACK, 2*PK_BUFFER_SIZE /* Jump back to start distance */
+
+.align 4
 PK_BUFFER_START:
 PK_BUFFER_1:   .space PK_BUFFER_SIZE
 PK_BUFFER_2:   .space PK_BUFFER_SIZE
