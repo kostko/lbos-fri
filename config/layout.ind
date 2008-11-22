@@ -6,21 +6,25 @@ INPUT(&& &&Assembler Files&)
 INPUT(&& &&Source Files&)
 INPUT(&& &&Tasks&)
 
-__TEXT_START__ = 0x00000000;
-__DATA_START__ = 0x20000000;
-__STACK_END__  = 0x20080000;
-__TASKS_START__ = 0x20100000;
+__VECTORS_START__ = 0x00000000;
+__TEXT_START__    = 0x20000000;
+__DATA_START__    = 0x20080000;
+__STACK_END__     = 0x20180000;
+__TASKS_START__   = 0x20200000;
 
 SECTIONS
 {
   /***********************************************
    *            KERNEL CODE SECTION              *
    ***********************************************/
-  .text __TEXT_START__ :
+  .vecs __VECTORS_START__ :
   {
     *vectors.o(.text)
-    *(.text)
-    *(.text.*)
+  }
+  
+  .text __TEXT_START__ :
+  {
+    *(EXCLUDE_FILE (*vectors.o) .text)
   }
   
   PROVIDE (__etext = .);
