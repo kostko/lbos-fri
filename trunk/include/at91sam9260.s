@@ -93,6 +93,7 @@
 .equ MCI_SR, 0x40
 .equ MCI_IER, 0x44
 .equ MCI_IDR, 0x48
+.equ MCI_IMR, 0x4C
 
 .equ PSR_MODE_MASK, 0x1F /* Mode mask */
 .equ PSR_MODE_USER, 0x10 /* User mode */
