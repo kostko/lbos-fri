@@ -51,19 +51,30 @@
 .equ TERM_OBUF_END, TERM_OBUF_START + 4
 .equ TERMSIZE, TERM_OBUF_END + 4
 
+/* ================================================================
+                       I/O REQUEST DESCRIPTOR
+   ================================================================
+*/
 .equ IO_RQ_OPER, 0
-.equ IO_RQ_BUF, IO_RQ_OPER + 4
+.equ IO_RQ_ADDR, IO_RQ_OPER + 4
+.equ IO_RQ_BUF, IO_RQ_ADDR + 4
 .equ IO_RQ_LEN, IO_RQ_BUF + 4
-.equ IORQSIZE, IO_RQ_LEN + 4
+.equ IO_RQ_TASK, IO_RQ_LEN + 4
+.equ IO_RQ_NEXT, IO_RQ_TASK + 4
+.equ IORQSIZE, IO_RQ_NEXT + 4
+
+.equ IO_OP_READ, 1
+.equ IO_OP_WRITE, 2
 
 /* ================================================================
                            PROCESS FLAGS
    ================================================================
 */
-.equ IWAIT, 1 /* Waiting on interrupt */
-.equ MWAIT, 2 /* Waiting on message completion */
-.equ RWAIT, 4 /* Waiting on message receipt */
-.equ TWAIT, 8 /* Waiting on timer */
+.equ IWAIT, 1     /* Waiting on interrupt */
+.equ MWAIT, 2     /* Waiting on message completion */
+.equ RWAIT, 4     /* Waiting on message receipt */
+.equ TWAIT, 8     /* Waiting on timer */
+.equ IOWAIT, 16   /* Waiting on IO */
 
 /* ================================================================
                           ERROR CODES

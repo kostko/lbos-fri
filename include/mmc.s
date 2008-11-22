@@ -39,6 +39,9 @@
 .equ MCI_CMDR_TRCMD_START, (0x1 << 16)
 .equ MCI_CMDR_TRCMD_STOP, (0x2 << 16)
 
+/* Transfer direction */
+.equ MCI_CMDR_TRDIR_RD, (0x1 << 18)
+
 /* Open drain command */
 .equ MCI_CMDR_OPDCMD, (0x1 << 11)
 
@@ -81,9 +84,18 @@
 .equ MMC_CSD_CSIZE_L_S, 30
 .equ MMC_CSD_CSIZE_L_M, 0x03
 
+/* SR (Status Register) offsets */
+.equ MMC_SR_READY, (1 << 8)
+
+/* Error codes */
+.equ E_MMC_NOT_AVAIL, 0x1
+.equ E_MMC_BUSY, 0x2
+.equ E_MMC_INVAL_ADDR, 0x3
+
 /* Data structure for saving card features */
 .equ MMC_F_CardInserted, 0x0
-.equ MMC_F_RelativeCardAddr, MMC_F_CardInserted + 4
+.equ MMC_F_CardStatus, MMC_F_CardInserted + 4
+.equ MMC_F_RelativeCardAddr, MMC_F_CardStatus + 4
 .equ MMC_F_MaxReadBlockLen, MMC_F_RelativeCardAddr + 4
 .equ MMC_F_MaxWriteBlockLen, MMC_F_MaxReadBlockLen + 4
 .equ MMC_F_ReadPartial, MMC_F_MaxWriteBlockLen + 4
