@@ -4,30 +4,30 @@
 */
 
 /* Basic commands and read stream commands (Class 0 and 1) */
-.equ MMC_GO_IDLE_STATE, 0x0
-.equ MMC_SEND_OP_COND, 0x1
-.equ MMC_ALL_SEND_CID, 0x2
-.equ MMC_SET_RELATIVE_ADDR, 0x3
-.equ MMC_SELECT_CARD, 0x7
-.equ MMC_SEND_CSD, 0x9
-.equ MMC_SEND_CID, 0x10
-.equ MMC_READ_DAT_UNTIL_STOP, 0x11
-.equ MMC_STOP_TRANSMISSION, 0x12
-.equ MMC_SEND_STATUS, 0x13
-.equ MMC_GO_INACTIVE_STATE, 0x15
+.equ MMC_GO_IDLE_STATE, 0
+.equ MMC_SEND_OP_COND, 1
+.equ MMC_ALL_SEND_CID, 2
+.equ MMC_SET_RELATIVE_ADDR, 3
+.equ MMC_SELECT_CARD, 7
+.equ MMC_SEND_CSD, 9
+.equ MMC_SEND_CID, 10
+.equ MMC_READ_DAT_UNTIL_STOP, 11
+.equ MMC_STOP_TRANSMISSION, 12
+.equ MMC_SEND_STATUS, 13
+.equ MMC_GO_INACTIVE_STATE, 15
 
 /* Block oriented read commands (Class 2) */
-.equ MMC_SET_BLOCKLEN, 0x16
-.equ MMC_READ_SINGLE_BLOCK, 0x17
-.equ MMC_READ_MULTIPLE_BLOCK, 0x18
+.equ MMC_SET_BLOCKLEN, 16
+.equ MMC_READ_SINGLE_BLOCK, 17
+.equ MMC_READ_MULTIPLE_BLOCK, 18
 
 /* Sequential write commands (Class 3) */
-.equ MMC_WRITE_DAT_UNTIL_STOP, 0x20
+.equ MMC_WRITE_DAT_UNTIL_STOP, 20
 
 /* Block oriented write commands (Class 4) */
-.equ MMC_WRITE_BLOCK, 0x24
-.equ MMC_WRITE_MULTIPLE_BLOCK, 0x25
-.equ MMC_PROGRAM_CSD, 0x27
+.equ MMC_WRITE_BLOCK, 24
+.equ MMC_WRITE_MULTIPLE_BLOCK, 25
+.equ MMC_PROGRAM_CSD, 27
 
 /* Response types */
 .equ MCI_CMDR_RSPTYP_NONE, (0x0 << 6)
