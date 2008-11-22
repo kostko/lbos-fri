@@ -5,6 +5,7 @@
 .global mmc_init
 .global mmc_read_block
 .global printk
+.global panic
 .global io_finish_request
 
 /* Include structure definitions and static variables */
@@ -151,7 +152,7 @@ mmc_init:
   cmp r0, #0
   ldrne r0, =MSG_MMC_INIT_FAILED
   bne __mmc_init_failed
-  
+
   b __mmc_init_done
 
 __mmc_init_failed:
@@ -167,7 +168,7 @@ __mmc_init_failed:
   mov r1, #(1 << 9)
   str r1, [r0, #AIC_IDCR]
   
-__mmc_init_done:  
+__mmc_init_done:
   ldmfd sp!, {r0-r6,pc}
 
 mmc_irq_handler:
@@ -199,7 +200,8 @@ mmc_irq_handler:
   b __end_mci_handler
   
 __no_rxbuff:
-  /* TODO */
+  ldr r0, =MSG_MMC_UNHDL_IRQ
+  b panic
 
 __end_mci_handler:
 
@@ -304,8 +306,8 @@ mmc_read_block:
   /* Check if we may read less than the block size */
   ldr r0, [r3, #MMC_F_ReadPartial]
   cmp r2, r4                        /* Compare size and max read block length */
-  movge r0, #E_MMC_INVAL_ADDR       /* If higher then size is invalid anyway */
-  bge __mmc_read_b_failed
+  movhi r0, #E_MMC_INVAL_ADDR       /* If higher then size is invalid anyway */
+  bhi __mmc_read_b_failed
   
   movlt r6, #1        /* If size < mrbl then r6 = 1 */
   cmp r0, #0          /* Is partial read allowed (r0 <> 0) ? */
@@ -323,7 +325,7 @@ mmc_read_block:
   /* Enable needed interrupts */
   ldr r0, =MCI_BASE
   mov r6, #(1 << 14)          /* Set RXBUF bit */
-  /*orr r6, r6, #(5 << 20)*/      /* Set DTOE/RTOE bits */
+  orr r6, r6, #(5 << 20)      /* Set DTOE/RTOE bits */
   str r6, [r0, #MCI_IER]
   
   /* Enable DMA transfer */
@@ -660,6 +662,7 @@ MSG_MMC_DISCOVER_FAILED: .asciz "  > Card discovery failed!\n\r"
 MSG_MMC_POWERON: .asciz "  > Card initialized.\n\r"
 MSG_MMC_DISCOVER_OK: .asciz "  > Card features discovered.\n\r"
 MSG_MMC_FEATS: .asciz "  > Card capacity: %d MBytes\n\r"
+MSG_MMC_UNHDL_IRQ: .asciz "Unhandled MMC driver IRQ!\n\r"
 
 /* Discovered card features */
 .align 4
