@@ -105,3 +105,4 @@
 .equ SYS_RECV, 4
 .equ SYS_REPLY, 5
 .equ SYS_LED, 6
+.equ SYS_MMC_READ, 7

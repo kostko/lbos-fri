@@ -27,5 +27,5 @@
 .global STACK_SUPM_END
 
 .equ MAXPAGES, 3840
-.equ MAXTASK, 2
+.equ MAXTASK, 3
 .equ NMCBS, 5
