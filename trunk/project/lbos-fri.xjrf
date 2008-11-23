@@ -228,8 +228,8 @@
             <VL type="Integer">81</VL>
           </PI.6>
           <PI.7>
-            <C type="Integer">27</C>
-            <L type="Integer">26</L>
+            <C type="Integer">11</C>
+            <L type="Integer">34</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\main.s</P>
             <VL type="Integer">21</VL>
           </PI.7>
@@ -1071,10 +1071,10 @@
                 <Items.0>
                   <__>
                     <Name type="String">assembler files</Name>
-                    <Options type="Integer">5</Options>
+                    <Options type="Integer">1</Options>
                     <Items.0>
                       <__>
-                        <Name type="String">debugger.s</Name>
+                        <Name type="String">panic.s</Name>
                         <Options type="Integer">4</Options>
                       </__>
                     </Items.0>
@@ -1083,7 +1083,7 @@
                 <Items.1>
                   <__>
                     <Name type="String">Init files</Name>
-                    <Options type="Integer">1</Options>
+                    <Options type="Integer">5</Options>
                     <Items.0>
                       <__>
                         <Name type="String">init.ini</Name>
@@ -1096,12 +1096,24 @@
                   <__>
                     <Name type="String">Linker files</Name>
                     <Options type="Integer">1</Options>
+                    <Items.0>
+                      <__>
+                        <Name type="String">layout.ind</Name>
+                        <Options type="Integer">4</Options>
+                      </__>
+                    </Items.0>
                   </__>
                 </Items.2>
                 <Items.3>
                   <__>
                     <Name type="String">Tasks</Name>
                     <Options type="Integer">1</Options>
+                    <Items.0>
+                      <__>
+                        <Name type="String">dummy.s</Name>
+                        <Options type="Integer">4</Options>
+                      </__>
+                    </Items.0>
                   </__>
                 </Items.3>
               </__>

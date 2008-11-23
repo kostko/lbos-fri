@@ -6,6 +6,9 @@
 .global svc_newtask
 .global dispatch
 .global register_timer
+.global mm_alloc_page
+.global mm_free_page
+.global io_queue_request
 
 /* Include structure definitions and static variables */
 .include "include/structures.s"
@@ -267,12 +270,44 @@ __led_done:
   SVC_RETURN_CODE #0
   POP_CONTEXT
 
+/**
+ * Reads a block of data from the inserted MMC card.
+ *
+ * @param r0 Source address
+ * @param r1 Pointer to destination buffer
+ * @param r2 Number of bytes to read
+ */
+svc_mmc_read:
+  /* Get us a free page for the IO structure */
+  mov r3, r0
+  bl mm_alloc_page
+  
+  /* Store stuff into the IO request struct */
+  mov r4, #IO_OP_READ
+  str r4, [r0, #IO_RQ_OPER]
+  str r3, [r0, #IO_RQ_ADDR]
+  str r1, [r0, #IO_RQ_BUF]
+  str r2, [r0, #IO_RQ_LEN]
+  
+  /* Queue our request and block current task until request
+     is completed. */
+  mov r4, r0                  /* Save structure address for later */
+  bl io_queue_request
+  mov r3, r0                  /* Save return code for later */
+  
+  /* Free memory allocated for IO request struct */
+  mov r0, r4
+  bl mm_free_page
+  
+  SVC_RETURN_CODE r3
+  POP_CONTEXT
+
 /* ================================================================
                            SYCALL TABLE
    ================================================================
 */
 .data
-.align 4
+.align 2
 SYSCALL_TABLE:
 .long svc_newtask   /* (0) enter dispatcher */
 .long svc_println   /* (1) print line to serial console */
@@ -281,6 +316,7 @@ SYSCALL_TABLE:
 .long svc_recv      /* (4) receive message */
 .long svc_reply     /* (5) reply to a message */
 .long svc_led       /* (6) LED manipulation syscall */
+.long svc_mmc_read  /* (7) MMC block read */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4

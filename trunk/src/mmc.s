@@ -665,5 +665,5 @@ MSG_MMC_FEATS: .asciz "  > Card capacity: %d MBytes\n\r"
 MSG_MMC_UNHDL_IRQ: .asciz "Unhandled MMC driver IRQ!\n\r"
 
 /* Discovered card features */
-.align 4
+.align 2
 MMC_CARD_FEATS: .space MMC_CARD_FEATSIZE, 0x00

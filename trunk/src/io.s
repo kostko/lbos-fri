@@ -206,7 +206,7 @@ MSG_IO_INVALID_OP: .asciz "Invalid I/O operation in dispatcher!\n\r"
 MSG_IO_REENTRY: .asciz "I/O dispatcher reentered while busy!\n\r"
 MSG_IO_INVALID_RQ: .asciz "No active request but io_finish_request called ?!?\n\r"
 
-.align 4
+.align 2
 IOQUEUE_HEAD: .long 0
 IOQUEUE_TAIL: .long 0
 

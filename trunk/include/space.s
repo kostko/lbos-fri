@@ -6,14 +6,14 @@
 .include "include/globals.s"
 .include "include/structures.s"
 
-.align 4
+.align 2
 TINDEX: .space 4    /* Current task index */
 TCBLIST: .space 4   /* Pointer to list of TCBs */
 CURRENT: .space 4   /* Pointer to current task's TCB */
 MCBLIST: .space 4   /* Pointer to free list of MCBs */
 
 /* Task TCB placeholders */
-.align 4
+.align 2
 TASK1: .space TCBSIZE
 TASK2: .space TCBSIZE
 TASK3: .space TCBSIZE
@@ -26,8 +26,8 @@ TASK9: .space TCBSIZE
 TASK10: .space TCBSIZE
 
 /* Task map table (if you change this, please update MAXTASK in globals.s) */
-.align 4
-TASKTAB: .long TASK1, TASK2
+.align 2
+TASKTAB: .long TASK1, TASK2, TASK3
 ENDTASKTAB:
 
 /* Place for message control block allocation */
@@ -36,11 +36,12 @@ MCBAREA:  .space MCBSIZE*NMCBS
 /* Task initialization data (see main.s/task_init) */
 .global task_dummy
 .global task_msgtest
-.align 4
+.align 2
 TASK_INITDATA:
       /* TCB | Program counter | Status register */ 
 .long TASK1,   task_dummy,       PSR_MODE_USER
 .long TASK2,   task_msgtest,     PSR_MODE_USER
+.long TASK3,   task_iotest,      PSR_MODE_USER
 .long 0
 
 /* WARNING ABOUT ADDING NEW TASKS
@@ -52,24 +53,24 @@ TASK_INITDATA:
 
 
 /* Timer structures */
-.align 4
+.align 2
 TIMERAREA: .space TMSIZE*MAXTASK  /* Area for timer alocation */
 TIMERFREE: .space 4               /* Pointer to list of free timers */
 TIMERQUEUE: .space 4              /* Timer queue pending firing */
 CUR_JIFFIES: .space 4             /* Current jiffies value */
 
 /* Terminal I/O structures */
-.align 4
+.align 2
 TERMDESC: .space TERMSIZE
 
 /* Memory allocation structures */
-.align 4
+.align 2
 PAGEBITMAP: .space MAXPAGES/8, 255
 PAGEOFFSET: .long __PAGE_OFFSET__
 
 /* Kernel stacks (Supervisor and IRQ modes have separate stacks). For
    memory locations see layout.ind linker script! */
-.align 4
+.align 2
 STACK_SUPM_END: .long __STACK_END__ - STACK_SIZE*4
 STACK_IRQM_END: .long __STACK_END__
 
