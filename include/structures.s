@@ -70,11 +70,12 @@
                            PROCESS FLAGS
    ================================================================
 */
-.equ IWAIT, 1     /* Waiting on interrupt */
-.equ MWAIT, 2     /* Waiting on message completion */
-.equ RWAIT, 4     /* Waiting on message receipt */
-.equ TWAIT, 8     /* Waiting on timer */
-.equ IOWAIT, 16   /* Waiting on IO */
+.equ IWAIT, 1             /* Waiting on interrupt */
+.equ MWAIT, 2             /* Waiting on message completion */
+.equ RWAIT, 4             /* Waiting on message receipt */
+.equ TWAIT, 8             /* Waiting on timer */
+.equ IOWAIT, 16           /* Waiting on IO */
+.equ TFINISHED, (1 << 31) /* Task has finished execution */
 
 /* ================================================================
                           ERROR CODES
@@ -106,3 +107,5 @@
 .equ SYS_REPLY, 5
 .equ SYS_LED, 6
 .equ SYS_MMC_READ, 7
+.equ SYS_MMC_WRITE, 8
+.equ SYS_EXIT, 9
