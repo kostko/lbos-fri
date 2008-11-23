@@ -302,6 +302,31 @@ svc_mmc_read:
   SVC_RETURN_CODE r3
   POP_CONTEXT
 
+/**
+ * Writes a block of data to the inserted MMC card.
+ *
+ * @param r0 Destination address
+ * @param r1 Pointer to source buffer
+ * @param r2 Number of bytes to write
+ */
+svc_mmc_write:
+  /* TODO */
+  b svc_mmc_write
+
+/**
+ * Terminates the current task.
+ */
+svc_exit:
+  /* Get current task's TCB */
+  LOAD_CURRENT_TCB r1
+  
+  /* Overwrite task's flags */
+  mov r0, #TFINISHED
+  str r0, [r1, #T_FLAG]
+  
+  /* This task is finished, let's go somewhere else */
+  b svc_newtask
+
 /* ================================================================
                            SYCALL TABLE
    ================================================================
@@ -317,6 +342,8 @@ SYSCALL_TABLE:
 .long svc_reply     /* (5) reply to a message */
 .long svc_led       /* (6) LED manipulation syscall */
 .long svc_mmc_read  /* (7) MMC block read */
+.long svc_mmc_write /* (8) MMC block write */
+.long svc_exit      /* (9) exit current task */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4

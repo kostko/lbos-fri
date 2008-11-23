@@ -15,11 +15,9 @@ task_iotest:
   ldr r1, =BUFFER
   mov r2, #1024
   swi #SYS_MMC_READ
-
-__inf_loop:
-  /* Yield CPU time */
-  swi #SYS_NEWTASK
-  b __inf_loop
+  
+  /* Exit this task */
+  swi #SYS_EXIT
 
 /*************************************************************
  *      TASK DATA SECTION - For static task structures       *
