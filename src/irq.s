@@ -2,6 +2,7 @@
  * FRI-LBOS ;-)
  * general OS framework (C) 2008 by FRI/OS1/Group8
  */
+.global spu_irq_handler
 .global sys_irq_handler
 .global svc_newtask
 
@@ -11,8 +12,23 @@
 
 .text
 .code 32
+/**
+ * Spurious interrupt handler.
+ */
+spu_irq_handler:
+  sub r14, r14, #4
+  stmfd sp!, {r0,r14}
+  
+  /* Just acknowledge IRQ and return */
+  ldr r0, =AIC_BASE
+  str r0, [r0, #AIC_EOICR]
+  
+  ldmfd sp!, {r0,pc}^
+
+/**
+ * System controller interrupt handler.
+ */
 sys_irq_handler:
-  /* System controller interrupt handler */
   sub r14, r14, #4
   PUSH_CONTEXT_SVC
   
