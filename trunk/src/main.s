@@ -14,6 +14,7 @@
 
 .global start
 .global sys_irq_handler
+.global spu_irq_handler
 .global timer_irq_handler
 .global dispatch
 start:
@@ -44,6 +45,11 @@ start:
   orr r0, r0, #(0x1 << 12)      /* Instruction cache bit */
   orr r0, r0, #(0x1 << 2)       /* Data cache bit */
   mcr p15, 0, r0, c1, c0, 0
+  
+  /* Setup spurious interrupt handler */
+  ldr r0, =AIC_BASE
+  ldr r1, =spu_irq_handler
+  str r1, [r0, #AIC_SPU]
   
   /* Initialize the debug unit so we can output stuff */
 init_dbgu:

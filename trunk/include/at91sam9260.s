@@ -39,10 +39,12 @@
 .equ AIC_SMR9,  0x24
 .equ AIC_SVR9,  0xA4
 .equ AIC_IVR, 	0x100
+.equ AIC_ISR, 0x108
 .equ AIC_IECR, 	0x120
 .equ AIC_IDCR, 0x124
 .equ AIC_ICCR, 0x128
 .equ AIC_EOICR, 	0x130
+.equ AIC_SPU, 0x134
 
 .equ PMC_BASE, 0xFFFFFC00
 .equ PMC_PCER, 0x0010
