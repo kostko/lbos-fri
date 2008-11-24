@@ -293,7 +293,7 @@ svc_mmc_read:
      is completed. */
   mov r4, r0                  /* Save structure address for later */
   bl io_queue_request
-  mov r3, r0                  /* Save return code for later */
+  ldr r3, [r4, #IO_RQ_RESULT] /* Save return code for later */
   
   /* Free memory allocated for IO request struct */
   mov r0, r4

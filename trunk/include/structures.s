@@ -60,7 +60,8 @@
 .equ IO_RQ_BUF, IO_RQ_ADDR + 4
 .equ IO_RQ_LEN, IO_RQ_BUF + 4
 .equ IO_RQ_TASK, IO_RQ_LEN + 4
-.equ IO_RQ_NEXT, IO_RQ_TASK + 4
+.equ IO_RQ_RESULT, IO_RQ_TASK + 4
+.equ IO_RQ_NEXT, IO_RQ_RESULT + 4
 .equ IORQSIZE, IO_RQ_NEXT + 4
 
 .equ IO_OP_READ, 1
