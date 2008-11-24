@@ -192,11 +192,7 @@ mmc_irq_handler:
   str r1, [r0, #MCI_IDR]  /* Disable RXBUFF interrupt */
   mov r1, #1
   str r1, [r0, #PDC_PTCR] /* Disable DMA */
-  
-  /* Set current device state to idle */
-  ldr r0, =MMC_CARD_FEATS
-  mov r1, #0
-  str r1, [r0, #MMC_F_CardStatus]
+  mov r0, #0              /* No errors */
   b __end_mci_handler
   
 __no_rxbuff:
@@ -204,10 +200,14 @@ __no_rxbuff:
   b panic
 
 __end_mci_handler:
+  /* Set current device state to idle */
+  ldr r1, =MMC_CARD_FEATS
+  mov r2, #0
+  str r2, [r1, #MMC_F_CardStatus]
 
   /* Signal end of IRQ handler */
-  ldr r0, =AIC_BASE
-  str r0, [r0, #AIC_EOICR]
+  ldr r1, =AIC_BASE
+  str r1, [r1, #AIC_EOICR]
   
   /* Branch to IO scheduler */
   b io_finish_request

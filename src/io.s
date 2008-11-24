@@ -20,8 +20,6 @@
 /**
  * I/O request dispatcher. Do NOT ever call this function when
  * another request might still be in progress!
- *
- * @return Zero on success, non-zero on failure
  */
 io_dispatch:
   stmfd sp!, {r1-r7,lr}
@@ -75,10 +73,8 @@ __not_write_op:
   bl panic
 
 __mmc_error:
-  /* Return error code (in r0) to calling process */
-  cmp r4, r5
-  ldrne r1, [r4, #T_SSP]      /* If current process did not enter the dispatcher, */
-  strne r0, [r1, #SCTX_REG]   /* we should update the stack of the one who did. */
+  /* Set request status code to last error code */
+  str r0, [r7, #IO_RQ_RESULT]
   b __rq_serviced
 
 __mmc_finished:
@@ -160,8 +156,12 @@ __io_request_end:
  * Called by MMC IRQ handler to signal end of request. Interrupted
  * task context is available on the stack, interrupts are disabled
  * upon entry.
+ *
+ * @param r0 Error code or zero on success
  */
 io_finish_request:
+  mov r5, r0                    /* Store error code for later */
+  
   /* Pop request from queue */
   ldr r0, =IOQUEUE_HEAD
   ldr r2, =IOQUEUE_TAIL
@@ -183,11 +183,14 @@ io_finish_request:
   mov r2, #0
   str r2, [r0]
   
-  /* Mark task as ready to schedule */
+  /* Mark task as ready to schedule and store error code */
   ldr r0, [r1, #IO_RQ_TASK]
   ldr r2, [r0, #T_FLAG]
   bic r2, r2, #IOWAIT
   str r2, [r0, #T_FLAG]
+  
+  /* Store potential error code */
+  str r5, [r1, #IO_RQ_RESULT]
   
   /* If any requests in queue, branch to io_dispatch */
   cmp r3, #0
