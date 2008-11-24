@@ -2,8 +2,6 @@
  * FRI-LBOS ;-)
  * general OS framework (C) 2008 by FRI/OS1/Group8
  */
-.global mmc_read_block
-.global panic
 .global io_dispatch
 .global io_queue_request
 .global io_finish_request
@@ -66,6 +64,17 @@ io_dispatch:
 __not_read_op:
   cmp r3, #IO_OP_WRITE
   bne __not_write_op
+  
+  /* Pass WRITE request to MMC driver */
+  ldr r0, [r7, #IO_RQ_ADDR]
+  ldr r1, [r7, #IO_RQ_BUF]
+  ldr r2, [r7, #IO_RQ_LEN]
+  bl mmc_write_block
+  
+  /* Check for errors */
+  cmp r0, #0
+  beq __mmc_finished
+  bne __mmc_error
 
 __not_write_op:
   /* Undefined operation, let's panic */
@@ -170,8 +179,8 @@ io_finish_request:
   ldreq r0, =MSG_IO_INVALID_RQ
   beq panic                     /* If so, we panic */
   
-  ldr r2, [r1, #IO_RQ_NEXT]     /* Load pointer to next request in queue */
-  str r2, [r0]                  /* Point head to that request */
+  ldr r4, [r1, #IO_RQ_NEXT]     /* Load pointer to next request in queue */
+  str r4, [r0]                  /* Point head to that request */
   ldr r3, [r2]
   cmp r1, r3                    /* Check if tail points to current request */
   movne r3, #1

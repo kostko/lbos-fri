@@ -4,9 +4,7 @@
  */
 .global mmc_init
 .global mmc_read_block
-.global printk
-.global panic
-.global io_finish_request
+.global mmc_write_block
 
 /* Include structure definitions and static variables */
 .include "include/structures.s"
@@ -170,7 +168,10 @@ __mmc_init_failed:
   
 __mmc_init_done:
   ldmfd sp!, {r0-r6,pc}
-
+/**
+ * Handler for MMC related interrupts. Passes on response to
+ * the I/O subsystem.
+ */
 mmc_irq_handler:
   sub r14, r14, #4
   PUSH_CONTEXT_SVC
@@ -196,6 +197,19 @@ mmc_irq_handler:
   b __end_mci_handler
   
 __no_rxbuff:
+  /* Check if TXBUFE ocurred */
+  ands r2, r1, #(1 << 15)
+  beq __no_txbufe
+  
+  /* TXBUFE ocurred */
+  mov r1, #(1 << 15)
+  str r1, [r0, #MCI_IDR]  /* Disable TXBUFE interrupt */
+  mov r1, #(1 << 9)
+  str r1, [r0, #PDC_PTCR] /* Disable DMA */
+  mov r0, #0              /* No errors */
+  b __end_mci_handler
+
+__no_txbufe:
   ldr r0, =MSG_MMC_UNHDL_IRQ
   b panic
 
@@ -324,7 +338,7 @@ mmc_read_block:
   
   /* Enable needed interrupts */
   ldr r0, =MCI_BASE
-  mov r6, #(1 << 14)          /* Set RXBUF bit */
+  mov r6, #(1 << 14)          /* Set RXBUFF bit */
   orr r6, r6, #(5 << 20)      /* Set DTOE/RTOE bits */
   str r6, [r0, #MCI_IER]
   
@@ -358,6 +372,114 @@ mmc_read_block:
   mov r0, #0
   
 __mmc_read_b_failed:
+  ldmfd sp!, {r1-r6,pc}
+
+/**
+ * Writes a block to the MMC card. Caller must ensure that
+ * this function is not reentered until IO operation is
+ * completed.
+ *
+ * @param r0 Destination address
+ * @param r1 Buffer
+ * @param r2 Size
+ * @return Zero on success, non-zero on error
+ */
+mmc_write_block:
+  stmfd sp!, {r1-r6,lr}
+  
+  /* Check if MMC is available */
+  ldr r3, =MMC_CARD_FEATS
+  ldr r4, [r3, #MMC_F_CardInserted]
+  cmp r4, #0
+  moveq r0, #E_MMC_NOT_AVAIL
+  beq __mmc_write_b_failed
+  
+  /* Check if card is idle and ready */
+  ldr r4, [r3, #MMC_F_CardStatus]
+  cmp r4, #0
+  movne r0, #E_MMC_BUSY
+  bne __mmc_write_b_failed
+  
+  mov r5, r0                /* Copy destination address to r5 */
+  bl mmc_get_card_status
+  ands r0, r0, #MMC_SR_READY
+  moveq r0, #E_MMC_BUSY
+  beq __mmc_write_b_failed
+  
+  /* Check if destination address and size are valid */
+  add r0, r5, r2
+  ldr r4, [r3, #MMC_F_Capacity]
+  cmp r0, r4
+  movhi r0, #E_MMC_INVAL_ADDR
+  bhi __mmc_write_b_failed
+  
+  /* Block length is always a power of two, so we generate the
+     mask by first shifting left, performing a not and then
+     shifting back right. We use that mask to test if destination
+     address is properly aligned. */
+  ldr r4, [r3, #MMC_F_MaxWriteBlockLen]
+  clz r0, r4
+  mov r6, r4, lsl r0
+  mvn r6, r6
+  mov r6, r6, lsr r0  /* r6 now contains the mask */
+  ands r6, r5, r6     /* r6 = r5 AND r6 */
+  movne r0, #E_MMC_INVAL_ADDR
+  bne __mmc_write_b_failed
+  
+  /* Check if we may read less than the block size */
+  ldr r0, [r3, #MMC_F_WritePartial]
+  cmp r2, r4                        /* Compare size and max read block length */
+  movhi r0, #E_MMC_INVAL_ADDR       /* If higher then size is invalid anyway */
+  bhi __mmc_write_b_failed
+  
+  movlt r6, #1        /* If size < mrbl then r6 = 1 */
+  cmp r0, #0          /* Is partial write allowed (r0 <> 0) ? */
+  movne r6, #0        /* If yes then r6 = 0 */
+  
+  cmp r6, #0          /* Does (size < mrbl && pread == 0) hold ? If so,
+                         the address is invalid and we abort. */
+  movne r0, #E_MMC_INVAL_ADDR
+  bne __mmc_write_b_failed
+  
+  /* Set card state to non-idle */
+  mov r0, #1
+  str r0, [r3, #MMC_F_CardStatus]
+  
+  /* Enable needed interrupts */
+  ldr r0, =MCI_BASE
+  mov r6, #(1 << 15)          /* Set TXBUFE bit */
+  orr r6, r6, #(5 << 20)      /* Set DTOE/RTOE bits */
+  str r6, [r0, #MCI_IER]
+  
+  /* Enable DMA transfer */
+  ldr r6, [r0, #MCI_MR]
+  orr r6, r6, r4, lsl #16     /* Set BLKLEN to MaxWriteBlockLen */
+  orr r6, r6, #(1 << 15)      /* Set PDCMODE bit */
+  str r6, [r0, #MCI_MR]
+  
+  mov r6, #(1 << 1)           /* Set RXDIS bit */
+  orr r6, r6, #(1 << 9)       /* Set TXDIS bit */
+  str r6, [r0, #PDC_PTCR]
+  
+  str r1, [r0, #PDC_TPR]      /* Set transmit buffer address */
+  mov r2, r2, lsr #2          /* Divide buffer size by 4 */
+  str r2, [r0, #PDC_TCR]      /* Set transmit buffer size */
+  
+  mov r6, #(1 << 8)           /* Set TXTEN bit */
+  str r6, [r0, #PDC_PTCR]
+  
+  /* Send WRITE_BLOCK command to the card */
+  mov r1, #MMC_WRITE_BLOCK
+  orr r1, r1, #MCI_CMDR_RSPTYP_48
+  orr r1, r1, #MCI_CMDR_TRCMD_START
+  orr r1, r1, #MCI_CMDR_MAXLAT
+  str r5, [r0, #MCI_ARGR]           /* Destination address is the argument */
+  str r1, [r0, #MCI_CMDR]           /* Send command to the card */
+  
+  /* Success */
+  mov r0, #0
+  
+__mmc_write_b_failed:
   ldmfd sp!, {r1-r6,pc}
 
 /**

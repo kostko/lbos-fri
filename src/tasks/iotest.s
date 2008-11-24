@@ -10,9 +10,15 @@
 
 .global task_iotest
 task_iotest:
+  /* Perform MMC write to 0x0 */
+  mov r0, #0
+  ldr r1, =WRITE_BUFFER
+  mov r2, #1024
+  swi #SYS_MMC_WRITE
+  
   /* Perform MMC read from 0x0 */
   mov r0, #0
-  ldr r1, =BUFFER
+  ldr r1, =READ_BUFFER
   mov r2, #1024
   swi #SYS_MMC_READ
   
@@ -26,5 +32,7 @@ task_iotest:
 /* Per-task data structures may be defined below */
 
 .align 2
-BUFFER: .space 1024
+WRITE_BUFFER: .asciz "Hello MMC card, you are being overwritten!"
+__wr_padding: .space 1024 - (__wr_padding - WRITE_BUFFER), 0x00
 
+READ_BUFFER: .space 1024
