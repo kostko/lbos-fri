@@ -310,8 +310,29 @@ svc_mmc_read:
  * @param r2 Number of bytes to write
  */
 svc_mmc_write:
-  /* TODO */
-  b svc_mmc_write
+  /* Get us a free page for the IO structure */
+  mov r3, r0
+  bl mm_alloc_page
+  
+  /* Store stuff into the IO request struct */
+  mov r4, #IO_OP_WRITE
+  str r4, [r0, #IO_RQ_OPER]
+  str r3, [r0, #IO_RQ_ADDR]
+  str r1, [r0, #IO_RQ_BUF]
+  str r2, [r0, #IO_RQ_LEN]
+  
+  /* Queue our request and block current task until request
+     is completed. */
+  mov r4, r0                  /* Save structure address for later */
+  bl io_queue_request
+  ldr r3, [r4, #IO_RQ_RESULT] /* Save return code for later */
+  
+  /* Free memory allocated for IO request struct */
+  mov r0, r4
+  bl mm_free_page
+  
+  SVC_RETURN_CODE r3
+  POP_CONTEXT
 
 /**
  * Terminates the current task.
