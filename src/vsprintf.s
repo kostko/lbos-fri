@@ -6,13 +6,14 @@
 /**
  * Variable size printf(char *src [, arg ... ]).
  * Arguments are passed on stack.
- * NOTE: Args are NOT removed from stack.
+ * NOTE: Args are NOT removed from stack when done.
  * 
  * MODIFIER   CONVERTS to    EXPECTS on stack
  *  %d         decimal        number
  *  %x         hexadecimal    number
  *  %c         character      number <= 255
  *  %s         string         pointer to string\0
+ *  %%         %              
  *
  * @param r0 Pointer to source null-terminated string
  * @param r1 Pointer to destination buffer
@@ -22,7 +23,7 @@ vsprintf:
   /* God forbode any more bugs here */
   stmfd sp!, {r2-r7,lr}
   mov r6, r1 /* Use copy of dest */
-  add r5, sp, #(12*4) /* sp with args to r5 (distance: 7regs here and 5 in printk.s. yea, that's wrong propose fix: additional reg to hold stack ptr) */
+  add r5, sp, #(12*4) /* sp with args to r5 (distance: 7regs here and 5regs in printk.s. yea, that's wrong(esp if interrupted). propose fix: additional reg arg to hold stack ptr) */
 __pf_loop:  
   ldrb r2, [r0], #1
   cmp r2, #0    /* End of Source string? */

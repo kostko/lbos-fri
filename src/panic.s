@@ -19,14 +19,12 @@
  */
 panic:
   DISABLE_IRQ
-  mov r1, r0
+  stmfd sp!, {r0}
   ldr r0, =MSG_PANIC
-  bl printk
-  mov r0, r1
   bl printk
 
 __kpanic_loop:
   b __kpanic_loop
 
 .data
-MSG_PANIC: .asciz "AIEEE! KERNEL PANIC: "
+MSG_PANIC: .asciz "AIEEE! KERNEL PANIC: %s"
