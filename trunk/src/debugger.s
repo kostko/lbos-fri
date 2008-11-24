@@ -2,18 +2,22 @@
  * FRI-LBOS ;-)
  * general OS framework (C) 2008 by FRI/OS1/Group8
  */
-.global debugger
+
+.global debugger_undef
+.global debugger_abort
+.global debugger_dabrt
+.global debugger_resvt
+.global debugger_fiqir
 
 /* Include structure definitions and static variables */
-.include "include/macros.s"
 .include "include/globals.s"
+.include "include/at91sam9260.s"
 
 .text
 .code 32
-debugger:
   /* We are now officially screwed, output as much data
      as we can. */
-  
+.macro SWITCH_SVC_CHECK_SP_SAVE_REGS  
   /* Switch to SVC mode to see last registers */
   mov r8, #0x13
   orr r8, r8, #(3 << 6)
@@ -29,7 +33,31 @@ debugger:
   mrs r11, cpsr
   mrs r12, spsr
   stmfd sp!, {r11,r12}
+.endm
 
+debugger_undef:
+  SWITCH_SVC_CHECK_SP_SAVE_REGS
+  ldr r0, =DBGU_STR_UNDEF
+  b debugger
+debugger_abort:
+  SWITCH_SVC_CHECK_SP_SAVE_REGS
+  ldr r0, =DBGU_STR_ABORT
+  b debugger  
+debugger_dabrt:
+  SWITCH_SVC_CHECK_SP_SAVE_REGS
+  ldr r0, =DBGU_STR_DABRT
+  b debugger
+debugger_resvt:
+  SWITCH_SVC_CHECK_SP_SAVE_REGS
+  ldr r0, =DBGU_STR_RESVT
+  b debugger
+debugger_fiqir:
+  SWITCH_SVC_CHECK_SP_SAVE_REGS
+  ldr r0, =DBGU_STR_FIQIR
+  b debugger
+
+debugger:
+  stmfd sp!,{r0} /* Push interrupt name on stack */
   /* Print debug Hello :*/
   ldr r0, =MSG_DBGU_DBGU
   bl printk
@@ -73,8 +101,14 @@ __panic_loop:
 
   
 .data
-MSG_DBGU_DBGU: .asciz "\n\rAIEEE! Unhandled CPU exception! Entered debugger...\n\r Register contents:\n\r"
-MSG_DBGU_REGS: .asciz "  R%d:\t%x\n\r"
-MSG_DBGU_xPSR: .asciz "  %cPSR:\t%x\n\r"
-MSG_DBGU_STCK: .asciz "\n\r  On stack:\n\r\t%x\n\r\t%x\n\r\t%x\n\r\t%x\n\r  __...%x__\n\r"
-MSG_DBGU_EXIT: .asciz "\n\rThe Quick deBuGger Jumped oVer iNTo teh NoT-laZy l00p.\n\r"
+DBGU_STR_UNDEF: .asciz "UNDEFINED INSTRUCTION"
+DBGU_STR_ABORT: .asciz "ABORT (PREFETCH)"
+DBGU_STR_DABRT: .asciz "ABORT (DATA)"
+DBGU_STR_RESVT: .asciz "RESERVED"
+DBGU_STR_FIQIR: .asciz "FIQ INTERRUPT"
+
+MSG_DBGU_DBGU: .asciz "\n\r<<! %s\n\rEntered debugger...\n\r\n"
+MSG_DBGU_REGS: .asciz " R%d:\t%x\n\r"
+MSG_DBGU_xPSR: .asciz " %cPSR:\t%x\n\r"
+MSG_DBGU_STCK: .asciz "\n\r On stack:\n\r\t%x\n\r\t%x\n\r\t%x\n\r\t%x\n\r\t%x ...\n\r"
+MSG_DBGU_EXIT: .asciz "\n\r The Quick deBuGger Jumped oVer\n\r    iNTo teh NoT-laZy l00p.\n\r"

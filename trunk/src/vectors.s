@@ -9,14 +9,13 @@
 /* Global symbols */
 .global start
 .global syscall_handler
-.global debugger
 
 /* Vector table (must start at 0x0) */
-  ldr pc, =debugger         /* RESET */
-  ldr pc, =debugger         /* UNDEFINED INSTRUCTION*/
-  ldr pc, =syscall_handler  /* SOFTWARE INTERRUPT */
-  ldr pc, =debugger         /* ABORT (PREFETCH) */
-  ldr pc, =debugger         /* ABORT (DATA) */
-  ldr pc, =debugger         /* RESERVED */
-  ldr pc, [pc, #-0x0F20]    /* IRQ INTERRUPT - to AIC */
-  ldr pc, =debugger         /* FIQ INTERRUPT */
+  ldr pc, =start                  /* RESET and start */
+  ldr pc, =debugger_undef         /* UNDEFINED INSTRUCTION*/
+  ldr pc, =syscall_handler        /* SOFTWARE INTERRUPT */
+  ldr pc, =debugger_abort         /* ABORT (PREFETCH) */
+  ldr pc, =debugger_dabrt         /* ABORT (DATA) */
+  ldr pc, =debugger_resvt         /* RESERVED */
+  ldr pc, [pc, #-0x0F20]          /* IRQ INTERRUPT - to AIC */
+  ldr pc, =debugger_fiqir         /* FIQ INTERRUPT */
