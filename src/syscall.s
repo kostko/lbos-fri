@@ -4,11 +4,6 @@
  */
 .global syscall_handler
 .global svc_newtask
-.global dispatch
-.global register_timer
-.global mm_alloc_page
-.global mm_free_page
-.global io_queue_request
 
 /* Include structure definitions and static variables */
 .include "include/structures.s"

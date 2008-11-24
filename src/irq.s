@@ -4,7 +4,6 @@
  */
 .global spu_irq_handler
 .global sys_irq_handler
-.global svc_newtask
 
 /* Include structure definitions and static variables */
 .include "include/at91sam9260.s"

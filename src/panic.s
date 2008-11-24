@@ -2,7 +2,6 @@
  * FRI-LBOS ;-)
  * general OS framework (C) 2008 by FRI/OS1/Group8
  */
-.global printk
 .global panic
 
 /* Include structure definitions and static variables */
