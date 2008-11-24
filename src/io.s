@@ -21,7 +21,8 @@
  */
 io_dispatch:
   stmfd sp!, {r1-r7,lr}
-  
+
+__retry_dispatch:
   /* Grab current task pointer */
   LOAD_CURRENT_TCB r5
   
@@ -84,6 +85,29 @@ __not_write_op:
 __mmc_error:
   /* Set request status code to last error code */
   str r0, [r7, #IO_RQ_RESULT]
+  
+  /* Pop request from queue */
+  ldr r0, =IOQUEUE_HEAD
+  ldr r2, =IOQUEUE_TAIL
+  
+  DISABLE_IRQ
+  ldr r4, [r7, #IO_RQ_NEXT]     /* Load pointer to next request in queue */
+  str r4, [r0]                  /* Point head to that request */
+  ldr r3, [r2]
+  cmp r7, r3                    /* Check if tail points to current request */
+  movne r3, #1
+  moveq r3, #0
+  streq r3, [r2]                /* If so, point tail to NULL */
+  
+  /* Clear busy indicator */
+  ldr r0, =IOQUEUE_BUSY
+  mov r2, #0
+  str r2, [r0]
+  ENABLE_IRQ
+  
+  /* If there are other requests, retry dispatch */
+  cmp r3, #0
+  bne __retry_dispatch
   b __rq_serviced
 
 __mmc_finished:
