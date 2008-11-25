@@ -17,13 +17,6 @@ MCBLIST: .space 4   /* Pointer to free list of MCBs */
 TASK1: .space TCBSIZE
 TASK2: .space TCBSIZE
 TASK3: .space TCBSIZE
-TASK4: .space TCBSIZE
-TASK5: .space TCBSIZE
-TASK6: .space TCBSIZE
-TASK7: .space TCBSIZE
-TASK8: .space TCBSIZE
-TASK9: .space TCBSIZE
-TASK10: .space TCBSIZE
 
 /* Task map table (if you change this, please update MAXTASK in globals.s) */
 .align 2

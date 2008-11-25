@@ -198,8 +198,9 @@ __init_tcb:
   beq __init_done   /* We are done if r2 is zero */
   
   /* r2 now contains pointer to task's TCB */
+  ldr r5, =T_STACK
   str r3, [r2, #T_USP]    /* Clear task's User Stack Pointer */
-  add r4, r2, #T_STACK    /* r4 now holds the task's stack pointer */
+  add r4, r2, r5          /* r4 now holds the task's stack pointer */
   str r3, [r2, #T_FLAG]   /* Mark the task "dispatchable" - clear flags */
   
   /* Push context to stack */
