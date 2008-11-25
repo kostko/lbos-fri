@@ -6,7 +6,7 @@ What needs to be done (or undone).
   * Document task stack usage (USP) ?
   * Implement task terminal I/O - *perice*
   * Write documentation on how MMC and MCI work - *kostko*
-  * Implement contigous page allocation - *kostko*
+  * Implement contigous page allocation _(Buddy allocator?)_ - *kostko*
   * Make task system stack and user stack dynamically allocatable - ?
 
 = Already done =
