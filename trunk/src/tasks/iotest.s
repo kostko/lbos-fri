@@ -16,11 +16,21 @@ task_iotest:
   mov r2, #1024
   swi #SYS_MMC_WRITE
   
+  /* READ I/O stress test */
+  mov r3, #50
+  
+__stress_loop:
   /* Perform MMC read from 0x0 */
   mov r0, #0
   ldr r1, =READ_BUFFER
   mov r2, #1024
   swi #SYS_MMC_READ
+  
+  /* TODO: Verify read */
+  /* TODO: Null out memory */
+  
+  subs r3, r3, #1
+  bne __stress_loop
   
   /* Exit this task */
   swi #SYS_EXIT
