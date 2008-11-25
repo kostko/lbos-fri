@@ -124,7 +124,7 @@ __mmc_finished:
   
   /* If current task has been blocked by this, switch now */
   cmp r4, r5
-  swi #SYS_NEWTASK
+  swieq #SYS_NEWTASK
   
 __skip_switch:
   ENABLE_IRQ

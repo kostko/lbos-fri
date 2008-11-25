@@ -97,6 +97,7 @@ mmc_init:
   
   mov r0, #0x4a
   orr r0, r0, #(0x83 << 8)  /* 400kHz for MCK = 60MHz */
+  orr r0, r0, #(3 << 11)    /* Enable RDPROOF and WRPROOF */
   str r0, [r3, #MCI_MR]
   
   mov r0, #0
@@ -168,6 +169,7 @@ __mmc_init_failed:
   
 __mmc_init_done:
   ldmfd sp!, {r0-r6,pc}
+
 /**
  * Handler for MMC related interrupts. Passes on response to
  * the I/O subsystem.
@@ -184,36 +186,38 @@ mmc_irq_handler:
   
   /* TODO: Check if an error ocurred */
   
-  /* Check if if RXBUFF ocurred */
+  /* Check if RXBUFF ocurred */
   ands r2, r1, #(1 << 14)
   beq __no_rxbuff
   
   /* RXBUFF ocurred */
-  mov r1, #(1 << 14)
-  str r1, [r0, #MCI_IDR]  /* Disable RXBUFF interrupt */
-  mov r1, #1
+  mov r1, #(1 << 1)
   str r1, [r0, #PDC_PTCR] /* Disable DMA */
   mov r0, #0              /* No errors */
   b __end_mci_handler
   
 __no_rxbuff:
-  /* Check if TXBUFE ocurred */
-  ands r2, r1, #(1 << 15)
-  beq __no_txbufe
+  /* Check if NOTBUSY ocurred */
+  ands r2, r1, #(1 << 5)
+  beq __no_notbusy
   
-  /* TXBUFE ocurred */
-  mov r1, #(1 << 15)
-  str r1, [r0, #MCI_IDR]  /* Disable TXBUFE interrupt */
+  /* NOTBUSY ocurred */
   mov r1, #(1 << 9)
   str r1, [r0, #PDC_PTCR] /* Disable DMA */
   mov r0, #0              /* No errors */
   b __end_mci_handler
 
-__no_txbufe:
+__no_notbusy:
   ldr r0, =MSG_MMC_UNHDL_IRQ
   b panic
 
 __end_mci_handler:
+  /* Disable all MCI interrupts */
+  ldr r1, =MCI_BASE
+  mov r2, #0
+  sub r2, r2, #1          /* Get 0xFFFFFFFF */
+  str r2, [r1, #MCI_IDR]  /* Disable all interrupts */
+  
   /* Set current device state to idle */
   ldr r1, =MMC_CARD_FEATS
   mov r2, #0
@@ -238,7 +242,7 @@ mmc_setup_card:
   mov r0, #MMC_SELECT_CARD
   orr r0, r0, #MCI_CMDR_RSPTYP_48
   orr r0, r0, #MCI_CMDR_MAXLAT
-  mov r1, #0
+  mov r1, #(1 << 16)
   bl mmc_send_command_with_polling
   
   /* Check if an error has ocurred */
@@ -336,13 +340,8 @@ mmc_read_block:
   mov r0, #1
   str r0, [r3, #MMC_F_CardStatus]
   
-  /* Enable needed interrupts */
+  /* Prepare DMA transfer */
   ldr r0, =MCI_BASE
-  mov r6, #(1 << 14)          /* Set RXBUFF bit */
-  orr r6, r6, #(5 << 20)      /* Set DTOE/RTOE bits */
-  str r6, [r0, #MCI_IER]
-  
-  /* Enable DMA transfer */
   ldr r6, [r0, #MCI_MR]
   orr r6, r6, r4, lsl #16     /* Set BLKLEN to MaxReadBlockLen */
   orr r6, r6, #(1 << 15)      /* Set PDCMODE bit */
@@ -356,17 +355,29 @@ mmc_read_block:
   mov r2, r2, lsr #2          /* Divide buffer size by 4 */
   str r2, [r0, #PDC_RCR]      /* Set receive buffer size */
   
+  /* Send READ_SINGLE_BLOCK command to the card */
+  mov r0, #MMC_READ_SINGLE_BLOCK
+  orr r0, r0, #MCI_CMDR_RSPTYP_48
+  orr r0, r0, #MCI_CMDR_TRCMD_START
+  orr r0, r0, #MCI_CMDR_TRDIR_RD
+  orr r0, r0, #MCI_CMDR_MAXLAT
+  mov r1, r5
+  bl mmc_send_command_with_polling
+  
+  /* Error handling */
+  cmp r0, #0
+  movne r0, #E_MMC_UNKNOWN
+  bne __mmc_read_b_failed
+  
+  /* Enable DMA transfer */
+  ldr r0, =MCI_BASE
   mov r6, #1                  /* Set RXTEN bit */
   str r6, [r0, #PDC_PTCR]
   
-  /* Send READ_SINGLE_BLOCK command to the card */
-  mov r1, #MMC_READ_SINGLE_BLOCK
-  orr r1, r1, #MCI_CMDR_RSPTYP_48
-  orr r1, r1, #MCI_CMDR_TRCMD_START
-  orr r1, r1, #MCI_CMDR_TRDIR_RD
-  orr r1, r1, #MCI_CMDR_MAXLAT
-  str r5, [r0, #MCI_ARGR]           /* Source address is the argument */
-  str r1, [r0, #MCI_CMDR]           /* Send command to the card */
+  /* Enable needed interrupts */
+  mov r6, #(1 << 14)          /* Set RXBUFF bit */
+  orr r6, r6, #(5 << 20)      /* Set DTOE/RTOE bits */
+  str r6, [r0, #MCI_IER]
   
   /* Success */
   mov r0, #0
@@ -445,13 +456,8 @@ mmc_write_block:
   mov r0, #1
   str r0, [r3, #MMC_F_CardStatus]
   
-  /* Enable needed interrupts */
+  /* Prepare DMA transfer */
   ldr r0, =MCI_BASE
-  mov r6, #(1 << 15)          /* Set TXBUFE bit */
-  orr r6, r6, #(5 << 20)      /* Set DTOE/RTOE bits */
-  str r6, [r0, #MCI_IER]
-  
-  /* Enable DMA transfer */
   ldr r6, [r0, #MCI_MR]
   orr r6, r6, r4, lsl #16     /* Set BLKLEN to MaxWriteBlockLen */
   orr r6, r6, #(1 << 15)      /* Set PDCMODE bit */
@@ -465,16 +471,28 @@ mmc_write_block:
   mov r2, r2, lsr #2          /* Divide buffer size by 4 */
   str r2, [r0, #PDC_TCR]      /* Set transmit buffer size */
   
-  mov r6, #(1 << 8)           /* Set TXTEN bit */
-  str r6, [r0, #PDC_PTCR]
-  
   /* Send WRITE_BLOCK command to the card */
-  mov r1, #MMC_WRITE_BLOCK
-  orr r1, r1, #MCI_CMDR_RSPTYP_48
-  orr r1, r1, #MCI_CMDR_TRCMD_START
-  orr r1, r1, #MCI_CMDR_MAXLAT
-  str r5, [r0, #MCI_ARGR]           /* Destination address is the argument */
-  str r1, [r0, #MCI_CMDR]           /* Send command to the card */
+  mov r0, #MMC_WRITE_BLOCK
+  orr r0, r0, #MCI_CMDR_RSPTYP_48
+  orr r0, r0, #MCI_CMDR_TRCMD_START
+  orr r0, r0, #MCI_CMDR_MAXLAT
+  mov r1, r5
+  bl mmc_send_command_with_polling
+    
+  /* Error handling */
+  cmp r0, #0
+  movne r0, #E_MMC_UNKNOWN
+  bne __mmc_write_b_failed
+  
+  /* Enable DMA transfer */
+  ldr r0, =MCI_BASE
+  mov r1, #(1 << 8)           /* Set TXTEN bit */
+  str r1, [r0, #PDC_PTCR]
+  
+  /* Enable needed interrupts */
+  ldr r6, =MCI_ERROR_MASK     /* Set error bits */
+  orr r6, r6, #(1 << 5)       /* Set NOTBUSY bit */
+  str r6, [r0, #MCI_IER]
   
   /* Success */
   mov r0, #0
@@ -491,7 +509,7 @@ mmc_get_card_status:
   mov r0, #MMC_SEND_STATUS
   orr r0, r0, #MCI_CMDR_RSPTYP_48
   orr r0, r0, #MCI_CMDR_MAXLAT
-  mov r1, #0
+  mov r1, #(1 << 16)
   bl mmc_send_command_with_polling
   
   /* Check if an error has ocurred */
@@ -530,14 +548,15 @@ mmc_discover_cards:
   ldr r5, =MMC_CARD_FEATS
   mov r1, #1
   str r1, [r5, #MMC_F_CardInserted]       /* Set card status to 1 */
-  mov r1, #0
-  str r1, [r5, #MMC_F_RelativeCardAddr]   /* Set RCA to 0x0 */
+  mov r1, #1
+  str r1, [r5, #MMC_F_RelativeCardAddr]   /* Set RCA to 0x1 */
   
   /* Set relative card addr for the card */
   mov r0, #MMC_SET_RELATIVE_ADDR
   orr r0, r0, #MCI_CMDR_RSPTYP_48
   orr r0, r0, #MCI_CMDR_OPDCMD
   orr r0, r0, #MCI_CMDR_MAXLAT
+  mov r1, #(1 << 16)
   bl mmc_send_command_with_polling
   
   /* Check for errors */
@@ -548,7 +567,7 @@ mmc_discover_cards:
   mov r0, #MMC_SEND_CSD
   orr r0, r0, #MCI_CMDR_RSPTYP_136
   orr r0, r0, #MCI_CMDR_MAXLAT
-  mov r1, #0
+  mov r1, #(1 << 16)
   bl mmc_send_command_with_polling
   
   /* Check for errors */
@@ -735,7 +754,8 @@ __rsp_poll_loop:
   beq __rsp_poll_loop
   
   /* Check for errors */
-  ands r2, r3, #MCI_ERROR_MASK
+  ldr r1, =MCI_ERROR_MASK
+  ands r2, r3, r1
   beq __rsp_ok                  /* If no errors, we are good */
   
   /* If command is MMC_SEND_OP_COND then the CRC error flag
