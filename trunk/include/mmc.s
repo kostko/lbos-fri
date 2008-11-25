@@ -52,6 +52,8 @@
 .equ MCI_CMDR_CMDNB_MASK, 0x3f
 
 /* Errors */
+.equ MCI_ERR_UNRE, (0x1 << 31)
+.equ MCI_ERR_OVRE, (0x1 << 30)
 .equ MCI_ERR_DTOE, (0x1 << 22)
 .equ MCI_ERR_DCRCE, (0x1 << 21)
 .equ MCI_ERR_RTOE, (0x1 << 20)
@@ -59,7 +61,7 @@
 .equ MCI_ERR_RCRCE, (0x1 << 18)
 .equ MCI_ERR_RDIRE, (0x1 << 17)
 .equ MCI_ERR_RINDE, (0x1 << 16)
-.equ MCI_ERROR_MASK, (MCI_ERR_DTOE | MCI_ERR_DCRCE | MCI_ERR_RTOE | MCI_ERR_RENDE | MCI_ERR_RCRCE | MCI_ERR_RDIRE | MCI_ERR_RINDE)
+.equ MCI_ERROR_MASK, (MCI_ERR_UNRE | MCI_ERR_OVRE | MCI_ERR_DTOE | MCI_ERR_DCRCE | MCI_ERR_RTOE | MCI_ERR_RENDE | MCI_ERR_RCRCE | MCI_ERR_RDIRE | MCI_ERR_RINDE)
 
 /* CSD offsets/masks */
 .equ MMC_CSD_RD_B_LEN_S, 16
@@ -91,6 +93,7 @@
 .equ E_MMC_NOT_AVAIL, 0x1
 .equ E_MMC_BUSY, 0x2
 .equ E_MMC_INVAL_ADDR, 0x3
+.equ E_MMC_UNKNOWN, 0x4
 
 /* Data structure for saving card features */
 .equ MMC_F_CardInserted, 0x0
