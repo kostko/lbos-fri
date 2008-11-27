@@ -13,7 +13,7 @@ DELAY:    /* Load current task TCB pointer */
           
           DISABLE_IRQ                           /* onemogocimo prekinitve */
           
-          add   r4, r2, #72                     /* r4 -> naslov izven DLYLIST */
+          add   r4, r2, #72                     /* r4 -> naslov na zadnjega v DLYLIST */
           ldr   r5, [r4, #D_TCB]		/* r5 -> kazalec na TCB zadnjega v vrsti */
           cmp   r5, #0        			/* ali je mesto zasedeno? */
           bne   NAPAKA				/* mesto je zasedeno -> NAPAKA */
