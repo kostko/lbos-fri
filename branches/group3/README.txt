@@ -16,5 +16,3 @@ Za nas svc_delay potrebujemo v trunk-u se:
 	.equ  D_TOUT,   D_TCB+4                         /* vrednost urinih period izkljucitve procesa */
 	
 ======================================================================================================
-
-kodo SVC_DELAY dodamo danes cez dan
