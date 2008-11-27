@@ -14,9 +14,9 @@ DELAY:    /* Load current task TCB pointer */
           DISABLE_IRQ                           /* onemogocimo prekinitve */
           
           add   r4, r2, #72                     /* r4 -> naslov izven DLYLIST */
-          ldr   r5, [r4, #D_TCB]				/* r5 -> kazalec na TCB zadnjega v vrsti */
-          cmp   r5, #0        					/* ali je mesto zasedeno? */
-          bne   NAPAKA							/* mesto je zasedeno -> NAPAKA */
+          ldr   r5, [r4, #D_TCB]		/* r5 -> kazalec na TCB zadnjega v vrsti */
+          cmp   r5, #0        			/* ali je mesto zasedeno? */
+          bne   NAPAKA				/* mesto je zasedeno -> NAPAKA */
           
 NAZAJ:    ldr   r3, [r2]                        /* vrednost na prvem mestu v tabeli */    
           cmp   r3, #0                          /* ali je kaksen blok ze v seznamu? */
