@@ -1,0 +1,36 @@
+#summary Plan for virtual memory implementation
+
+= Static per-task tables =
+{{{
+TASK1_L1TBL: .space 16384
+TASK1_L2TBL: .space 1024
+
+TASK2_L1TBL: .space 16384
+TASK2_L2TBL: .space 1024
+
+TASK3_L1TBL: .space 16384
+TASK3_L2TBL: .space 1024
+}}}
+
+= Function to generate mappings =
+{{{
+/**
+ * @param r0 Pointer to L1 space
+ * @param r1 Pointer to L2 space
+ * @param r2 Task start address (properly aligned)
+ * @param r3 Task size in pages
+ */
+prepare_task_ttb:
+  /* Generate identity map for L1 */
+  /* Generate identity map for L2 */
+  /* [(Shift task start address >> 18) AND NOT(3)] OR [L1 space] */
+  /* Setup pointer to L2 coarse page descriptor */
+  /* [(Shift task start address >> 12) AND 0xFF] OR [L2 space] */
+  /* Setup identity map for r3 number of pages */
+}}}
+
+= Task Control Block entries =
+T_TTB field in TCB. Dispatcher switches MMU TTB value on context switch.
+
+= Fault handler =
+Fault handler (DATA/FETCH abort).
