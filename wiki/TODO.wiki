@@ -1,7 +1,9 @@
+#summary Current TODO for all active branches
 #labels Featured
+
 What needs to be done (or undone). *This is* the latest, *most accurate TODO list*. 
 
-Please note, if there were previous assignments you were supposed to fulfil, it might now not be so. Please checkout trunk to see what is and what is not yet. If you find yourself having nothing to do, grab [http://code.google.com/p/lbos-fri/source/browse/trunk/README.txt?r=90#116 reference material], and write a driver for some pheripheral or something (eth would be nice :p). You may also help out with other groups, but please resort to commiting to /branches/yourGroupName exclusively! When you have a segment of tested working code open a review request in the issue tracker to merge it into trunk.
+Please note, if there were previous assignments you were supposed to fulfil, it might now not be so. Please checkout trunk to see what is and what is not yet. If you find yourself having nothing to do, grab [http://code.google.com/p/lbos-fri/source/browse/trunk/README.txt?r=90#116 reference material], and write a driver for some pheripheral or something (eth would be nice =p). You may also help out with other groups, but please resort to commiting to /branches/yourGroupName exclusively! When you have a segment of tested working code open a review request in the issue tracker to merge it into trunk.
 
 <wiki:toc max_depth="1" />
 
