@@ -1,6 +1,5 @@
 #summary Short general readme
-#labels readme
-= Readme =
+#labels Featured,readme
 
 This is LBOS-FRI general project repository of Little Bitty Operating System, developed by [http://www.fri.uni-lj.si/en/ Faculty of Computer and Information Science], [http://www.uni-lj.si/en/ University of Ljubljana], 3rd grade students.
 
@@ -11,8 +10,8 @@ Code is written for ARM (a RISC microprocessor) AT91SAM9260, using [http://www.i
 
 [http://code.google.com/p/lbos-fri/source/browse/trunk/CODING_STANDARD.txt Minimal coding standard] is what you need to follow
 
-*Up to date* [http://code.google.com/p/lbos-fri/wiki/TODO TODO list] is where you pick assignments
+*Up to date* [http://code.google.com/p/lbos-fri/wiki/TODO TODO list] is where you pick assignments (Note: LBOS.pdf or anything else from ucilnica.fri is completely *out of date*).
 
 [http://code.google.com/p/lbos-fri/source/browse/#svn/trunk Trunk source code] is what compiles and executes fine, prints a few messages, switches between tasks, switches LED, etc.
 
-[http://code.google.com/p/lbos-fri/source/browse/#svn/branches Branches source] is where groups test their code before being merged into trunk.
+[http://code.google.com/p/lbos-fri/source/browse/#svn/branches Branches source] is where groups test their code before having it merged into trunk.
