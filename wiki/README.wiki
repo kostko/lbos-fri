@@ -1,0 +1,18 @@
+#summary Short general readme
+#labels readme
+= Readme =
+
+This is LBOS-FRI general project repository of Little Bitty Operating System, developed by [http://www.fri.uni-lj.si/en/ Faculty of Computer and Information Science], [http://www.uni-lj.si/en/ University of Ljubljana], 3rd grade students.
+
+Code is written for ARM (a RISC microprocessor) AT91SAM9260, using [http://www.isystem.si/ WinIDEA].
+
+
+[http://code.google.com/p/lbos-fri/source/browse/trunk/README.txt General source code readme]
+
+[http://code.google.com/p/lbos-fri/source/browse/trunk/CODING_STANDARD.txt Minimal coding standard]
+
+*Up to date* [http://code.google.com/p/lbos-fri/wiki/TODO TODO list].
+
+[http://code.google.com/p/lbos-fri/source/browse/#svn/trunk Trunk source code]
+
+[http://code.google.com/p/lbos-fri/source/browse/#svn/branches Branches source]
