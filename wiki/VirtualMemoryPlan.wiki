@@ -29,7 +29,7 @@ prepare_task_ttb:
   /* Setup identity map for r3 number of pages */
 }}}
 
-Call prepare_task_ttb in main (tcb init), table addresses currently staticly defined and listed in task init table (space.s).
+Call prepare_task_ttb in main (tcb init), table addresses currently staticly defined and listed in task init table (space.s). This function should be put into _memory.s_ (or _vm.s_ if it is found more suitable).
 
 = Task Control Block entries =
 T_TTB field in TCB. Dispatcher switches MMU TTB value on context switch.
