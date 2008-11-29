@@ -8,9 +8,10 @@ Currently the memory layout is as follows:
   [4KB ] 0x00000000 - 0x00001000 BOOT MEMORY (mapped to SRAM0), CODE
   [4KB ] 0x00300000 - 0x00301000 SRAM1
   [32MB] 0x20000000 - 0x22000000 SDRAM
-           0x20000000            KERNEL DATA START
-           0x20080000            KERNEL STACK END
-           0x20100000            TASK AREA START
+           0x20000000            KERNEL CODE START
+           0x20080000            KERNEL DATA START
+           0x20180000            KERNEL STACK END
+           0x20200000            TASK AREA START
 
 To load high-memory data structures you have to use something like:
   ldr r0, =STRUCTURE_LABEL
