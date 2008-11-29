@@ -1,20 +1,53 @@
 #labels Featured
-What needs to be done (or undone).
+What needs to be done (or undone). *This is* the latest, *most accurate TODO list*. 
 
-= TODO =
+Please note, if there were previous assignments you were supposed to fulfil, it might now not be so. Please checkout trunk to see what is and what is not yet. If you find yourself having nothing to do, grab [http://code.google.com/p/lbos-fri/source/browse/trunk/README.txt?r=90#116 reference material], and write a driver for some pheripheral or something (eth would be nice :p). You may also help out with other groups, but please resort to commiting to /branches/yourGroupName exclusively! When you have a segment of tested working code open a review request in the issue tracker to merge it into trunk.
+
+<wiki:toc max_depth="1" />
+
+= Group 8 / 2.1 =
+  * ~~svc_newtask, svc_delay, svc_send, svc_recv, svc_reply, svc_led - *kostko*~~
+  * ~~Improve the debugger to output registers (reg0-reg12 and SPSR/CPSR) - *kernc*~~
+  * ~~Improve printk routine so it uses DMA - *kernc*~~
+  * ~~Implement _vsprintf_-like function - *kernc*~~
+  * ~~Implement _panic_ function (disable irq + printk + infinite loop) - *kostko*~~
+  * ~~Add T_PRIO to TCB struct (4 bytes) - *kostko*~~
+  * ~~MMC driver and API for data transfer - svc_mmc_read, svc_mmc_write - *kostko*~~
+  * ~~Implement basic string functions - *kostko*~~
   * [VirtualMemoryPlan Implement virtual memory] - *zomb*
   * Document task stack usage (USP) ?
   * Implement task terminal I/O - *perice*
   * Write documentation on how MMC and MCI work - *kostko*
   * Implement contigous page allocation _(Buddy allocator?)_ - *kostko*
   * Make task system stack and user stack dynamically allocatable - ?
+  * ...
 
-= Already done =
-  * ~~Improve the debugger to output registers (reg0-reg12 and SPSR/CPSR) - *kernc*~~
-  * ~~Improve printk routine so it uses DMA - *kernc*~~
-  * ~~Implement _vsprintf_-like function - *kernc*~~
-  * ~~Implement _panic_ function (disable irq + printk + infinite loop) - *kostko*~~
-  * ~~Add T_PRIO to TCB struct (4 bytes) - *kostko*~~
-  * ~~Research possibility of implementing a MMC driver - *kostko*~~
-  * ~~Implement a MMC driver and a simple API for data transfer - *kostko*~~
-  * ~~Implement basic string functions - *kostko*~~
+= Group ? / 2.2 =
+  * [http://en.wikipedia.org/wiki/Weighted_round_robin Weighted Round-Robin] and optional priority scheduler - see [http://code.google.com/p/lbos-fri/source/browse/trunk/src/sched.s sched.s] - ?
+  * ...
+
+= Group ? / 2.3 =
+  * ...
+
+= Group 3 / 2.4 =
+  * ...
+
+= Group ? / 2.5 =
+  * svc_signal and svc_wait for dynamic lock objects aquisitions - ?
+  * ...
+
+= Group ? / 2.6 =
+  * svc_getchar, svc_putchar for communication with the serial port - ?
+  * monitor process - ?
+  * ...
+
+= Group ? / 2.7 =
+  * directory structure - ?
+  * svc_mkdir, svc_rmdir, svc_chdir, svc_dirup - ?
+  * ...
+
+= Group ? / 2.8 =
+  * [FileSystemPlan FAT-ng filesystem] - ?
+  * svc_fread, svc_fwrite, svc_fappend, (svc_fopen) - ?
+  * ...
+  
