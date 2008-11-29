@@ -51,25 +51,26 @@ __ms_loop:
  * @param r0 Area #1 address
  * @param r1 Area #2 address
  * @param r2 Size
- * @return Zero if equal, non-zero otherwise
+ * @return r0 Zero if equal, 1 if #1 > #2 and -1 otherwise
  */
 memcmp:
-  stmfd sp!, {r1-r5,lr}
+  stmfd sp!, {r1-r4,lr}
   
 __mcp_loop:
   ldrb r3, [r0], #1
   ldrb r4, [r1], #1
   cmp r3, r4
-  movne r0, #1
+  movhi r0, #1
+  movlo r0, #-1
   bne __mcp_done
-  subeqs r2, r2, #1
+  subs r2, r2, #1
   bne __mcp_loop
   
   /* Memory areas are equal */
   mov r0, #0  
   
 __mcp_done:
-  ldmfd sp!, {r1-r5,pc}
+  ldmfd sp!, {r1-r4,pc}
 
 /**
  * Returns NULL terminated string length.

@@ -19,9 +19,11 @@ To load high-memory data structures you have to use something like:
 2. System call invocation
 ----------------------------------------------------------------------
 Use the SWI instruction for invoking system calls as follows:
-  SWI #0x1
+    SWI #0x1
+or  SWI #SYS_NEWTASK
 
-Where 0x1 is the SYSCALL NUMBER as defined in syscall.s/SYSCALL_TABLE!
+Where 0x1 is the SYSCALL NUMBER as defined in syscall.s/SYSCALL_TABLE
+or mnemonic as defined in include/structures.s.
 System calls return values in register r0. Parameters should be passed
 into r0, r1, r2, r3.
 
@@ -29,7 +31,7 @@ into r0, r1, r2, r3.
 ----------------------------------------------------------------------
 The following macros are currently defined (in include/macros.s):
 
-        Macro name          | Description                | Regs 
+        Macro name          | Description                | Regs
   --------------------------+----------------------------+----------
   ENABLE_IRQ                | Enables CPU interrupts.    | r12
   --------------------------+----------------------------+----------
@@ -56,7 +58,7 @@ The following macros are currently defined (in include/macros.s):
                             | context.                   |
   --------------------------+----------------------------+----------
   GET_SP <mode> <reg>       | Retrieves the sp as set in | r1, r2
-                            | the specified <mode> and   | 
+                            | the specified <mode> and   |
                             | places it into <reg>, which|
                             | MUST NOT be one of the     |
                             | used registers.            |
@@ -88,7 +90,7 @@ following example:
      0x04   | R0      | SCTX_REG
      0x08   | R1      |
      0x0C   | R2      |
-     0x10   | R3      | 
+     0x10   | R3      |
      0x14   | R4      |
      0x18   | R5      |
      0x1C   | R6      |
@@ -110,3 +112,20 @@ SCTX_* constants defined in include/structures.s. Also note that you
 should only add new stuff at the top, above SCTX_REG, because context
 switches are faster if we can load R0-PC in one instruction and switch
 SPSR to CPSR at the same time.
+
+5. Reference manuals
+----------------------------------------------------------------------
+ARMv4T Partial Instruction Set Summary
+http://www.google.com/search?q=ARMv4T+Instruction+Set+Summary
+
+GNU ARM Assembler Quick Reference
+http://www.google.com/search?q=GNU+ARM+Assembler+Quick+Reference
+
+ARM926EJ-S Technical Reference Manual
+http://www.google.com/search?q=ARM926EJ-S+Technical+Reference+Manual
+
+AT91 ARM Thumb Microcontrollers AT91SAM9260 Preliminary Summary
+http://laps.fri.uni-lj.si/ars/ars_files/AT91SAM9260.pdf
+
+ARM v5TE Architecture Reference Manual
+http://www.arm.com/community/university/eulaarmarm.html
