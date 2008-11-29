@@ -1,9 +1,0 @@
-#summary List of currently active branches.
-#labels Featured
-
-= Branches =
-
-The following branches are currently available in the repository:
-  * *group3* - Implementation of SVC_DELAY subscribable timers. Documentation pending. _(gasper.rupnik et al.)_
-
-Please note any branch changes on this page. Any new code commited to these branches should have associated review requests (they can be opened in the issue tracker) before being merged into trunk.
