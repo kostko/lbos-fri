@@ -32,7 +32,7 @@ prepare_task_ttb:
 Call prepare_task_ttb in main (tcb init), table addresses currently staticly defined and listed in task init table (space.s). This function should be put into _memory.s_ (or _vm.s_ if it is found more suitable).
 
 = Task Control Block entries =
-T_TTB field in TCB. Dispatcher switches MMU TTB value on context switch.
+T_TTB field in TCB. Dispatcher switches MMU TTB value on context switch. If some day memory will *not* be identity mapped, we also *must* flush data and instruction caches, otherwise wierd stuff might happen.
 
 = Fault handler =
 Fault handler (DATA/FETCH abort).
