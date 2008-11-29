@@ -1,0 +1,7 @@
+#summary Plan for improved FAT filesystem implementation.
+
+  * utilize MMC if present
+  * "use free space bitmaps that indicate used and available clusters"
+     * ?
+  * ensure less fragmentation
+     * [http://geekblog.oneandoneis2.org/index.php/2006/08/17/why_doesn_t_linux_need_defragmenting approaches] ?
