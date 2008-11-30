@@ -27,6 +27,13 @@ mm_alloc_page:
   ldr r4, [r4]
   mov r1, #0
   
+  /* Check if we have a recorded last free offset and go
+     from there instead. */
+  ldr r2, =BITMAP_LAST_FREE_PTR
+  ldr r2, [r2]
+  cmp r2, #0
+  movne r0, r2
+  
   DISABLE_IRQ
 __find_page:
   /* Find first one bit */
@@ -43,6 +50,12 @@ __found_page:
   bic r2, r2, r5, lsl r3
   add r3, r1, r6
   add r3, r4, r3, lsl #12
+  
+  /* Save this offset for later lookups, so we don't need to
+     traverse the whole bitmap again. */
+  ldr r5, =BITMAP_LAST_FREE_PTR
+  sub r4, r0, #4
+  str r4, [r5]
     
   /* Mark page as used */
   str r2, [r0, #-4]
@@ -91,14 +104,24 @@ mm_free_page:
   sub r3, r0, r1, lsl #3  /* Compute bit offset */
   rsb r3, r3, #31         /* Bits are reversed :) */
   
-  /* Modify bitmap */
   DISABLE_IRQ
+  /* Modify bitmap */
   ldr r0, [r2, r1]
   mov r4, #1
   orr r0, r0, r4, lsl r3
   str r0, [r2, r1]
+  
+  /* Save last free offset for later reuse */
+  ldr r0, =BITMAP_LAST_FREE_PTR
+  ldr r3, [r0]
+  add r1, r2, r1
+  cmp r1, r3
+  strlo r1, [r0]        /* Store if new ptr < current ptr */
   ENABLE_IRQ
   
 __done:
   ldmfd sp!, {r0-r4,pc}
 
+.data
+.align 2
+BITMAP_LAST_FREE_PTR: .long 0
