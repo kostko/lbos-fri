@@ -12,6 +12,25 @@ TASK3_L1TBL: .space 16384
 TASK3_L2TBL: .space 1024
 }}}
 
+= Dynamic table block allocation =
+
+Two linked lists, one for free blocks for L1 tables, the other for free blocks for L2 tables:
+
+{{{
+VM_L1_FREE_BLOCKS: .long 0
+VM_L2_FREE_BLOCKS: .long 0
+}}}
+
+Lists are kept separate to avoid fragmentation. Each free block contains the following header in first 8 bytes:
+  * *NextFreeBlock* - address of next free block in the respective linked list.
+  * *BlockSize* - size of the current block (always a multiple of respective table size)
+
+When we need a new block for L1 or L2 table, we do the following:
+  # Find a free block in the respective linked list. If the list contains a block that is bigger than what we need, we split it into two parts (one is the size we need, the other is the remainder). If there are no free blocks available (only when `VM_Lx_FREE_BLOCK` points to 0), we proceed with point 2.
+  # When there are no free blocks available, we call `mm_alloc_block` function, so we get a contiguous block of memory (currently 32K). We insert that block into the respecitve linked list and repeat point 1.
+
+When the time comes to free the table, we just put it back to the beginning of the linked list (and write the proper header into it).
+
 = Function to generate mappings =
 {{{
 /**
