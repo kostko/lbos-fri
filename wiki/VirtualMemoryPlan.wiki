@@ -12,6 +12,8 @@ TASK3_L1TBL: .space 16384
 TASK3_L2TBL: .space 1024
 }}}
 
+This is only temporary until we establish dynamic table block allocation.
+
 = Dynamic table block allocation =
 
 Two linked lists, one for free blocks for L1 tables, the other for free blocks for L2 tables:
