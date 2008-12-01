@@ -1,5 +1,11 @@
 #summary Plan for virtual memory implementation
 
+= Virtual memory layout =
+|| *VA* || *PA* || *Size* || *Description* ||
+|| 0x00000000 || 0x00000000 || 1M || CPU exception vectors (identity map), unprivileged access is denied. ||
+
+TODO
+
 = Static per-task tables =
 {{{
 TASK1_L1TBL: .space 16384
