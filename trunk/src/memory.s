@@ -33,6 +33,8 @@ mm_alloc_page:
   ldr r2, [r2]
   cmp r2, #0
   movne r0, r2
+  subne r2, r2, r0
+  movne r1, r2, lsl #3
   
   DISABLE_IRQ
 __find_page:
@@ -120,6 +122,59 @@ mm_free_page:
   ENABLE_IRQ
   
 __done:
+  ldmfd sp!, {r0-r4,pc}
+
+/**
+ * Allocates a contiguous memory block 32K in size that is aligned
+ * to respective boundaries.
+ *
+ * @return Address of first allocated page or zero on failure
+ */
+mm_alloc_block:
+  stmfd sp!, {r0-r4,lr}
+  
+  /* Find a free page in PAGEBITMAP; Note that free pages
+     are marked by 1 in the bitmap so negate is not needed. */
+  ldr r0, =PAGEBITMAP
+  ldr r4, =PAGEOFFSET
+  ldr r4, [r4]
+  mov r1, #0
+  
+  /* Check if we have a recorded last free offset and go
+     from there instead. */
+  ldr r2, =BITMAP_LAST_FREE_PTR
+  ldr r2, [r2]
+  cmp r2, #0
+  movne r0, r2
+  
+  DISABLE_IRQ
+__mmab_find_block:
+  /* Find a completely free block (0xFF) */
+  ldrb r2, [r0], #1
+  cmp r2, #0xFF
+  bne __mmab_next_entry
+  
+__mmab_found_block:
+  /* Found a free block, compute memory location */
+  add r3, r4, r1, lsl #12
+    
+  /* Mark block of pages as used */
+  mov r2, #0xFF
+  str r2, [r0, #-1]
+  mov r0, r3
+  b __mmab_alloc_done
+  
+__mmab_next_entry:
+  add r1, r1, #8        /* One block represents 8 pages */
+  cmp r1, #MAXPAGES     /* Check if we are done */
+  blo __mmab_find_block /* If not, repeat */
+  
+  /* No free blocks have been found */
+  mov r0, #0
+
+__mmab_alloc_done:
+  ENABLE_IRQ
+  
   ldmfd sp!, {r0-r4,pc}
 
 .data
