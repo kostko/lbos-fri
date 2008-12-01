@@ -1,10 +1,15 @@
 #summary Plan for virtual memory implementation
 
 = Virtual memory layout =
-|| *VA* || *PA* || *Size* || *Description* ||
-|| 0x00000000 || 0x00000000 || 1M || CPU exception vectors (identity map), unprivileged access is denied. ||
+|| *VA* || *PA* || *Size* || *Level* || *Description* ||
+|| 0x00000000 || 0x00000000 || 1M || 1 || CPU exception vectors (identity map). ||
+|| 0x20000000 || 0x20000000 || 2M || 1 || Kernel code, static data and stack (identity map). ||
+|| 0xA0000000 || _dynamic_ || 32M || 2 || Kernel heap. Page frames that kernel is using are mapped here. ||
+|| 0xF0000000 || 0xF0000000 || 256M || 1 || Internal peripherals. ||
 
-TODO
+Table types:
+  * *Level 1* - section descriptors (per 1M block).
+  * *Level 2* - coarse page descriptors (4K blocks), first level tables point to common (among tasks) level 2 descriptors.
 
 = Static per-task tables =
 {{{
