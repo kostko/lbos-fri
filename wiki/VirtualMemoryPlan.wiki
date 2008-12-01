@@ -5,7 +5,7 @@
 || 0x00000000 || 0x00000000 || 1M || 1 || CPU exception vectors (identity map). ||
 || 0x20000000 || 0x20000000 || 2M || 1 || Kernel code, static data and stack (identity map). ||
 || 0xA0000000 || _dynamic_ || 32M || 2 || Kernel heap. Page frames that kernel is using are mapped here. ||
-|| 0xF0000000 || 0xF0000000 || 256M || 1 || Internal peripherals. ||
+|| 0xF0000000 || 0xF0000000 || 256M || 1 || Internal peripherals (identity map). ||
 
 Table types:
   * *Level 1* - section descriptors (per 1M block).
