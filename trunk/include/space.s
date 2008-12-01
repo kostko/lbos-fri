@@ -41,7 +41,8 @@ TASK_INITDATA:
  *
  * If you wish to add more tasks, you need to edit the linker script and
  * define a new task section. Note that all task sections must be aligned
- * to proper 256K boundaries!
+ * to proper 256K boundaries! Also don't forget to increment MAXTASK in
+ * globsls.s otherwise tasks will not be scheduled.
  */
 
 
