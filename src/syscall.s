@@ -121,26 +121,25 @@ svc_send:
   LOAD_CURRENT_TCB r0     /* Get pointer to current task's TCB */
   str r0, [r4, #M_RTCB]   /* Save task TCB into MCB */
   
-  /* Alter task flags so it gets eliminated from dispatch
-     process */
-  DISABLE_IRQ
-  ldr r1, [r0, #T_FLAG]
-  orr r1, r1, #MWAIT
-  str r1, [r0, #T_FLAG]
-  ENABLE_IRQ
-  
   /* Grab destination task */
   ldr r1, =TASKTAB
   ldr r1, [r1, r2, lsl #2]  /* Load destination task's TCB address */
   add r3, r1, #T_MSG        /* Calculate destination message queue address */
   
-  /* Find end of queue to insert our MCB */
   DISABLE_IRQ
+  /* Alter current task's flags so it gets eliminated from dispatch
+     process */
+  ldr r5, [r0, #T_FLAG]
+  orr r5, r5, #MWAIT
+  str r5, [r0, #T_FLAG]
+  
+  /* Find end of queue to insert our MCB */
 __find_mcb:
   ldr r0, [r3, #M_LINK]   /* Load link to next into r0 */
   cmp r0, #0
   beq __found_mcb         /* If NULL is found, we are done */
   mov r3, r0              /* Follow the M_LINK */
+  b __find_mcb
 
 __found_mcb:
   str r4, [r3, #M_LINK]   /* Append our MCB to end of queue */
@@ -226,9 +225,6 @@ __found_mcb_reply:
   
   /* Update sender's TCB */
   ldr r3, [r0, #M_RTCB]   /* Load sender's TCB pointer to r3 */
-  ldr r4, [r3, #T_SSP]    /* Load sender's stack pointer to r4 */
-  ldr r5, [r0, #M_STAT]   /* Load status code */
-  str r5, [r4, #SCTX_REG] /* Put status code to sender's r0 on stack */
   ldr r5, [r3, #T_FLAG]   /* Load sender's flags to r5 */
   bic r5, r5, #MWAIT      /* Clear MWAIT flag */
   str r5, [r3, #T_FLAG]   /* Store flags back */
