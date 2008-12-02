@@ -13,7 +13,7 @@ Table types:
 
 Notes:
   * Every address not listed in the above table *must* be marked invalid so it generates a page fault.
-  * Since there is always only 32MB of RAM on the FRI-SMS board, we can simply identity map it, so we can access it without problems in the kernel. Individual tasks then have their respective areas marked in their TTBs (later task space for each task will start at `0x30000000`).
+  * Since there is always only 32MB of RAM on the FRI-SMS board, we can simply identity map it, so we can access it without problems in the kernel. Individual tasks then have their respective areas marked in their tables (later task space for each task will start at `0x30000000`).
 
 = Static per-task tables =
 {{{
