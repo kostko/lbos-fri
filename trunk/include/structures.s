@@ -15,7 +15,8 @@
 .equ T_SSP, T_USP + 4                 /* system stack pointer area */
 .equ T_FLAG, T_SSP + 4                /* flag word */
 .equ T_PRIO, T_FLAG + 4               /* task priority or something */
-.equ T_STACK, T_PRIO + 4 + STACK_SIZE /* end of stack area */
+.equ T_TTB, T_PRIO + 4                /* translation table base for this task */
+.equ T_STACK, T_TTB + 4 + STACK_SIZE /* end of stack area */
 .equ TCBSIZE, T_STACK                 /* size of tcb in bytes */
 
 
@@ -95,6 +96,31 @@
 .equ SCTX_PSR, 0x00
 .equ SCTX_REG, 0x04
 .equ SCTX_PC, 0x38
+
+/* ================================================================
+                       MMU RELATED CONSTANTS
+                       
+   This is merely for easier understanding/flag setting. For 
+   further reference see the ARM926EJ-S Technical Reference Manual.
+   ================================================================
+*/
+.equ PAGESIZE, 4*1024                                          /* Pagesize in bytes */
+.equ TTBIT, 0x10                                               
+.equ SECTION, 0b10                                             /* Section constant */
+.equ COARSE, 0b01                                              /* Coarse descriptor const. */
+.equ DOMAIN, 0x0 << 5                                          /* Domain; legal values from 0 to F */
+.equ USR_ACCESS, 0b11 << 10                                    /* User access */
+.equ SVC_ACCESS, 0b01 << 10                                    /* Privileged access */
+.equ BUFFERABLE, 0b1 << 2                                      /* Omit these from the descriptor to set not cacheable 
+.equ CACHEABLE, 0b1 << 3                                          and/or not bufferable */
+.equ USR_SUBP_P, 0xFF << 4                                     /* Permissions for subpages. Just leave this alone */
+.equ SVC_SUBP_P, 0x55 << 4
+
+/* Descriptor flags. */
+.equ MMU_KERNEL_FLAGS, DOMAIN | TTBIT| SECTION | SVC_ACCESS    
+.equ MMU_TASK_FLAGS_L2, SECTION 
+.equ MMU_TASK_FLAGS_L1, DOMAIN | TTBIT | COARSE
+
 
 /* ================================================================
                     SYSCALL NUMBERS FOR USERSPACE

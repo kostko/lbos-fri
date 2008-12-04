@@ -12,6 +12,7 @@
 .text
 .code 32
 
+.global switch_ttb
 .global dispatch
 dispatch:
   /* Task dispatcher */
@@ -44,7 +45,13 @@ __no_wrap:
   str r2, [r3]
   ldr r3, [r2, #T_USP]      /* Load task's User Stack Pointer */
   ldr r4, [r2, #T_SSP]      /* Load task's System Stack Pointer */
+  ldr r5, [r2, #T_TTB]        /* Load task's Translation Table Base */
   
   SET_SP #PSR_MODE_SYS, r3  /* Set USP */
   mov sp, r4                /* Set SSP */
+  
+  /* Switch the task's TTB */
+  mov r0, r5
+  bl switch_ttb
+  
   POP_CONTEXT

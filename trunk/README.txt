@@ -114,7 +114,29 @@ should only add new stuff at the top, above SCTX_REG, because context
 switches are faster if we can load R0-PC in one instruction and switch
 SPSR to CPSR at the same time.
 
-5. Reference manuals
+5. Notes about adding new tasks & Virtual Memory
+----------------------------------------------------------------------
+Currently each task gets 256K of memory; both for code and data. This 
+is due to the current virtual memory implementation (everything is static). 
+
+So for each task you add you MUST:
+  Modify space.s:
+  - Reserve space for its TCB
+  - Add the proper TCB label to the TASKTAB 
+  - Add a new entry to the TASKINIT table 
+  - Reserve space for its L1 and L2 tables 
+  
+  Modify globals.s:
+  - Increment MAXTASK
+  
+  Modify layout.ind:
+  - Add a new task section; note that each task must be aligned to a 256K
+    address!
+
+Also:	
+  - Be sure to check existing tasks for reference!
+
+6. Reference manuals
 ----------------------------------------------------------------------
 ARMv4T Partial Instruction Set Summary
 http://www.google.com/search?q=ARMv4T+Instruction+Set+Summary
