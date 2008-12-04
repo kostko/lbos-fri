@@ -8,8 +8,29 @@
 .include "include/globals.s"
 .include "include/macros.s"
 
+.global mm_init
 .global mm_alloc_page
 .global mm_free_page
+.global mm_alloc_block
+
+/**
+ * Initialize memory manager.
+ */
+mm_init:
+  stmfd sp!, {r0-r2,lr}
+  
+  /* Initialize bitmap with 0xFF (free space) */
+  ldr r0, =PAGEBITMAP
+  mov r1, #0xFF
+  mov r2, #0
+  
+__mm_init_bitmap:
+  strb r1, [r0], #1
+  adds r2, r2, #8
+  cmp r2, #MAXPAGES
+  blo __mm_init_bitmap
+  
+  ldmfd sp!, {r0-r2,pc}
 
 /**
  * Allocates a new 4KB page for use. If no free pages are
@@ -131,7 +152,7 @@ __done:
  * @return Address of first allocated page or zero on failure
  */
 mm_alloc_block:
-  stmfd sp!, {r0-r4,lr}
+  stmfd sp!, {r1-r4,lr}
   
   /* Find a free page in PAGEBITMAP; Note that free pages
      are marked by 1 in the bitmap so negate is not needed. */
@@ -146,6 +167,8 @@ mm_alloc_block:
   ldr r2, [r2]
   cmp r2, #0
   movne r0, r2
+  subne r2, r2, r0
+  movne r1, r2, lsl #3
   
   DISABLE_IRQ
 __mmab_find_block:
@@ -159,8 +182,8 @@ __mmab_found_block:
   add r3, r4, r1, lsl #12
     
   /* Mark block of pages as used */
-  mov r2, #0xFF
-  str r2, [r0, #-1]
+  mov r2, #0x00
+  strb r2, [r0, #-1]
   mov r0, r3
   b __mmab_alloc_done
   
@@ -175,7 +198,7 @@ __mmab_next_entry:
 __mmab_alloc_done:
   ENABLE_IRQ
   
-  ldmfd sp!, {r0-r4,pc}
+  ldmfd sp!, {r1-r4,pc}
 
 .data
 .align 2

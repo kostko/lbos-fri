@@ -84,6 +84,7 @@ TASK3_L2TBL: .space 1024*32
 
 /* Messages */
 MSG_PREINIT: .asciz "\n\rLBOS-FRI v0.1 for AT91SAM9260/FRI-SMS starting up...\n\r"
+MSG_INIT_MM: .asciz ">>> Initializing the memory manager...\n\r"
 MSG_INIT_PER: .asciz ">>> Initializing peripherals (LED, timers)...\n\r"
 MSG_INIT_TCB: .asciz ">>> Initializing tasks...\n\r"
 MSG_INIT_MCB: .asciz ">>> Initializing message passing...\n\r"
