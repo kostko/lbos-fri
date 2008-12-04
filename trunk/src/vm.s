@@ -7,21 +7,21 @@
 .include "include/globals.s"
 .include "include/structures.s"
 
-.global prepare_task_ttb
-.global switch_ttb
+.global vm_prepare_task_ttb
+.global vm_switch_ttb
 /**
  * @param r0 Pointer to L1 space
  * @param r1 Pointer to L2 space
  * @param r2 Task start address (properly aligned)
  * @param r3 Task size in pages
  */
-prepare_task_ttb:
+vm_prepare_task_ttb:
   stmfd sp!, {r0-r8, lr}
   
   ldr r4, =0x21F                  /* Counter for bits [31:20] */
   ldr r5, =MMU_TASK_FLAGS_L1
   ldr r6, =MMU_TASK_FLAGS_L2
-  orr r6, r6, #SVC_SUBP_P         /* First set only privileged access */                                                                                    
+  orr r6, r6, #SVC_SUBP_P         /* First set only privileged access */
   
   /* Set mappings for CPU Exception vectors space */
   ldr r7, =MMU_KERNEL_FLAGS       /* Base address is 0x0. */
@@ -51,17 +51,17 @@ prepare_task_ttb:
     /* We need to grant user access to task space addresses */
   _ptt_set_task_space:
     orr r4, r0, r2, LSR #18
-    bic r4, #3                  /* r4 will hold the proper level 1 descriptor's addr */
+    bic r4, r4, #3              /* r4 will hold the proper level 1 descriptor's addr */
     ldr r5, [r4]                /* Load L1 descr. */
     
     /* This extracts bits [19:12] from the task's address (which is in r2). */
     mov r6, r2, LSR #10
     ldr r7, =0xFFF
     mov r7, r7, LSL #11
-    bic r6, r7
+    bic r6, r6, r7
     
     ldr r7, =0x3FF
-    bic r5, r7                  /* Clear bits [9:0] */
+    bic r5, r5, r7              /* Clear bits [9:0] */
     orr r5, r5, r6              /* Combine to get the proper level 2 descriptor address */
     
     ldr r6, [r5]                /* Load it */
@@ -92,7 +92,7 @@ prepare_task_ttb:
  * 
  * @param r0 Translation Table Base
  */
-switch_ttb:
+vm_switch_ttb:
   stmfd sp!, {r0-r8, lr}
   
   mov r8, r0

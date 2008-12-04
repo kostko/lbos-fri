@@ -17,7 +17,7 @@
 .global spu_irq_handler
 .global timer_irq_handler
 .global dispatch
-.global prepare_task_ttb
+.global vm_prepare_task_ttb
 start:
   /* Switch to IRQ mode to setup the stack */
   mrs r0, cpsr         /* Load CPSR to r0 */
@@ -235,10 +235,10 @@ __TTB_setup:              /* This piece of code is a bit ugly; but try not to ca
   mov r2, r5             /* Task start address in r2 */
   ldr r3, [r0], #4       /* Task size in pages in r3 */
   mov r0, r7             /* Pointer to L1 space in r0 */
-  bl prepare_task_ttb  
+  bl vm_prepare_task_ttb  
   
   ldmfd sp!, {r0-r3}     /* Restore previous reg. values */      
-  add r0, r0, #8         /* Correct the pointer TASK_INITDATA pointer */                                               
+  add r0, r0, #8         /* Correct the TASK_INITDATA pointer */                                               
                              
   mov r1, r2             /* Save current TCB address for later */
   b __init_tcb
