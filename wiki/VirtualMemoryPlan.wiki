@@ -71,7 +71,9 @@ Call prepare_task_ttb in main (tcb init), table addresses currently staticly def
 T_TTB field in TCB. Dispatcher switches MMU TTB value on context switch. If some day memory will *not* be identity mapped, we also *must* flush data and instruction caches, otherwise wierd stuff might happen.
 
 = Fault handler =
-Fault handler (DATA/FETCH abort).
+Fault handler (DATA/FETCH abort):
+  * When a _userspace task_ causes a problem, it should be killed and a message outputed via DBGU (something like `"[VM] Task %d protection fault acessing address %x."`)
+  * When the fault ocurrs in _kernel mode_ the fault handler should cause a panic.
 
 = Nasty task =
 Add a task that messes around with (unauthorized) memory accesses.
