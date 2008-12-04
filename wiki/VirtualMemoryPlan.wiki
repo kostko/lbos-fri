@@ -72,3 +72,6 @@ T_TTB field in TCB. Dispatcher switches MMU TTB value on context switch. If some
 
 = Fault handler =
 Fault handler (DATA/FETCH abort).
+
+= Nasty task =
+Add a task that messes around with (unauthorized) memory accesses.
