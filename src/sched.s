@@ -12,7 +12,7 @@
 .text
 .code 32
 
-.global switch_ttb
+.global vm_switch_ttb
 .global dispatch
 dispatch:
   /* Task dispatcher */
@@ -52,6 +52,6 @@ __no_wrap:
   
   /* Switch the task's TTB */
   mov r0, r5
-  bl switch_ttb
+  bl vm_switch_ttb
   
   POP_CONTEXT
