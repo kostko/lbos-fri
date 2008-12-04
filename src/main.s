@@ -78,6 +78,12 @@ init_dbgu:
   
   ldr r0, =MSG_PREINIT
   bl printk
+  
+  /* Initialize the memory manager */
+  ldr r0, =MSG_INIT_MM
+  bl printk
+  bl mm_init
+  
   ldr r0, =MSG_INIT_PER
   bl printk
   
