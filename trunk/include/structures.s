@@ -16,8 +16,7 @@
 .equ T_FLAG, T_SSP + 4                /* flag word */
 .equ T_PRIO, T_FLAG + 4               /* task priority or something */
 .equ T_TTB, T_PRIO + 4                /* translation table base for this task */
-.equ T_STACK, T_TTB + 4 + STACK_SIZE /* end of stack area */
-.equ TCBSIZE, T_STACK                 /* size of tcb in bytes */
+.equ TCBSIZE, T_TTB + 4               /* size of tcb in bytes */
 
 
 /* ================================================================
