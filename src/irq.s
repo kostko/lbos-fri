@@ -4,6 +4,8 @@
  */
 .global spu_irq_handler
 .global sys_irq_handler
+.global irq_disable
+.global irq_restore
 
 /* Include structure definitions and static variables */
 .include "include/at91sam9260.s"
@@ -60,3 +62,29 @@ __pit_irq_handler:
   DISABLE_PIT_IRQ
   ENABLE_IRQ
   b svc_newtask
+
+/**
+ * Disables IRQ and returns previous state.
+ */
+irq_disable:
+  stmfd sp!, {r12,lr}
+  
+  mrs r12, cpsr           /* Load CPSR to r12 */
+  mov r0, r12
+  orr r12, r12, #(3 << 6) /* Set IRQ, FIQ disable bits (7, 8) */
+  msr cpsr_c, r12         /* Write r12 to CPSR */
+  
+  ldmfd sp!, {r12,pc}
+
+
+/**
+ * Restores previous state (enables IRQ if it was enabled
+ * before).
+ *
+ * @param r0 Previous state (PSR)
+ */
+irq_restore:
+  /* Write previous state to CPSR */
+  msr cpsr_c, r0
+  mov pc, lr
+

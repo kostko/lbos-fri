@@ -9,84 +9,413 @@
 
 .global vm_prepare_task_ttb
 .global vm_switch_ttb
+.global vm_alloc_translation_table
+.global vm_map_region
+.global vm_get_phyaddr
+
+/* Free blocks structure definition */
+.equ VM_FB_NextFreeBlock, 0x00
+.equ VM_FB_BlockSize, 0x04
+
 /**
- * @param r0 Pointer to L1 space
- * @param r1 Pointer to L2 space
- * @param r2 Task start address (properly aligned)
- * @param r3 Task size in pages
+ * Allocates a new translation table. Table contents is completely
+ * filled with zeroes. Tables are allocated from two separate linked
+ * lists of free spaces (one for each size, so fragmentation is
+ * avoided).
+ *
+ * Each free block contains the following header in first 8 bytes: 
+ *   NextFreeBlock - address of next free block in the respective
+ *                   linked list. 
+ *   BlockSize - size of the current block (always a multiple of
+ *               respective table size) 
+ *
+ * @param r0 Table size (1 for L1, 2 for L2)
+ * @return Table address
+ */
+vm_alloc_translation_table:
+  stmfd sp!, {r1-r7,lr}
+  
+  /* Load proper linked list header and table size */
+  cmp r0, #1
+  ldreq r1, =VM_L1_FREE_BLOCKS
+  moveq r2, #16384
+  ldrne r1, =VM_L2_FREE_BLOCKS
+  movne r2, #1024
+  
+  /* Disable IRQs and save state */
+  bl irq_disable
+  mov r7, r0
+  
+  /* Check if any block available */
+  ldr r3, [r1]
+  cmp r3, #0
+  ldrne r0, [r3, #VM_FB_BlockSize]
+  bne __vmalltt_free_block_avail
+  
+  /* No free blocks available, get one (currently 32K) */
+  bl mm_alloc_block
+  cmp r0, #0            /* Check for out of memory condition */
+  beq __vmalltt_oom
+  
+  /* Overwrite linked list header */
+  mov r3, r0
+  str r3, [r1]
+  
+  /* Setup block header */
+  mov r0, #0
+  str r0, [r3, #VM_FB_NextFreeBlock]
+  mov r0, #32768
+  str r0, [r3, #VM_FB_BlockSize]
+  
+__vmalltt_free_block_avail:
+  /* A block is available (but might not be the right size) */
+  cmp r0, r2                        /* r0 contains block size */
+  blo __vmalltt_block_size_error
+  bhi __vmalltt_split_block
+
+  /* Block is already the right size, just pop from linked list */
+  ldr r4, [r3, #VM_FB_NextFreeBlock]
+  str r4, [r1]
+  mov r0, r3
+  b __vmalltt_done
+
+__vmalltt_split_block:
+  /* Block is too large, split into two parts - first part is the
+     right size, second part is the remainder. */
+  add r4, r3, r2                        /* Compute second part offset */
+  sub r5, r0, r2                        /* Compute new block size */
+  
+  ldr r6, [r3, #VM_FB_NextFreeBlock]    /* Load next block address */
+  str r6, [r4, #VM_FB_NextFreeBlock]    /* Setup new block header */
+  str r5, [r4, #VM_FB_BlockSize]
+  
+  str r4, [r1]                          /* Overwrite list header */
+  mov r0, r3                            /* We have allocated ourselves a block */
+  b __vmalltt_done
+
+__vmalltt_oom:
+  /* Out of memory during page table block allocation */
+  ldr r0, =MSG_VM_TBL_ALLOC_OOM
+  bl panic
+
+__vmalltt_block_size_error:
+  /* Invalid block size, this should never happen */
+  ldr r0, =MSG_VM_TBL_ALLOC_INVAL_SIZE
+  bl panic
+
+__vmalltt_done:
+  /* Restore previous state */
+  mov r1, r0
+  mov r0, r7
+  bl irq_restore
+  
+  /* Zero out the allocated block */
+  mov r0, r1      /* r0: table start address */
+  mov r1, #0x00   /* r1: fill byte */
+                  /* r2: table size */
+  bl memset
+  
+  ldmfd sp!, {r1-r7,pc}
+
+/**
+ * Frees a previously allocated translation table.
+ *
+ * @param r0 Table address
+ * @param r1 Table type (as with alloc)
+ */
+vm_free_translation_table:
+  stmfd sp!, {r0-r4,lr}
+  
+  /* TODO */
+  
+  ldmfd sp!, {r0-r4,pc}
+
+/**
+ * Maps a region of physical pages to virtual memory. This
+ * will setup at most 256 pages using course L2 descriptor.
+ *
+ * @param r0 L1 translation table address
+ * @param r1 Physical address
+ * @param r2 Virtual address
+ * @param r3 Size (in pages)
+ * @param r4 Mode bits
+ * @return Zero on success, non-zero on failure
+ */
+vm_map_region_coarse:
+  stmfd sp!, {r1-r8,lr}
+  
+  /* Calculate offset in L1 translation table and fetch
+     first level descriptor */
+  ldr r7, =0xFFF00000             /* Prepare VMA[31:20] mask */
+  and r7, r2, r7                  /* Mask other bits */
+  ldr r5, [r0, r7, lsr #18]       /* Load descriptor */
+    
+  /* Check if descriptor does not exist or is an existing
+     coarse page descriptor. */
+  and r6, r5, #0b11
+  cmp r6, #COARSE
+  beq __vmmrc_deref_to_l2
+  cmp r6, #MMU_L1_INVALID
+  movne r0, #1
+  bne __vmmrc_done
+  
+  /* L1 descriptor is marked as invalid, we have to allocate
+     a new L2 table and setup the descriptor. */
+  mov r6, r0
+  mov r0, #2
+  bl vm_alloc_translation_table
+  
+  /* Got a fresh new L2 table space, setup reference in L1 */
+  orr r5, r0, #(COARSE | TTBIT)   /* General flags */
+  and r8, r4, #VM_MODE_M_DOMAIN
+  orr r5, r5, r8, lsl #1          /* Domain */
+  str r5, [r6, r7, lsr #18]
+  mov r0, r6
+
+__vmmrc_deref_to_l2:
+  /* Load L2 table base and setup necesarry descriptors */
+  ldr r6, =0xFFFFFC00             /* Prepare L1[31:10] mask */
+  and r5, r5, r6                  /* Mask other bits, so r5 contains L2 table address */
+  
+  /* Calculate starting offset */
+  mov r6, #0xFF000                /* Prepare VMA[19:12] mask */
+  and r2, r2, r6
+  add r5, r5, r2, lsr #12
+  
+__vmmrc_setup_descriptor:
+  orr r2, r1, #MMU_L2_SMALL_PAGE  /* General flags */
+  and r6, r4, #VM_MODE_M_CB
+  orr r2, r2, r6, lsl #2          /* Cacheable/Bufferable bits */
+  and r6, r4, #VM_MODE_M_AP
+  orr r2, r2, r6, lsl #2          /* Acess permissions 0 */
+  orr r2, r2, r6, lsl #4          /* Acess permissions 1 */
+  orr r2, r2, r6, lsl #6          /* Acess permissions 2 */
+  orr r2, r2, r6, lsl #8          /* Acess permissions 3 */
+  str r2, [r5], #4
+  add r1, r1, #4096               /* Offset physical address by one page */
+  subs r3, r3, #1
+  bne __vmmrc_setup_descriptor
+  
+  /* Success */
+  mov r0, #0
+
+__vmmrc_done:
+  ldmfd sp!, {r1-r8,pc}
+
+/**
+ * Maps a 1MB region of physical pages to virtual memory using
+ * section L1 desctiptors.
+ *
+ * @param r0 L1 translation table address
+ * @param r1 Physical address
+ * @param r2 Virtual address
+ * @param r3 Size (ignored, always 256 pages)
+ * @param r4 Mode bits
+ * @return Zero on success, non-zero on failure
+ */
+vm_map_region_section:
+  stmfd sp!, {r1-r8,lr}
+  
+  /* Calculate offset in L1 translation table and fetch
+     first level descriptor */
+  ldr r7, =0xFFF00000             /* Prepare VMA[31:20] mask */
+  and r1, r1, r7                  /* Mask other bits in PMA */
+  and r2, r2, r7                  /* Mask other bits in VMA */
+  ldr r5, [r0, r2, lsr #18]       /* Load descriptor */
+  
+  /* Check if descriptor does not exist or is an existing
+     section descriptor. */
+  and r6, r5, #0b11
+  cmp r6, #SECTION
+  beq __vmmrs_overwrite
+  cmp r6, #MMU_L1_INVALID
+  movne r0, #1
+  bne __vmmrs_done
+  
+__vmmrs_overwrite:
+  /* Setup L1 section descriptor */
+  orr r1, r1, #(SECTION | TTBIT)      /* General flags */
+  and r3, r4, #VM_MODE_M_CB
+  orr r1, r1, r3, lsl #2              /* Cacheable/Bufferable bits */
+  and r3, r4, #VM_MODE_M_AP
+  orr r1, r1, r3, lsl #8              /* Access permissions */
+  and r3, r4, #VM_MODE_M_DOMAIN
+  orr r1, r1, r3, lsl #1              /* Domain */
+  str r1, [r0, r2, lsr #18]
+  
+  /* Success */
+  mov r0, #0
+  
+__vmmrs_done:
+  ldmfd sp!, {r1-r8,pc}
+
+/**
+ * Maps a region of physical pages to virtual memory.
+ *
+ * @param r0 L1 translation table address
+ * @param r1 Physical address
+ * @param r2 Virtual address
+ * @param r3 Size (in pages)
+ * @param r4 Mode bits (see VM_MODE_x constants)
+ * @return Zero on success, non-zero on failure
+ */
+vm_map_region:
+  stmfd sp!, {r1-r8,lr}
+  
+  /* Is number of pages less than 256 ? If so, we can simply use
+     just one coarse page descriptor. */
+  cmp r3, #256
+  blo __vmmr_map_course
+  
+  /* Possibly some section descriptors and some coarse descriptors */
+  mov r5, r3, lsr #8      /* Calculate number of sections needed */
+  mov r6, r0
+  
+__vmmr_map_section:
+  /* Map a whole section at once */
+  mov r0, r6
+  bl vm_map_region_section
+  cmp r0, #0
+  bne __vmmr_map_done
+  
+  /* Offset physical and virtual addresses by 1M */
+  add r1, r1, #(1 << 20)
+  add r2, r2, #(1 << 20)
+  sub r3, r3, #256
+  subs r5, r5, #1
+  bne __vmmr_map_section
+  
+  /* Done with sections, what's left (if anything) is coarse */
+  cmp r3, #0
+  moveq r0, #0
+  beq __vmmr_map_done
+  
+__vmmr_map_course:
+  /* Map remainder using 4K coarse pages */
+  bl vm_map_region_coarse
+
+__vmmr_map_done:
+  ldmfd sp!, {r1-r8,pc}
+
+/**
+ * Returns physical address of some specified virtual address or
+ * zero when no mapping exists. This method does things relative
+ * to the current task.
+ *
+ * @param r0 Virtual address
+ * @return Physical address
+ */
+vm_get_phyaddr:
+  stmfd sp!, {r1-r5,lr}
+  
+  /* Get TTB into r1 */
+  mrc p15, 0, r1, c2, c0, 0
+  
+  /* Calculate table offset */
+  ldr r2, =0xFFF00000             /* Prepare VMA[31:20] mask */
+  and r5, r0, r2                  /* Mask other bits in VMA */
+  ldr r3, [r1, r5, lsr #18]       /* Load descriptor */
+  
+  /* Check if descriptor does not exist or is not supported */
+  and r4, r3, #0b11
+  cmp r4, #SECTION
+  beq __vmgp_section
+  cmp r4, #COARSE
+  beq __vmgp_coarse
+  
+  /* Invalid or unsupported descriptor */
+  mov r0, #0
+  b __vmgp_done
+
+__vmgp_section:
+  /* Section descriptor, just combine bits and we have our PMA */
+  and r3, r3, r2                  /* Get bits [31:20] */
+  mvn r2, r2                      /* Get inverse mask */
+  and r0, r0, r2                  /* And apply to our VMA */
+  orr r0, r3, r0                  /* Combine bits to get PMA */
+  b __vmgp_done
+
+__vmgp_coarse:
+  /* Coarse page table descriptor, dereference L2 table */
+  ldr r2, =0xFFFFFC00             /* Prepare L1[31:10] mask */
+  and r3, r3, r2                  /* Mask other bits, so r3 contains L2 table address */
+  
+  /* Calculate starting offset */
+  mov r2, #0xFF000                /* Prepare VMA[19:12] mask */
+  and r4, r0, r2
+  ldr r1, [r3, r4, lsr #12]       /* Load L2 descriptor */
+  
+  /* Check if descriptor does not exist or is not supported */
+  and r4, r1, #0b11
+  cmp r4, #MMU_L2_SMALL_PAGE
+  movne r0, #0
+  bne __vmgp_done
+  
+  /* Combine bits to get physical address */
+  ldr r4, =0xFFF                  /* Prepare mask */
+  bic r1, r1, r4                  /* Clear bits [11:0] */
+  and r0, r0, r4                  /* Extract bits [11:0] for VMA */
+  orr r0, r1, r0                  /* Combine bits to get PMA */
+
+__vmgp_done:
+  ldmfd sp!, {r1-r5,pc}
+
+/**
+ * Sets up task's translation tables.
+ *
+ * @param r0 Task start address (properly aligned)
+ * @param r1 Task size in pages
+ * @return Task's TTB
  */
 vm_prepare_task_ttb:
-  stmfd sp!, {r0-r8, lr}
+  stmfd sp!, {r1-r8,lr}
   
-  ldr r4, =0x21F                  /* Counter for bits [31:20] */
-  ldr r5, =MMU_TASK_FLAGS_L1
-  ldr r6, =MMU_TASK_FLAGS_L2
-  orr r6, r6, #SVC_SUBP_P         /* First set only privileged access */
+  /* Save parameters for later use */
+  mov r6, r0
+  mov r7, r1
   
-  /* Set mappings for CPU Exception vectors space */
-  ldr r7, =MMU_KERNEL_FLAGS       /* Base address is 0x0. */
-  str r7, [r0]                    /* Store it to L1 space. */
+  /* Allocate a fresh L1 table for our task */
+  mov r0, #1
+  bl vm_alloc_translation_table
+  mov r5, r0
   
-  /* Set mappings for RAM space */                           
-  _init_ttb_1:                                                        
-    orr r7, r1, r5              /* First level descriptor */        
-    str r7, [r0, r4, LSL #2]    /* Store it */
-    
-    ldr r8, =0xFF               /* Counter for bits [19:12] */
-    _init_ttb_2:              
-      mov r7, r4, LSL #20
-      orr r7, r7, r8, LSL #12
-      orr r7, r7, r6            /* Second level descriptor */
-      str r7, [r1, r8, LSL #2]  /* Store it */
-      
-      subs r8, r8, #1
-      bpl _init_ttb_2
-    
-    add r1, r1, #(1 << 10)      /* Set to next L2 table address (1KB apart) */
-    sub r4, r4, #1
-    
-    cmp r4, #(1 << 9)           /* Is the counter >= 0x200 (=start of RAM) */     
-    bge _init_ttb_1
+  /* Set mappings for CPU exception vectors space */
+  mov r0, r5            /* r0: L1 table address */
+  mov r1, #0x00000000   /* r1: Physical address */
+  mov r2, #0x00000000   /* r2: Virtual address */
+  mov r3, #1            /* r3: Size (in pages) */
+  mov r4, #VM_SVC_MODE  /* r4: Mode bits */
+  bl vm_map_region
+  
+  /* Set mappings for RAM space */
+  mov r0, r5            /* r0: L1 table address */
+  mov r1, #0x20000000   /* r1: Physical address */
+  mov r2, #0x20000000   /* r2: Virtual address */
+  mov r3, #8192         /* r3: Size (in pages) */
+  mov r4, #VM_SVC_MODE  /* r4: Mode bits */
+  bl vm_map_region
+  
+  /* Set mappings for task-specific space */
+  mov r0, r5            /* r0: L1 table address */
+  mov r1, r6            /* r1: Physical address */
+  mov r2, #0x30000000   /* r2: Virtual address */
+  mov r3, r7            /* r3: Size (in pages) */
+  mov r4, #VM_USR_MODE  /* r4: Mode bits */
+  bl vm_map_region
+  
+  /* Set mappings for peripherals */
+  mov r0, r5            /* r0: L1 table address */
+  mov r1, #0xF0000000   /* r1: Physical address */
+  mov r2, #0xF0000000   /* r2: Virtual address */
+  mov r3, #65536        /* r3: Size (in pages) */
+  mov r4, #VM_SVC_MODE  /* r4: Mode bits */
+  bl vm_map_region
+  
+  /* Return task's TTB */
+  mov r0, r5
+  
+  ldmfd sp!, {r1-r8,pc}
 
-    /* We need to grant user access to task space addresses */
-  _ptt_set_task_space:
-    orr r4, r0, r2, LSR #18
-    bic r4, r4, #3              /* r4 will hold the proper level 1 descriptor's addr */
-    ldr r5, [r4]                /* Load L1 descr. */
-    
-    /* This extracts bits [19:12] from the task's address (which is in r2). */
-    mov r6, r2, LSR #10
-    ldr r7, =0xFFF
-    mov r7, r7, LSL #11
-    bic r6, r6, r7
-    
-    ldr r7, =0x3FF
-    bic r5, r5, r7              /* Clear bits [9:0] */
-    orr r5, r5, r6              /* Combine to get the proper level 2 descriptor address */
-    
-    ldr r6, [r5]                /* Load it */
-    orr r6, r6, #USR_SUBP_P     /* Change flags to grant user access */
-    str r6, [r5]                /* Update */ 
-    
-    add r2, r2, #(0b1 << 12)    /* Move to next page of this task, i.e. increment start address by 4K */
-    subs r3, r3, #1             /* Decrement "task size in pages" counter */
-    bne _ptt_set_task_space     /* Pages left? */
-    
-  /* Peripheral table map init; 0xF0000000 - 0xFFFFFFFF */
-  ldr r4, =0xFFF
-  ldr r5, =MMU_KERNEL_FLAGS
-
-  _periph_L1:
-    orr r7, r5, r4, LSL #20
-    str r7, [r0, r4, LSL #2]
-    
-    subs r4, r4, #1
-    cmp r4, #0xF00
-    bge _periph_L1
-  
-  ldmfd sp!, {r0-r8, pc}
-  
-  
 /**
  * Inits the MMU and sets the Translation Table Base (address given in r0). 
  * 
@@ -119,7 +448,7 @@ vm_switch_ttb:
   mcr p15, 0, r0, c1, c0, 0     
                                     
   /* Make sure that the pipeline does not contain anything
-     that could cause an invalid address acces. */
+     that could cause an invalid address access. */
   nop  
   nop
   nop
@@ -131,3 +460,11 @@ vm_switch_ttb:
   mcr p15, 0, r0, c1, c0, 0
   
   ldmfd sp!, {r0-r8, pc}
+
+.data
+.align 2
+VM_L1_FREE_BLOCKS: .long 0
+VM_L2_FREE_BLOCKS: .long 0
+
+MSG_VM_TBL_ALLOC_OOM: .asciz "Out of memory in VM table allocator!\n\r"
+MSG_VM_TBL_ALLOC_INVAL_SIZE: .asciz "Block in allocation table of invalid size!\n\r"

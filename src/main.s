@@ -219,27 +219,21 @@ __init_tcb:
   
   /* Set r4 to be task's System Stack Pointer */
   str r4, [r2, #T_SSP]
-
-  ldr r7, [r0], #4        /* Load the task's TTB address */
-  str r7, [r2, #T_TTB]    /* Store it in the TCB */
+  
+  /* Load task size and physical address and setup TTB */
+  mov r7, r0
+  mov r8, r1
+  ldr r0, [r7], #4        /* r0: Task start address */
+  ldr r1, [r7], #4        /* r1: Task size in pages */
+  bl vm_prepare_task_ttb
+  str r0, [r2, #T_TTB]    /* Store TTB in the TCB */
+  mov r0, r7
+  mov r1, r8
   
   /* Setup TCB linkage */
-  str r2, [r1, #T_LINK]   /* Set previous TCB link word; note that first loop
-                             iteration only works because T_LINK is 0! */
-                             
-__TTB_setup:              /* This piece of code is a bit ugly; but try not to care ATM */
-  stmfd sp!, {r0-r3}      /* Save previous reg. values */
+  str r2, [r1, #T_LINK]   /* Set previous TCB link word; note that first loop */
+                          /* iteration only works because T_LINK is 0! */
   
-  /* Set parameters */
-  ldr r1, [r0], #4       /* Pointer to L2 space in r1 */
-  mov r2, r5             /* Task start address in r2 */
-  ldr r3, [r0], #4       /* Task size in pages in r3 */
-  mov r0, r7             /* Pointer to L1 space in r0 */
-  bl vm_prepare_task_ttb  
-  
-  ldmfd sp!, {r0-r3}     /* Restore previous reg. values */      
-  add r0, r0, #8         /* Correct the TASK_INITDATA pointer */                                               
-                             
   mov r1, r2             /* Save current TCB address for later */
   b __init_tcb
   
