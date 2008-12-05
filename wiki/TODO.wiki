@@ -8,6 +8,11 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
 <wiki:toc max_depth="1" />
 
 = Group 8 / 2.1 =
+  * [VirtualMemoryPlan Implement virtual memory] - *zomb*
+  * Document task stack usage (USP), should be mapped into task virtual space - ?
+  * Implement task terminal I/O - *perice*
+  * Write documentation on how MMC and MCI work - *kostko*
+
   * ~~svc_newtask, svc_delay, svc_send, svc_recv, svc_reply, svc_led - *kostko*~~
   * ~~Improve the debugger to output registers (reg0-reg12 and SPSR/CPSR) - *kernc*~~
   * ~~Improve printk routine so it uses DMA - *kernc*~~
@@ -16,13 +21,8 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * ~~Add T_PRIO to TCB struct (4 bytes) - *kostko*~~
   * ~~MMC driver and API for data transfer - svc_mmc_read, svc_mmc_write - *kostko*~~
   * ~~Implement basic string functions - *kostko*~~
-  * [VirtualMemoryPlan Implement virtual memory] - *zomb*
-  * Document task stack usage (USP) ?
-  * Implement task terminal I/O - *perice*
-  * Write documentation on how MMC and MCI work - *kostko*
-  * Implement contigous page allocation _(Buddy allocator?)_ - *kostko*
-  * Make task system stack and user stack dynamically allocatable - ?
-  * ...
+  * ~~Implement contigous page allocation (currently in 32K blocks which is good enough for now - only needed for MMU translation tables) - *kostko*~~
+  * ~~Make task system stack and user stack dynamically allocatable - *kostko*~~
 
 = Group ? / 2.2 =
   * [http://en.wikipedia.org/wiki/Weighted_round_robin Weighted Round-Robin] and optional priority scheduler - see [http://code.google.com/p/lbos-fri/source/browse/trunk/src/sched.s sched.s] - ?
