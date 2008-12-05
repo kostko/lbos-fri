@@ -273,6 +273,13 @@ svc_mmc_read:
   mov r3, r0
   bl mm_alloc_page
   
+  /* Resolve physical address for our buffer */
+  mov r4, r0
+  mov r0, r1
+  bl vm_get_phyaddr
+  mov r1, r0
+  mov r0, r4
+  
   /* Store stuff into the IO request struct */
   mov r4, #IO_OP_READ
   str r4, [r0, #IO_RQ_OPER]
@@ -304,6 +311,13 @@ svc_mmc_write:
   /* Get us a free page for the IO structure */
   mov r3, r0
   bl mm_alloc_page
+  
+  /* Resolve physical address for our buffer */
+  mov r4, r0
+  mov r0, r1
+  bl vm_get_phyaddr
+  mov r1, r0
+  mov r0, r4
   
   /* Store stuff into the IO request struct */
   mov r4, #IO_OP_WRITE

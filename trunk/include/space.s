@@ -33,10 +33,10 @@ MCBAREA:  .space MCBSIZE*NMCBS
 .global task_msgtest
 .align 2
 TASK_INITDATA:
-      /* TCB | Program counter | Status register | TTB L1 pointer | TTB L2 pointer | Task size in pages (currently statically defined) */ 
-.long TASK1,   task_dummy,       PSR_MODE_USER,    TASK1_L1TBL,     TASK1_L2TBL,     256*1024 / PAGESIZE
-.long TASK2,   task_msgtest,     PSR_MODE_USER,    TASK2_L1TBL,     TASK2_L2TBL,     256*1024 / PAGESIZE
-.long TASK3,   task_iotest,      PSR_MODE_USER,    TASK3_L1TBL,     TASK3_L2TBL,     256*1024 / PAGESIZE
+      /* TCB | Program counter | Status register | Task address  | Task size in pages (currently statically defined) */ 
+.long TASK1,   task_dummy,       PSR_MODE_USER,    _task1_paddr,   256*1024 / PAGESIZE
+.long TASK2,   task_msgtest,     PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE
+.long TASK3,   task_iotest,      PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE
 .long 0
 
 /* WARNING ABOUT ADDING NEW TASKS
@@ -69,18 +69,6 @@ PAGEOFFSET: .long __PAGE_OFFSET__
 .align 2
 STACK_SUPM_END: .long __STACK_END__ - STACK_SIZE*4
 STACK_IRQM_END: .long __STACK_END__
-
-/* Level 1 table allocation; each table must be aligned to 16K */
-.align 14
-TASK1_L1TBL: .space 16384
-TASK2_L1TBL: .space 16384
-TASK3_L1TBL: .space 16384
-
-/* Level 2 table allocation; each table must be aligned to 1K */
-.align 10
-TASK1_L2TBL: .space 1024*32
-TASK2_L2TBL: .space 1024*32
-TASK3_L2TBL: .space 1024*32
 
 /* Messages */
 MSG_PREINIT: .asciz "\n\rLBOS-FRI v0.1 for AT91SAM9260/FRI-SMS starting up...\n\r"

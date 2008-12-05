@@ -111,16 +111,34 @@
 .equ DOMAIN, 0x0 << 5                                          /* Domain; legal values from 0 to F */
 .equ USR_ACCESS, 0b11 << 10                                    /* User access */
 .equ SVC_ACCESS, 0b01 << 10                                    /* Privileged access */
-.equ BUFFERABLE, 0b1 << 2                                      /* Omit these from the descriptor to set not cacheable 
-.equ CACHEABLE, 0b1 << 3                                          and/or not bufferable */
+.equ BUFFERABLE, 0b1 << 2                                      /* Omit these from the descriptor to set not cacheable */
+.equ CACHEABLE, 0b1 << 3                                       /* and/or not bufferable */
 .equ USR_SUBP_P, 0xFF << 4                                     /* Permissions for subpages. Just leave this alone */
 .equ SVC_SUBP_P, 0x55 << 4
+
+.equ MMU_L1_INVALID, 0b00                                      /* L1 invalid bits */
+.equ MMU_L2_SMALL_PAGE, 0b10                                   /* L2 small page type */
 
 /* Descriptor flags. */
 .equ MMU_KERNEL_FLAGS, DOMAIN | TTBIT| SECTION | SVC_ACCESS    
 .equ MMU_TASK_FLAGS_L2, SECTION 
 .equ MMU_TASK_FLAGS_L1, DOMAIN | TTBIT | COARSE
 
+/* VM mode bits */
+.equ VM_MODE_CACHEABLE, 0b01
+.equ VM_MODE_BUFFERABLE, 0b10
+.equ VM_MODE_SVC_ACCESS, 0b0100
+.equ VM_MODE_USR_ACCESS, 0b1100
+.equ VM_MODE_DOMAIN, 0b00000000
+
+/* Frequently used mode combos */
+.equ VM_SVC_MODE, VM_MODE_SVC_ACCESS | VM_MODE_DOMAIN
+.equ VM_USR_MODE, VM_MODE_USR_ACCESS | VM_MODE_DOMAIN
+
+/* VM mode bit masks */
+.equ VM_MODE_M_CB, 0b11               /* [1:0] Cacheable/Bufferable flag */
+.equ VM_MODE_M_AP, 0b1100             /* [2:3] Access Permissions */
+.equ VM_MODE_M_DOMAIN, 0b11110000     /* [7:4] Domain */
 
 /* ================================================================
                     SYSCALL NUMBERS FOR USERSPACE

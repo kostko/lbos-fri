@@ -11,6 +11,7 @@ __TEXT_START__    = 0x20000000;
 __DATA_START__    = 0x20080000;
 __STACK_END__     = 0x20180000;
 __TASKS_START__   = 0x20200000;
+__TASKS_VM__      = 0x30000000;
 __RAM_END__       = 0x22000000;
 
 SECTIONS
@@ -54,17 +55,20 @@ SECTIONS
   /***********************************************
    *                TASKS SECTION                *
    ***********************************************/
-  .task1 __TASKS_START__ : { *dummy.o(task_code)   *dummy.o(task_data) }
-  .task2 ALIGN(0x40000):   { *msgtest.o(task_code) *msgtest.o(task_data) }
-  .task3 ALIGN(0x40000):   { *iotest.o(task_code)  *iotest.o(task_data) }
+  .task1 __TASKS_VM__ : AT( __TASKS_START__           ) { *dummy.o(task_code)   *dummy.o(task_data) }
+  .task2 __TASKS_VM__ : AT( __TASKS_START__ + 0x40000 ) { *msgtest.o(task_code) *msgtest.o(task_data) }
+  .task3 __TASKS_VM__ : AT( __TASKS_START__ + 0x80000 ) { *iotest.o(task_code)  *iotest.o(task_data) }
   
-  . = ALIGN(0x40000);
-  __TASKS_END__ = .;
+  _task1_paddr = LOADADDR(.task1);
+  _task2_paddr = LOADADDR(.task2);
+  _task3_paddr = LOADADDR(.task3);
+  
+  /* Set current position just beyond task 3 physical space */
+  . = LOADADDR(.task3) + 0x40000;
   
   /***********************************************
    * FOLLOWING MEMORY IS FOR DYNAMIC ALLOCATION  *
    ***********************************************/
-  . = ALIGN(0x1000);
   __PAGE_OFFSET__ = .;
   
   PROVIDE (end = .);

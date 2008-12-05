@@ -39,7 +39,7 @@ __mm_init_bitmap:
  * @return r0
  */
 mm_alloc_page:
-  stmfd sp!, {r1-r6,lr}
+  stmfd sp!, {r1-r7,lr}
   
   /* Find a free page in PAGEBITMAP; Note that free pages
      are marked by 1 in the bitmap so negate is not needed. */
@@ -57,7 +57,12 @@ mm_alloc_page:
   subne r2, r2, r0
   movne r1, r2, lsl #3
   
-  DISABLE_IRQ
+  /* Disable IRQ and save current state */
+  mov r3, r0
+  bl irq_disable
+  mov r7, r0
+  mov r0, r3
+  
 __find_page:
   /* Find first one bit */
   ldr r2, [r0], #4
@@ -94,9 +99,13 @@ __next_entry:
   mov r0, #0
 
 __alloc_done:
-  ENABLE_IRQ
+  /* Restore previous state */
+  mov r1, r0
+  mov r0, r7
+  bl irq_restore
+  mov r0, r1
   
-  ldmfd sp!, {r1-r6,pc}
+  ldmfd sp!, {r1-r7,pc}
 
 /**
  * Frees a previously allocated page.
@@ -104,7 +113,7 @@ __alloc_done:
  * @param r0 Page address
  */
 mm_free_page:
-  stmfd sp!, {r0-r4,lr}
+  stmfd sp!, {r0-r5,lr}
   
   /* Compute page address and bitmap offset */
   ldr r2, =PAGEBITMAP
@@ -127,7 +136,10 @@ mm_free_page:
   sub r3, r0, r1, lsl #3  /* Compute bit offset */
   rsb r3, r3, #31         /* Bits are reversed :) */
   
-  DISABLE_IRQ
+  /* Disable IRQ and save current state */
+  bl irq_disable
+  mov r5, r0
+  
   /* Modify bitmap */
   ldr r0, [r2, r1]
   mov r4, #1
@@ -140,10 +152,13 @@ mm_free_page:
   add r1, r2, r1
   cmp r1, r3
   strlo r1, [r0]        /* Store if new ptr < current ptr */
-  ENABLE_IRQ
+  
+  /* Restore previous state */
+  mov r0, r5
+  bl irq_restore
   
 __done:
-  ldmfd sp!, {r0-r4,pc}
+  ldmfd sp!, {r0-r5,pc}
 
 /**
  * Allocates a contiguous memory block 32K in size that is aligned
@@ -152,7 +167,7 @@ __done:
  * @return Address of first allocated page or zero on failure
  */
 mm_alloc_block:
-  stmfd sp!, {r1-r4,lr}
+  stmfd sp!, {r1-r5,lr}
   
   /* Find a free page in PAGEBITMAP; Note that free pages
      are marked by 1 in the bitmap so negate is not needed. */
@@ -170,7 +185,12 @@ mm_alloc_block:
   subne r2, r2, r0
   movne r1, r2, lsl #3
   
-  DISABLE_IRQ
+  /* Disable IRQ and save current state */
+  mov r3, r0
+  bl irq_disable
+  mov r5, r0
+  mov r0, r3
+  
 __mmab_find_block:
   /* Find a completely free block (0xFF) */
   ldrb r2, [r0], #1
@@ -179,6 +199,10 @@ __mmab_find_block:
   
 __mmab_found_block:
   /* Found a free block, compute memory location */
+  mov r2, r1, lsr #5        /* This mess is needed because */
+  mov r2, r2, lsl #6        /* little endian sucks! */
+  rsb r3, r1, #24
+  add r1, r3, r2
   add r3, r4, r1, lsl #12
     
   /* Mark block of pages as used */
@@ -196,9 +220,13 @@ __mmab_next_entry:
   mov r0, #0
 
 __mmab_alloc_done:
-  ENABLE_IRQ
+  /* Restore previous state */
+  mov r1, r0
+  mov r0, r5
+  bl irq_restore
+  mov r0, r1
   
-  ldmfd sp!, {r1-r4,pc}
+  ldmfd sp!, {r1-r5,pc}
 
 .data
 .align 2

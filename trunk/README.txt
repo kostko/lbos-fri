@@ -2,7 +2,7 @@
   LBOS-FRI DEVELOPMENT GUIDELINES - READ BEFORE COMMITTING ANY CODE !
 ======================================================================
 
-1. Memory layout
+1a. Physical memory layout
 ----------------------------------------------------------------------
 Currently the memory layout is as follows:
   [4KB ] 0x00000000 - 0x00001000 BOOT MEMORY (mapped to SRAM0), CODE
@@ -16,6 +16,35 @@ Currently the memory layout is as follows:
 To load high-memory data structures you have to use something like:
   ldr r0, =STRUCTURE_LABEL
   ldr r1, [r0]
+
+1b. Virtual memory layout
+----------------------------------------------------------------------
+LBOS-FRI now supports virtual memory and has the following layout
+for each userspace task:
+  
+  VA         | PA         | Size | Description
+  -----------+------------+------+-----------------------------------
+  0x20000000 | 0x20000000 | 32M  | Kernel accessible SDRAM (id map).
+  -----------+------------+------+-----------------------------------
+  0x30000000 | per-task   | 256K | Per-task mapped space
+  -----------+------------+------+-----------------------------------
+  0xF0000000 | 0xF0000000 | 256M | Internal peripherals (id map).
+
+Any address not listed in the above table is marked as invalid in the
+MMU translation tables and as such will generate an abort exception.
+
+Also note that userspace tasks are confined to their mapped space and
+cannot access anything beyond it! Attempting to do so will generate a
+protection fault.
+
+WARNING #1: Since buffer pointers passed to syscalls are all in task
+space, we MUST first resolve them to their respective physical
+addresses (since we don't have swapping this is not a problem). If you
+don't do this, buffer pointers passed to the kernel will be invalid
+and will cause the kernel to crash!
+
+WARNING #2: Message passing requires the kernel to copy the buffer to
+destination task's space!
 
 2. System call invocation
 ----------------------------------------------------------------------
@@ -116,15 +145,17 @@ SPSR to CPSR at the same time.
 
 5. Notes about adding new tasks & Virtual Memory
 ----------------------------------------------------------------------
-Currently each task gets 256K of memory; both for code and data. This 
+Currently each task gets 256KB of memory; both for code and data. This 
 is due to the current virtual memory implementation (everything is static). 
+All tasks live in their own private space starting at 0x30000000 and
+are currently allocated 256KB as mentioned above. Any access outside this
+area will cause a protection fault (not handled ATM)!
 
 So for each task you add you MUST:
   Modify space.s:
   - Reserve space for its TCB
   - Add the proper TCB label to the TASKTAB 
   - Add a new entry to the TASKINIT table 
-  - Reserve space for its L1 and L2 tables 
   
   Modify globals.s:
   - Increment MAXTASK
