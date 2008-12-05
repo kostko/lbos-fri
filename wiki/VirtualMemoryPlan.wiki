@@ -17,20 +17,6 @@ Notes:
   * Since there is always only 32MB of RAM on the FRI-SMS board, we can simply identity map it, so we can access it without problems in the kernel.
   * We have to set bit 13 in CP15 register c1 to enable high CPU exception vectors.
 
-= Static per-task tables =
-{{{
-TASK1_L1TBL: .space 16384
-TASK1_L2TBL: .space 1024
-
-TASK2_L1TBL: .space 16384
-TASK2_L2TBL: .space 1024
-
-TASK3_L1TBL: .space 16384
-TASK3_L2TBL: .space 1024
-}}}
-
-This is only temporary until we establish dynamic table block allocation.
-
 = Dynamic table block allocation =
 
 Two linked lists, one for free blocks for L1 tables, the other for free blocks for L2 tables:
@@ -70,7 +56,7 @@ prepare_task_ttb:
 Call prepare_task_ttb in main (tcb init), table addresses currently staticly defined and listed in task init table (space.s). This function should be put into _memory.s_ (or _vm.s_ if it is found more suitable).
 
 = Task Control Block entries =
-T_TTB field in TCB. Dispatcher switches MMU TTB value on context switch. If some day memory will *not* be identity mapped, we also *must* flush data and instruction caches, otherwise wierd stuff might happen.
+T_TTB field in TCB. Dispatcher switches MMU TTB value on context switch. We also *must* flush data and instruction caches, otherwise wierd stuff might happen.
 
 = Fault handler =
 Fault handler (DATA/FETCH abort):
