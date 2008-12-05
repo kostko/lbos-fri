@@ -7,6 +7,7 @@
 .include "include/globals.s"
 .include "include/structures.s"
 
+.global vm_init
 .global vm_prepare_task_ttb
 .global vm_switch_ttb
 .global vm_alloc_translation_table
@@ -361,22 +362,14 @@ __vmgp_done:
   ldmfd sp!, {r1-r5,pc}
 
 /**
- * Sets up task's translation tables.
+ * Maps kernel areas into the specified L1 table.
  *
- * @param r0 Task start address (properly aligned)
- * @param r1 Task size in pages
- * @return Task's TTB
+ * @param r0 L1 table address
  */
-vm_prepare_task_ttb:
-  stmfd sp!, {r1-r8,lr}
+vm_prepare_kernel_areas:
+  stmfd sp!, {r0-r5,lr}
   
   /* Save parameters for later use */
-  mov r6, r0
-  mov r7, r1
-  
-  /* Allocate a fresh L1 table for our task */
-  mov r0, #1
-  bl vm_alloc_translation_table
   mov r5, r0
   
   /* Set mappings for CPU exception vectors space */
@@ -395,20 +388,45 @@ vm_prepare_task_ttb:
   mov r4, #VM_SVC_MODE  /* r4: Mode bits */
   bl vm_map_region
   
-  /* Set mappings for task-specific space */
-  mov r0, r5            /* r0: L1 table address */
-  mov r1, r6            /* r1: Physical address */
-  mov r2, #0x30000000   /* r2: Virtual address */
-  mov r3, r7            /* r3: Size (in pages) */
-  mov r4, #VM_USR_MODE  /* r4: Mode bits */
-  bl vm_map_region
-  
   /* Set mappings for peripherals */
   mov r0, r5            /* r0: L1 table address */
   mov r1, #0xF0000000   /* r1: Physical address */
   mov r2, #0xF0000000   /* r2: Virtual address */
   mov r3, #65536        /* r3: Size (in pages) */
   mov r4, #VM_SVC_MODE  /* r4: Mode bits */
+  bl vm_map_region
+  
+  ldmfd sp!, {r0-r5,pc}
+
+/**
+ * Sets up task's translation tables.
+ *
+ * @param r0 Task start address (properly aligned)
+ * @param r1 Task size in pages
+ * @return Task's TTB
+ */
+vm_prepare_task_ttb:
+  stmfd sp!, {r1-r8,lr}
+  
+  /* Save parameters for later use */
+  mov r6, r0
+  mov r7, r1
+  
+  /* Allocate a fresh L1 table for our task */
+  mov r0, #1
+  bl vm_alloc_translation_table
+  mov r5, r0
+  
+  /* Set kernel mappings */
+  mov r0, r5            /* r0: L1 table address */
+  bl vm_prepare_kernel_areas
+  
+  /* Set mappings for task-specific space */
+  mov r0, r5            /* r0: L1 table address */
+  mov r1, r6            /* r1: Physical address */
+  mov r2, #0x30000000   /* r2: Virtual address */
+  mov r3, r7            /* r3: Size (in pages) */
+  mov r4, #VM_USR_MODE  /* r4: Mode bits */
   bl vm_map_region
   
   /* Return task's TTB */
@@ -422,24 +440,13 @@ vm_prepare_task_ttb:
  * @param r0 Translation Table Base
  */
 vm_switch_ttb:
-  stmfd sp!, {r0-r8, lr}
+  stmfd sp!, {r0-r1, lr}
   
-  mov r8, r0
-  
-  /* Disable MMU and invalidate TLBs. */
-  mrc p15, 0, r0, c1, c0, 0      /* Read CP15:c0 */
-  bic r0, r0, #0b1               /* Disable MMU */
-  mcr p15, 0, r0, c1, c0, 0      /* Update */
-  
-  /* Init Translation Table Base for kernel space */
-  mcr p15, 0, r8, c2, c0, 0
-  
-  mov r0, #0
-  mcr p15, 0, r0, c7, c7, 0      /* Invalidate caches */
-  mcr p15, 0, r0, c8, c7, 0      /* Invalidate TLBs */
-  
-  mov r0, #0b01                  /* Set Domain 0 to client mode */
-  mcr p15, 0, r0, c3, c0, 0    
+  mov r1, #0
+  mcr p15, 0, r1, c7, c10, 4     /* Drain the write buffer */
+  mcr p15, 0, r0, c2, c0, 0      /* Set the new TTB */
+  mcr p15, 0, r1, c7, c7, 0      /* Invalidate caches */
+  mcr p15, 0, r1, c8, c7, 0      /* Invalidate TLBs */
   
   mrc p15, 0, r0, c1, c0, 0      
   bic r0, r0, #(0x1 << 12)       /* Ensure I Cache disabled */
@@ -459,12 +466,67 @@ vm_switch_ttb:
   orr r0, r0, #(0x1 << 2)       /* Data cache bit */
   mcr p15, 0, r0, c1, c0, 0
   
-  ldmfd sp!, {r0-r8, pc}
+  ldmfd sp!, {r0-r1, pc}
+
+/**
+ * Initialize the virtual memory. After this function returns MMU
+ * will be enabled and programmed with identity maps.
+ */
+vm_init:
+  stmfd sp!, {r0-r1,lr}
+  
+  /* Allocate ourselves an L1 table and map kernel areas*/
+  mov r0, #1            /* r0: Table type (1 = L1) */
+  bl vm_alloc_translation_table
+  mov r1, r0            /* Save table address to r1 */
+  bl vm_prepare_kernel_areas
+  
+  /* Store table address */
+  ldr r0, =KERNEL_L1_TABLE
+  str r1, [r0]
+  
+  /* Disable MMU and invalidate TLBs */
+  mrc p15, 0, r0, c1, c0, 0      /* Read CP15:c0 */
+  bic r0, r0, #0b1               /* Disable MMU */
+  mcr p15, 0, r0, c1, c0, 0      /* Update */
+  
+  /* Init Translation Table Base for kernel space */
+  mcr p15, 0, r1, c2, c0, 0
+  
+  mov r0, #0
+  mcr p15, 0, r0, c7, c7, 0      /* Invalidate caches */
+  mcr p15, 0, r0, c8, c7, 0      /* Invalidate TLBs */
+  
+  mov r0, #0b01                  /* Set Domain 0 to client mode */
+  mcr p15, 0, r0, c3, c0, 0    
+  
+  mrc p15, 0, r0, c1, c0, 0      
+  bic r0, r0, #(0x1 << 12)       /* Ensure I Cache disabled */
+  bic r0, r0, #(0x1 << 2)        /* Ensure D Cache disabled */
+  orr r0, r0, #0x1               /* Enable MMU before scatter loading */
+  mcr p15, 0, r0, c1, c0, 0     
+                                    
+  /* Make sure that the pipeline does not contain anything
+     that could cause an invalid address access. */
+  nop  
+  nop
+  nop
+  
+  /* Enable instruction and data caches */
+  mrc p15, 0, r0, c1, c0, 0 
+  orr r0, r0, #(0x1 << 12)      /* Instruction cache bit */
+  orr r0, r0, #(0x1 << 2)       /* Data cache bit */
+  mcr p15, 0, r0, c1, c0, 0
+  
+  ldmfd sp!, {r0-r1,pc}
 
 .data
 .align 2
 VM_L1_FREE_BLOCKS: .long 0
 VM_L2_FREE_BLOCKS: .long 0
+
+/* Kernel MMU table used only at startup */
+KERNEL_L1_TABLE: .long 0
 
 MSG_VM_TBL_ALLOC_OOM: .asciz "Out of memory in VM table allocator!\n\r"
 MSG_VM_TBL_ALLOC_INVAL_SIZE: .asciz "Block in allocation table of invalid size!\n\r"
