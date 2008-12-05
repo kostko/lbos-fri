@@ -84,6 +84,11 @@ init_dbgu:
   bl printk
   bl mm_init
   
+  /* Initialize virtual memory */
+  ldr r0, =MSG_INIT_VM
+  bl printk
+  bl vm_init
+  
   ldr r0, =MSG_INIT_PER
   bl printk
   
@@ -279,3 +284,14 @@ done:
   
   /* Enter task dispatcher */
   b dispatch
+
+.data
+/* Messages */
+MSG_PREINIT: .asciz "\n\rLBOS-FRI v0.1 for AT91SAM9260/FRI-SMS starting up...\n\r"
+MSG_INIT_MM: .asciz ">>> Initializing the memory manager...\n\r"
+MSG_INIT_VM: .asciz ">>> Initializing virtual memory...\n\r"
+MSG_INIT_PER: .asciz ">>> Initializing peripherals (LED, timers)...\n\r"
+MSG_INIT_TCB: .asciz ">>> Initializing tasks...\n\r"
+MSG_INIT_MCB: .asciz ">>> Initializing message passing...\n\r"
+MSG_INIT_MMC: .asciz ">>> Initializing MMC driver...\n\r"
+MSG_INIT_DONE: .asciz "All done! Entering the dispatcher.\n\r"
