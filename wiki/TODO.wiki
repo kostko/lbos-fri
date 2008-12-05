@@ -12,6 +12,8 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * Document task stack usage (USP), should be mapped into task virtual space - ?
   * [TerminalIOPlan Implement task terminal I/O] - *perice*
   * Write documentation on how MMC and MCI work - *kostko*
+  * Implement dynamic task creation, PIDs and the fork function - ?
+  * Implement ELF binary loader - ?
 
   * ~~svc_newtask, svc_delay, svc_send, svc_recv, svc_reply, svc_led - *kostko*~~
   * ~~Improve the debugger to output registers (reg0-reg12 and SPSR/CPSR) - *kernc*~~
