@@ -33,10 +33,10 @@ MCBAREA:  .space MCBSIZE*NMCBS
 .global task_msgtest
 .align 2
 TASK_INITDATA:
-      /* TCB | Program counter | Status register | Task address  | Task size in pages (currently statically defined) */ 
-.long TASK1,   task_dummy,       PSR_MODE_USER,    _task1_paddr,   256*1024 / PAGESIZE
-.long TASK2,   task_msgtest,     PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE
-.long TASK3,   task_iotest,      PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE
+      /* TCB | Status register | Task address  | Task size in pages (currently statically defined) */ 
+.long TASK1,   PSR_MODE_USER,    _task1_paddr,   256*1024 / PAGESIZE
+.long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE
+.long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE
 .long 0
 
 /* WARNING ABOUT ADDING NEW TASKS

@@ -8,7 +8,6 @@
 /* Include structure definitions and static variables */
 .include "include/structures.s"
 
-.global task_msgtest
 task_msgtest:
   mov r0, #14
   mov r1, #15
