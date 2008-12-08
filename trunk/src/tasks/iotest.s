@@ -8,7 +8,6 @@
 /* Include structure definitions and static variables */
 .include "include/structures.s"
 
-.global task_iotest
 task_iotest:
   /* Perform MMC write to 0x0 */
   mov r0, #0

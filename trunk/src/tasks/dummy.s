@@ -8,7 +8,6 @@
 /* Include structure definitions and static variables */
 .include "include/structures.s"
 
-.global task_dummy
 task_dummy:
 
   mov r0, #1

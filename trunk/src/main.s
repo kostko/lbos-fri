@@ -220,7 +220,7 @@ __init_tcb:
   mov r0, r7
   
   /* Push context to stack */
-  ldr r5, [r0], #4        /* Load task's PC */
+  mov r5, #0x30000000     /* Set task's PC */
   str r5, [r4, #-4]!      /* Push task's PC to the stack */
   sub r4, r4, #(13 << 2)  /* Move stack pointer since regs should be there */
   ldr r6, [r0], #4        /* Load task's status register */
