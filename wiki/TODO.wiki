@@ -10,6 +10,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
 = Group 8 / 2.1 =
   * [VirtualMemoryPlan Implement virtual memory] - *zomb*
   * Document task stack usage (USP), should be mapped into task virtual space - ?
+  * Document task heap usage via the `brk` system call - ?
   * [TerminalIOPlan Implement task terminal I/O] - *perice*
   * Write documentation on how MMC and MCI work - *kostko*
   * System task capability registration mechanism - ?
