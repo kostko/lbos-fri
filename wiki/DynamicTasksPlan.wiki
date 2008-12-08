@@ -16,7 +16,32 @@ Since we now have dynamic task creation, we need an init task (but have no files
   * Load an ELF binary (after the loader is implemented).
 
 = Fork implementation =
-TBD
+
+This should all be placed into `fork.s`.
+
+{{{
+/**
+ * Returns the next free PID that we can assign to a newly
+ * created process.
+ *
+ * @return Next available PID
+ */
+get_free_pid:
+  /* Search list to get free PID */
+
+/**
+ * Actually executes a process fork.
+ *
+ * @param r0 Pointer to current task's context on stack
+ * @return New task's PID
+ */
+do_fork:
+  /* Allocate new TCB */
+  /* Get free PID and use it */
+  /* Copy CPU context (to new system stack), set parent PID, set task dispatchable */
+  /* Copy all memory allocated by current task */
+  /* LAST AND ATOMIC: Insert into list of processes */
+}}}
 
 = Brk implementation =
 TBD
