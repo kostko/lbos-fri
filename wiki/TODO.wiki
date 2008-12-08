@@ -13,7 +13,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * [TerminalIOPlan Implement task terminal I/O] - *perice*
   * Write documentation on how MMC and MCI work - *kostko*
   * System task capability registration mechanism - ?
-  * Implement dynamic task creation, PIDs and the fork function - ?
+  * [DynamicTasksPlan Implement dynamic task creation, PIDs and the fork function] - ?
   * Implement ELF binary loader - ?
 
   * ~~svc_newtask, svc_delay, svc_send, svc_recv, svc_reply, svc_led - *kostko*~~
