@@ -29,8 +29,6 @@ ENDTASKTAB:
 MCBAREA:  .space MCBSIZE*NMCBS
 
 /* Task initialization data (see main.s/task_init) */
-.global task_dummy
-.global task_msgtest
 .align 2
 TASK_INITDATA:
       /* TCB | Status register | Task address  | Task size in pages (currently statically defined) */ 
