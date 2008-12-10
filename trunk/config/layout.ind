@@ -65,7 +65,7 @@ SECTIONS
   _task3_paddr = LOADADDR(.task3);
   _task4_paddr = LOADADDR(.task4);
   
-  /* Set current position just beyond task 3 physical space */
+  /* Set current position just beyond task 4 physical space */
   . = LOADADDR(.task4) + 0x40000;
   
   /***********************************************
