@@ -248,8 +248,7 @@
             <VL type="Integer">81</VL>
           </PI.7>
           <PI.8>
-            <C type="Integer">64</C>
-            <L type="Integer">29</L>
+            <L type="Integer">22</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\main.s</P>
             <VL type="Integer">22</VL>
           </PI.8>
@@ -307,7 +306,7 @@
             <RelativeFileName type="String">..\src\tasks\dummy.s</RelativeFileName>
           </Editor.10>
           <Editor.11>
-            <FileBarIndex type="Integer">9</FileBarIndex>
+            <FileBarIndex type="Integer">10</FileBarIndex>
             <RectPosBottom type="Integer">310</RectPosBottom>
             <RectPosLeft type="Integer">92</RectPosLeft>
             <RectPosRight type="Integer">813</RectPosRight>
@@ -355,7 +354,7 @@
             <RelativeFileName type="String">..\src\irq.s</RelativeFileName>
           </Editor.4>
           <Editor.5>
-            <FileBarIndex type="Integer">8</FileBarIndex>
+            <FileBarIndex type="Integer">6</FileBarIndex>
             <RectPosBottom type="Integer">241</RectPosBottom>
             <RectPosLeft type="Integer">23</RectPosLeft>
             <RectPosRight type="Integer">744</RectPosRight>
@@ -363,7 +362,7 @@
             <RelativeFileName type="String">..\src\main.s</RelativeFileName>
           </Editor.5>
           <Editor.6>
-            <FileBarIndex type="Integer">6</FileBarIndex>
+            <FileBarIndex type="Integer">7</FileBarIndex>
             <RectPosBottom type="Integer">264</RectPosBottom>
             <RectPosLeft type="Integer">46</RectPosLeft>
             <RectPosRight type="Integer">767</RectPosRight>
@@ -371,7 +370,7 @@
             <RelativeFileName type="String">..\src\memory.s</RelativeFileName>
           </Editor.6>
           <Editor.7>
-            <FileBarIndex type="Integer">10</FileBarIndex>
+            <FileBarIndex type="Integer">9</FileBarIndex>
             <RectPosBottom type="Integer">264</RectPosBottom>
             <RectPosLeft type="Integer">46</RectPosLeft>
             <RectPosRight type="Integer">767</RectPosRight>
@@ -379,7 +378,7 @@
             <RelativeFileName type="String">..\src\printk.s</RelativeFileName>
           </Editor.7>
           <Editor.8>
-            <FileBarIndex type="Integer">7</FileBarIndex>
+            <FileBarIndex type="Integer">8</FileBarIndex>
             <RectPosBottom type="Integer">241</RectPosBottom>
             <RectPosLeft type="Integer">23</RectPosLeft>
             <RectPosRight type="Integer">744</RectPosRight>
@@ -408,10 +407,10 @@
           </EditorHistoryFile.3>
         </Documents.0>
         <Progress>
-          <b type="Integer">361</b>
-          <l type="Integer">0</l>
-          <r type="Integer">504</r>
-          <t type="Integer">0</t>
+          <b type="Integer">597</b>
+          <l type="Integer">324</l>
+          <r type="Integer">828</r>
+          <t type="Integer">236</t>
         </Progress>
         <Watches>
           <ActiveWatchPane type="Integer">0</ActiveWatchPane>
@@ -1093,10 +1092,10 @@
                 <Items.0>
                   <__>
                     <Name type="String">assembler files</Name>
-                    <Options type="Integer">5</Options>
+                    <Options type="Integer">1</Options>
                     <Items.0>
                       <__>
-                        <Name type="String">debugger.s</Name>
+                        <Name type="String">mmc.s</Name>
                         <Options type="Integer">4</Options>
                       </__>
                     </Items.0>
@@ -1105,7 +1104,7 @@
                 <Items.1>
                   <__>
                     <Name type="String">Init files</Name>
-                    <Options type="Integer">1</Options>
+                    <Options type="Integer">5</Options>
                     <Items.0>
                       <__>
                         <Name type="String">init.ini</Name>
@@ -1130,6 +1129,12 @@
                   <__>
                     <Name type="String">Tasks</Name>
                     <Options type="Integer">1</Options>
+                    <Items.0>
+                      <__>
+                        <Name type="String">dummy.s</Name>
+                        <Options type="Integer">4</Options>
+                      </__>
+                    </Items.0>
                   </__>
                 </Items.3>
               </__>
