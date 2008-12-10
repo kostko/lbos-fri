@@ -14,8 +14,8 @@
   ldr pc, =start                  /* RESET and start */
   ldr pc, =debugger_undef         /* UNDEFINED INSTRUCTION*/
   ldr pc, =syscall_handler        /* SOFTWARE INTERRUPT */
-  ldr pc, =debugger_abort         /* ABORT (PREFETCH) */
-  ldr pc, =debugger_dabrt         /* ABORT (DATA) */
+  ldr pc, =vm_abort_handler       /* ABORT (PREFETCH) */
+  ldr pc, =vm_abort_handler       /* ABORT (DATA) */
   ldr pc, =debugger_resvt         /* RESERVED */
   ldr pc, [pc, #-0x0F20]          /* IRQ INTERRUPT - to AIC */
   ldr pc, =debugger_fiqir         /* FIQ INTERRUPT */
