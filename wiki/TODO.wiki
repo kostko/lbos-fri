@@ -8,7 +8,6 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
 <wiki:toc max_depth="1" />
 
 = Group 8 / 2.1 =
-  * [VirtualMemoryPlan Implement virtual memory] - *zomb*
   * Document task stack usage (USP), should be mapped into task virtual space - ?
   * Document task heap usage via the `brk` system call - ?
   * [TerminalIOPlan Implement task terminal I/O] - *perice*
@@ -27,6 +26,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * ~~Implement basic string functions - *kostko*~~
   * ~~Implement contigous page allocation (currently in 32K blocks which is good enough for now - only needed for MMU translation tables) - *kostko*~~
   * ~~Make task system stack and user stack dynamically allocatable - *kostko*~~
+  * ~~[VirtualMemoryPlan Implement virtual memory] - *zomb*~~
 
 = Group ? / 2.2 =
   * [http://en.wikipedia.org/wiki/Weighted_round_robin Weighted Round-Robin] and optional priority scheduler - see [http://code.google.com/p/lbos-fri/source/browse/trunk/src/sched.s sched.s] - ?
