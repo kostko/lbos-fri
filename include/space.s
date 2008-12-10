@@ -19,10 +19,11 @@ MCBLIST: .space 4   /* Pointer to free list of MCBs */
 TASK1: .space TCBSIZE
 TASK2: .space TCBSIZE
 TASK3: .space TCBSIZE
+TASK4: .space TCBSIZE
 
 /* Task map table (if you change this, please update MAXTASK in globals.s) */
 .align 2
-TASKTAB: .long TASK1, TASK2, TASK3
+TASKTAB: .long TASK1, TASK2, TASK3, TASK4
 ENDTASKTAB:
 
 /* Place for message control block allocation */
@@ -35,6 +36,7 @@ TASK_INITDATA:
 .long TASK1,   PSR_MODE_USER,    _task1_paddr,   256*1024 / PAGESIZE
 .long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE
 .long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE
+.long TASK4,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE
 .long 0
 
 /* WARNING ABOUT ADDING NEW TASKS

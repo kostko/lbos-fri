@@ -4,8 +4,10 @@
  */
 
 /* Include structure definitions and static variables */
+.include "include/at91sam9260.s"
 .include "include/globals.s"
 .include "include/structures.s"
+.include "include/macros.s"
 
 .global vm_init
 .global vm_prepare_task_ttb
@@ -13,6 +15,7 @@
 .global vm_alloc_translation_table
 .global vm_map_region
 .global vm_get_phyaddr
+.global vm_abort_handler
 
 /* Free blocks structure definition */
 .equ VM_FB_NextFreeBlock, 0x00
@@ -519,7 +522,48 @@ vm_init:
   mcr p15, 0, r0, c1, c0, 0
   
   ldmfd sp!, {r0-r1,pc}
+ 
+/**
+ * Handles prefetch and data aborts.
+ * 
+ * Current functionality:
+ *  If a task generates an abort due to whatever it gets killed.
+ *  If the abort doesn't originate from userspace then panic is called.
+ */
+vm_abort_handler:
+  
+  mrs r0, spsr                       /* Fetch the SPSR */
+  mrc p15, 0, r1, c6, c0, 0          /* Read the Fault Address Register (FAR) */
+  ldr r2, =0xFFFFFFE0                /* Mask for extracting the proper bits */
+  
+  /* We just check the mode we were in when the abort happened */
+	 
+  bic r0, r0, r2                     /* Clear bits [31:4] */
+  cmp r0, #PSR_MODE_USER                     
+  beq __vm_abort_task                /* Ok, obviously a task is doing some illegal stuff */
 
+__vm_abort_kernel:                   /* Probably a kernel related issue. */
+  ldr r0, =MSG_VM_KERNEL_ABORT       /* Pass the msg buffer address in r0 */
+  bl panic                           /* Call panic function */
+
+__vm_abort_task:
+  LOAD_CURRENT_TCB r2                /* Get current task TCB */
+  ldr r3, =TFINISHED             
+  str r3, [r2, #T_FLAG]              /* Set the 'finished' flag; this task is no more */
+  
+  /* Report evil doings */
+  mov r4, #0                         /* This should be the task's PID; zero for now */
+  stm sp!, {r4, r1}                  /* Pass the parameters */
+  ldr r0, =MSG_VM_TASK_ABORT         /* ..and the msg buffer address */
+  
+__vm_abort_done:                     /* Note that this section is executed only on aborts caused by userspace tasks */
+  /* Switch to proper mode */
+  mrs r0, cpsr                        /* Load CPSR to r0 */
+  orr r0, r0, #PSR_MODE_SVC           /* Set supervisor mode */
+  msr cpsr, r0                        /* Write r0 to CPSR */
+  
+  b svc_newtask                      /* Continue */                      
+  
 .data
 .align 2
 VM_L1_FREE_BLOCKS: .long 0
@@ -530,3 +574,5 @@ KERNEL_L1_TABLE: .long 0
 
 MSG_VM_TBL_ALLOC_OOM: .asciz "Out of memory in VM table allocator!\n\r"
 MSG_VM_TBL_ALLOC_INVAL_SIZE: .asciz "Block in allocation table of invalid size!\n\r"
+MSG_VM_KERNEL_ABORT: .asciz "[VM] Kernel caused a protection fault.\n\r"
+MSG_VM_TASK_ABORT: .asciz "[VM] Task %d protection fault acessing address %x.\n\r"
