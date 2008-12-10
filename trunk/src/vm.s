@@ -537,8 +537,13 @@ vm_abort_handler:
   ldr r2, =0xFFFFFFE0                /* Mask for extracting the proper bits */
   
   /* We just check the mode we were in when the abort happened */
-	 
-  bic r0, r0, r2                     /* Clear bits [31:4] */
+
+  mrs r3, cpsr                        /* Load CPSR to r3 */
+  bic r3, r3, #0b11111                /* Clear mode bits */
+  orr r3, r3, #PSR_MODE_SVC           /* Set supervisor mode */
+  msr cpsr, r3                        /* Write r3 to CPSR */
+  
+  bic r0, r0, r2                     /* Clear bits [31:5] */
   cmp r0, #PSR_MODE_USER                     
   beq __vm_abort_task                /* Ok, obviously a task is doing some illegal stuff */
 
@@ -552,16 +557,12 @@ __vm_abort_task:
   str r3, [r2, #T_FLAG]              /* Set the 'finished' flag; this task is no more */
   
   /* Report evil doings */
-  mov r4, #0                         /* This should be the task's PID; zero for now */
-  stm sp!, {r4, r1}                  /* Pass the parameters */
+  mov r0, #0                         /* This should be the task's PID; zero for now */
+  stmfd sp!, {r0, r1}                /* Pass the parameters */
   ldr r0, =MSG_VM_TASK_ABORT         /* ..and the msg buffer address */
+  bl printk
   
 __vm_abort_done:                     /* Note that this section is executed only on aborts caused by userspace tasks */
-  /* Switch to proper mode */
-  mrs r0, cpsr                        /* Load CPSR to r0 */
-  orr r0, r0, #PSR_MODE_SVC           /* Set supervisor mode */
-  msr cpsr, r0                        /* Write r0 to CPSR */
-  
   b svc_newtask                      /* Continue */                      
   
 .data
