@@ -15,6 +15,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * System task capability registration mechanism - ?
   * [DynamicTasksPlan Implement dynamic task creation, PIDs and the fork function] - ?
   * Implement ELF binary loader - ?
+  * Include EMAC interface (based on ATMEL's) - *zomb*
 
   * ~~svc_newtask, svc_delay, svc_send, svc_recv, svc_reply, svc_led - *kostko*~~
   * ~~Improve the debugger to output registers (reg0-reg12 and SPSR/CPSR) - *kernc*~~
