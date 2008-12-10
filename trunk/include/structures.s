@@ -139,6 +139,19 @@
 .equ VM_MODE_M_AP, 0b1100             /* [2:3] Access Permissions */
 .equ VM_MODE_M_DOMAIN, 0b11110000     /* [7:4] Domain */
 
+/* Possible abort status codes; there are two possibilities for each source */
+.equ ABORT_SRC_ALIGN_A, 0b0001        /* Alignment fault */
+.equ ABORT_SRC_ALIGN_B, 0b0011
+.equ ABORT_SRC_EXT_TRANSL_A, 0b1100   /* External abort or translation */
+.equ ABORT_SRC_EXT_TRANSL_B, 0b1110   
+.equ ABORT_SRC_TRANSL_A, 0b0101       /* Translation fault */
+.equ ABORT_SRC_TRANSL_B, 0b0111
+.equ ABORT_SRC_DOMAIN_A, 0b1001       /* Domain fault */
+.equ ABORT_SRC_DOMAIN_B, 0b1011
+.equ ABORT_SRC_PERMS_A, 0b1101        /* Permissions fault */
+.equ ABORT_SRC_PERMS_B, 0b1111
+.equ ABORT_SRC_EXT_A, 0b1000          /* External abort */
+.equ ABORT_SRC_EXT_B, 0b1010
 
 /* ================================================================
                     SYSCALL NUMBERS FOR USERSPACE

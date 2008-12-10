@@ -532,6 +532,57 @@ vm_init:
  */
 vm_abort_handler:
   
+  /* Let's try to find out what went wrong */
+  
+__vm_abort_cause:
+  mrc p15, 0, r0, c5, c0, 0          /* Read the Fault Status Register (FSR) */
+  ldr r2, =0xFFFFFFF0                /* Mask for extracting the proper bits */
+  bic r0, r0, r2                     /* Clear bits [31:4] */
+  
+  /* Now comes a great deal of tedious compares... */
+  
+  /* Alignment fault: */
+  cmp r0, #ABORT_SRC_ALIGN_A         /* Test both possibilities for this fault */
+  cmpne r0, #ABORT_SRC_ALIGN_B
+  ldreq r4, =MSG_VM_ABORT_ALIGN      /* Set pointer to message */
+  beq __vm_abort_cause_found          /* OK, found the cause */
+  
+  /* External or translation fault: */
+  cmp r0, #ABORT_SRC_EXT_TRANSL_A
+  cmpne r0, #ABORT_SRC_EXT_TRANSL_B
+  ldreq r4, =MSG_VM_ABORT_EXT_TRANSL 
+  beq __vm_abort_cause_found
+  
+  /* Translation fault: */
+  cmp r0, #ABORT_SRC_TRANSL_A
+  cmpne r0, #ABORT_SRC_TRANSL_B
+  ldreq r4, =MSG_VM_ABORT_TRANSL
+  beq __vm_abort_cause_found
+  
+  /* Domain fault: */
+  cmp r0, #ABORT_SRC_DOMAIN_A
+  cmpne r0, #ABORT_SRC_DOMAIN_B
+  ldreq r4, =MSG_VM_ABORT_DOMAIN
+  beq __vm_abort_cause_found
+  
+  /* Permissions fault: */
+  cmp r0, #ABORT_SRC_PERMS_A
+  cmpne r0, #ABORT_SRC_PERMS_B
+  ldreq r4, =MSG_VM_ABORT_PERMS      
+  beq __vm_abort_cause_found
+  
+  /* External fault: */
+  cmp r0, #ABORT_SRC_EXT_A
+  cmpne r0, #ABORT_SRC_EXT_B
+  ldreq r4, =MSG_VM_ABORT_EXT     
+  beq __vm_abort_cause_found
+  
+  /* No source matched! Set cause to unknown */
+  ldr r4, =MSG_VM_ABORT_UNKNOWN
+  
+__vm_abort_cause_found:
+  /* Message in r4. Continue... */
+  
   mrs r0, spsr                       /* Fetch the SPSR */
   mrc p15, 0, r1, c6, c0, 0          /* Read the Fault Address Register (FAR) */
   ldr r2, =0xFFFFFFE0                /* Mask for extracting the proper bits */
@@ -548,17 +599,21 @@ vm_abort_handler:
   beq __vm_abort_task                /* Ok, obviously a task is doing some illegal stuff */
 
 __vm_abort_kernel:                   /* Probably a kernel related issue. */
-  ldr r0, =MSG_VM_KERNEL_ABORT       /* Pass the msg buffer address in r0 */
+  stmfd sp!, {r4}                    /* Pass probable cause */
+  ldr r0, =MSG_VM_KERNEL_ABORT_PK    /* Pass formated message */
+  bl printk
+  
+  ldr r0, =MSG_VM_KERNEL_ABORT       /* Pass the panic msg buffer address in r0 */
   bl panic                           /* Call panic function */
 
-__vm_abort_task:
+__vm_abort_task:                     /* Task related issue */
   LOAD_CURRENT_TCB r2                /* Get current task TCB */
   ldr r3, =TFINISHED             
   str r3, [r2, #T_FLAG]              /* Set the 'finished' flag; this task is no more */
   
   /* Report evil doings */
   mov r0, #0                         /* This should be the task's PID; zero for now */
-  stmfd sp!, {r0, r1}                /* Pass the parameters */
+  stmfd sp!, {r0, r1, r4}            /* Pass the parameters */
   ldr r0, =MSG_VM_TASK_ABORT         /* ..and the msg buffer address */
   bl printk
   
@@ -576,4 +631,14 @@ KERNEL_L1_TABLE: .long 0
 MSG_VM_TBL_ALLOC_OOM: .asciz "Out of memory in VM table allocator!\n\r"
 MSG_VM_TBL_ALLOC_INVAL_SIZE: .asciz "Block in allocation table of invalid size!\n\r"
 MSG_VM_KERNEL_ABORT: .asciz "[VM] Kernel caused a protection fault.\n\r"
-MSG_VM_TASK_ABORT: .asciz "[VM] Task %d protection fault acessing address %x.\n\r"
+MSG_VM_KERNEL_ABORT_PK: .asciz "[VM] Abort due to kernel bug. Possible cause: %s\n\r"
+MSG_VM_TASK_ABORT: .asciz "[VM] Task %d protection fault acessing address %x. Possible cause: %s\n\r"
+
+/* Abort cause messages */
+MSG_VM_ABORT_ALIGN: .asciz "Alignment fault"
+MSG_VM_ABORT_EXT_TRANSL: .asciz "External abort or translation fault"
+MSG_VM_ABORT_TRANSL: .asciz "Translation fault"
+MSG_VM_ABORT_DOMAIN: .asciz "Domain fault"
+MSG_VM_ABORT_PERMS: .asciz "Permissions fault"
+MSG_VM_ABORT_EXT: .asciz "External abort"
+MSG_VM_ABORT_UNKNOWN: .asciz "Unknown"
