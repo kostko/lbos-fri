@@ -1,7 +1,9 @@
 #summary Plan for SVC_DELAY
 
 = Requirements =
-*DELAY LIST* (list of all processes that make the system call SVC_DELAY)
+
+*DELAY LIST*
+List of all processes that make the system call SVC_DELAY sorted by time.
 
 {{{
 DLYLIST:  .space    80
@@ -29,3 +31,8 @@ Error code:
 {{{
 .equ E_OVRFLV, -5      /* overflow in DELAY LIST */
 }}}
+
+
+= Adding requirements for delay =
+
+= Deleting requirements for delay =
