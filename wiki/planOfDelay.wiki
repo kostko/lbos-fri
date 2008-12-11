@@ -89,4 +89,25 @@ EOC
 
 = Deleting requirements for delay =
 
-TODO
+You always remove only first element of DELAY LIST / process with minimum D_TOUT!
+
+_Example:_
+
+In DELAY LIST we have:
+
+|| *P#3* ||P#1||P#2||
+|| *0x50* ||0x30||0x40||
+|| *60* ||40||22||
+
+When timer count D_TOUT of first block in DELAY LIST (in out example 60 jiffies) we remove first element and then we have:
+
+|| *P#1* ||P#2||
+|| *0x30* ||0x40||
+|| *40* ||22||
+
+	
+So, in those 60 jiffies timer count full delay of P#3, partial delay of P#1 and P#2 (60 jiffies). The residue shows the new table (40 jiffies for P#1 and 22 jiffies for P#2).
+
+*Thus we have achieved more counting delays by one timer.*
+
+EOC NY
