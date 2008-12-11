@@ -14,19 +14,21 @@ Both functions are needed for later `kmalloc` implementation.
 
 = Kmalloc =
 
-A simple linked-list implementation. The following structure describes a single block:
+A simple binned linked-list implementation. The following structure describes a single block:
 {{{
 struct {
   long size;      // Block size (4 bytes)
-  malloc_t *next; // Pointer to next block (4 bytes)
   long magic;     // Magic value + used bit (4 bytes)
+  malloc_t *next; // Pointer to next block in the same bin (4 bytes)
 } malloc_t;
+
+// If the chunk is in use there is no "next" element in the structure!
 
 // If magic value doesn't match, memory corruption has ocurred
 .equ KMALLOC_MAGIC, 0xDA192FA8
 }}}
 
-This mechanism is quite horrible and will fragment quickly. But it's better than nothing and can always be replaced with something better (like the slab allocator).
+Each chunk belongs to a bin. Bins come in different sizes and only contain chunks up to a speficic size. Check out http://g.oswego.edu/dl/html/malloc.html for advice on implementing kmalloc (first implementation should not be overly complex).
 
 = Function prototypes =
 
