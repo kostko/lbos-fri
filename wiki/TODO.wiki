@@ -40,6 +40,9 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
 = Group 3 / 2.4 =
   Members: Gašper Rupnik, Anže Pečar, Tomaž Sečnik, Erik Hribar
 
+  * ~~Implement 'Deleting requirements for delay' from plan~~
+  * ~~Implement 'Adding requirements for delay' from plan~~
+  * ~~Implement 'Requirements' from plan~~
   * ~~[planOfDelay Plan for SVC_DELAY]~~
 
 = Group ? / 2.5 =
