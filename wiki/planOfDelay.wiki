@@ -38,18 +38,15 @@ EOC
 {{{
 i = 1
 n = lastFullPosition
-if (DELAY LIST is empty)
-/* Just put it into the first place of DELAY LIST*/
-  D_TCB[1] <- r1
-  D_TOUT[1] <- r0
-else 
+if (DELAY LIST is not empty)
+  /* Find right position */
   while ((D_TCB[i] is full) & (r0 > D_TOUT[i]))
     /* Subtract delay to the value of the current in DELAY LIST */
-    r0 <- r0 - D_TOUT[i]
+    r0 = r0 - D_TOUT[i]
     inc(i)
   loop
   /* We are in the right position */
-  for (j=n;j>i;j--)
+  for (j=n+1;j>i;j--)
     D_TCB[j] = D_TCB[j-1]
     if ((j-1) = i)
       D_TOUT[j] = D_TOUT[j-1] - r0
@@ -57,9 +54,9 @@ else
       D_TOUT[j] = D_TOUT[j-1]
     end if
   next
-  D_TCB[i] <- r1
-  D_TOUT[i] <- r0
 end if
+D_TCB[i] <- r1
+D_TOUT[i] <- r0
 }}}
 
 _Example:_
