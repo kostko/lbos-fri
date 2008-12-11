@@ -39,7 +39,8 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
 
 = Group 3 / 2.4 =
   Members: Gašper Rupnik, Anže Pečar, Tomaž Sečnik, Erik Hribar
-  * ...
+
+  * ~~[planOfDelay Plan for SVC_DELAY]~~
 
 = Group ? / 2.5 =
   * svc_signal and svc_wait for dynamic lock objects aquisitions - ?
