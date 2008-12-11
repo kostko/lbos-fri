@@ -2,12 +2,30 @@
 
 = Requirements =
 *DELAY LIST* (list of all processes that make the system call SVC_DELAY)
+
+{{{
+DLYLIST:  .space    80
+}}}
+
 || *P#1* || *P#2* || *P#3* || *P#4* || *P#5* || *P#6* || *P#7* || *P#8* || *P#9* || *P#10* ||
 ||D_TCB||...|| || || || || || || || ||
 ||D_TOUT||...|| || || || || || || || ||
 
+
 *DLYLIST* ... pointer to DELAY LIST
+
 
 Structure of DELAY LIST:
   * *D_TCB* ... pointer to TCB of process
   * *D_TOUT* ... timeout/delay for process
+
+{{{
+.equ  D_TCB,    0
+.equ  D_TOUT,   D_TCB+4
+}}}
+
+
+Error code:
+{{{
+.equ E_OVRFLV, -5      /* overflow in DELAY LIST */
+}}}
