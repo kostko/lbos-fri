@@ -104,6 +104,10 @@ The following macros are currently defined (in include/macros.s):
   --------------------------+----------------------------+----------
   LOAD_CURRENT_TCB <reg>    | Load current task's TCB    | -
                             | pointer into <reg>.        |
+  --------------------------+----------------------------+----------
+  MODULO_INC <ctr>, <mod>   | Calculates:                | -    
+                            | <ctr> = <ctr> % <mod>.     | 
+                            | Both parameters are regs.  |						
 
 "Regs" values represent registers that get used by the macro and
 should be expected to contain garbage after the macro has been

@@ -9,7 +9,8 @@
    ================================================================
 */
 .equ T_LINK, 0                        /* link word for task list thread */
-.equ T_MSG, T_LINK + 4                /* link to waiting messages */
+.equ T_PID, T_LINK + 4                /* process ID */
+.equ T_MSG, T_PID + 4                 /* link to waiting messages */
 .equ T_RPLY, T_MSG + 4                /* link to message received */
 .equ T_USP, T_RPLY + 4                /* user stack pointer area */
 .equ T_SSP, T_USP + 4                 /* system stack pointer area */

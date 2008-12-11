@@ -210,6 +210,7 @@ __init_tcb:
   beq __init_done   /* We are done if r2 is zero */
   
   /* r2 now contains pointer to task's TCB */
+  str r3, [r2, #T_PID]    /* Set PID to 0 for now */
   str r3, [r2, #T_USP]    /* Clear task's User Stack Pointer */
   str r3, [r2, #T_FLAG]   /* Mark the task "dispatchable" - clear flags */
   

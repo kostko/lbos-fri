@@ -18,7 +18,10 @@
 .global PAGEBITMAP
 .global PAGEOFFSET
 .global STACK_SUPM_END
+.global LAST_PID
 
 .equ MAXPAGES, 3840
 .equ MAXTASK, 4
 .equ NMCBS, 5
+
+.equ MAX_PID, 0xFFF
