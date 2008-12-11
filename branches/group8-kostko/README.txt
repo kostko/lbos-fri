@@ -28,6 +28,8 @@ for each userspace task:
   -----------+------------+------+-----------------------------------
   0x30000000 | per-task   | 256K | Per-task mapped space
   -----------+------------+------+-----------------------------------
+  0xA0000000 | dynamic    | 32M  | Kernel heap space
+  -----------+------------+------+-----------------------------------
   0xF0000000 | 0xF0000000 | 256M | Internal peripherals (id map).
 
 Any address not listed in the above table is marked as invalid in the

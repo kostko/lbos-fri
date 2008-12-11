@@ -370,7 +370,7 @@ __vmgp_done:
  * @param r0 L1 table address
  */
 vm_prepare_kernel_areas:
-  stmfd sp!, {r0-r5,lr}
+  stmfd sp!, {r0-r6,lr}
   
   /* Save parameters for later use */
   mov r5, r0
@@ -399,7 +399,44 @@ vm_prepare_kernel_areas:
   mov r4, #VM_SVC_MODE  /* r4: Mode bits */
   bl vm_map_region
   
-  ldmfd sp!, {r0-r5,pc}
+  /* Set mappings for kernel heap */
+  ldr r4, =VM_KERNEL_HEAP_L2
+  ldr r6, [r4]
+  cmp r6, #0            /* Check if heap space already mapped */
+  bne __vmpka_heap_alloced
+  
+  /* Allocate a new 32K block for all the tables */
+  bl mm_alloc_block
+  cmp r0, #0            /* Check for out of memory condition */
+  ldreq r0, =MSG_VM_ALLOC_HEAP_TBL_OOM
+  beq panic
+  
+  /* Zero out the whole block */
+  mov r6, r0
+                        /* r0: Memory address */
+  mov r1, #0            /* r1: Fill byte */
+  mov r2, #0x8000       /* r2: Size (32K) */
+  bl memset
+  
+  /* We now have our heap table space */
+  str r6, [r4]
+
+__vmpka_heap_alloced:
+  /* We have to create the mappings */
+  mov r2, #0xA00        /* Kernel heap start address */
+  mov r3, #32           /* Number of L1 descriptors (for 32MB) */
+  
+__vmpka_heap_create_l1:
+  /* Now just map it in L1 (r6 holds L2 table address) */
+  orr r0, r6, #(COARSE | TTBIT)   /* General flags, domain is 0 */
+  str r0, [r5, r2, lsl #2]
+  
+  add r6, r6, #1024     /* L2 tables are 1024 bytes long */
+  add r2, r2, #1
+  subs r3, r3, #1
+  bne __vmpka_heap_create_l1
+  
+  ldmfd sp!, {r0-r6,pc}
 
 /**
  * Sets up task's translation tables.
@@ -628,6 +665,10 @@ VM_L2_FREE_BLOCKS: .long 0
 /* Kernel MMU table used only at startup */
 KERNEL_L1_TABLE: .long 0
 
+/* L2 translation tables for kernel heap */
+VM_KERNEL_HEAP_L2: .long 0
+
+MSG_VM_ALLOC_HEAP_TBL_OOM: .asciz "Out of memory while allocating kernel heap MMU tables!\n\r"
 MSG_VM_TBL_ALLOC_OOM: .asciz "Out of memory in VM table allocator!\n\r"
 MSG_VM_TBL_ALLOC_INVAL_SIZE: .asciz "Block in allocation table of invalid size!\n\r"
 MSG_VM_KERNEL_ABORT: .asciz "[VM] Kernel caused a protection fault.\n\r"
