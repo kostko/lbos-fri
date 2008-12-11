@@ -13,7 +13,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * [TerminalIOPlan Implement task terminal I/O] - *perice*
   * Write documentation on how MMC and MCI work - *kostko*
   * System task capability registration mechanism - ?
-  * [DynamicTasksPlan Implement dynamic task creation, PIDs and the fork function] - ?
+  * [DynamicTasksPlan Implement dynamic task creation, PIDs and the fork function] - *zomb*
   * Implement ELF binary loader - ?
   * [KernelHeapAndKmallocPlan Implement VM-mapped kernel heap] - *kostko*
   * [EMAC Research EMAC interface (based on ATMEL's)] - *zomb*
