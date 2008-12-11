@@ -3,7 +3,7 @@
 = Requirements =
 
 *DELAY LIST*
-List of all processes that make the system call SVC_DELAY sorted by time.
+  * List of all processes that make the system call SVC_DELAY sorted by time.
 
 {{{
 DLYLIST:  .space    80
