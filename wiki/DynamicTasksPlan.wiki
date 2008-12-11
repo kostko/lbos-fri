@@ -44,5 +44,22 @@ do_fork:
   /* LAST AND ATOMIC: Insert into list of processes */
 }}}
 
+* Proposed PID allocator in pseudo-code:
+{{{
+DISABLE_IRQ
+
+INC(LAST_PID) % MAX_PID
+
+for each TASK
+  if TASK.PID == LAST_PID
+    INC(LAST_PID) % MAX_PID
+  endif
+endfor
+
+pid = LAST_PID
+
+ENABLE_IRQ
+}}}
+
 = Brk implementation =
 TBD
