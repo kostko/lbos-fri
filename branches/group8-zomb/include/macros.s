@@ -106,3 +106,8 @@
   ldr \reg, [\reg]
 .endm
 
+.macro MODULO_INC ctr, mod
+  add \ctr, \ctr, #1
+  cmp \ctr, \mod
+  moveq \ctr, #0
+.endm

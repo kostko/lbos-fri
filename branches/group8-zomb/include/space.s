@@ -13,6 +13,7 @@ TINDEX: .space 4    /* Current task index */
 TCBLIST: .space 4   /* Pointer to list of TCBs */
 CURRENT: .space 4   /* Pointer to current task's TCB */
 MCBLIST: .space 4   /* Pointer to free list of MCBs */
+LAST_PID: .space 4  /* Variable that holds the last allocated process ID */
 
 /* Task TCB placeholders */
 .align 2
