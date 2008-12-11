@@ -110,4 +110,4 @@ So, in those 60 jiffies timer count full delay of P#3, partial delay of P#1 and 
 
 *Thus we have achieved more counting delays by one timer.*
 
-EOC NY
+EOC
