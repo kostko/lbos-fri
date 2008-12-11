@@ -1,0 +1,16 @@
+#summary Plan for kernel heap and kmalloc.
+
+= Kernel heap location and usage =
+
+Kernel heap should have preallocated 32MB and be located at virtual memory address `0xA0000000` forward. This requires preallocation of 32 L2 MMU coarse page tables (this fits into one 32K block of physical memory) since heap space needs to be mapped to *same page frames* in all tasks!
+
+This 32K block should be allocated (by using standard MMU block allocation functions) in VM subsystem by `vm_init_kernel_heap` function and saved into the `VM_KERNEL_HEAP_L2` variable.
+
+The kernel heap interface needs to perform two basic functions:
+  * Increase kernel heap by allocating more physical memory and mapping it to kernel heap space (all allocations are ceiled to 4K).
+  * Decrease kernel heap by freeing pages and unmapping them from kernel heap space.
+
+Both functions are needed for later `kmalloc` implementation.
+
+= Kmalloc =
+TBD
