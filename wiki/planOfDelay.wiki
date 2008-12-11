@@ -25,13 +25,71 @@ Structure of DELAY LIST:
 .equ  D_TOUT,   D_TCB+4
 }}}
 
+EOC
 
-Error code:
-{{{
-.equ E_OVRFLV, -5      /* overflow in DELAY LIST */
-}}}
+= Parameters =
+ * *r0* Number of jiffies to delay execution for
+ * *r1* Pointer to TCB
 
+EOC
 
 = Adding requirements for delay =
 
+{{{
+i = 1
+n = lastFullPosition
+if (DELAY LIST is empty)
+/* Just put it into the first place of DELAY LIST*/
+  D_TCB[1] <- r1
+  D_TOUT[1] <- r0
+else 
+  while ((D_TCB[i] is full) & (r0 > D_TOUT[i]))
+    /* Subtract delay to the value of the current in DELAY LIST */
+    r0 <- r0 - D_TOUT[i]
+    inc(i)
+  loop
+  /* We are in the right position */
+  for (j=n;j>i;j--)
+    D_TCB[j] = D_TCB[j-1]
+    if ((j-1) = i)
+      D_TOUT[j] = D_TOUT[j-1] - r0
+    else  
+      D_TOUT[j] = D_TOUT[j-1]
+    end if
+  next
+  D_TCB[i] <- r1
+  D_TOUT[i] <- r0
+end if
+}}}
+
+_Example:_
+
+First task that we want to insert:
+ * D_TCB = 0x30
+ * D_TOUT = 100 <- Number of jiffies
+
+|| *P#1* ||
+|| *0x30* ||
+|| *100* ||
+
+Second task that we want to insert:
+ * D_TCB = 0x40
+ * D_TOUT = 122 <- Number of jiffies
+
+||P#1|| *P#2* ||
+||0x30|| *0x40* ||
+||100|| *22* ||
+
+Third task that we want to insert:
+ * D_TCB = 0x50
+ * D_TOUT = 60 <- Number of jiffies
+
+|| *P#3* ||P#1||P#2||
+|| *0x50* ||0x30||0x40||
+|| *60* ||40||22||
+
+EOC
+
 = Deleting requirements for delay =
+
+TODO
