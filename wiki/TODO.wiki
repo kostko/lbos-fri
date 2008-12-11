@@ -16,7 +16,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * [DynamicTasksPlan Implement dynamic task creation, PIDs and the fork function] - ?
   * Implement ELF binary loader - ?
   * [KernelHeapAndKmallocPlan Implement VM-mapped kernel heap] - *kostko*
-  * [EMAC Include EMAC interface (based on ATMEL's)] - *zomb*
+  * [EMAC Research EMAC interface (based on ATMEL's)] - *zomb*
 
   * ~~svc_newtask, svc_delay, svc_send, svc_recv, svc_reply, svc_led - *kostko*~~
   * ~~Improve the debugger to output registers (reg0-reg12 and SPSR/CPSR) - *kernc*~~
