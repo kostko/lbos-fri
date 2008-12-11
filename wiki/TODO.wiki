@@ -44,6 +44,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * Implement some test tasks
   * Test our code
   
+  * ~~Implement protection for overflow of DELAY LIST~~
   * ~~Implement 'Deleting requirements for delay' from plan~~
   * ~~Implement 'Adding requirements for delay' from plan~~
   * ~~Implement 'Requirements' from plan~~
