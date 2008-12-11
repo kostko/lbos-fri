@@ -25,6 +25,12 @@ Structure of DELAY LIST:
 .equ  D_TOUT,   D_TCB+4
 }}}
 
+Error code for overflow of DELAY LIST
+
+{{{
+.equ E_OVRFLV, -5
+}}}
+
 EOC
 
 = Parameters =
