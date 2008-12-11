@@ -20,4 +20,4 @@ Both current `printk` implementation and the new terminal I/O server should use 
 
 = System calls =
 
-Terminal I/O system calls should then just use existing message passing syscalls to forward messages to the terminal task. We still need a mechanism for registering different tasks upon their execution, so the kernel knows (no static definitions this time - the tables may be static though) which task provides terminal output. When no such task is available, the kernel should panic.
+Terminal I/O system calls should then just use existing message passing syscalls to forward messages to the terminal task. We still need a mechanism for registering different tasks upon their execution, so the kernel knows (no static definitions this time - the tables may be static though) which task provides terminal output. When no such task is available, the kernel should panic (or just ignore userspace terminal output and write a debug message via `printk`, something like `"[TerminalIO] No tasks provide terminal I/O server!"`).
