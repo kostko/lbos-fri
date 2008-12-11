@@ -29,7 +29,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * ~~Make task system stack and user stack dynamically allocatable - *kostko*~~
   * ~~[VirtualMemoryPlan Implement virtual memory] - *zomb*~~
 
-= Group ? / 2.2 =
+= Group 6 / 2.2 =
   * [http://en.wikipedia.org/wiki/Weighted_round_robin Weighted Round-Robin] and optional priority scheduler - see [http://code.google.com/p/lbos-fri/source/browse/trunk/src/sched.s sched.s] - ?
   * ...
 
