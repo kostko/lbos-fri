@@ -45,6 +45,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * Implement some test tasks
   * Test our code
   
+  * ~~Added 'Critical-Section Graph' into [planOfDelay plan]~~
   * ~~ENABLE_IRQ/DISABLE_IRQ (macros) to irq_disable/irq_restore (functions)~~
   * ~~Add ENABLE_IRQ/DISABLE_IRQ (macros)~~
   * ~~Implement protection for overflow of DELAY LIST~~
