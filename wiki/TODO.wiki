@@ -41,11 +41,11 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   Members: Gašper Rupnik, Anže Pečar, Tomaž Sečnik, Erik Hribar
 
   * To comply with CODING_STANDARD
-  * ENABLE_IRQ/DISABLE_IRQ (macros) to irq_disable/irq_restore (functions)
   * Implement timer and set/clear timer flags
   * Implement some test tasks
   * Test our code
   
+  * ~~ENABLE_IRQ/DISABLE_IRQ (macros) to irq_disable/irq_restore (functions)~~
   * ~~Add ENABLE_IRQ/DISABLE_IRQ (macros)~~
   * ~~Implement protection for overflow of DELAY LIST~~
   * ~~Implement 'Deleting requirements for delay' from plan~~
