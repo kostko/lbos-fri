@@ -12,14 +12,14 @@ The kernel heap interface (`kbrk`) needs to perform two basic functions:
 
 Both functions are needed for later `kmalloc` implementation.
 
-= Kmalloc =
+= kmalloc =
 
-A simple binned linked-list implementation. The following structure describes a single block:
+A simple linked-list implementation. The following structure describes a single block:
 {{{
 struct {
-  long size;      // Block size (4 bytes)
+  long size;      // Usable block size (4 bytes)
   long magic;     // Magic value + used bit (4 bytes)
-  malloc_t *next; // Pointer to next block in the same bin (4 bytes)
+  malloc_t *next; // Pointer to next block (4 bytes)
 } malloc_t;
 
 // If the chunk is in use there is no "next" element in the structure!
@@ -28,7 +28,13 @@ struct {
 .equ KMALLOC_MAGIC, 0xDA192FA8
 }}}
 
-Each chunk belongs to a bin. Bins come in different sizes and only contain chunks up to a speficic size. Check out http://g.oswego.edu/dl/html/malloc.html for advice on implementing kmalloc (first implementation should not be overly complex).
+This is a simple implementation and might be replaced in the future. Allocation works as follows:
+  * We search for a big enough free block. If a larger block is found, we split it and use the first part for our allocation.
+  * The last block in the heap is dubbed the _wildreness block_. It is the only one that can grow arbitrarily using the `kbrk` call and as such should be considered the biggest possible block. When no blocks are found we always:
+    * Allocate the wilderness block, increasing the heap via `kbrk` if needed.
+    * In the remaining space a new wilderness block is created and properly linked into the list.
+
+Later we might consider implementing _binning_.
 
 = Function prototypes =
 
