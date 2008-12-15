@@ -59,9 +59,8 @@ __pit_irq_handler:
   ldr r0, =AIC_BASE
   str r0, [r0, #AIC_EOICR]
   
-  DISABLE_PIT_IRQ
   ENABLE_IRQ
-  b svc_newtask
+  b dispatch
 
 /**
  * Disables IRQ and returns previous state.

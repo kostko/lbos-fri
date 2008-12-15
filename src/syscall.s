@@ -46,19 +46,20 @@ __bad_svc:
  * New task syscall.
  */
 svc_newtask:
-  /* Load current task TCB pointer */
-  LOAD_CURRENT_TCB r0
-  cmp r0, #0
-  beq dispatch      /* No current process, enter dispatch */
-  
-  /* Save current task's context. */
-  DISABLE_PIT_IRQ
-  GET_SP #PSR_MODE_SYS, r3    /* Get USP */
-  str r3, [r0, #T_USP]        /* Store USP */
-  str sp, [r0, #T_SSP]        /* Store SSP */
-  
-  /* Branch to scheduler */
-  b dispatch
+  DISABLE_IRQ
+
+  mov r1, #SCHEDULER  /* Load scheduling discipline */
+  cmp r1, #0
+  bne prio_dispatch   /* If priority scheduler, enter priority dispatch */
+
+  /* Give the remaining time of the quantum to the next task */
+  ldr r2, =Q_LEFT
+  mov r1, #1
+  str r1, [r2]
+
+  b wrr_dispatch      /* Enter weighted round robin dispatch */
+
+
 
 /**
  * Print line syscall.

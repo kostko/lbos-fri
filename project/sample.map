@@ -1,0 +1,506 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+LOAD C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+                0x00000000                __VECTORS_START__ = 0x0
+                0x20000000                __TEXT_START__ = 0x20000000
+                0x20080000                __DATA_START__ = 0x20080000
+                0x20180000                __STACK_END__ = 0x20180000
+                0x20200000                __TASKS_START__ = 0x20200000
+                0x30000000                __TASKS_VM__ = 0x30000000
+                0x22000000                __RAM_END__ = 0x22000000
+
+.vecs           0x00000000       0x38
+ *vectors.o(.text)
+ .text          0x00000000       0x38 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+
+.text           0x20000000     0x1ee0
+ *(EXCLUDE_FILE(*vectors.o) .text)
+ .text          0x20000000       0xb8 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+                0x20000000                spu_irq_handler
+                0x200000a8                irq_restore
+                0x20000090                irq_disable
+                0x20000014                sys_irq_handler
+ .text          0x200000b8      0x3b0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+                0x200000b8                start
+ .text          0x20000468      0x378 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+                0x20000468                syscall_handler
+                0x200004b4                svc_newtask
+ .text          0x200007e0      0x1e8 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+                0x20000908                prio_dispatch
+                0x200007e0                dispatch
+                0x20000834                wrr_dispatch
+ .text          0x200009c8       0x60 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+                0x200009c8                printk
+ .text          0x20000a28      0x11c C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+                0x20000aa0                register_timer
+                0x20000a28                timer_irq_handler
+ .text          0x20000b44      0x18c C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+                0x20000c04                debugger_fiqir
+                0x20000ba4                debugger_dabrt
+                0x20000bd4                debugger_resvt
+                0x20000b74                debugger_abort
+                0x20000b44                debugger_undef
+ .text          0x20000cd0      0x1d4 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+                0x20000e08                mm_alloc_block
+                0x20000cf4                mm_alloc_page
+                0x20000d90                mm_free_page
+                0x20000cd0                mm_init
+ .text          0x20000ea4      0x720 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+                0x20001238                mmc_write_block
+                0x20000ea4                mmc_init
+                0x20001124                mmc_read_block
+ .text          0x200015c4      0x250 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+                0x200015c4                io_dispatch
+                0x20001700                io_queue_request
+                0x2000177c                io_finish_request
+ .text          0x20001814       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+                0x20001814                panic
+ .text          0x20001834      0x150 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+                0x20001834                vsprintf
+ .text          0x20001984       0x78 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+                0x20001984                memcpy
+                0x200019b0                memcmp
+                0x2000199c                memset
+                0x200019dc                strlen
+ .text          0x200019fc      0x4e4 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+                0x20001cc4                vm_prepare_task_ttb
+                0x20001dc4                vm_abort_handler
+                0x20001bf4                vm_get_phyaddr
+                0x20001d04                vm_switch_ttb
+                0x20001ba8                vm_map_region
+                0x20001d50                vm_init
+                0x200019fc                vm_alloc_translation_table
+ .text          0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .text          0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .text          0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .text          0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .text          0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .text          0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .text          0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .text          0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .text          0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+                0x20001ee0                PROVIDE (__etext, .)
+
+.glue_7         0x20001ee0        0x0
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .glue_7        0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+
+.glue_7t        0x20001ee0        0x0
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .glue_7t       0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+
+.vfp11_veneer   0x20001ee0        0x0
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .vfp11_veneer  0x20001ee0        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+                0x20001ee0                . = ALIGN (0x1)
+                0x20001ee0                PROVIDE (__start_task_code, .)
+
+task_code       0x20001ee0      0x10c
+ task_code      0x20001ee0       0x54 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ task_code      0x20001f34       0x38 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ task_code      0x20001f6c       0x18 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ task_code      0x20001f84       0x68 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+                0x20001fec                PROVIDE (__stop_task_code, .)
+
+.rodata
+ *(.rodata)
+ *(.rodata.*)
+
+.bss            0x20001fec        0x0
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .bss           0x20001fec        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+
+.data           0x20080000      0xf54
+ *(.data)
+ .data          0x20080000        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+ .data          0x20080000      0x524 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+                0x20080038                TASK2
+                0x20080018                TASK1
+                0x20080014                Q_LEFT
+                0x20080008                TCBLIST
+                0x200803dc                STACK_SUPM_END
+                0x200801dc                CUR_JIFFIES
+                0x200803d8                PAGEOFFSET
+                0x200801d8                TIMERQUEUE
+                0x20080004                TINDEX
+                0x200800b8                TASKTAB
+                0x200800cc                MCBAREA
+                0x200801d4                TIMERFREE
+                0x20080058                TASK3
+                0x200801f8                PAGEBITMAP
+                0x20080010                MCBLIST
+                0x2008000c                CURRENT
+ .data          0x20080524       0x28 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+ .data          0x2008054c        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+ .data          0x2008054c        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+ .data          0x2008054c      0x604 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+ .data          0x20080b50        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+ .data          0x20080b50       0xf1 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+ *fill*         0x20080c41        0x3 00
+ .data          0x20080c44        0x4 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+ .data          0x20080c48       0xe4 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+ .data          0x20080d2c       0x90 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+ .data          0x20080dbc       0x18 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+ .data          0x20080dd4        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+ .data          0x20080dd4        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+ .data          0x20080dd4      0x180 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+ .data          0x20080f54        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .data          0x20080f54        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .data          0x20080f54        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .data          0x20080f54        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .data          0x20080f54        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .data          0x20080f54        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .data          0x20080f54        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .data          0x20080f54        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .data          0x20080f54        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+ *(.data.*)
+                0x20080f54                . = ALIGN (0x1)
+                0x20080f54                PROVIDE (__start_task_data, .)
+
+task_data       0x20080f54      0x806
+ task_data      0x20080f54        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ task_data      0x20080f54      0x800 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ task_data      0x20081754        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ task_data      0x20081754        0x6 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+                0x2008175a                PROVIDE (__stop_task_data, .)
+                0x2008175c                . = ALIGN (0x4)
+                0x2008175c                __DATA_END__ = .
+
+.task1          0x30000000       0x24 load address 0x20200000
+ *task1.o(task_code)
+ task_code      0x30000000       0x24 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ *task1.o(task_data)
+ task_data      0x30000024        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+
+.task2          0x30000000        0x4 load address 0x20240000
+ *task2.o(task_code)
+ task_code      0x30000000        0x4 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ *task2.o(task_data)
+ task_data      0x30000004        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+
+.task3          0x30000000        0xc load address 0x20280000
+ *task3.o(task_code)
+ task_code      0x30000000        0x4 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ *task3.o(task_data)
+ task_data      0x30000004        0x8 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+
+.task4          0x30000000        0x8 load address 0x202c0000
+ *task4.o(task_code)
+ task_code      0x30000000        0x8 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ *task4.o(task_data)
+ task_data      0x30000008        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+
+.task5          0x30000000        0x4 load address 0x20300000
+ *task5.o(task_code)
+ task_code      0x30000000        0x4 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+ *task5.o(task_data)
+ task_data      0x30000004        0x0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+                0x20200000                _task1_paddr = LOADADDR (.task1)
+                0x20240000                _task2_paddr = LOADADDR (.task2)
+                0x20280000                _task3_paddr = LOADADDR (.task3)
+                0x202c0000                _task4_paddr = LOADADDR (.task4)
+                0x20300000                _task5_paddr = LOADADDR (.task5)
+                0x20340000                . = (LOADADDR (.task5) + 0x40000)
+                0x20340000                __PAGE_OFFSET__ = .
+                0x20340000                PROVIDE (end, .)
+START GROUP
+LOAD c:/winidea/2008/gcc/arm/bin/../lib/gcc/arm-elf/4.2.2\libgcc.a
+LOAD c:/winidea/2008/gcc/arm/bin/../lib/gcc/arm-elf/4.2.2/../../../../arm-elf/lib\libc.a
+END GROUP
+OUTPUT(lbos-fri.elf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x10
+ .ARM.attributes
+                0x00000000       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+ .ARM.attributes
+                0x00000010       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+ .ARM.attributes
+                0x00000020       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+ .ARM.attributes
+                0x00000030       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+ .ARM.attributes
+                0x00000040       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+ .ARM.attributes
+                0x00000050       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+ .ARM.attributes
+                0x00000060       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+ .ARM.attributes
+                0x00000070       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+ .ARM.attributes
+                0x00000080       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+ .ARM.attributes
+                0x00000090       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+ .ARM.attributes
+                0x000000a0       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+ .ARM.attributes
+                0x000000b0       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+ .ARM.attributes
+                0x000000c0       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+ .ARM.attributes
+                0x000000d0       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+ .ARM.attributes
+                0x000000e0       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+ .ARM.attributes
+                0x000000f0       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .ARM.attributes
+                0x00000100       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .ARM.attributes
+                0x00000110       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .ARM.attributes
+                0x00000120       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .ARM.attributes
+                0x00000130       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .ARM.attributes
+                0x00000140       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .ARM.attributes
+                0x00000150       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .ARM.attributes
+                0x00000160       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .ARM.attributes
+                0x00000170       0x10 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+
+.debug_line     0x00000000     0x1555
+ .debug_line    0x00000000       0xad C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+ .debug_line    0x000000ad      0x1d7 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+ .debug_line    0x00000284      0x13e C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+ .debug_line    0x000003c2       0x9a C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+ .debug_line    0x0000045c       0xe7 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+ .debug_line    0x00000543       0xa7 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+ .debug_line    0x000005ea       0xcd C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+ .debug_line    0x000006b7       0xc3 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+ .debug_line    0x0000077a      0x107 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+ .debug_line    0x00000881      0x24c C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+ .debug_line    0x00000acd      0x106 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+ .debug_line    0x00000bd3       0x95 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+ .debug_line    0x00000c68       0xe3 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+ .debug_line    0x00000d4b       0xb5 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+ .debug_line    0x00000e00      0x1c0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+ .debug_line    0x00000fc0       0xad C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .debug_line    0x0000106d       0xa3 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .debug_line    0x00001110       0x9d C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .debug_line    0x000011ad       0xb0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .debug_line    0x0000125d       0x9d C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .debug_line    0x000012fa       0x97 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .debug_line    0x00001391       0x97 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .debug_line    0x00001428       0x96 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .debug_line    0x000014be       0x97 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+
+.debug_info     0x00000000     0x15a3
+ .debug_info    0x00000000       0xe0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+ .debug_info    0x000000e0       0xe1 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+ .debug_info    0x000001c1       0xe4 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+ .debug_info    0x000002a5       0xe4 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+ .debug_info    0x00000389       0xe2 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+ .debug_info    0x0000046b       0xe3 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+ .debug_info    0x0000054e       0xe3 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+ .debug_info    0x00000631       0xe5 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+ .debug_info    0x00000716       0xe3 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+ .debug_info    0x000007f9       0xe0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+ .debug_info    0x000008d9       0xdf C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+ .debug_info    0x000009b8       0xe2 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+ .debug_info    0x00000a9a       0xe5 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+ .debug_info    0x00000b7f       0xe3 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+ .debug_info    0x00000c62       0xdf C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+ .debug_info    0x00000d41       0xf0 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .debug_info    0x00000e31       0xef C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .debug_info    0x00000f20       0xef C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .debug_info    0x0000100f       0xee C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .debug_info    0x000010fd       0xee C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .debug_info    0x000011eb       0xee C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .debug_info    0x000012d9       0xee C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .debug_info    0x000013c7       0xee C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .debug_info    0x000014b5       0xee C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+
+.debug_abbrev   0x00000000      0x1e0
+ .debug_abbrev  0x00000000       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+ .debug_abbrev  0x00000014       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+ .debug_abbrev  0x00000028       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+ .debug_abbrev  0x0000003c       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+ .debug_abbrev  0x00000050       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+ .debug_abbrev  0x00000064       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+ .debug_abbrev  0x00000078       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+ .debug_abbrev  0x0000008c       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+ .debug_abbrev  0x000000a0       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+ .debug_abbrev  0x000000b4       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+ .debug_abbrev  0x000000c8       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+ .debug_abbrev  0x000000dc       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+ .debug_abbrev  0x000000f0       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+ .debug_abbrev  0x00000104       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+ .debug_abbrev  0x00000118       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+ .debug_abbrev  0x0000012c       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .debug_abbrev  0x00000140       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .debug_abbrev  0x00000154       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .debug_abbrev  0x00000168       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .debug_abbrev  0x0000017c       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .debug_abbrev  0x00000190       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .debug_abbrev  0x000001a4       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .debug_abbrev  0x000001b8       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .debug_abbrev  0x000001cc       0x14 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o
+
+.debug_aranges  0x00000000      0x300
+ .debug_aranges
+                0x00000000       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\irq.o
+ .debug_aranges
+                0x00000020       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\main.o
+ .debug_aranges
+                0x00000040       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\syscall.o
+ .debug_aranges
+                0x00000060       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vectors.o
+ .debug_aranges
+                0x00000080       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\sched.o
+ .debug_aranges
+                0x000000a0       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\printk.o
+ .debug_aranges
+                0x000000c0       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\timers.o
+ .debug_aranges
+                0x000000e0       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\debugger.o
+ .debug_aranges
+                0x00000100       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\memory.o
+ .debug_aranges
+                0x00000120       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\mmc.o
+ .debug_aranges
+                0x00000140       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\io.o
+ .debug_aranges
+                0x00000160       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\panic.o
+ .debug_aranges
+                0x00000180       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vsprintf.o
+ .debug_aranges
+                0x000001a0       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\string.o
+ .debug_aranges
+                0x000001c0       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vm.o
+ .debug_aranges
+                0x000001e0       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\msgtest.o
+ .debug_aranges
+                0x00000200       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\iotest.o
+ .debug_aranges
+                0x00000220       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\vmtest.o
+ .debug_aranges
+                0x00000240       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\dummy.o
+ .debug_aranges
+                0x00000260       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task1.o
+ .debug_aranges
+                0x00000280       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task2.o
+ .debug_aranges
+                0x000002a0       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task3.o
+ .debug_aranges
+                0x000002c0       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task4.o
+ .debug_aranges
+                0x000002e0       0x20 C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\task5.o

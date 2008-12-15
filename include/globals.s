@@ -18,7 +18,10 @@
 .global PAGEBITMAP
 .global PAGEOFFSET
 .global STACK_SUPM_END
+.global Q_LEFT
 
+.equ SCHEDULER, 1  /* If set to 0 weighted round robin scheduler,
+                      else (please use 1) priority scheduler is used */
 .equ MAXPAGES, 3840
-.equ MAXTASK, 4
+.equ MAXTASK, 5
 .equ NMCBS, 5

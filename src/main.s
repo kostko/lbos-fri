@@ -200,8 +200,9 @@ init_tasks:
   
   /* Reset current task index */
   ldr r2, =TINDEX   /* Load TINDEX address */
-  mov r3, #0
+  mov r3, #-1
   str r3, [r2]      /* Write 0 to TINDEX */
+  mov r3, #0
   
   /* Initialize all task TCBs */
 __init_tcb:
@@ -239,6 +240,8 @@ __init_tcb:
   mov r0, r7
   mov r1, r8
   
+  ldr r8, [r0], #4
+  str r8, [r2, #T_PRIO]
   /* Setup TCB linkage */
   str r2, [r1, #T_LINK]   /* Set previous TCB link word; note that first loop */
                           /* iteration only works because T_LINK is 0! */
@@ -282,11 +285,62 @@ done:
   ldr r0, =MSG_INIT_DONE
   bl printk
   
+  
+  /* Sorting TCB list by priority using bubble sort */
+bubble_sort:
+  mov r1, #SCHEDULER  /* Load scheduling discipline */
+  cmp r1, #0
+  beq end_sort       /* If not priority scheduler, skip sort */
+
+  mov r6, #MAXTASK    /* iteration's counter in r6 */
+
+/* For (MAXTASK - 1) */
+__iteration:
+  sub r6, r6, #1      /* Decrement iteration counter */
+  cmp r6, #1
+  bmi end_sort       /* End of sort? */
+
+  ldr r0, =TCBLIST    /* Previous task's T_LINK address in r0 */
+  ldr r1, [r0]        /* Task in r1 */
+
+  mov r5, r6          /* counter in r5 */
+
+__compare:
+  cmp r5, #1
+  bmi __iteration       /* End comparing? */
+  sub r5, r5, #1        /* Decrement counter */
+
+  ldr r2, [r1, #T_LINK]  /* Next task in r2 */
+  ldr r3, [r1, #T_PRIO]  /* Task's priority in r3 */
+  ldr r4, [r2, #T_PRIO]  /* Next task's priority in r4 */
+
+  cmp r3, r4
+  bpl __next             /* Next task in list doesn't have higher priority then task */
+
+  ldr r4, [r2, #T_LINK]  /* Task's T_LINK in r4 */
+  str r4, [r1, #T_LINK]  /* Task's T_LINK := next task's T_LINK */
+  str r2, [r0]           /* Previous task's T_LINK := next task */
+  str r1, [r2, #T_LINK]  /* Next task's T_LINK := task */
+
+__next:
+  ldr r1, [r0]           /* Old task in r1 */
+  add r0, r1, #T_LINK    /* New previous task's T_LINK address */
+  ldr r1, [r0]           /* New task */
+  b __compare
+
+end_sort:
+
+
   ldr r0, =CURRENT
   mov r1, #0
-  str r1, [r0]    /* Clear current task */
+  str r1, [r0]      /* Clear current task */
+  
+  ldr r1, =Q_LEFT  
+  mov r0, #0
+  str r0, [r1]
   
   /* Enter task dispatcher */
+
   b dispatch
 
 .data

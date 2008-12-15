@@ -1,0 +1,15 @@
+CONVERTING	C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\lbos-fri.elf
+LOADING	C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\project\Debug\lbos-fri.elf
+EMULATION	POD: ARM9   CPU: ARM926EJS
+LOADING 	14270 bytes
+VERIFYING
+	FILE: lbos-fri.elf  AREA: Physical
+	Verifying 38h locations from 00h
+	Verifying 00001FECh locations from 20000000h
+	Verifying 0000175Ah locations from 20080000h
+	Verifying 00000024h locations from 20200000h
+	Verifying 00000004h locations from 20240000h
+	Verifying 0000000Ch locations from 20280000h
+	Verifying 00000008h locations from 202C0000h
+	Verifying 00000004h locations from 20300000h
+	Verify OK

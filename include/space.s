@@ -13,6 +13,7 @@ TINDEX: .space 4    /* Current task index */
 TCBLIST: .space 4   /* Pointer to list of TCBs */
 CURRENT: .space 4   /* Pointer to current task's TCB */
 MCBLIST: .space 4   /* Pointer to free list of MCBs */
+Q_LEFT: .space 4    /* Current task's quanta left. MUST BE SET TO 0 AT INIT!!! */
 
 /* Task TCB placeholders */
 .align 2
@@ -20,10 +21,11 @@ TASK1: .space TCBSIZE
 TASK2: .space TCBSIZE
 TASK3: .space TCBSIZE
 TASK4: .space TCBSIZE
+TASK5: .space TCBSIZE
 
 /* Task map table (if you change this, please update MAXTASK in globals.s) */
 .align 2
-TASKTAB: .long TASK1, TASK2, TASK3, TASK4
+TASKTAB: .long TASK1, TASK2, TASK3, TASK4, TASK5
 ENDTASKTAB:
 
 /* Place for message control block allocation */
@@ -32,11 +34,12 @@ MCBAREA:  .space MCBSIZE*NMCBS
 /* Task initialization data (see main.s/task_init) */
 .align 2
 TASK_INITDATA:
-      /* TCB | Status register | Task address  | Task size in pages (currently statically defined) */ 
-.long TASK1,   PSR_MODE_USER,    _task1_paddr,   256*1024 / PAGESIZE
-.long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE
-.long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE
-.long TASK4,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE
+/* TCB | Status register | Task address  | Task size in pages (currently statically defined) | Task Priority */ 
+.long TASK1,   PSR_MODE_USER,    _task1_paddr,   256*1024 / PAGESIZE, 1
+.long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE, 3
+.long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE, 2
+.long TASK4,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE, 1
+.long TASK5,   PSR_MODE_USER,    _task5_paddr,   256*1024 / PAGESIZE, 2
 .long 0
 
 /* WARNING ABOUT ADDING NEW TASKS
