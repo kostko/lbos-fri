@@ -130,12 +130,16 @@ following example:
      0x2C   | R10     |
      0x30   | R11     |
      0x34   | R12     |
-     0x38   | PC      | SCTX_PC
+     0x38   | LR-usr  | SCTX_USR_LR
+     0x3C   | LR-svc  | SCTX_SVC_LR
+     0x40   | PC      | SCTX_PC
 
 Where registers are as follows:
  R0-R12 - general purpuse registers
  PSR    - program status register (in SPSR after mode switch)
  PC     - task program counter
+ LR-svc - Supervisor mode link register
+ LR-usr - User mode link register
 
 If you change the layout don't forget to fix *_CONTEXT macros and all
 SCTX_* constants defined in include/structures.s. Also note that you
