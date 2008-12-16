@@ -58,8 +58,7 @@ kbrk:
  * @return Start address of newly allocated memory
  */
 kmalloc:
-  /* Search for a free block */
-  /* If a larger block is found - split it */
+  /* Search for a suitable free block */
   /* If no free blocks are found, call kbrk to get us a larger heap */
 
 /**
