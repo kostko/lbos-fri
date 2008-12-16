@@ -40,10 +40,10 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
 = Group 3 / 2.4 =
   Members: Gašper Rupnik, Anže Pečar, Tomaž Sečnik, Erik Hribar
 
-  * Implement some test tasks
   * Test our code
   * To translate some comments
   
+  * ~~Implement some test tasks~~
   * ~~Implement timer and set/clear timer flags~~
   * ~~To comply with CODING_STANDARD~~
   * ~~Added 'Critical-Section Graph' into [planOfDelay plan]~~
