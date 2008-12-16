@@ -222,9 +222,9 @@ __init_tcb:
   /* Push context to stack */
   mov r5, #0x30000000     /* Set task's PC */
   str r5, [r4, #-4]!      /* Push task's PC to the stack */
-  sub r4, r4, #(13 << 2)  /* Move stack pointer since regs should be there */
+  sub r4, r4, #(15 << 2)  /* Move stack pointer since regs should be there */
   ldr r6, [r0], #4        /* Load task's status register */
-  str r6, [r4, #-4]!      /* Push task's PC and PSR to the stack */
+  str r6, [r4, #-4]!      /* Push task's PSR to the stack */
   
   /* Set r4 to be task's System Stack Pointer */
   str r4, [r2, #T_SSP]
