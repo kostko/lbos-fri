@@ -42,7 +42,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
 
   * Test our code (24h)
   * To translate some comments
-  * Add 'print to terminal' for our tasks when terminal I/O (Group ?) will be done.
+  * Add 'print to terminal' for our tasks when communication with the serial port (Group ?) will be done.
   
   * ~~Implement some test tasks~~
   * ~~Implement timer and set/clear timer flags~~
