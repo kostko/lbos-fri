@@ -42,7 +42,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
 
   * Test our code (24h)
   * To translate some comments
-  * Add 'print to terminal' when the 'Group X' ended
+  * Add 'print to terminal' for our tasks when the 'Group X' ended terminal I/O
   
   * ~~Implement some test tasks~~
   * ~~Implement timer and set/clear timer flags~~
