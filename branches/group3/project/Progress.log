@@ -1,15 +1,18 @@
-INITIALIZING	Emulator: iONE (SN 51847)   Debugger: On-chip
 CONVERTING	C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\lbos-fri.elf
 LOADING	C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\lbos-fri.elf
 EMULATION	POD: ARM9   CPU: ARM926EJS
-LOADING 	13790 bytes
+LOADING 	14126 bytes
 VERIFYING
 	FILE: lbos-fri.elf  AREA: Physical
 	Verifying 38h locations from 00h
 	Verifying 00001D80h locations from 20000000h
-	Verifying 00000F14h locations from 20080000h
-	Verifying 0000006Eh locations from 20200000h
+	Verifying 00000FE4h locations from 20080000h
+	Verifying 0000004Eh locations from 20200000h
 	Verifying 00000054h locations from 20240000h
 	Verifying 00000838h locations from 20280000h
 	Verifying 00000018h locations from 202C0000h
+	Verifying 00000028h locations from 20300000h
+	Verifying 00000028h locations from 20340000h
+	Verifying 00000028h locations from 20380000h
+	Verifying 00000028h locations from 203C0000h
 	Verify OK

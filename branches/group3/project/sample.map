@@ -26,6 +26,10 @@ LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\du
 LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
 LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
 LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
                 0x00000000                __VECTORS_START__ = 0x0
                 0x20000000                __TEXT_START__ = 0x20000000
                 0x20080000                __DATA_START__ = 0x20080000
@@ -98,6 +102,10 @@ LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vm
  .text          0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
  .text          0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
  .text          0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .text          0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .text          0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .text          0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .text          0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
                 0x20001d80                PROVIDE (__etext, .)
 
 .glue_7         0x20001d80        0x0
@@ -121,6 +129,10 @@ LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vm
  .glue_7        0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
  .glue_7        0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
  .glue_7        0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .glue_7        0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .glue_7        0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .glue_7        0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .glue_7        0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
 
 .glue_7t        0x20001d80        0x0
  .glue_7t       0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\irq.o
@@ -143,6 +155,10 @@ LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vm
  .glue_7t       0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
  .glue_7t       0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
  .glue_7t       0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .glue_7t       0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .glue_7t       0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .glue_7t       0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .glue_7t       0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
 
 .vfp11_veneer   0x20001d80        0x0
  .vfp11_veneer  0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\irq.o
@@ -165,6 +181,10 @@ LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vm
  .vfp11_veneer  0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
  .vfp11_veneer  0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
  .vfp11_veneer  0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .vfp11_veneer  0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .vfp11_veneer  0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .vfp11_veneer  0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .vfp11_veneer  0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
 
 .rodata
  *(.rodata)
@@ -191,53 +211,61 @@ LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vm
  .bss           0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
  .bss           0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
  .bss           0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .bss           0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .bss           0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .bss           0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .bss           0x20001d80        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
 
-.data           0x20080000      0xf14
+.data           0x20080000      0xfe4
  *(.data)
  .data          0x20080000        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\irq.o
- .data          0x20080000      0x4e4 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\main.o
+ .data          0x20080000      0x5b4 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\main.o
                 0x20080034                TASK2
                 0x20080014                TASK1
                 0x20080008                TCBLIST
-                0x2008019c                CDLYTCB
-                0x2008039c                STACK_SUPM_END
-                0x20080398                PAGEOFFSET
+                0x2008026c                CDLYTCB
+                0x2008046c                STACK_SUPM_END
+                0x20080468                PAGEOFFSET
                 0x20080004                TINDEX
-                0x20080094                TASKTAB
-                0x2008014c                DLYLIST
-                0x200800a4                MCBAREA
+                0x20080114                TASKTAB
+                0x2008021c                DLYLIST
+                0x20080134                MCBAREA
                 0x20080054                TASK3
-                0x200801b8                PAGEBITMAP
+                0x20080288                PAGEBITMAP
                 0x20080010                MCBLIST
                 0x2008000c                CURRENT
- .data          0x200804e4       0x28 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\syscall.o
- .data          0x2008050c        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vectors.o
- .data          0x2008050c        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\sched.o
- .data          0x2008050c      0x604 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\printk.o
- .data          0x20080b10        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\timers.o
- .data          0x20080b10       0xf1 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\debugger.o
- *fill*         0x20080c01        0x3 00
- .data          0x20080c04        0x4 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\memory.o
- .data          0x20080c08       0xe4 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\mmc.o
- .data          0x20080cec       0x90 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\io.o
- .data          0x20080d7c       0x18 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\panic.o
- .data          0x20080d94        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vsprintf.o
- .data          0x20080d94        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\string.o
- .data          0x20080d94      0x180 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vm.o
- .data          0x20080f14        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\svc_delay.o
- .data          0x20080f14        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dummy.o
- .data          0x20080f14        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
- .data          0x20080f14        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
- .data          0x20080f14        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .data          0x200805b4       0x28 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\syscall.o
+ .data          0x200805dc        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vectors.o
+ .data          0x200805dc        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\sched.o
+ .data          0x200805dc      0x604 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\printk.o
+ .data          0x20080be0        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\timers.o
+ .data          0x20080be0       0xf1 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\debugger.o
+ *fill*         0x20080cd1        0x3 00
+ .data          0x20080cd4        0x4 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\memory.o
+ .data          0x20080cd8       0xe4 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\mmc.o
+ .data          0x20080dbc       0x90 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\io.o
+ .data          0x20080e4c       0x18 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\panic.o
+ .data          0x20080e64        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vsprintf.o
+ .data          0x20080e64        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\string.o
+ .data          0x20080e64      0x180 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vm.o
+ .data          0x20080fe4        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\svc_delay.o
+ .data          0x20080fe4        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dummy.o
+ .data          0x20080fe4        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
+ .data          0x20080fe4        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
+ .data          0x20080fe4        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .data          0x20080fe4        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .data          0x20080fe4        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .data          0x20080fe4        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .data          0x20080fe4        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
  *(.data.*)
-                0x20080f14                . = ALIGN (0x4)
-                0x20080f14                __DATA_END__ = .
+                0x20080fe4                . = ALIGN (0x4)
+                0x20080fe4                __DATA_END__ = .
 
-.task1          0x30000000       0x6e load address 0x20200000
+.task1          0x30000000       0x4e load address 0x20200000
  *dummy.o(task_code)
- task_code      0x30000000       0x68 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dummy.o
+ task_code      0x30000000       0x48 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dummy.o
  *dummy.o(task_data)
- task_data      0x30000068        0x6 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dummy.o
+ task_data      0x30000048        0x6 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dummy.o
 
 .task2          0x30000000       0x54 load address 0x20240000
  *msgtest.o(task_code)
@@ -256,13 +284,37 @@ LOAD C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vm
  task_code      0x30000000       0x18 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
  *vmtest.o(task_data)
  task_data      0x30000018        0x0 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+
+.task5          0x30000000       0x28 load address 0x20300000
+ *dlytest1.o(task_code)
+ task_code      0x30000000       0x28 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ *dlytest1.o(task_data)
+
+.task6          0x30000000       0x28 load address 0x20340000
+ *dlytest2.o(task_code)
+ task_code      0x30000000       0x28 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ *dlytest2.o(task_data)
+
+.task7          0x30000000       0x28 load address 0x20380000
+ *dlytest3.o(task_code)
+ task_code      0x30000000       0x28 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
+ *dlytest3.o(task_data)
+
+.task8          0x30000000       0x28 load address 0x203c0000
+ *dlytest4.o(task_code)
+ task_code      0x30000000       0x28 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ *dlytest4.o(task_data)
                 0x20200000                _task1_paddr = LOADADDR (.task1)
                 0x20240000                _task2_paddr = LOADADDR (.task2)
                 0x20280000                _task3_paddr = LOADADDR (.task3)
                 0x202c0000                _task4_paddr = LOADADDR (.task4)
-                0x20300000                . = (LOADADDR (.task4) + 0x40000)
-                0x20300000                __PAGE_OFFSET__ = .
-                0x20300000                PROVIDE (end, .)
+                0x20300000                _task5_paddr = LOADADDR (.task5)
+                0x20340000                _task6_paddr = LOADADDR (.task6)
+                0x20380000                _task7_paddr = LOADADDR (.task7)
+                0x203c0000                _task8_paddr = LOADADDR (.task8)
+                0x20400000                . = (LOADADDR (.task8) + 0x40000)
+                0x20400000                __PAGE_OFFSET__ = .
+                0x20400000                PROVIDE (end, .)
 START GROUP
 LOAD c:/winidea/2009/gcc/arm/bin/../lib/gcc/arm-elf/4.2.2\libgcc.a
 LOAD c:/winidea/2009/gcc/arm/bin/../lib/gcc/arm-elf/4.2.2/../../../../arm-elf/lib\libc.a
@@ -311,8 +363,16 @@ OUTPUT(lbos-fri.elf elf32-littlearm)
                 0x00000120       0x10 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
  .ARM.attributes
                 0x00000130       0x10 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .ARM.attributes
+                0x00000140       0x10 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .ARM.attributes
+                0x00000150       0x10 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .ARM.attributes
+                0x00000160       0x10 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .ARM.attributes
+                0x00000170       0x10 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
 
-.debug_line     0x00000000     0x1070
+.debug_line     0x00000000     0x1288
  .debug_line    0x00000000       0x93 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\irq.o
  .debug_line    0x00000093      0x172 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\main.o
  .debug_line    0x00000205      0x118 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\syscall.o
@@ -329,12 +389,16 @@ OUTPUT(lbos-fri.elf elf32-littlearm)
  .debug_line    0x00000b2c       0x9a C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\string.o
  .debug_line    0x00000bc6      0x1a5 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vm.o
  .debug_line    0x00000d6b       0xd4 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\svc_delay.o
- .debug_line    0x00000e3f       0x95 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dummy.o
- .debug_line    0x00000ed4       0x92 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
- .debug_line    0x00000f66       0x88 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
- .debug_line    0x00000fee       0x82 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .debug_line    0x00000e3f       0x8d C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dummy.o
+ .debug_line    0x00000ecc       0x92 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
+ .debug_line    0x00000f5e       0x88 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
+ .debug_line    0x00000fe6       0x82 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .debug_line    0x00001068       0x88 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .debug_line    0x000010f0       0x88 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .debug_line    0x00001178       0x88 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .debug_line    0x00001200       0x88 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
 
-.debug_info     0x00000000      0xdab
+.debug_info     0x00000000     0x1097
  .debug_info    0x00000000       0xaa C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\irq.o
  .debug_info    0x000000aa       0xab C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\main.o
  .debug_info    0x00000155       0xae C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\syscall.o
@@ -355,8 +419,12 @@ OUTPUT(lbos-fri.elf elf32-littlearm)
  .debug_info    0x00000b7f       0xba C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
  .debug_info    0x00000c39       0xb9 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
  .debug_info    0x00000cf2       0xb9 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .debug_info    0x00000dab       0xbb C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .debug_info    0x00000e66       0xbb C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .debug_info    0x00000f21       0xbb C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .debug_info    0x00000fdc       0xbb C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
 
-.debug_abbrev   0x00000000      0x190
+.debug_abbrev   0x00000000      0x1e0
  .debug_abbrev  0x00000000       0x14 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\irq.o
  .debug_abbrev  0x00000014       0x14 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\main.o
  .debug_abbrev  0x00000028       0x14 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\syscall.o
@@ -377,8 +445,12 @@ OUTPUT(lbos-fri.elf elf32-littlearm)
  .debug_abbrev  0x00000154       0x14 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\msgtest.o
  .debug_abbrev  0x00000168       0x14 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
  .debug_abbrev  0x0000017c       0x14 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .debug_abbrev  0x00000190       0x14 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .debug_abbrev  0x000001a4       0x14 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .debug_abbrev  0x000001b8       0x14 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .debug_abbrev  0x000001cc       0x14 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o
 
-.debug_aranges  0x00000000      0x280
+.debug_aranges  0x00000000      0x300
  .debug_aranges
                 0x00000000       0x20 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\irq.o
  .debug_aranges
@@ -419,3 +491,11 @@ OUTPUT(lbos-fri.elf elf32-littlearm)
                 0x00000240       0x20 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\iotest.o
  .debug_aranges
                 0x00000260       0x20 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\vmtest.o
+ .debug_aranges
+                0x00000280       0x20 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest4.o
+ .debug_aranges
+                0x000002a0       0x20 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest1.o
+ .debug_aranges
+                0x000002c0       0x20 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest2.o
+ .debug_aranges
+                0x000002e0       0x20 C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\project\Debug\dlytest3.o

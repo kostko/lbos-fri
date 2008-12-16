@@ -109,7 +109,7 @@ __dld_tcwait:
   beq __dld_tcwait
   ldr r5, =CDLYTCB
   str r1, [r5]
-  mov r0, r0, lsl #6         
+  mov r0, r0, lsl #4         
   str r0, [r6, #TC_RC]  	  		  
         
   /* Mark tasks undispatchable */
