@@ -34,135 +34,130 @@
             <P type="String">C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\config\layout.ind</P>
           </PI.14>
           <PI.15>
+            <P type="String">C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\src\tasks\dlytest4.s</P>
+          </PI.15>
+          <PI.16>
+            <P type="String">C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\src\tasks\dlytest3.s</P>
+          </PI.16>
+          <PI.17>
+            <L type="Integer">13</L>
+            <P type="String">C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\src\tasks\dlytest2.s</P>
+          </PI.17>
+          <PI.18>
+            <L type="Integer">24</L>
+            <P type="String">C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\src\tasks\dlytest1.s</P>
+            <VL type="Integer">6</VL>
+          </PI.18>
+          <PI.19>
             <C type="Integer">28</C>
             <L type="Integer">9</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\vm.s</P>
-          </PI.15>
-          <PI.16>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\vectors.s</P>
-          </PI.16>
-          <PI.17>
-            <L type="Integer">9</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\msgtest.s</P>
-            <VL type="Integer">9</VL>
-          </PI.17>
-          <PI.18>
-            <C type="Integer">16</C>
-            <L type="Integer">10</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\dummy.s</P>
-            <VL type="Integer">5</VL>
-          </PI.18>
-          <PI.19>
-            <L type="Integer">57</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\syscall.s</P>
-            <VL type="Integer">44</VL>
           </PI.19>
           <PI.2>
             <P type="String">C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\src\tasks\msgtest.s</P>
           </PI.2>
           <PI.20>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\vectors.s</P>
+          </PI.20>
+          <PI.21>
+            <L type="Integer">9</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\msgtest.s</P>
+            <VL type="Integer">9</VL>
+          </PI.21>
+          <PI.22>
+            <C type="Integer">16</C>
+            <L type="Integer">10</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\tasks\dummy.s</P>
+            <VL type="Integer">5</VL>
+          </PI.22>
+          <PI.23>
+            <L type="Integer">57</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\syscall.s</P>
+            <VL type="Integer">44</VL>
+          </PI.23>
+          <PI.24>
             <L type="Integer">25</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\sched.s</P>
             <VL type="Integer">14</VL>
-          </PI.20>
-          <PI.21>
+          </PI.24>
+          <PI.25>
             <L type="Integer">29</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\printk.s</P>
             <VL type="Integer">15</VL>
-          </PI.21>
-          <PI.22>
+          </PI.25>
+          <PI.26>
             <C type="Integer">13</C>
             <L type="Integer">86</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\memory.s</P>
             <VL type="Integer">81</VL>
-          </PI.22>
-          <PI.23>
+          </PI.26>
+          <PI.27>
             <L type="Integer">22</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\main.s</P>
             <VL type="Integer">22</VL>
-          </PI.23>
-          <PI.24>
+          </PI.27>
+          <PI.28>
             <L type="Integer">43</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\src\irq.s</P>
             <VL type="Integer">34</VL>
-          </PI.24>
-          <PI.25>
+          </PI.28>
+          <PI.29>
             <C type="Integer">13</C>
             <L type="Integer">35</L>
             <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\structures.s</P>
             <VL type="Integer">29</VL>
-          </PI.25>
-          <PI.26>
-            <C type="Integer">39</C>
-            <L type="Integer">41</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\space.s</P>
-            <VL type="Integer">39</VL>
-          </PI.26>
-          <PI.27>
-            <L type="Integer">35</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\clock_init.s</P>
-            <VL type="Integer">24</VL>
-          </PI.27>
-          <PI.28>
-            <L type="Integer">53</L>
-            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\config\layout.ind</P>
-            <VL type="Integer">48</VL>
-          </PI.28>
-          <PI.29>
-            <C type="Integer">5</C>
-            <L type="Integer">124</L>
-            <P type="String">F:\lbos-fri\src\vm.s</P>
-            <VL type="Integer">110</VL>
           </PI.29>
           <PI.3>
             <P type="String">C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\src\tasks\dummy.s</P>
           </PI.3>
           <PI.30>
+            <C type="Integer">39</C>
+            <L type="Integer">41</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\space.s</P>
+            <VL type="Integer">39</VL>
+          </PI.30>
+          <PI.31>
+            <L type="Integer">35</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\include\clock_init.s</P>
+            <VL type="Integer">24</VL>
+          </PI.31>
+          <PI.32>
+            <L type="Integer">53</L>
+            <P type="String">C:\Users\Kostko\Desktop\new\lbos-fri\config\layout.ind</P>
+            <VL type="Integer">48</VL>
+          </PI.32>
+          <PI.33>
+            <C type="Integer">5</C>
+            <L type="Integer">124</L>
+            <P type="String">F:\lbos-fri\src\vm.s</P>
+            <VL type="Integer">110</VL>
+          </PI.33>
+          <PI.34>
             <C type="Integer">25</C>
             <L type="Integer">14</L>
             <P type="String">F:\lbos-fri\src\vectors.s</P>
-          </PI.30>
-          <PI.31>
+          </PI.34>
+          <PI.35>
             <L type="Integer">14</L>
             <P type="String">F:\lbos-fri\src\tasks\msgtest.s</P>
             <VL type="Integer">3</VL>
-          </PI.31>
-          <PI.32>
+          </PI.35>
+          <PI.36>
             <C type="Integer">11</C>
             <L type="Integer">11</L>
             <P type="String">F:\lbos-fri\src\tasks\dummy.s</P>
             <VL type="Integer">6</VL>
-          </PI.32>
-          <PI.33>
+          </PI.36>
+          <PI.37>
             <P type="String">F:\lbos-fri\src\syscall.s</P>
-          </PI.33>
-          <PI.34>
+          </PI.37>
+          <PI.38>
             <L type="Integer">56</L>
             <P type="String">F:\lbos-fri\src\sched.s</P>
             <VL type="Integer">42</VL>
-          </PI.34>
-          <PI.35>
-            <P type="String">F:\lbos-fri\src\printk.s</P>
-          </PI.35>
-          <PI.36>
-            <C type="Integer">19</C>
-            <L type="Integer">12</L>
-            <P type="String">F:\lbos-fri\src\memory.s</P>
-          </PI.36>
-          <PI.37>
-            <C type="Integer">52</C>
-            <L type="Integer">46</L>
-            <P type="String">F:\lbos-fri\src\main.s</P>
-            <VL type="Integer">22</VL>
-          </PI.37>
-          <PI.38>
-            <P type="String">F:\lbos-fri\src\irq.s</P>
           </PI.38>
           <PI.39>
-            <C type="Integer">43</C>
-            <L type="Integer">119</L>
-            <P type="String">F:\lbos-fri\include\structures.s</P>
-            <VL type="Integer">99</VL>
+            <P type="String">F:\lbos-fri\src\printk.s</P>
           </PI.39>
           <PI.4>
             <L type="Integer">31</L>
@@ -170,57 +165,57 @@
             <VL type="Integer">17</VL>
           </PI.4>
           <PI.40>
+            <C type="Integer">19</C>
+            <L type="Integer">12</L>
+            <P type="String">F:\lbos-fri\src\memory.s</P>
+          </PI.40>
+          <PI.41>
+            <C type="Integer">52</C>
+            <L type="Integer">46</L>
+            <P type="String">F:\lbos-fri\src\main.s</P>
+            <VL type="Integer">22</VL>
+          </PI.41>
+          <PI.42>
+            <P type="String">F:\lbos-fri\src\irq.s</P>
+          </PI.42>
+          <PI.43>
+            <C type="Integer">43</C>
+            <L type="Integer">119</L>
+            <P type="String">F:\lbos-fri\include\structures.s</P>
+            <VL type="Integer">99</VL>
+          </PI.43>
+          <PI.44>
             <C type="Integer">18</C>
             <L type="Integer">8</L>
             <P type="String">F:\lbos-fri\include\space.s</P>
-          </PI.40>
-          <PI.41>
+          </PI.44>
+          <PI.45>
             <P type="String">F:\lbos-fri\include\clock_init.s</P>
-          </PI.41>
-          <PI.42>
+          </PI.45>
+          <PI.46>
             <C type="Integer">43</C>
             <L type="Integer">5</L>
             <P type="String">F:\lbos-fri\config\layout.ind</P>
-          </PI.42>
-          <PI.43>
+          </PI.46>
+          <PI.47>
             <C type="Integer">49</C>
             <L type="Integer">10</L>
             <P type="String">F:\lbos-fri\src\mmc.s</P>
-          </PI.43>
-          <PI.44>
+          </PI.47>
+          <PI.48>
             <L type="Integer">61</L>
             <P type="String">C:\Users\zomb\Faks\3\OS1\lbos-fri\src\vm.s</P>
             <VL type="Integer">43</VL>
-          </PI.44>
-          <PI.45>
+          </PI.48>
+          <PI.49>
             <C type="Integer">50</C>
             <L type="Integer">4</L>
             <P type="String">C:\Users\zomb\Faks\3\OS1\lbos-fri\src\vectors.s</P>
-          </PI.45>
-          <PI.46>
-            <C type="Integer">46</C>
-            <L type="Integer">13</L>
-            <P type="String">C:\Users\zomb\Faks\3\OS1\lbos-fri\src\tasks\msgtest.s</P>
-          </PI.46>
-          <PI.47>
-            <P type="String">C:\Users\zomb\Faks\3\OS1\lbos-fri\src\tasks\dummy.s</P>
-            <VL type="Integer">48</VL>
-          </PI.47>
-          <PI.48>
-            <C type="Integer">44</C>
-            <L type="Integer">11</L>
-            <P type="String">C:\Users\zomb\Faks\3\OS1\lbos-fri\src\syscall.s</P>
-            <VL type="Integer">15</VL>
-          </PI.48>
-          <PI.49>
-            <C type="Integer">18</C>
-            <L type="Integer">15</L>
-            <P type="String">C:\Users\zomb\Faks\3\OS1\lbos-fri\src\sched.s</P>
           </PI.49>
           <PI.5>
-            <L type="Integer">104</L>
+            <L type="Integer">28</L>
             <P type="String">C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\src\svc_delay.s</P>
-            <VL type="Integer">91</VL>
+            <VL type="Integer">14</VL>
           </PI.5>
           <PI.6>
             <L type="Integer">26</L>
@@ -236,7 +231,6 @@
           <PI.9>
             <L type="Integer">22</L>
             <P type="String">C:\Users\RaspeR\Documents\fax\OS1\LBOS\LBOS-FRI svn\Group3\src\main.s</P>
-            <VL type="Integer">22</VL>
           </PI.9>
         </REG_ROOT>
       </EditorOptions>
@@ -260,7 +254,7 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\src\sched.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\svc_delay.s</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
             <FileBarIndex type="Integer">1</FileBarIndex>
@@ -319,7 +313,7 @@
             <RelativeFileName type="String">..\src\vm.s</RelativeFileName>
           </Editor.14>
           <Editor.2>
-            <FileBarIndex type="Integer">4</FileBarIndex>
+            <FileBarIndex type="Integer">3</FileBarIndex>
             <RectPosBottom type="Integer">287</RectPosBottom>
             <RectPosLeft type="Integer">69</RectPosLeft>
             <RectPosRight type="Integer">790</RectPosRight>
@@ -375,7 +369,7 @@
             <RelativeFileName type="String">..\src\sched.s</RelativeFileName>
           </Editor.8>
           <Editor.9>
-            <FileBarIndex type="Integer">3</FileBarIndex>
+            <FileBarIndex type="Integer">4</FileBarIndex>
             <RectPosBottom type="Integer">337</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">1201</RectPosRight>
@@ -383,16 +377,16 @@
             <RelativeFileName type="String">..\src\svc_delay.s</RelativeFileName>
           </Editor.9>
           <EditorHistoryFile.0>
-            <RelativeFileName type="String">..\include\clock_init.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\tasks\dlytest1.s</RelativeFileName>
           </EditorHistoryFile.0>
           <EditorHistoryFile.1>
-            <RelativeFileName type="String">..\config\init.ini</RelativeFileName>
+            <RelativeFileName type="String">..\src\tasks\dlytest2.s</RelativeFileName>
           </EditorHistoryFile.1>
           <EditorHistoryFile.2>
-            <RelativeFileName type="String">..\src\string.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\tasks\dlytest3.s</RelativeFileName>
           </EditorHistoryFile.2>
           <EditorHistoryFile.3>
-            <RelativeFileName type="String">..\src\mmc.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\tasks\dlytest4.s</RelativeFileName>
           </EditorHistoryFile.3>
         </Documents.0>
         <Progress>
@@ -641,7 +635,7 @@
                 <Condition type="String"></Condition>
                 <Condition_Count type="Integer">0</Condition_Count>
                 <ConditionEnabled type="String">False</ConditionEnabled>
-                <Name type="String">&quot;..\src\svc_delay.s&quot;::104</Name>
+                <Name type="String">&quot;..\src\svc_delay.s&quot;::29</Name>
               </__>
             </BP.0>
           </Fetch>
