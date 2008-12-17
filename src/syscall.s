@@ -353,6 +353,77 @@ svc_exit:
   
   /* This task is finished, let's go somewhere else */
   b svc_newtask
+  
+/**
+  * Check the semaphore's status and enqueue task if status = 0
+  */ 
+   
+svc_wait:
+  /*
+  podajanje parametrov:
+  1. stevilka semaforja v r1
+  2. stevilka procesa v CURRENT
+  3. navadni ali syn
+  
+  POSTOPEK:         
+  pogledamo stanje semaforja
+  ce je >0 spustimo proces v  KO
+  ce je <0 postavimo proces v vrsto cakanja
+  zmanjsamo stanje  
+  */
+  
+  DISABLE_IRQ
+
+  mov v1, #400        /* offset za statusno tabelo */ 
+  ldr v2, =SEMA_TABLES 
+  add v2, v2, v1      /* smo v statusni tabelci */
+  mov v1, #4
+  mul v2, v1, r1
+  add v2, v2, r1      /* smo v statusni tabelci v pravi celici */
+
+  ldr v3, [v2]
+  cmp v3, #1
+  beq __wait_konec           /* semafor ima se eno prazno mesto */
+ 
+
+/* dodajanje elementa */  
+  mov v4, #40 
+  mul v4, r1, v4    /* izracunamo offset za pravo tabelo */ 
+	ldr v5, =SEMA_TABLES 
+  add v5, v5, v4   /* v5 kaze na pravo tabelo semaforja */ 
+  
+  /* najdi prazen prostor in dodaj element */ 
+  mov v6, #10          
+             
+__wait_L2:
+  /*ldrs v4, [v5]   */
+	beq __wait_L3 
+  add v5, v5, #4 
+  subs v6, v6, #1 
+	bne __wait_L2   
+  b __wait_konec 
+  
+/* shrani element */ 
+__wait_L3:
+  ldr v6, =CURRENT
+  ldr v7, [v6, #T_FLAG]
+  orr v7, v7, #0x100
+  str v7, [v6, #T_FLAG]
+  
+/*  str CURRENT, [v5]    */
+/* postavi bit(BITSET) v TCB-ju  */
+           
+__wait_konec:
+  sub v3, v3, #1
+  str v3, [v2]
+  /* pogojni stavek ce je kaksen proces v vrsti => klici RR*/
+
+  ENABLE_IRQ
+
+  POP_CONTEXT 
+  
+svc_signal:
+    POP_CONTEXT 
 
 /* ================================================================
                            SYCALL TABLE
@@ -371,6 +442,8 @@ SYSCALL_TABLE:
 .long svc_mmc_read  /* (7) MMC block read */
 .long svc_mmc_write /* (8) MMC block write */
 .long svc_exit      /* (9) exit current task */
+.long svc_wait      /* (10) semaphore wait */
+.long svc_signal    /* (11) semaphore signal */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4
