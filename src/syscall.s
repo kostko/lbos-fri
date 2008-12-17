@@ -16,10 +16,11 @@
 syscall_handler:
   /* System call handler/dispatcher */
   PUSH_CONTEXT
+  mov r11, lr               /* Save link register before enabling preemption */
   ENABLE_IRQ
   
   /* Get syscall number from SWI instruction */
-  ldr r12, [lr, #-4]       /* Load SWI instruction opcode + arg to r0 */
+  ldr r12, [r11, #-4]       /* Load SWI instruction opcode + arg to r0 */
   bic r12, r12, #0xFF000000 /* Clear upper 8 bits */
   
   /* Check if SVC number is valid */
