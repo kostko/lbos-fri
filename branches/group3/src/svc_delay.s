@@ -76,7 +76,8 @@ __dla_next2:
 __dla_emlst: 
   str   r1, [r2, #D_TCB]                /* shrani TCB na pravo mesto v DLYLIST */
   str   r0, [r2, #D_TOUT]               /* shrani TOUT na pravo mesto v DLYLIST */
-                                    
+ 
+__dld_tcwait:                                   
   mov r0, r7							/* omogocimo prekinitve */
   bl irq_restore						
 		  
@@ -101,14 +102,18 @@ dl_drfd:
   beq   __dld_nocnt                     /* skoci naprej, ce ni treba stetja */
 
   /* timer steje */          	  
-  ldr r6, =TC0_BASE
+  ldr r6, =TC0_BASE  
+  ldr r5, =CDLYTCB
+  ldr r5, [r5]
+  cmp r5, #0
+  beq __dld_firsts
+  cmp r5, #-1
+  bne __dld_tcwait
   
-__dld_tcwait:   
-  ldr r5, [r6, #TC_SR]
-  tst r5, #16
-  beq __dld_tcwait
+__dld_firsts:
   ldr r5, =CDLYTCB
   str r1, [r5]
+  
   mov r0, r0, lsl #4         
   str r0, [r6, #TC_RC]  	  		  
         

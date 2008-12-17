@@ -17,7 +17,7 @@ __td3_loop:
   bne  __td3_loop
 			
   /* Turn LED on */
-  mov r0, #1
+  mov r0, #0
   swi #SYS_LED
 			
   /* Delay 400 ms */
@@ -25,7 +25,7 @@ __td3_loop:
   swi #SYS_DELAY
   
   /* Turn LED off */
-  mov r0, #0
+  mov r0, #1
   swi #SYS_LED
 			  
   b task_dlytest3
