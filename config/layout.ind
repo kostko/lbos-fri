@@ -59,13 +59,16 @@ SECTIONS
   .task2 __TASKS_VM__ : AT( __TASKS_START__ + 0x40000 ) { *msgtest.o(task_code) *msgtest.o(task_data) }
   .task3 __TASKS_VM__ : AT( __TASKS_START__ + 0x80000 ) { *iotest.o(task_code)  *iotest.o(task_data) }
   .task4 __TASKS_VM__ : AT( __TASKS_START__ + 0xC0000 ) { *vmtest.o(task_code)  *vmtest.o(task_data) }
+  .task5 __TASKS_VM__ : AT( __TASKS_START__ + 0x100000 ) { *serialtest.o(task_code)  *serialtest.o(task_data) }
+  
   
   _task1_paddr = LOADADDR(.task1);
   _task2_paddr = LOADADDR(.task2);
   _task3_paddr = LOADADDR(.task3);
   _task4_paddr = LOADADDR(.task4);
+  _task5_paddr = LOADADDR(.task5);
   
-  /* Set current position just beyond task 4 physical space */
+  /* Set current position just beyond task 5 physical space */
   . = LOADADDR(.task4) + 0x40000;
   
   /***********************************************
