@@ -69,3 +69,7 @@ PAGEOFFSET: .long __PAGE_OFFSET__
 .align 2
 STACK_SUPM_END: .long __STACK_END__ - STACK_SIZE*4
 STACK_IRQM_END: .long __STACK_END__
+
+/* Semaphore tables space */
+
+SEMA_TABLES: .space 440

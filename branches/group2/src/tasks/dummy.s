@@ -16,6 +16,8 @@ task_dummy:
   mov r3, #4
   mov r4, #5
   
+  swi #SYS_WAIT
+  
   /* Delay 500 ms */
   mov r0, #500
   swi #SYS_DELAY

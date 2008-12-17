@@ -18,6 +18,7 @@
 .global PAGEBITMAP
 .global PAGEOFFSET
 .global STACK_SUPM_END
+.global SEMA_TABLES
 
 .equ MAXPAGES, 3840
 .equ MAXTASK, 4

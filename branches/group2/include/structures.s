@@ -169,3 +169,5 @@
 .equ SYS_MMC_READ, 7
 .equ SYS_MMC_WRITE, 8
 .equ SYS_EXIT, 9
+.equ SYS_WAIT, 10
+.equ SYS_SIGNAL, 11
