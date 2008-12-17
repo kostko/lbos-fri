@@ -40,8 +40,14 @@ sys_irq_handler:
   cmp r1, #1
   beq __pit_irq_handler
   
+  /* Check if DBGU is responsible for this interrupt */
+  ldr r0, =DBGU_BASE
+  ldr r1, [r0, #DBGU_SR]
+  cmp r1, #1
+  beq serial_irq_handler
+  
   /* Nothing matched */
-
+  
   /* Signal AIC end of interrupt and return */
   ldr r0, =AIC_BASE
   str r0, [r0, #AIC_EOICR]
@@ -55,6 +61,10 @@ __pit_irq_handler:
   ldr r0, =PIT_BASE
   ldr r0, [r0, #PIT_PIVR]
   
+  /* Acknowledge interrupt */
+  ldr r0, =PIT_BASE
+  ldr r0, [r0, #PIT_PIVR]
+  
   /* Signal end of interrupt handling to AIC */
   ldr r0, =AIC_BASE
   str r0, [r0, #AIC_EOICR]
@@ -62,6 +72,8 @@ __pit_irq_handler:
   DISABLE_PIT_IRQ
   ENABLE_IRQ
   b svc_newtask
+  
+
 
 /**
  * Disables IRQ and returns previous state.
@@ -87,4 +99,3 @@ irq_restore:
   /* Write previous state to CPSR */
   msr cpsr_c, r0
   mov pc, lr
-
