@@ -95,7 +95,9 @@
 */
 .equ SCTX_PSR, 0x00
 .equ SCTX_REG, 0x04
-.equ SCTX_PC, 0x38
+.equ SCTX_USR_LR, 0x38
+.equ SCTX_SVC_LR, 0x3C
+.equ SCTX_PC, 0x40
 
 /* ================================================================
                        MMU RELATED CONSTANTS
