@@ -59,14 +59,24 @@ SECTIONS
   .task2 __TASKS_VM__ : AT( __TASKS_START__ + 0x40000 ) { *msgtest.o(task_code) *msgtest.o(task_data) }
   .task3 __TASKS_VM__ : AT( __TASKS_START__ + 0x80000 ) { *iotest.o(task_code)  *iotest.o(task_data) }
   .task4 __TASKS_VM__ : AT( __TASKS_START__ + 0xC0000 ) { *vmtest.o(task_code)  *vmtest.o(task_data) }
+  .task5 __TASKS_VM__ : AT( __TASKS_START__ + 0x100000 ) { *testmsg1.o(task_code)  *testmsg1.o(task_data) }
+  .task6 __TASKS_VM__ : AT( __TASKS_START__ + 0x140000 ) { *testmsg2.o(task_code)  *testmsg2.o(task_data) }
+  .task7 __TASKS_VM__ : AT( __TASKS_START__ + 0x180000 ) { *testmsg3.o(task_code)  *testmsg3.o(task_data) }
+  .task8 __TASKS_VM__ : AT( __TASKS_START__ + 0x1C0000 ) { *testmsg4.o(task_code)  *testmsg4.o(task_data) }
   
   _task1_paddr = LOADADDR(.task1);
   _task2_paddr = LOADADDR(.task2);
   _task3_paddr = LOADADDR(.task3);
   _task4_paddr = LOADADDR(.task4);
+  _task5_paddr = LOADADDR(.task5);
+  _task6_paddr = LOADADDR(.task6);
+  _task7_paddr = LOADADDR(.task7);
+  _task8_paddr = LOADADDR(.task8);
+
+
   
   /* Set current position just beyond task 4 physical space */
-  . = LOADADDR(.task4) + 0x40000;
+  . = LOADADDR(.task8) + 0x40000;
   
   /***********************************************
    * FOLLOWING MEMORY IS FOR DYNAMIC ALLOCATION  *

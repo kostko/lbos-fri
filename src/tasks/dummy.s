@@ -9,7 +9,6 @@
 .include "include/structures.s"
 
 task_dummy:
-
   mov r0, #1
   mov r1, #2
   mov r2, #3
