@@ -60,11 +60,17 @@ svc_newtask:
   b dispatch
 
 /**
- * Print line syscall.
+ * Print buffer to serial syscall.
+ *
+ * @param r0 Pointer to buffer
+ * @param r1 Size
  */
-svc_println:
-  /* TODO */
-  b svc_println
+svc_print:
+  bl vm_get_phyaddr
+  cmp r0, #0 /* check if valid address */
+  blne serial_write_bytes
+  POP_CONTEXT
+  /* TODO? */
 
 /**
  * Delay syscall.
@@ -361,7 +367,7 @@ svc_exit:
 .align 2
 SYSCALL_TABLE:
 .long svc_newtask   /* (0) enter dispatcher */
-.long svc_println   /* (1) print line to serial console */
+.long svc_print     /* (1) print to serial console */
 .long svc_delay     /* (2) delay */
 .long svc_send      /* (3) send message */
 .long svc_recv      /* (4) receive message */

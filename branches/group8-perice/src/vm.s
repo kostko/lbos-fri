@@ -632,7 +632,7 @@ MSG_VM_TBL_ALLOC_OOM: .asciz "Out of memory in VM table allocator!\n\r"
 MSG_VM_TBL_ALLOC_INVAL_SIZE: .asciz "Block in allocation table of invalid size!\n\r"
 MSG_VM_KERNEL_ABORT: .asciz "[VM] Kernel caused a protection fault.\n\r"
 MSG_VM_KERNEL_ABORT_PK: .asciz "[VM] Abort due to kernel bug. Possible cause: %s\n\r"
-MSG_VM_TASK_ABORT: .asciz "[VM] Task %d protection fault acessing address %x. Possible cause: %s\n\r"
+MSG_VM_TASK_ABORT: .asciz "[VM] Task %d protection fault accessing address %x. Possible cause: %s\n\r"
 
 /* Abort cause messages */
 MSG_VM_ABORT_ALIGN: .asciz "Alignment fault"

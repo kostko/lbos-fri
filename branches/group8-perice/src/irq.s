@@ -40,12 +40,21 @@ sys_irq_handler:
   cmp r1, #1
   beq __pit_irq_handler
   
+<<<<<<< .mine
+  /* Check if DBGU (serial) */
+  ldr r0, =DBGU_BASE
+  ldr r1, [r0, #DBGU_SR]
+  tst r1, #1
+  bne serial_irq_handler
+  
+=======
   /* Check if DBGU is responsible for this interrupt */
   ldr r0, =DBGU_BASE
   ldr r1, [r0, #DBGU_SR]
   cmp r1, #1
   beq serial_irq_handler
   
+>>>>>>> .r233
   /* Nothing matched */
   
   /* Signal AIC end of interrupt and return */

@@ -52,7 +52,7 @@
 .equ TERMSIZE, TERM_OBUF_END + 4
 
 /* ================================================================
-                       I/O REQUEST DESCRIPTOR
+                       I/O (MMC) REQUEST DESCRIPTOR
    ================================================================
 */
 .equ IO_RQ_OPER, 0
@@ -66,6 +66,15 @@
 
 .equ IO_OP_READ, 1
 .equ IO_OP_WRITE, 2
+
+/* ================================================================
+                       I/O (SERIAL) REQUEST DESCRIPTOR
+   ================================================================
+*/
+.equ SERIAL_RQ_TASK, 0
+.equ SERIAL_RQ_BUF, (SERIAL_RQ_TASK + 4)
+.equ SERIAL_RQ_SIZE, (SERIAL_RQ_BUF + 4) 
+.equ SERIAL_RQ_NEXT, (SERIAL_RQ_SIZE + 4)
 
 /* ================================================================
                            PROCESS FLAGS
@@ -158,7 +167,7 @@
    ================================================================
 */
 .equ SYS_NEWTASK, 0
-.equ SYS_PRINTLN, 1
+.equ SYS_PRINT, 1
 .equ SYS_DELAY, 2
 .equ SYS_SEND, 3
 .equ SYS_RECV, 4
