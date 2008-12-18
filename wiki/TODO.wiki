@@ -10,7 +10,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
 = Group 8 / 2.1 =
   * Document task stack usage (USP), should be mapped into task virtual space - ?
   * Document task heap usage via the `brk` system call - ?
-  * [TerminalIOPlan Implement task terminal I/O] - *perice*
+  * [TerminalIOPlan Implement task terminal I/O] - *perice*, *kernc*
   * Write documentation on how MMC and MCI work - *kostko*
   * System task capability registration mechanism - ?
   * [DynamicTasksPlan Implement dynamic task creation, PIDs and the fork function] - *zomb*
