@@ -24,7 +24,10 @@ task_msgtest:
   mov r12, #26
   
   /* Receive data from the other task */
+  ldr r0, =TESTBUFF
+  mov r1, #25 
   swi #SYS_RECV
+  
   /* Got something (pointer to MCB in r0) */
   /* Just leave it there */
   nop
@@ -41,4 +44,4 @@ task_msgtest:
  *************************************************************/
 .section task_data, "aw"
 /* Per-task data structures may be defined below */
-
+TESTBUFF: .space 12 

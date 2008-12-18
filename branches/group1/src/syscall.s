@@ -104,7 +104,15 @@ svc_send:
   cmp r2, #MAXTASK
   bhs __err_badtask
   
-  DISABLE_IRQ
+
+  mov r3, r0
+  mov r4, r1
+  mov r5, r2
+  
+  /* Resolve physical address for buffer address that sender put in MCB */
+  bl vm_get_phyaddr 
+  
+  DISABLE_IRQ  
   ldr r3, =MCBLIST
   ldr r4, [r3]          /* Load first MCB base into r3 */
   cmp r4, #0            /* Check if it is not NULL */
@@ -166,13 +174,20 @@ __err_badtask:
 
 /**
  * Receive message syscall.
+
+ * @param r0 Buffer address
+ * @param r1 Buffer size
  */
 svc_recv:
+  mov r4, r0            
+  mov r5, r1
+
+__rcv_wait:
   /* Get current task's TCB */
   LOAD_CURRENT_TCB r0
   
   DISABLE_IRQ
-  ldr r1, [r0, #T_MSG]
+  ldr r1, [r0, #T_MSG]  /* MCB */
   cmp r1, #0            /* Check if there are any messages */
   beq __wait_for_msg    /* If none, wait */
   
@@ -181,9 +196,27 @@ svc_recv:
   ldr r2, [r0, #T_RPLY] /* Load address of first MCB in reply queue */
   str r2, [r1, #M_LINK]
   str r1, [r0, #T_RPLY] /* Insert message into reply queue */
+    
+  ldr r2, [r1, #M_BUFF] /* Load address that sender put in MCB (svc_send translated it from virtual to physical) */
+  ldr r3, [r1, #M_COUNT] /* Load buffer size that sender put in MCB */
+  str r4, [r1, #M_BUFF] /* Save virtual buffer address, where receiver wants to get data */
+  
+  /* Compare sender's buffer size with receiver's buffer size. 
+     Lower of both values is now in r5 and we store it back to MCB. */
+  cmp r3,r5
+  movls r5, r3  
+  str r5, [r1, #M_COUNT] 
+
+  mov r6, r1 /* MCB */
+  
+  /* Copy to receiver's data section */ 
+  mov r1, r2 
+  mov r0, r4
+  mov r2, r5  
+  bl memcpy
   
   /* Return TCB address to userspace */
-  SVC_RETURN_CODE r1
+  SVC_RETURN_CODE r6
   POP_CONTEXT
 
 __wait_for_msg:
@@ -194,7 +227,7 @@ __wait_for_msg:
   
   /* Switch to other task and retry receive */
   swi #SYS_NEWTASK
-  b svc_recv
+  b __rcv_wait
 
 /**
  * Reply to a message syscall.
