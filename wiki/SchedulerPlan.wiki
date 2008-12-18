@@ -14,7 +14,7 @@ When dispatch is called, the scheduler type is chosen. If SCHEDULER is set to 0,
   * Loop in __no_dis_task, until interrupted
   * If process terminates before using all of its time slices, current slice is added to the next process' time
   * Q_LEFT contains the remaining time for current task  
-  * Q_LEFT is decreased each time PIT calls dispatch
+  * Q_LEFT is decreased each time dispatch is called by PIT
   * At init  Q_LEFT = 0
   * Interrupts are disabled
 
