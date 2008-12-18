@@ -45,9 +45,9 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   Members: Gašper Rupnik, Anže Pečar, Tomaž Sečnik, Erik Hribar
 
   * Test our code (24h)
-  * To translate some comments
   * Add 'print to terminal' for our tasks when communication with the serial port (Group ?) will be done.
   
+  * ~~To translate some comments~~
   * ~~Implement some test tasks~~
   * ~~Implement timer and set/clear timer flags~~
   * ~~To comply with CODING_STANDARD~~
