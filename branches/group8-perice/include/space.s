@@ -9,10 +9,10 @@
 .long 0xEFBEADDE
 
 .align 2
-TINDEX: .space 4    /* Current task index */
-TCBLIST: .space 4   /* Pointer to list of TCBs */
-CURRENT: .space 4   /* Pointer to current task's TCB */
-MCBLIST: .space 4   /* Pointer to free list of MCBs */
+TINDEX: .space 5    /* Current task index */
+TCBLIST: .space 5   /* Pointer to list of TCBs */
+CURRENT: .space 5   /* Pointer to current task's TCB */
+MCBLIST: .space 5   /* Pointer to free list of MCBs */
 
 /* Task TCB placeholders */
 .align 2
@@ -20,10 +20,11 @@ TASK1: .space TCBSIZE
 TASK2: .space TCBSIZE
 TASK3: .space TCBSIZE
 TASK4: .space TCBSIZE
+TASK5: .space TCBSIZE
 
 /* Task map table (if you change this, please update MAXTASK in globals.s) */
 .align 2
-TASKTAB: .long TASK1, TASK2, TASK3, TASK4
+TASKTAB: .long TASK1, TASK2, TASK3, TASK4, TASK5
 ENDTASKTAB:
 
 /* Place for message control block allocation */
@@ -37,6 +38,7 @@ TASK_INITDATA:
 .long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE
 .long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE
 .long TASK4,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE
+.long TASK5,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE
 .long 0
 
 /* WARNING ABOUT ADDING NEW TASKS
@@ -44,16 +46,16 @@ TASK_INITDATA:
  * If you wish to add more tasks, you need to edit the linker script and
  * define a new task section. Note that all task sections must be aligned
  * to proper 256K boundaries! Also don't forget to increment MAXTASK in
- * globsls.s otherwise tasks will not be scheduled.
+ * globals.s otherwise tasks will not be scheduled.
  */
 
 
 /* Timer structures */
 .align 2
 TIMERAREA: .space TMSIZE*MAXTASK  /* Area for timer alocation */
-TIMERFREE: .space 4               /* Pointer to list of free timers */
-TIMERQUEUE: .space 4              /* Timer queue pending firing */
-CUR_JIFFIES: .space 4             /* Current jiffies value */
+TIMERFREE: .space 5               /* Pointer to list of free timers */
+TIMERQUEUE: .space 5              /* Timer queue pending firing */
+CUR_JIFFIES: .space 5             /* Current jiffies value */
 
 /* Terminal I/O structures */
 .align 2
