@@ -12,9 +12,11 @@ When dispatch is called, the scheduler type is chosen. If SCHEDULER is set to 0,
   * Process is chosen when it is next in TASKTAB and its T_FLAG is set to 0
   * If there are no ready processes, jump to __no_dis_task 
   * Loop in __no_dis_task, until interrupted
-  * If process terminates before using all of its time slices, the rest are added to the next process' time
+  * If process terminates before using all of its time slices, current slice is added to the next process' time
   * Q_LEFT contains the remaining time for current task  
+  * Q_LEFT is decreased each time PIT calls dispatch
   * At init  Q_LEFT = 0
+  * Interrupts are disabled
 
 = Priority Scheduler =
 
