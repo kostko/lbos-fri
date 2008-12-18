@@ -69,7 +69,7 @@ SECTIONS
   _task5_paddr = LOADADDR(.task5);
   
   /* Set current position just beyond task 5 physical space */
-  . = LOADADDR(.task4) + 0x40000;
+  . = LOADADDR(.task5) + 0x40000;
   
   /***********************************************
    * FOLLOWING MEMORY IS FOR DYNAMIC ALLOCATION  *
