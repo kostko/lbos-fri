@@ -38,8 +38,8 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * User programs - *Barbara, Anita*
   * Testing with user programs ?
 
-= Group ? / 2.3 =
-  * ...
+= Group 2 / 2.5 =
+  * svc_signal and svc_wait for dynamic lock objects aquisitions - ?
 
 = Group 3 / 2.4 =
   Members: Gašper Rupnik, Anže Pečar, Tomaž Sečnik, Erik Hribar
@@ -59,10 +59,6 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * ~~Implement 'Adding requirements for delay' from plan~~
   * ~~Implement 'Requirements' from plan~~
   * ~~[planOfDelay Plan for SVC_DELAY]~~
-
-= Group ? / 2.5 =
-  * svc_signal and svc_wait for dynamic lock objects aquisitions - ?
-  * ...
 
 = Group ? / 2.6 =
   * svc_getchar, svc_putchar for communication with the serial port - ?
