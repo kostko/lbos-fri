@@ -361,9 +361,12 @@ svc_exit:
 svc_wait:
   /*
   podajanje parametrov:
-  1. stevilka semaforja v r1
+  1. stevilka semaforja v r0  (0..9)
   2. stevilka procesa v CURRENT
-  3. navadni ali syn
+  3. navadni ali syn dolocimo z stanjem v r1   ...recimo
+  (ce r1 == 0 => navaden semafor) 5,6,7,8,9
+  (ce r1 == 1 => Synchro semafor) 0,1,2,3,4
+  oba tipa klicemo 0-4
   
   POSTOPEK:         
   pogledamo stanje semaforja
@@ -373,52 +376,62 @@ svc_wait:
   */
   
   DISABLE_IRQ
-
-  mov v1, #400        /* offset za statusno tabelo */ 
+                                    
+  mov v1, #0x190      /* offset za statusno tabelo */ 
   ldr v2, =SEMA_TABLES 
-  add v2, v2, v1      /* smo v statusni tabelci */
-  mov v1, #4
-  mul v2, v1, r1
-  add v2, v2, r1      /* smo v statusni tabelci v pravi celici */
+  add v2, v2, v1      /* v2 kaze na statusno tabelo */
+ 
+  cmp r1, #0
+  addeq r0, r0, #5    /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
+  
+  mov v1, #4          /* odmik 4B=32bit*/
+  mul v3, v1, r0      /* izracunamo pravi odmik glede na st. semaforja*/
+  add v2, v2, v3      /* smo v statusni tabelci v pravi celici */
 
+  cmp r1, #1
+  beq svc_wait_syntype   /* mogoce to niti ni potrebno*/           
+
+  /* navaden semafor */
   ldr v3, [v2]
   cmp v3, #1
-  beq __wait_konec           /* semafor ima se eno prazno mesto */
- 
+  beq svc_wait_konec            /* semafor ima se eno prazno mesto=>zmanjsamo status in koncamo  */
+                      
+__wait_syntype:
 
 /* dodajanje elementa */  
-  mov v4, #40 
-  mul v4, r1, v4    /* izracunamo offset za pravo tabelo */ 
+  mov v4, #0x28
+  mul v6, v4, r0       /* izracunamo offset za pravo tabelo */ 
 	ldr v5, =SEMA_TABLES 
-  add v5, v5, v4   /* v5 kaze na pravo tabelo semaforja */ 
+  add v5, v5, v6       /* v5 kaze na pravo tabelo semaforja */ 
   
   /* najdi prazen prostor in dodaj element */ 
   mov v6, #10          
              
-__wait_L2:
-  /*ldrs v4, [v5]   */
-	beq __wait_L3 
+svc_wait_loop1:	
+  ldr v4, [v5] 
+  cmp v4, #0
+  beq svc_wait_loop2 
   add v5, v5, #4 
   subs v6, v6, #1 
-	bne __wait_L2   
-  b __wait_konec 
+	bne svc_wait_loop1   
+  b svc_wait_konec 
   
 /* shrani element */ 
-__wait_L3:
-  ldr v6, =CURRENT
-  ldr v7, [v6, #T_FLAG]
-  orr v7, v7, #0x100
-  str v7, [v6, #T_FLAG]
+svc_wait_loop2:
+  ldr v4, =CURRENT 
+  ldr v5, [v4]
+  ldr v6, [v5, #T_FLAG]
+  orr v6, v6, #0x100
+  str v6, [v5, #T_FLAG]
   
-/*  str CURRENT, [v5]    */
-/* postavi bit(BITSET) v TCB-ju  */
-           
-__wait_konec:
+          
+svc_wait_konec: 
   sub v3, v3, #1
   str v3, [v2]
-  /* pogojni stavek ce je kaksen proces v vrsti => klici RR*/
-
+  
   ENABLE_IRQ
+  
+  swi #SYS_NEWTASK
 
   POP_CONTEXT 
   
