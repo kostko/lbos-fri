@@ -2,7 +2,7 @@
 
 = Introduction =
 
-Add your content here.
+When dispatch is called, the scheduler type is chosen. If SCHEDULER is set to 0, jump to wrr_dispatch, else if the value of SCHEDULER is 1, jump to prio_dispatch.
 
 
 = Weighted Round Robin =
