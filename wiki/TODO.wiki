@@ -31,9 +31,9 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * ~~[VirtualMemoryPlan Implement virtual memory] - *zomb*~~
 
 = Group 6 / 2.2 =
-  * ~~[http://en.wikipedia.org/wiki/Weighted_round_robin Weighted Round-Robin]- *Rok*~~ 
-  * ~~priority scheduler - *Rok*~~
-  * ~~Bubble sort -for priority scheduler - *Rok*~~
+  * ~~[http://en.wikipedia.org/wiki/Weighted_round_robin Weighted Round-Robin]- *Hari*~~ 
+  * ~~priority scheduler - *Hari*~~
+  * ~~Bubble sort -for priority scheduler - *Hari*~~
   * ~~Debugging - *everyone*~~
   * User programs - *Barbara, Anita*
   * Testing with user programs ?
