@@ -276,6 +276,20 @@ init_mmc:
   
   /* Call the init function */
   bl mmc_init
+  
+init_st:
+  mov r1, #0
+  mov r2, #10
+  mov r3, #0x190
+  ldr r4, =SEMA_TABLES
+  add r4, r4, r3
+  
+__init_st:
+  str r1, [r1], #4
+  cmp r2, #6
+  moveq r1, #1 /* init on 1 */
+  subs r2, r2, #1
+  bne __init_st
 
   /* All initializations completed */
 done:
