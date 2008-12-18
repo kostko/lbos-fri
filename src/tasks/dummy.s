@@ -42,8 +42,10 @@ task_dummy:
   mov r12, #13
   
   /* Send something to other task */
-  mov r0, #TESTBUF
-  mov r1, #6
+  ldr r0, =TESTBUF
+  
+
+  mov r1, #20
   mov r2, #1
   swi #SYS_SEND
   
@@ -55,4 +57,4 @@ task_dummy:
 .section task_data, "aw"
 /* Per-task data structures may be defined below */
 
-TESTBUF: .asciz "Hello"
+TESTBUF: .asciz "Pozdravljen Stefan!"
