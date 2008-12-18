@@ -38,7 +38,11 @@ TASK_INITDATA:
 .long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE
 .long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE
 .long TASK4,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE
+<<<<<<< .mine
+.long TASK5,   PSR_MODE_USER,    _task5_paddr,   256*1024 / PAGESIZE
+=======
 .long TASK5,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE
+>>>>>>> .r233
 .long 0
 
 /* WARNING ABOUT ADDING NEW TASKS

@@ -4,8 +4,6 @@
  */
 
 .global debugger_undef
-.global debugger_abort
-.global debugger_dabrt
 .global debugger_resvt
 .global debugger_fiqir
 
@@ -38,14 +36,6 @@
 debugger_undef:
   SWITCH_SVC_CHECK_SP_SAVE_REGS
   ldr r0, =DBGU_STR_UNDEF
-  b debugger
-debugger_abort:
-  SWITCH_SVC_CHECK_SP_SAVE_REGS
-  ldr r0, =DBGU_STR_ABORT
-  b debugger  
-debugger_dabrt:
-  SWITCH_SVC_CHECK_SP_SAVE_REGS
-  ldr r0, =DBGU_STR_DABRT
   b debugger
 debugger_resvt:
   SWITCH_SVC_CHECK_SP_SAVE_REGS
@@ -92,18 +82,11 @@ __dbgu_regs_loop:
   bl printk
  
   ldr r0, =MSG_DBGU_EXIT
-  bl printk
-     
-  /* TODO */
-  
-__panic_loop:
-  b __panic_loop
+  bl panic
 
   
 .data
 DBGU_STR_UNDEF: .asciz "UNDEFINED INSTRUCTION"
-DBGU_STR_ABORT: .asciz "ABORT (PREFETCH)"
-DBGU_STR_DABRT: .asciz "ABORT (DATA)"
 DBGU_STR_RESVT: .asciz "RESERVED"
 DBGU_STR_FIQIR: .asciz "FIQ INTERRUPT"
 

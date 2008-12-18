@@ -59,22 +59,20 @@ init_dbgu:
   str r1, [r0, #DBGU_BRGR]
   
   /* Enable TX and RX */
-  mov r1, #(1 << 6)
-  orr r1, r1, #(1 << 4)
+  mov r1, #(5 << 4) /* RXEN|TXEN */
   str r1, [r0, #DBGU_CR]
   
   /* Set no-parity mode */
   mov r1, #(1 << 11)
   str r1, [r0, #DBGU_MR]
 
-  /* Enable DMA transmition - both ways */
+  /* Enable DMA transmition */
   mov r1, #(1 << 8)
-  add r1, r1, #1   
   str r1, [r0, #PDC_PTCR]
   
   /* Enable interrupts on character receive */
-  /*mov r1, #1
-  str r1, [r0, #DBGU_IER]*/
+  mov r1, #1
+  str r1, [r0, #DBGU_IER]
   
   ldr r0, =MSG_PREINIT
   bl printk
