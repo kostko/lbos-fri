@@ -5,6 +5,11 @@
 .global TASK1
 .global TASK2
 .global TASK3
+.global TASK4
+.global TASK5
+.global TASK6
+.global TASK7
+.global TASK8
 .global TINDEX
 .global TCBLIST
 .global CURRENT
@@ -20,5 +25,5 @@
 .global STACK_SUPM_END
 
 .equ MAXPAGES, 3840
-.equ MAXTASK, 4
+.equ MAXTASK, 8
 .equ NMCBS, 5

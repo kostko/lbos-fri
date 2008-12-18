@@ -20,10 +20,14 @@ TASK1: .space TCBSIZE
 TASK2: .space TCBSIZE
 TASK3: .space TCBSIZE
 TASK4: .space TCBSIZE
+TASK5: .space TCBSIZE
+TASK6: .space TCBSIZE
+TASK7: .space TCBSIZE
+TASK8: .space TCBSIZE
 
 /* Task map table (if you change this, please update MAXTASK in globals.s) */
 .align 2
-TASKTAB: .long TASK1, TASK2, TASK3, TASK4
+TASKTAB: .long TASK1, TASK2, TASK3, TASK4 ,TASK5, TASK6, TASK7, TASK8
 ENDTASKTAB:
 
 /* Place for message control block allocation */
@@ -37,6 +41,10 @@ TASK_INITDATA:
 .long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE
 .long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE
 .long TASK4,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE
+.long TASK5,   PSR_MODE_USER,    _task5_paddr,   256*1024 / PAGESIZE
+.long TASK6,   PSR_MODE_USER,    _task6_paddr,   256*1024 / PAGESIZE
+.long TASK7,   PSR_MODE_USER,    _task7_paddr,   256*1024 / PAGESIZE
+.long TASK8,   PSR_MODE_USER,    _task8_paddr,   256*1024 / PAGESIZE
 .long 0
 
 /* WARNING ABOUT ADDING NEW TASKS
