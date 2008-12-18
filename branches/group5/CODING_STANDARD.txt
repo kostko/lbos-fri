@@ -1,0 +1,89 @@
+======================================================================
+  LBOS-FRI DEVELOPMENT GUIDELINES - READ BEFORE COMMITTING ANY CODE !
+======================================================================
+
+Certain practice is there to adopt in order to keep maintaining this
+project a rich and insightful experience. I've never written a coding
+standard before, nor read one for that matter, but here goes my best:
+
+Coding standard
+----------------------------------------------------------------------
+
+-- File names --
+Files shall be named in lowercase, such as 'main.s'. The name shall
+consist of a logical units name (i.e. function name) if on it's own,
+or a common logical name if file holds several public procedures
+(e.g. 'irq.s').
+
+-- New lines and indentation --
+Each instruction shall be separated by a single new line character
+(that be \n, \r, or a combination thereof). Logical sections shall be
+separated by two new line characters (one blank line).
+Indentation shall be zero spaces on lines with assembler directives
+and labels, and two spaces on lines with processor instructions.
+Line width shall not exceed 80 characters, preferably less.
+
+-- Labels --
+Each label shall be put on the beginning of a line. If label
+represents constant data it shall be followed by a single whitespace
+(can be a space or a tab) delimited assembler directive. In this case
+the label shall be ALL_UPPERCASE. Assembler labels and macros are also
+in ALL_UPPERCASE. If the label, however, designates part of
+instruction code, then it stands alone on a single line, and is all
+lowercase. For example:
+
+.equ ASM_LABEL, 16 | 17
+
+loop:
+  b loop
+
+.data
+SOME_DATA: .word ((3 + ASM_LABEL) << 2)
+
+Labels designating procedure loops and sub-sections shall be preceded
+by two underscore characters, followed by couple of letters
+representing "mother" function, then followed by '_' delimited
+logical expression (e.g. '__pf_hex' is a sub-section of a printf
+function, that prints numbers in base 16).
+All effort shall be put into naming labels with common, English,
+computer, and otherwise descriptive terms.
+
+-- Instructions --
+Processor instructions shall be all lowercase, each on it's line,
+followed by a single whitespace (space or tab) delimited set of single
+space delimited arguments (registers, constants).
+
+-- Constants --
+Constants shall be defined in their most descriptive form, for example,
+'add r2, r2, #(3*4)' adds to r2 the size of three 32 bit words. Using
+just '#12' would be much less descriptive.
+;>Note, you can use +, -, /, *, %, (, ), <<, >>, and possibly more
+(|,||, &, &&?) or fewer operators, and (non-).EQU-ed constants. Those
+are all preprocessed, and get their respected value at compile time.
+
+-- Comments --
+Comments shall be inline or block, whichever appropriate. Labels to
+public procedures are preceded with a block comment, following or
+closely resembling doxygen system, that is:
+/* General specific function description.
+ *
+ * @param  r0  Argument accepted in register 0. Description.
+ * @param  r1  Some other argument accepted in register 1.
+ * @return r0  Return value will be written in r0.
+ */
+Blocked comments are preferred as they may be overall more descriptive
+of what the following instructions do on concept level.
+All effort shall be put into keeping the comments in common, English,
+computer, and otherwise descriptive terms.
+;>Note, portable code shall always base on English wording, and code
+that uses non-English wording is always less portable, than it could
+be. If code wasn't meant to be portable, you would not be here reading.
+
+-- General rules --
+You shall commit only tested working code. You shall always leave a
+log string for given revision. You shall completely adhere to this
+coding standard for this particular project.
+
+EOF
+
+While you are accepting it, it is open for suggestions.
