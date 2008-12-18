@@ -29,14 +29,14 @@ dl_arfd:
   ldr   r2, =DLYLIST                    /* r2 -> address of first DLY block */  
    
   mov r6, r0                                  
-  bl irq_disable						/* disable interruption */
+  bl irq_disable						            /* disable interruption */
   mov r7, r0
   mov r0, r6
           
   add   r4, r2, #72                     /* r4 -> address of last element in DLYLIST */
-  ldr   r5, [r4, #D_TCB]				/* R5 -> pointer to the TCB latest in a list */
-  cmp   r5, #0							/* check if FREE */
-  bne   __dla_ovrflw				    /* OVERFLOW_ERROR */
+  ldr   r5, [r4, #D_TCB]				        /* R5 -> pointer to the TCB latest in a list */
+  cmp   r5, #0							            /* check if FREE */
+  bne   __dla_ovrflw				            /* OVERFLOW_ERROR */
           
 __dla_next:    
   ldr   r3, [r2]                        /* value in the first place in the table */    
@@ -78,7 +78,7 @@ __dla_emlst:
   str   r0, [r2, #D_TOUT]               /* store TOUT in the right place in DLYLIST */
  
 __dld_tcwait:                                   
-  mov r0, r7							/* enable interruption */
+  mov r0, r7							              /* enable interruption */
   bl irq_restore						
 		  
 
@@ -86,7 +86,7 @@ __dld_tcwait:
  * Deleting requirements for delay
  */
 dl_drfd: 
-  bl irq_disable						/* disable interruption */
+  bl irq_disable						            /* disable interruption */
   mov r7, r0
           
   ldr   r2, =DLYLIST                    /* r2 -> address of the first DLY block */  
@@ -157,14 +157,14 @@ __dld_wblock:
   str   r5, [r2, #-8]                   /* write 0 into TCB of the previous DLY block */
   str   r5, [r2, #-4]                   /* write 0 into  TOUT of the previous DLY block */       
           
-  mov r0, r7							/* enable interruption */
+  mov r0, r7							              /* enable interruption */
   bl irq_restore
            
   b     dl_drfd                         /* repeat for  next */
 
   /* finished */
 __dld_exit:   
-  mov r0, r7							/* enable interrupt */
+  mov r0, r7							              /* enable interrupt */
   bl irq_restore
  
   /* Switch to some other task */
@@ -172,7 +172,7 @@ __dld_exit:
   b     svc_newtask
           
 __dla_ovrflw:   
-  mov r0, r7							/* enable interrupt */
+  mov r0, r7							              /* enable interrupt */
   bl irq_restore 
 
   /* Switch to some other task */

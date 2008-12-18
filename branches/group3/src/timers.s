@@ -17,11 +17,11 @@ timer_irq_handler:
   stmfd sp!, {r0-r4,r14}
   
   /* Load destination task's TCB and clear timer flags */
-  ldr   r2, =CDLYTCB                    /* r2 -> naslov na TCB, ki je trenutno v štetju */
-  ldr   r1, [r2]                        /* r1 -> TCB trenutnega DLY bloka (ki je v štetju) */
-  ldr   r4, [r1, #T_FLAG]               /* preberi vrstico z zastavicami iz TCB-ja */
-  bic   r4, r4, #TWAIT                  /* izbrisi TWAIT zastavico */
-  str   r4, [r1, #T_FLAG]               /* shrani vrstico z zastavicami v TCB */
+  ldr   r2, =CDLYTCB                    /* r2 -> address of the TCB,that is currently in count */
+  ldr   r1, [r2]                        /* r1 -> TCB of the current DLY block (currently in count) */
+  ldr   r4, [r1, #T_FLAG]               /* read the fags from the TCB-ja */
+  bic   r4, r4, #TWAIT                  /* remove TWAIT flag */
+  str   r4, [r1, #T_FLAG]               /* store the flags to TCB */
   mov   r4, #-1
   str   r4, [r2]
 
