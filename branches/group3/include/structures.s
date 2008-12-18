@@ -158,8 +158,8 @@
                          DELAY LIST STRUCTURE
    ================================================================
 */
-.equ  D_TCB,    0                               /* kazalec na pripadajoc TCB procesa */
-.equ  D_TOUT,   D_TCB+4                         /* vrednost urinih period izkljucitve procesa */
+.equ  D_TCB,    0                               /* pointer to TCB of process */
+.equ  D_TOUT,   D_TCB+4                         /* number of jiffies */
 
 /* ================================================================
                     SYSCALL NUMBERS FOR USERSPACE
