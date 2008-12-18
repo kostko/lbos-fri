@@ -16,7 +16,12 @@ Add your content here.
   * Q_LEFT contains the remaining time for current task  
   * At init  Q_LEFT = 0
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+= Priority Scheduler =
+
+  * When priority scheduler is chosen, the processes are sorted using [http://en.wikipedia.org/wiki/Bubblesort Bubble sort]
+  * When choosing a new process, always start at the beginning of TCBLIST
+  * Choose the first process that has T_FLAG set to 0
+  * The process executes until terminates or it releases the resources  (ex. SVC_SEND)
+  * Q_LEFT is 0, it is never used
+  * If there are no ready processes, jump to __no_dis_task 
+  * Loop in __no_dis_task, until interrupted 
