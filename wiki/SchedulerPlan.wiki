@@ -8,6 +8,13 @@ Add your content here.
 = Weighted Round Robin =
 
   * [http://en.wikipedia.org/wiki/Weighted_round_robin WRR description]
+  * Process' weight is loaded from its TCB's T_PRIO
+  * Process is chosen when it is next in TASKTAB and its T_FLAG is set to 0
+  * If there are no ready processes, jump to __no_dis_task 
+  * Loop in __no_dis_task, until interrupted
+  * If process terminates before using all of its time slices, the rest are added to the next process' time
+  * Q_LEFT contains the remaining time for current task  
+  * At init  Q_LEFT = 0
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
