@@ -9,10 +9,10 @@
 .long 0xEFBEADDE
 
 .align 2
-TINDEX: .space 5    /* Current task index */
-TCBLIST: .space 5   /* Pointer to list of TCBs */
-CURRENT: .space 5   /* Pointer to current task's TCB */
-MCBLIST: .space 5   /* Pointer to free list of MCBs */
+TINDEX: .space 4    /* Current task index */
+TCBLIST: .space 4   /* Pointer to list of TCBs */
+CURRENT: .space 4   /* Pointer to current task's TCB */
+MCBLIST: .space 4   /* Pointer to free list of MCBs */
 
 /* Task TCB placeholders */
 .align 2
@@ -38,11 +38,7 @@ TASK_INITDATA:
 .long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE
 .long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE
 .long TASK4,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE
-<<<<<<< .mine
 .long TASK5,   PSR_MODE_USER,    _task5_paddr,   256*1024 / PAGESIZE
-=======
-.long TASK5,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE
->>>>>>> .r233
 .long 0
 
 /* WARNING ABOUT ADDING NEW TASKS
@@ -57,9 +53,9 @@ TASK_INITDATA:
 /* Timer structures */
 .align 2
 TIMERAREA: .space TMSIZE*MAXTASK  /* Area for timer alocation */
-TIMERFREE: .space 5               /* Pointer to list of free timers */
-TIMERQUEUE: .space 5              /* Timer queue pending firing */
-CUR_JIFFIES: .space 5             /* Current jiffies value */
+TIMERFREE: .space 4               /* Pointer to list of free timers */
+TIMERQUEUE: .space 4              /* Timer queue pending firing */
+CUR_JIFFIES: .space 4             /* Current jiffies value */
 
 /* Terminal I/O structures */
 .align 2
