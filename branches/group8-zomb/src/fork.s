@@ -158,6 +158,7 @@ __df_page_copy:
   str r1, [r0]
   ENABLE_IRQ
   
+  mov r0, r7                /* Return child PID */
   ldmfd sp!, {r1-r10, pc}
 
 MSG_NO_MORE_FREE_PAGES: .asciz "No more free pages!"
