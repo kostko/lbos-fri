@@ -15,6 +15,7 @@
 .global vm_alloc_translation_table
 .global vm_map_region
 .global vm_get_phyaddr
+.global vm_get_phyaddr_2
 .global vm_abort_handler
 
 /* Free blocks structure definition */
@@ -314,6 +315,21 @@ vm_get_phyaddr:
   
   /* Get TTB into r1 */
   mrc p15, 0, r1, c2, c0, 0
+  bl vm_get_phyaddr_2
+  
+  ldmfd sp!, {r1-r5,pc}
+  
+/**
+ * Returns physical address of some specified virtual address or
+ * zero when no mapping exists. This method calculates the physical
+ * address based on the TTB address given.
+ *
+ * @param r0 Virtual address
+ * @param r1 TTB
+ * @return Physical address
+ */
+vm_get_phyaddr_2:
+  stmfd sp!, {r1-r5,lr}
   
   /* Calculate table offset */
   ldr r2, =0xFFF00000             /* Prepare VMA[31:20] mask */
@@ -362,7 +378,7 @@ __vmgp_coarse:
   orr r0, r1, r0                  /* Combine bits to get PMA */
 
 __vmgp_done:
-  ldmfd sp!, {r1-r5,pc}
+  ldmfd sp!, {r1-r5,pc}  
 
 /**
  * Maps kernel areas into the specified L1 table.

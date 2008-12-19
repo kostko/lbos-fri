@@ -354,6 +354,13 @@ svc_exit:
   /* This task is finished, let's go somewhere else */
   b svc_newtask
 
+/**
+ * Creates a new process.
+ */ 
+svc_fork:
+  /* TODO */
+  b svc_fork
+ 
 /* ================================================================
                            SYCALL TABLE
    ================================================================
@@ -371,6 +378,7 @@ SYSCALL_TABLE:
 .long svc_mmc_read  /* (7) MMC block read */
 .long svc_mmc_write /* (8) MMC block write */
 .long svc_exit      /* (9) exit current task */
+.long svc_fork      /* (10) create a new process */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4
