@@ -203,6 +203,8 @@ init_tasks:
   mov r3, #0
   str r3, [r2]
   
+  /* TODO: init NUMTASK */
+  
   /* Reset current task index */
   ldr r2, =TINDEX   /* Load TINDEX address */
   str r3, [r2]      /* Write 0 to TINDEX */

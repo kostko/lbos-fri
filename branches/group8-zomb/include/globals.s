@@ -19,6 +19,7 @@
 .global PAGEOFFSET
 .global STACK_SUPM_END
 .global LAST_PID
+.global NUMTASK
 
 .equ MAXPAGES, 3840
 .equ MAXTASK, 4

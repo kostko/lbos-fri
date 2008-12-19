@@ -70,3 +70,7 @@ PAGEOFFSET: .long __PAGE_OFFSET__
 .align 2
 STACK_SUPM_END: .long __STACK_END__ - STACK_SIZE*4
 STACK_IRQM_END: .long __STACK_END__
+
+/* (temporary) Changes for dynamic task loading */
+.align 2
+NUMTASK: .space 4         /* Current number of tasks */

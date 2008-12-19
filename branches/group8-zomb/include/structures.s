@@ -17,7 +17,8 @@
 .equ T_FLAG, T_SSP + 4                /* flag word */
 .equ T_PRIO, T_FLAG + 4               /* task priority or something */
 .equ T_TTB, T_PRIO + 4                /* translation table base for this task */
-.equ TCBSIZE, T_TTB + 4               /* size of tcb in bytes */
+.equ T_MAIN_SEGMENT, T_TTB + 4        /* amount of allocated memory (in pages) */
+.equ TCBSIZE, T_MAIN_SEGMENT + 4      /* size of tcb in bytes */
 
 
 /* ================================================================
@@ -98,6 +99,7 @@
 .equ SCTX_USR_LR, 0x38
 .equ SCTX_SVC_LR, 0x3C
 .equ SCTX_PC, 0x40
+.equ SCTX_LEN, SCTX_PC + 4
 
 /* ================================================================
                        MMU RELATED CONSTANTS
@@ -170,3 +172,4 @@
 .equ SYS_MMC_READ, 7
 .equ SYS_MMC_WRITE, 8
 .equ SYS_EXIT, 9
+.equ SYS_FORK, 10
