@@ -30,6 +30,11 @@ __mm_init_bitmap:
   cmp r2, #MAXPAGES
   blo __mm_init_bitmap
   
+  /* Initialize variables */
+  ldr r0, =BITMAP_LAST_FREE_PTR
+  mov r1, #0
+  str r1, [r0]
+  
   ldmfd sp!, {r0-r2,pc}
 
 /**

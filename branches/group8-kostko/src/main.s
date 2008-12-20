@@ -89,6 +89,11 @@ init_dbgu:
   bl printk
   bl vm_init
   
+  /* Initialize kernel heap allocator */
+  ldr r0, =MSG_INIT_KM
+  bl printk
+  bl kmalloc_init
+  
   ldr r0, =MSG_INIT_PER
   bl printk
   
@@ -294,6 +299,7 @@ done:
 MSG_PREINIT: .asciz "\n\rLBOS-FRI v0.1 for AT91SAM9260/FRI-SMS starting up...\n\r"
 MSG_INIT_MM: .asciz ">>> Initializing the memory manager...\n\r"
 MSG_INIT_VM: .asciz ">>> Initializing virtual memory...\n\r"
+MSG_INIT_KM: .asciz ">>> Initializing kernel heap allocator...\n\r"
 MSG_INIT_PER: .asciz ">>> Initializing peripherals (LED, timers)...\n\r"
 MSG_INIT_TCB: .asciz ">>> Initializing tasks...\n\r"
 MSG_INIT_MCB: .asciz ">>> Initializing message passing...\n\r"

@@ -515,6 +515,17 @@ vm_switch_ttb:
 vm_init:
   stmfd sp!, {r0-r1,lr}
   
+  /* Initialize all variables to 0 */
+  mov r1, #0
+  ldr r0, =VM_L1_FREE_BLOCKS
+  str r1, [r0]
+  ldr r0, =VM_L2_FREE_BLOCKS
+  str r1, [r0]
+  ldr r0, =KERNEL_L1_TABLE
+  str r1, [r0]
+  ldr r0, =VM_KERNEL_HEAP_L2
+  str r1, [r0]
+  
   /* Allocate ourselves an L1 table and map kernel areas*/
   mov r0, #1            /* r0: Table type (1 = L1) */
   bl vm_alloc_translation_table
@@ -663,6 +674,7 @@ VM_L1_FREE_BLOCKS: .long 0
 VM_L2_FREE_BLOCKS: .long 0
 
 /* Kernel MMU table used only at startup */
+.global KERNEL_L1_TABLE
 KERNEL_L1_TABLE: .long 0
 
 /* L2 translation tables for kernel heap */
