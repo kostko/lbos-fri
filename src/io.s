@@ -20,7 +20,7 @@
  * another request might still be in progress!
  */
 io_dispatch:
-  stmfd sp!, {r1-r7,lr}
+  stmfd sp!, {r1-r7,r12,lr}
 
 __retry_dispatch:
   /* Grab current task pointer */
@@ -130,7 +130,7 @@ __skip_switch:
   ENABLE_IRQ
 
 __rq_serviced:
-  ldmfd sp!, {r1-r7,pc}
+  ldmfd sp!, {r1-r7,r12,pc}
 
 /**
  * Queues a new request for I/O operation. Blocks current task
@@ -140,7 +140,7 @@ __rq_serviced:
  * @return Zero on success, non-zero on error
  */
 io_queue_request:
-  stmfd sp!, {r1-r5,lr}
+  stmfd sp!, {r1-r5,r12,lr}
   
   /* Prepare request structure */
   LOAD_CURRENT_TCB r5
@@ -183,7 +183,7 @@ __io_ready:
   bl io_dispatch
   
 __io_request_end:
-  ldmfd sp!, {r1-r5,pc}
+  ldmfd sp!, {r1-r5,r12,pc}
 
 /**
  * Called by MMC IRQ handler to signal end of request. Interrupted
