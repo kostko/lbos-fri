@@ -407,7 +407,7 @@ __wait_syntype:
   /* najdi prazen prostor in dodaj element */ 
   mov v6, #10          
              
-svc_wait_loop1:	
+___wait_loop1:	
   ldr v4, [v5] 
   cmp v4, #0
   beq svc_wait_loop2 
@@ -417,7 +417,7 @@ svc_wait_loop1:
   b svc_wait_konec 
   
 /* shrani element */ 
-svc_wait_loop2:
+__wait_loop2:
   ldr v4, =CURRENT 
   ldr v5, [v4]
   ldr v6, [v5, #T_FLAG]
@@ -425,7 +425,7 @@ svc_wait_loop2:
   str v6, [v5, #T_FLAG]
   
           
-svc_wait_konec: 
+__wait_konec: 
   sub v3, v3, #1
   str v3, [v2]
   
@@ -436,6 +436,66 @@ svc_wait_konec:
   POP_CONTEXT 
   
 svc_signal:
+/*
+  podajanje parametrov:
+  1. stevilka semaforja v r0
+  2. stevilka procesa v CURRENT
+  3. navadni ali syn v r1
+  (ce r1 == 0 => navaden semafor) 5,6,7,8,9
+  (ce r1 == 1 => Synchro semafor) 0,1,2,3,4
+  oba tipa klicemo 0-4
+  
+  POSTOPEK:         
+  prvo povecamo stanje spr.
+  ce je <=0 vzamemo prvi cakajoc proces iz vrste in ga spustimo v KO (BIT_CLR)
+  ce je ==1 pustimo statusno spr. in koncamo
+  */                                        
+
+
+  mov v1, #0x190      /* offset za statusno tabelo */ 
+  ldr v2, =SEMA_TABLES 
+  add v2, v2, v1      /* v2 kaze na statusno tabelo */
+ 
+  cmp r1, #0
+  addeq r0, r0, #5    /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
+  
+  mov v1, #4          /* odmik 4B=32bit*/
+  mul v3, v1, r0      /* izracunamo pravi odmik glede na st. semaforja*/
+  add v2, v2, v3      /* smo v statusni tabelci v pravi celici */
+
+/*  cmp r1, #1
+  beq __signal_syntype    */         
+
+  /* povecamo spremenljivko za 1 in shranimo*/
+  ldr v3, [v2]
+  add v3, v3, #1
+  str v3, [v2]
+  
+  /* dodati se pogoje, ce je prej ze navaden enak 0 ali syn enak 1 => error*/
+               
+  /* Vzemanje elementa_FIFO */ 
+  mov v4, #0x28 
+  mul v4, v4, r0    /* izracunamo offset za pravo tabelo */ 
+	ldr v5, =SEMA_TABLES 
+  add v5, v5, v4    /* v5 kaze na pravo tabelo semaforja */ 
+  
+  /* prvemu elementu(FIFO) zbrisemo(BIT_CLR) flag in ga vzamemo iz vrste,
+   ter pomaknemo ostale navzgor*/                                                                                                       
+  
+  /* vse elemente premaknemo za ena navzgor, tako ga prepisemo in popravimo 
+vrsto*/ 
+  
+    mov v1, #9
+__signal_loop1:
+  	ldr v6, [v5, #4]  /* naslednji element pomaknemo za mesto navzgor */
+    str v6, [v5],#4 
+    cmp v6, #0
+    beq __signal_konec /* smo prisli do praznega naslova => konec*/
+	  subs v1, v1, #1 
+  	bne __signal_loop1    
+
+
+__signal_konec:
     POP_CONTEXT 
 
 /* ================================================================

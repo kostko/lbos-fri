@@ -13,118 +13,121 @@
             <ASMSyntaxFile type="String"></ASMSyntaxFile>
           </ColorSyntax>
           <PI.0>
-            <P type="String">X:\Lbos\src\vm.s</P>
+            <P type="String">G:\Miha\Arm\Lbos\src\vm.s</P>
+            <VL type="Integer">9</VL>
           </PI.0>
           <PI.1>
-            <P type="String">X:\Lbos\src\vectors.s</P>
+            <P type="String">G:\Miha\Arm\Lbos\src\vectors.s</P>
           </PI.1>
           <PI.10>
-            <P type="String">X:\Lbos\src\irq.s</P>
+            <P type="String">G:\Miha\Arm\Lbos\src\irq.s</P>
           </PI.10>
           <PI.11>
-            <P type="String">X:\Lbos\src\debugger.s</P>
-          </PI.11>
-          <PI.12>
-            <C type="Integer">7</C>
-            <L type="Integer">15</L>
-            <P type="String">X:\Lbos\include\structures.s</P>
-            <VL type="Integer">153</VL>
-          </PI.12>
-          <PI.13>
-            <C type="Integer">56</C>
-            <L type="Integer">13</L>
-            <P type="String">X:\Lbos\include\space.s</P>
-          </PI.13>
-          <PI.14>
-            <C type="Integer">20</C>
-            <L type="Integer">9</L>
-            <P type="String">X:\Lbos\include\globals.s</P>
-          </PI.14>
-          <PI.15>
-            <P type="String">X:\Lbos\include\clock_init.s</P>
-          </PI.15>
-          <PI.16>
-            <C type="Integer">68</C>
-            <L type="Integer">59</L>
-            <P type="String">X:\Lbos\config\layout.ind</P>
-            <VL type="Integer">42</VL>
-          </PI.16>
-          <PI.17>
             <L type="Integer">99</L>
             <P type="String">G:\Miha\Arm\Lbos\src\debugger.s</P>
             <VL type="Integer">9</VL>
-          </PI.17>
-          <PI.18>
-            <C type="Integer">24</C>
-            <L type="Integer">20</L>
-            <P type="String">G:\Miha\Arm\Lbos\include\globals.s</P>
-          </PI.18>
-          <PI.19>
-            <P type="String">G:\Miha\Arm\Lbos\src\tasks\iotest.s</P>
-          </PI.19>
-          <PI.2>
-            <P type="String">X:\Lbos\src\tasks\msgtest.s</P>
-          </PI.2>
-          <PI.20>
-            <P type="String">G:\Miha\Arm\Lbos\src\vm.s</P>
-            <VL type="Integer">9</VL>
-          </PI.20>
-          <PI.21>
-            <P type="String">G:\Miha\Arm\Lbos\src\vectors.s</P>
-          </PI.21>
-          <PI.22>
-            <P type="String">G:\Miha\Arm\Lbos\src\tasks\msgtest.s</P>
-          </PI.22>
-          <PI.23>
-            <C type="Integer">15</C>
-            <L type="Integer">18</L>
-            <P type="String">G:\Miha\Arm\Lbos\src\tasks\dummy.s</P>
-            <VL type="Integer">9</VL>
-          </PI.23>
-          <PI.24>
-            <C type="Integer">2</C>
-            <L type="Integer">411</L>
-            <P type="String">G:\Miha\Arm\Lbos\src\syscall.s</P>
-            <VL type="Integer">393</VL>
-          </PI.24>
-          <PI.25>
-            <P type="String">G:\Miha\Arm\Lbos\src\sched.s</P>
-          </PI.25>
-          <PI.26>
-            <P type="String">G:\Miha\Arm\Lbos\src\printk.s</P>
-          </PI.26>
-          <PI.27>
-            <P type="String">G:\Miha\Arm\Lbos\src\memory.s</P>
-          </PI.27>
-          <PI.28>
-            <L type="Integer">22</L>
-            <P type="String">G:\Miha\Arm\Lbos\src\main.s</P>
-            <VL type="Integer">19</VL>
-          </PI.28>
-          <PI.29>
-            <P type="String">G:\Miha\Arm\Lbos\src\irq.s</P>
-          </PI.29>
-          <PI.3>
-            <P type="String">X:\Lbos\src\tasks\iotest.s</P>
-          </PI.3>
-          <PI.30>
+          </PI.11>
+          <PI.12>
             <C type="Integer">59</C>
             <L type="Integer">15</L>
             <P type="String">G:\Miha\Arm\Lbos\include\structures.s</P>
-          </PI.30>
-          <PI.31>
+          </PI.12>
+          <PI.13>
             <C type="Integer">23</C>
             <L type="Integer">74</L>
             <P type="String">G:\Miha\Arm\Lbos\include\space.s</P>
             <VL type="Integer">45</VL>
-          </PI.31>
-          <PI.32>
+          </PI.13>
+          <PI.14>
+            <C type="Integer">24</C>
+            <L type="Integer">20</L>
+            <P type="String">G:\Miha\Arm\Lbos\include\globals.s</P>
+          </PI.14>
+          <PI.15>
             <P type="String">G:\Miha\Arm\Lbos\include\clock_init.s</P>
-          </PI.32>
-          <PI.33>
+          </PI.15>
+          <PI.16>
             <C type="Integer">31</C>
             <L type="Integer">9</L>
             <P type="String">G:\Miha\Arm\Lbos\config\layout.ind</P>
+            <VL type="Integer">42</VL>
+          </PI.16>
+          <PI.17>
+            <P type="String">X:\Lbos\src\vm.s</P>
+          </PI.17>
+          <PI.18>
+            <P type="String">X:\Lbos\src\vectors.s</P>
+          </PI.18>
+          <PI.19>
+            <P type="String">X:\Lbos\src\tasks\msgtest.s</P>
+          </PI.19>
+          <PI.2>
+            <P type="String">G:\Miha\Arm\Lbos\src\tasks\msgtest.s</P>
+          </PI.2>
+          <PI.20>
+            <P type="String">X:\Lbos\src\tasks\iotest.s</P>
+          </PI.20>
+          <PI.21>
+            <C type="Integer">14</C>
+            <L type="Integer">29</L>
+            <P type="String">X:\Lbos\src\tasks\dummy.s</P>
+            <VL type="Integer">9</VL>
+          </PI.21>
+          <PI.22>
+            <C type="Integer">57</C>
+            <L type="Integer">448</L>
+            <P type="String">X:\Lbos\src\syscall.s</P>
+            <VL type="Integer">373</VL>
+          </PI.22>
+          <PI.23>
+            <L type="Integer">26</L>
+            <P type="String">X:\Lbos\src\sched.s</P>
+            <VL type="Integer">15</VL>
+          </PI.23>
+          <PI.24>
+            <P type="String">X:\Lbos\src\printk.s</P>
+          </PI.24>
+          <PI.25>
+            <P type="String">X:\Lbos\src\memory.s</P>
+          </PI.25>
+          <PI.26>
+            <C type="Integer">15</C>
+            <L type="Integer">291</L>
+            <P type="String">X:\Lbos\src\main.s</P>
+            <VL type="Integer">263</VL>
+          </PI.26>
+          <PI.27>
+            <P type="String">X:\Lbos\src\irq.s</P>
+          </PI.27>
+          <PI.28>
+            <P type="String">X:\Lbos\src\debugger.s</P>
+          </PI.28>
+          <PI.29>
+            <C type="Integer">7</C>
+            <L type="Integer">15</L>
+            <P type="String">X:\Lbos\include\structures.s</P>
+            <VL type="Integer">153</VL>
+          </PI.29>
+          <PI.3>
+            <P type="String">G:\Miha\Arm\Lbos\src\tasks\iotest.s</P>
+          </PI.3>
+          <PI.30>
+            <C type="Integer">56</C>
+            <L type="Integer">13</L>
+            <P type="String">X:\Lbos\include\space.s</P>
+          </PI.30>
+          <PI.31>
+            <C type="Integer">20</C>
+            <L type="Integer">9</L>
+            <P type="String">X:\Lbos\include\globals.s</P>
+          </PI.31>
+          <PI.32>
+            <P type="String">X:\Lbos\include\clock_init.s</P>
+          </PI.32>
+          <PI.33>
+            <C type="Integer">68</C>
+            <L type="Integer">59</L>
+            <P type="String">X:\Lbos\config\layout.ind</P>
             <VL type="Integer">42</VL>
           </PI.33>
           <PI.34>
@@ -157,9 +160,9 @@
             <VL type="Integer">14</VL>
           </PI.39>
           <PI.4>
-            <C type="Integer">14</C>
-            <L type="Integer">29</L>
-            <P type="String">X:\Lbos\src\tasks\dummy.s</P>
+            <C type="Integer">15</C>
+            <L type="Integer">18</L>
+            <P type="String">G:\Miha\Arm\Lbos\src\tasks\dummy.s</P>
             <VL type="Integer">9</VL>
           </PI.4>
           <PI.40>
@@ -217,27 +220,24 @@
             <P type="String">F:\lbos-fri\src\vectors.s</P>
           </PI.49>
           <PI.5>
-            <C type="Integer">57</C>
-            <L type="Integer">448</L>
-            <P type="String">X:\Lbos\src\syscall.s</P>
-            <VL type="Integer">373</VL>
+            <C type="Integer">9</C>
+            <L type="Integer">492</L>
+            <P type="String">G:\Miha\Arm\Lbos\src\syscall.s</P>
+            <VL type="Integer">467</VL>
           </PI.5>
           <PI.6>
-            <L type="Integer">26</L>
-            <P type="String">X:\Lbos\src\sched.s</P>
-            <VL type="Integer">15</VL>
+            <P type="String">G:\Miha\Arm\Lbos\src\sched.s</P>
           </PI.6>
           <PI.7>
-            <P type="String">X:\Lbos\src\printk.s</P>
+            <P type="String">G:\Miha\Arm\Lbos\src\printk.s</P>
           </PI.7>
           <PI.8>
-            <P type="String">X:\Lbos\src\memory.s</P>
+            <P type="String">G:\Miha\Arm\Lbos\src\memory.s</P>
           </PI.8>
           <PI.9>
-            <C type="Integer">15</C>
-            <L type="Integer">291</L>
-            <P type="String">X:\Lbos\src\main.s</P>
-            <VL type="Integer">263</VL>
+            <L type="Integer">22</L>
+            <P type="String">G:\Miha\Arm\Lbos\src\main.s</P>
+            <VL type="Integer">19</VL>
           </PI.9>
         </REG_ROOT>
       </EditorOptions>
@@ -261,7 +261,7 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\src\main.s</RelativeFileName>
+            <RelativeFileName type="String">..\config\layout.ind</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
             <FileBarIndex type="Integer">1</FileBarIndex>
@@ -412,12 +412,6 @@
             <RelativeFileName type="String">..\src\mmc.s</RelativeFileName>
           </EditorHistoryFile.3>
         </Documents.0>
-        <Progress>
-          <b type="Integer">676</b>
-          <l type="Integer">392</l>
-          <r type="Integer">888</r>
-          <t type="Integer">317</t>
-        </Progress>
         <Watches>
           <ActiveWatchPane type="Integer">0</ActiveWatchPane>
           <WatchPane.0>
@@ -657,6 +651,14 @@
         <CASETool>
           <AutoBegin type="String">False</AutoBegin>
         </CASETool>
+        <DataCoverage>
+          <AutoBegin type="String">False</AutoBegin>
+          <CoverData>
+            <Complete type="Integer">0</Complete>
+            <Globals type="Integer">1</Globals>
+            <MemArea type="Integer">-1</MemArea>
+          </CoverData>
+        </DataCoverage>
         <Debug>
           <Assume>
             <UnmodifiableCode type="Integer">0</UnmodifiableCode>
@@ -693,7 +695,7 @@
               <TargetRelative type="String">True</TargetRelative>
               <Type type="Integer">28</Type>
               <Options>
-                <DumpELFHeaders type="Integer">0</DumpELFHeaders>
+                <DumpELFHeaders  type="Integer">0</DumpELFHeaders >
                 <IgnoreChecksum type="Integer">0</IgnoreChecksum>
                 <LoadCode type="Integer">0</LoadCode>
                 <LoadDwarfSection type="Integer">1</LoadDwarfSection>
@@ -772,7 +774,6 @@
             <Variables type="String">True</Variables>
           </SymbolFile>
           <Symbols>
-            <AddressDisplay type="Integer">0</AddressDisplay>
             <ANSI type="Integer">1</ANSI>
             <BrowserScope type="String">True</BrowserScope>
             <CharDisplay type="Integer">2</CharDisplay>
@@ -972,7 +973,7 @@
           </Combo>
         </History>
         <Info>
-          <winIDEA type="String">Build 9.9.37</winIDEA>
+          <winIDEA type="String">Build 9.7.156</winIDEA>
         </Info>
         <Options>
           <CASE>
@@ -1028,11 +1029,9 @@
             <ProfileData type="Integer">0</ProfileData>
             <ProfileExec type="Integer">0</ProfileExec>
             <ProfileSingleData type="Integer">0</ProfileSingleData>
-            <SP_Addr type="Integer">0</SP_Addr>
-            <SP_Area type="Integer">0</SP_Area>
             <StartAt type="Integer">0</StartAt>
             <StartingPoint type="String"></StartingPoint>
-            <UseStartingPoint type="Integer">0</UseStartingPoint>
+            <TimeStamp type="Integer">0</TimeStamp>
             <SingleData>
               <Description type="String"></Description>
               <Name type="String"></Name>
@@ -1076,7 +1075,6 @@
             <HexList type="String">False</HexList>
             <HexSaveAddress type="String">False</HexSaveAddress>
             <HexSaveSize type="String">True</HexSaveSize>
-            <MAUsPerLine type="Integer">16</MAUsPerLine>
             <SaveFile type="String">M:\Sample\OnChip\ARM9\EvalBrd\ITAT91SAM9260\IntRAM\test2.hex</SaveFile>
             <SaveSize type="String">0x100</SaveSize>
             <SaveSizeType type="Integer">0</SaveSizeType>
@@ -1212,10 +1210,6 @@
           </SFR>
         </WindowsInfo>
       </Environment>
-      <Plugins>
-        <_76946E39-78E2-4625-9BF0-751C4C11A09F>
-        </_76946E39-78E2-4625-9BF0-751C4C11A09F>
-      </Plugins>
     </REG_ROOT>
   </winIDEA>
   <Project>
@@ -1357,7 +1351,7 @@
               <CortexDWT>
                 <Beep type="String">True</Beep>
                 <DisplayMessage type="String">True</DisplayMessage>
-                <DWT>
+                <Data>
                   <CC_Enabled type="Integer">0</CC_Enabled>
                   <CC_ITMSyncPacket type="Integer">0</CC_ITMSyncPacket>
                   <CC_ITMSyncPacketPeriod type="Integer">0</CC_ITMSyncPacketPeriod>
@@ -1448,7 +1442,7 @@
                       <IgnoreLSBBits type="Integer">0</IgnoreLSBBits>
                     </Address.1>
                   </Comparator.3>
-                </DWT>
+                </Data>
               </CortexDWT>
               <CortexRBPs>
                 <Beep type="String">True</Beep>
@@ -1586,9 +1580,8 @@
           <Trace>
             <Common>
               <CoverageBuffSize type="String">100%</CoverageBuffSize>
-              <CustomTimeStamp type="String">0 ns</CustomTimeStamp>
               <ProfilerBuffSize type="String">100%</ProfilerBuffSize>
-              <ProfilerTimeStamp type="Integer">1</ProfilerTimeStamp>
+              <ProfilerPackingGUID type="Integer">0</ProfilerPackingGUID>
             </Common>
             <ETM>
               <BranchBroadcast type="Integer">0</BranchBroadcast>
@@ -1600,15 +1593,12 @@
               <Width type="Integer">3</Width>
               <Width3 type="Integer">0</Width3>
             </ETM>
-            <Time>
-              <TimeStamp type="String">0 ns</TimeStamp>
-            </Time>
           </Trace>
           <UMI>
           </UMI>
         </Data>
         <HW>
-          <Version type="Integer">151584842</Version>
+          <Version type="Integer">151454008</Version>
           <BDM>
             <CPU>
               <CPU type="Integer">6</CPU>
@@ -1622,16 +1612,11 @@
               <ARM7>
                 <AllowFLASHWrite type="Integer">0</AllowFLASHWrite>
                 <bPresetPC type="Integer">0</bPresetPC>
-                <Cortex_DWT type="Integer">0</Cortex_DWT>
-                <Cortex_ETM type="Integer">0</Cortex_ETM>
-                <Cortex_HTM type="Integer">0</Cortex_HTM>
                 <CortexDebugProtocol type="Integer">0</CortexDebugProtocol>
                 <CortexSwoClkPrescaler type="Integer">0</CortexSwoClkPrescaler>
                 <CortexTraceProtocol type="Integer">0</CortexTraceProtocol>
                 <CortexTRACEWidth type="Integer">0</CortexTRACEWidth>
                 <DebugHandlerBase type="Integer">20</DebugHandlerBase>
-                <ETMClocking type="Integer">0</ETMClocking>
-                <ETMPortSize type="Integer">3</ETMPortSize>
                 <Exceptions type="Integer">0</Exceptions>
                 <ForceSupervisor type="Integer">0</ForceSupervisor>
                 <MAC72xx_BackDoorAccessKey type="IntegerArray">PPPPPPPPPPPPPPPP</MAC72xx_BackDoorAccessKey>
