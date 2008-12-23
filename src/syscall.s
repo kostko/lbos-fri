@@ -389,12 +389,12 @@ svc_wait:
   add v2, v2, v3      /* smo v statusni tabelci v pravi celici */
 
   cmp r1, #1
-  beq svc_wait_syntype   /* mogoce to niti ni potrebno*/           
+  beq __wait_syntype   /* mogoce to niti ni potrebno*/           
 
   /* navaden semafor */
   ldr v3, [v2]
   cmp v3, #1
-  beq svc_wait_konec            /* semafor ima se eno prazno mesto=>zmanjsamo status in koncamo  */
+  beq __wait_konec            /* semafor ima se eno prazno mesto=>zmanjsamo status in koncamo  */
                       
 __wait_syntype:
 
@@ -480,7 +480,11 @@ svc_signal:
   add v5, v5, v4    /* v5 kaze na pravo tabelo semaforja */ 
   
   /* prvemu elementu(FIFO) zbrisemo(BIT_CLR) flag in ga vzamemo iz vrste,
-   ter pomaknemo ostale navzgor*/                                                                                                       
+   ter pomaknemo ostale navzgor*/
+  ldr v6, v5
+  ldr v7, [v6, #T_FLAG]
+  bic v7, v7, 0x100
+  str v7, [v6, #T_FLAG]                                                                                                       
   
   /* vse elemente premaknemo za ena navzgor, tako ga prepisemo in popravimo 
 vrsto*/ 
