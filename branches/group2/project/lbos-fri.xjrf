@@ -220,10 +220,10 @@
             <P type="String">F:\lbos-fri\src\vectors.s</P>
           </PI.49>
           <PI.5>
-            <C type="Integer">9</C>
-            <L type="Integer">492</L>
+            <C type="Integer">12</C>
+            <L type="Integer">483</L>
             <P type="String">G:\Miha\Arm\Lbos\src\syscall.s</P>
-            <VL type="Integer">467</VL>
+            <VL type="Integer">470</VL>
           </PI.5>
           <PI.6>
             <P type="String">G:\Miha\Arm\Lbos\src\sched.s</P>
@@ -261,7 +261,7 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\config\layout.ind</RelativeFileName>
+            <RelativeFileName type="String">..\src\syscall.s</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
             <FileBarIndex type="Integer">1</FileBarIndex>
