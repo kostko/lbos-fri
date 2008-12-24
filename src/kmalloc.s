@@ -19,6 +19,9 @@
 
 /* Note that bit 0 of KMALLOC_MAGIC is used for free/used selection! */
 
+/* Remaining usable block size when split will no longer be considered */
+.equ KM_MIN_SPLIT, 16
+
 .global kmalloc
 .global kfree
 .global kbrk
@@ -186,7 +189,26 @@ __kmalloc_find_block:
   ldrlo r3, [r3, #KM_BLK_NextPtr]
   blo __kmalloc_find_block      /* Too small */
   
+  /* Split into two blocks if needed */
+  sub r0, r4, r2                /* Calculate number of bytes available */
+  sub r0, r0, #KM_BLK_SIZEOF    /* for the next block */
+  cmp r0, #KM_MIN_SPLIT         /* Check the result for <= KM_MIN_SPLIT */
+  ble __kmalloc_overalloc_blk   /* If not enough space for split, overallocate */
+  
+  /* Otherwise we can now split the block */
+  add r4, r3, r2                /* Calculate next block address in r4 */
+  add r4, r4, #KM_BLK_SIZEOF    /* {HEAD1|.......>HEAD2|....} */
+  str r2, [r3, #KM_BLK_Size]    /* Resize previous block */
+  str r0, [r4, #KM_BLK_Size]    /* Set new block size */
+  ldr r0, [r3, #KM_BLK_NextPtr] /* Load pointer to next block */
+  str r0, [r4, #KM_BLK_NextPtr] /* Store pointer to next block */
+  str r4, [r3, #KM_BLK_NextPtr] /* Update next pointer for current block */
+
+__kmalloc_overalloc_blk:
   /* Block is big enough, let's grab it */
+  ldr r0, [r3, #KM_BLK_NextPtr] /* Load current block next pointer */
+  str r0, [r1, #KM_BLK_NextPtr] /* Update previous block next pointer */
+  
   orr r5, r5, #0b1              /* Set used bit */
   str r5, [r3, #KM_BLK_Magic]   /* Store used bit + magic value */
   add r0, r3, #KM_BLK_SIZEOF    /* Add size of block header */
