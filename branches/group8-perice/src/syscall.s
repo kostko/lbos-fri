@@ -16,21 +16,22 @@
 syscall_handler:
   /* System call handler/dispatcher */
   PUSH_CONTEXT
+  mov r11, lr               /* Save link register before enabling preemption */
   ENABLE_IRQ
-  
+
   /* Get syscall number from SWI instruction */
-  ldr r12, [lr, #-4]       /* Load SWI instruction opcode + arg to r0 */
+  ldr r12, [r11, #-4]       /* Load SWI instruction opcode + arg to r0 */
   bic r12, r12, #0xFF000000 /* Clear upper 8 bits */
-  
+
   /* Check if SVC number is valid */
   cmp r12, #MAX_SVC_NUMBER
   bhs __bad_svc
-  
+
   /* Get SVC address and jump to it */
   ldr r11, =SYSCALL_TABLE
   ldr r11, [r11, r12, lsl #2]
   bx r11
-  
+
 __bad_svc:
   /* Return E_BADSVC error code in r0 */
   SVC_RETURN_CODE #E_BADSVC
@@ -49,13 +50,13 @@ svc_newtask:
   LOAD_CURRENT_TCB r0
   cmp r0, #0
   beq dispatch      /* No current process, enter dispatch */
-  
+
   /* Save current task's context. */
   DISABLE_PIT_IRQ
   GET_SP #PSR_MODE_SYS, r3    /* Get USP */
   str r3, [r0, #T_USP]        /* Store USP */
   str sp, [r0, #T_SSP]        /* Store SSP */
-  
+
   /* Branch to scheduler */
   b dispatch
 
@@ -68,9 +69,46 @@ svc_newtask:
 svc_print:
   bl vm_get_phyaddr
   cmp r0, #0 /* check if valid address */
-  blne serial_write_bytes
-  POP_CONTEXT
-  /* TODO? */
+  /* TODOeq: kill task? */
+  stmne sp!, {r2}
+  movne r2, #0         /* user space write request */
+  blne serial_write_request  
+  ldmne sp!, {r2}
+  b svc_newtask
+
+/**
+ * Read from serial syscall.
+ *
+ * @param r0 Pointer to buffer
+ * @param r1 Size
+ */
+svc_read:
+  bl vm_get_phyaddr
+  cmp r0, #0                /* check if valid address */
+  /* TODOeq: kill task? */
+  stmne sp!, {r2}
+  movne r2, #0              /* mark not read line */
+  blne serial_read_request
+  ldmne sp!, {r2}
+  b svc_newtask
+
+/**
+ * Read one (\n terminated) line from serial
+ * or size characters, which ever first.
+ *
+ * @param r0 Pointer to buffer
+ * @param r1 Maximum size
+ */
+svc_readln:
+  bl vm_get_phyaddr
+  cmp r0, #0                /* check if valid address */
+  /* TODOeq: kill task? */
+  stmne sp!, {r2}
+  movne r2, #1              /* mark read line */
+  blne serial_read_request
+  ldmne sp!, {r2}
+  b svc_newtask
+
 
 /**
  * Delay syscall.
@@ -80,17 +118,17 @@ svc_print:
 svc_delay:
   /* Load current task TCB pointer */
   LOAD_CURRENT_TCB r1
-  
+
   /* Register a new timer */
   bl register_timer
-  
+
   /* Mark current task undispatchable */
   DISABLE_IRQ
   ldr r2, [r1, #T_FLAG]
   orr r2, r2, #TWAIT
   str r2, [r1, #T_FLAG]
   ENABLE_IRQ
-  
+
   /* Switch to some other task */
   SVC_RETURN_CODE #0
   b svc_newtask
@@ -108,7 +146,11 @@ svc_send:
      error is detected. */
   cmp r2, #MAXTASK
   bhs __err_badtask
-  
+
+  bl vm_get_phyaddr       /* Resolve physical address */
+  cmp r0, #0              /* is valid address? */
+  /* TODOeq: kill task */
+
   DISABLE_IRQ
   ldr r3, =MCBLIST
   ldr r4, [r3]          /* Load first MCB base into r3 */
@@ -117,28 +159,28 @@ svc_send:
   ldr r5, [r4, #M_LINK] /* Get next MCB in line */
   str r5, [r3]          /* Now we hold our own MCB */
   ENABLE_IRQ
-  
+
   /* Transfer data to MCB */
   mov r3, #0
   str r3, [r4, #M_LINK]   /* Clear M_LINK of our MCB */
   str r0, [r4, #M_BUFF]   /* Put buffer address into MCB */
   str r1, [r4, #M_COUNT]  /* Put buffer length into MCB */
-  
+
   LOAD_CURRENT_TCB r0     /* Get pointer to current task's TCB */
   str r0, [r4, #M_RTCB]   /* Save task TCB into MCB */
-  
+
   /* Grab destination task */
   ldr r1, =TASKTAB
   ldr r1, [r1, r2, lsl #2]  /* Load destination task's TCB address */
   add r3, r1, #T_MSG        /* Calculate destination message queue address */
-  
+
   DISABLE_IRQ
   /* Alter current task's flags so it gets eliminated from dispatch
      process */
   ldr r5, [r0, #T_FLAG]
   orr r5, r5, #MWAIT
   str r5, [r0, #T_FLAG]
-  
+
   /* Find end of queue to insert our MCB */
 __find_mcb:
   ldr r0, [r3, #M_LINK]   /* Load link to next into r0 */
@@ -149,21 +191,21 @@ __find_mcb:
 
 __found_mcb:
   str r4, [r3, #M_LINK]   /* Append our MCB to end of queue */
-  
+
   /* Clear target task RWAIT flag */
   ldr r0, [r1, #T_FLAG]
   bic r0, r0, #RWAIT
   str r0, [r1, #T_FLAG]
   ENABLE_IRQ
-  
+
   /* Switch to some other task */
   b svc_newtask
-  
+
 __err_nomcbs:
   /* Return E_NOMCB error code in r0 */
   SVC_RETURN_CODE #E_NOMCB
   POP_CONTEXT
-  
+
 __err_badtask:
   /* Return E_BADTASK error code in r0 */
   SVC_RETURN_CODE #E_BADTASK
@@ -175,18 +217,18 @@ __err_badtask:
 svc_recv:
   /* Get current task's TCB */
   LOAD_CURRENT_TCB r0
-  
+
   DISABLE_IRQ
   ldr r1, [r0, #T_MSG]
   cmp r1, #0            /* Check if there are any messages */
   beq __wait_for_msg    /* If none, wait */
-  
+
   ldr r2, [r1, #M_LINK] /* Load first message link */
   str r2, [r0, #T_MSG]  /* Remove first message from queue */
   ldr r2, [r0, #T_RPLY] /* Load address of first MCB in reply queue */
   str r2, [r1, #M_LINK]
   str r1, [r0, #T_RPLY] /* Insert message into reply queue */
-  
+
   /* Return TCB address to userspace */
   SVC_RETURN_CODE r1
   POP_CONTEXT
@@ -196,7 +238,7 @@ __wait_for_msg:
   ldr r1, [r0, #T_FLAG]
   orr r1, r1, #RWAIT
   str r1, [r0, #T_FLAG]
-  
+
   /* Switch to other task and retry receive */
   swi #SYS_NEWTASK
   b svc_recv
@@ -209,11 +251,11 @@ __wait_for_msg:
 svc_reply:
   /* Get current task's TCB */
   LOAD_CURRENT_TCB r1
-  
+
   /* Get list header and start MCB search to find the MCB
      directly before us */
   add r2, r1, #T_RPLY
-  
+
   DISABLE_IRQ
 __find_mcb_reply:
   ldr r3, [r2, #M_LINK]
@@ -228,19 +270,19 @@ __found_mcb_reply:
   /* MCB is valid, take it out (r2 = MCB before us in the list) */
   ldr r3, [r0, #M_LINK]
   str r3, [r2, #M_LINK]
-  
+
   /* Update sender's TCB */
   ldr r3, [r0, #M_RTCB]   /* Load sender's TCB pointer to r3 */
   ldr r5, [r3, #T_FLAG]   /* Load sender's flags to r5 */
   bic r5, r5, #MWAIT      /* Clear MWAIT flag */
   str r5, [r3, #T_FLAG]   /* Store flags back */
-  
+
   /* Put MCB back in free list */
   ldr r1, =MCBLIST
   ldr r2, [r1]
   str r2, [r0, #M_LINK]
   str r0, [r1]
-  
+
   ENABLE_IRQ
   b svc_newtask   /* Switch to some other task */
 
@@ -259,10 +301,10 @@ svc_led:
   beq __led_off
   LED_ON
   b __led_done
-  
+
 __led_off:
   LED_OFF
-  
+
 __led_done:
   SVC_RETURN_CODE #0
   POP_CONTEXT
@@ -278,31 +320,31 @@ svc_mmc_read:
   /* Get us a free page for the IO structure */
   mov r3, r0
   bl mm_alloc_page
-  
+
   /* Resolve physical address for our buffer */
   mov r4, r0
   mov r0, r1
   bl vm_get_phyaddr
   mov r1, r0
   mov r0, r4
-  
+
   /* Store stuff into the IO request struct */
   mov r4, #IO_OP_READ
   str r4, [r0, #IO_RQ_OPER]
   str r3, [r0, #IO_RQ_ADDR]
   str r1, [r0, #IO_RQ_BUF]
   str r2, [r0, #IO_RQ_LEN]
-  
+
   /* Queue our request and block current task until request
      is completed. */
   mov r4, r0                  /* Save structure address for later */
   bl io_queue_request
   ldr r3, [r4, #IO_RQ_RESULT] /* Save return code for later */
-  
+
   /* Free memory allocated for IO request struct */
   mov r0, r4
   bl mm_free_page
-  
+
   SVC_RETURN_CODE r3
   POP_CONTEXT
 
@@ -317,31 +359,31 @@ svc_mmc_write:
   /* Get us a free page for the IO structure */
   mov r3, r0
   bl mm_alloc_page
-  
+
   /* Resolve physical address for our buffer */
   mov r4, r0
   mov r0, r1
   bl vm_get_phyaddr
   mov r1, r0
   mov r0, r4
-  
+
   /* Store stuff into the IO request struct */
   mov r4, #IO_OP_WRITE
   str r4, [r0, #IO_RQ_OPER]
   str r3, [r0, #IO_RQ_ADDR]
   str r1, [r0, #IO_RQ_BUF]
   str r2, [r0, #IO_RQ_LEN]
-  
+
   /* Queue our request and block current task until request
      is completed. */
   mov r4, r0                  /* Save structure address for later */
   bl io_queue_request
   ldr r3, [r4, #IO_RQ_RESULT] /* Save return code for later */
-  
+
   /* Free memory allocated for IO request struct */
   mov r0, r4
   bl mm_free_page
-  
+
   SVC_RETURN_CODE r3
   POP_CONTEXT
 
@@ -351,11 +393,11 @@ svc_mmc_write:
 svc_exit:
   /* Get current task's TCB */
   LOAD_CURRENT_TCB r1
-  
+
   /* Overwrite task's flags */
   mov r0, #TFINISHED
   str r0, [r1, #T_FLAG]
-  
+
   /* This task is finished, let's go somewhere else */
   b svc_newtask
 
@@ -376,6 +418,12 @@ SYSCALL_TABLE:
 .long svc_mmc_read  /* (7) MMC block read */
 .long svc_mmc_write /* (8) MMC block write */
 .long svc_exit      /* (9) exit current task */
+.long 0
+.long 0
+.long 0
+.long 0
+.long svc_read      /* (14) read from serial */
+.long svc_readln    /* (15) read line from serial */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4

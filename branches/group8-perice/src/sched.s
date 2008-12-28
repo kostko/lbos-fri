@@ -24,8 +24,7 @@ dispatch:
   
   /* Wrap around if needed */
   cmp r1, #MAXTASK
-  bne __no_wrap
-  mov r1, #0
+  moveq r1, #0
 
 __no_wrap:
   str r1, [r0]

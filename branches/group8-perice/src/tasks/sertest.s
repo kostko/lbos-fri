@@ -14,13 +14,14 @@
 task_sertest:
   /* prints 65534 'A's and one 'C' */
   ldr r0, =SER_PRINT_BUF
-  mov r1, #65536
-  sub r1, r1, #1
+  mov r1, #2
   swi #SYS_PRINT
   
-  swi #SYS_EXIT
-
+  mov r0, #1000
+  swi #SYS_DELAY
+  
   b task_sertest
+  
 
 /*************************************************************
  *      TASK DATA SECTION - For static task structures       *
@@ -28,5 +29,6 @@ task_sertest:
 .section task_data, "aw"
 /* Per-task data structures may be defined below */
 
-SER_PRINT_BUF: .space 65534, 'A'
-               .space 3,   'C'
+SER_PRINT_BUF: /*.space 65534, 'A'
+               .space 3,   'C'    */
+               .asciz "AC"
