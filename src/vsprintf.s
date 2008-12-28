@@ -8,16 +8,16 @@
  * Arguments are passed on stack.
  * NOTE: Args are NOT removed from stack when done.
  * 
- * MODIFIER   CONVERTS to    EXPECTS on stack
- *  %d         decimal        number
- *  %x         hexadecimal    number
- *  %c         character      number <= 255
- *  %s         string         pointer to string\0
+ * MODIFIER   CONVERTS to     EXPECTS on stack
+ *  %d         signed decimal  number
+ *  %x         hexadecimal     number
+ *  %c         character       number <= 255
+ *  %s         string          pointer to string\0
  *  %%         %              
  *
  * @param r0 Pointer to source null-terminated string
  * @param r1 Pointer to destination buffer
- * @return r0 Number of characters written
+ * @return Number of characters written
  */
 vsprintf:
   /* God forbode any more bugs here */
@@ -56,27 +56,27 @@ __pf_loop_end:
 __pf_dec:
   ldmfd r5!, {r2}
   /* There is no division!?#$% */
-  mov r3, #(1 << 31)  /* check sign */
-  ands r3, r2, r3
-  mov r3, #-1 /* mask */
+  ands r3, r2, #(1 << 31) /* check sign */
+  mov r3, #-1             /* mask */
   eorne r2, r2, r3 
   addne r2, r2, #1    /* two's complement */
   movne r3, #'-'
   strneb r3, [r6], #1 /* write sign */
   movne r3, #-1
-  ldr r4, =PF_DEC_BUFFER
-  mov r7, r4
-_pf_dec_loop:
+  ldr r7, =PF_DEC_BUFFER
+__pf_dec_loop:
   subs r2, r2, #10  /* subtract 10 */
   add r3, r3, #1    /* this is the divisor */
-  bpl _pf_dec_loop
+  bpl __pf_dec_loop
   add r2, r2, #10   /* reverse one loop */
   add r2, r2, #'0'
   strb r2, [r7], #1 /* write down the new modulo on buffer */
   movs r2, r3  /* copy new divisor, clear and continue */
   mov r3, #-1
-  bne _pf_dec_loop
+  bne __pf_dec_loop
   /* ok, now fetch correct decimal from buffer reversed */
+  ldr r4, =PF_DEC_BUFFER
+  
 __pf_dec_write:
   ldrb r3, [r7, #-1]!
   strb r3, [r6], #1
