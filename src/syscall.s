@@ -407,14 +407,14 @@ __wait_syntype:
   /* najdi prazen prostor in dodaj element */ 
   mov v6, #10          
              
-___wait_loop1:	
+__wait_loop1:	
   ldr v4, [v5] 
   cmp v4, #0
-  beq svc_wait_loop2 
+  beq __wait_loop2 
   add v5, v5, #4 
   subs v6, v6, #1 
-	bne svc_wait_loop1   
-  b svc_wait_konec 
+	bne __wait_loop1   
+  b __wait_konec 
   
 /* shrani element */ 
 __wait_loop2:
@@ -481,9 +481,9 @@ svc_signal:
   
   /* prvemu elementu(FIFO) zbrisemo(BIT_CLR) flag in ga vzamemo iz vrste,
    ter pomaknemo ostale navzgor*/
-  ldr v6, v5
+  ldr v6, [v5]
   ldr v7, [v6, #T_FLAG]
-  bic v7, v7, 0x100
+  bic v7, v7, #0x100
   str v7, [v6, #T_FLAG]                                                                                                       
   
   /* vse elemente premaknemo za ena navzgor, tako ga prepisemo in popravimo 
