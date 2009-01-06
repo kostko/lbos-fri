@@ -116,6 +116,7 @@ __find_queue:
   
   /* Continue via links */
   mov r1, r2
+  b __find_queue
 
 __place_found:
   /* Put our timer into the queue */
