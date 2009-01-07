@@ -1,7 +1,8 @@
-#summary Plan for improved FAT filesystem implementation.
+#summary Plan for filesystem implementation.
 
   * utilize MMC if present
   * "use free space bitmaps that indicate used and available clusters"
-     * [http://tldp.org/HOWTO/Filesystems-HOWTO.html HPFS] ?
+     * [http://en.wikipedia.org/wiki/Bitmap_index Bitmap index]
+     * [http://crd.lbl.gov/~kewu/ps/LBNL-49626.html WAH compression]
   * ensure less fragmentation
      * [http://geekblog.oneandoneis2.org/index.php/2006/08/17/why_doesn_t_linux_need_defragmenting approaches] ?
