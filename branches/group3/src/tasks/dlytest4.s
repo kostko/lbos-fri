@@ -16,6 +16,17 @@ __td4_loop:
   subs r0, r0, #1
   bne  __td4_loop
 
+  /* Turn LED on */
+  mov r0, #0
+  swi #SYS_LED
+  
+  /* Delay 800 ms */
+  mov r0, #800
+  swi #SYS_DELAY
+  
+  /* Turn LED off */
+  mov r0, #1
+  swi #SYS_LED
 			  
   b task_dlytest4
   
