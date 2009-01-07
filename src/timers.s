@@ -15,7 +15,7 @@
 .code 32
 timer_irq_handler:
   sub r14, r14, #4
-  stmfd sp!, {r0-r4,r14}
+  stmfd sp!, {r0-r2,r14}
   
   /* Read TC0 status register */
   ldr r0, =TC0_BASE
@@ -27,51 +27,56 @@ timer_irq_handler:
   add r1, r1, #1
   str r1, [r0]
   
-  /* Check which timers need to be fired */
-  ldr r0, =TIMERQUEUE
-  
+  /* Check if we have timers to be fired */
 __find_timers:
-  ldr r2, [r0]
-  cmp r2, #0
-  beq __timers_done         /* If there are no more, we are done */
+  ldr r0, =TIMERQUEUE
+  ldr r0, [r0]
+  cmp r0, #0
+  beq __no_more_timers
   
   /* Check if this timer should fire */
-  ldr r3, [r2, #TM_COUNT]
-  cmp r3, r1
-  bls __fire_timer
-  
-  /* Timer should not fire, we are done, since this is an
-     ordered priority queue */
-  b __timers_done
-
-__fire_timer:
-  /* Remove timer from queue and put the block into free
-     blocks list */
-  ldr r3, [r2, #TM_LINK]
-  str r3, [r0]
-  
-  /* Put timer back in free list */
-  ldr r3, =TIMERFREE
-  ldr r4, [r3]
-  str r4, [r2, #TM_LINK]
-  str r2, [r3]
-  
-  /* Load destination task's TCB and clear timer flags */
-  ldr r3, [r2, #TM_TASK]
-  ldr r4, [r3, #T_FLAG]
-  bic r4, r4, #TWAIT
-  str r4, [r3, #T_FLAG]
+  ldr r2, [r0, #TM_COUNT]
+  cmp r2, r1
+  blls __fire_timer
   
   /* Timer has fired, move on */
-  b __find_timers
-
-__timers_done:
-  /* Signal end of IRQ handler */
+  bls __find_timers
+  
+  /* no more timers in TIMERQUEUE */
+__no_more_timers:
   ldr r0, =AIC_BASE
   str r0, [r0, #AIC_EOICR]
-  
-  ldmfd sp!, {r0-r4,pc}^
+  ldmfd sp!, {r0-r2,pc}^
 
+  
+/**
+ * Fire timer.
+ *
+ * @param r0 Pointer to timer which need to be fired
+ */
+__fire_timer:
+  stmfd sp!, {r0-r2,r12,lr}
+
+  /* Remove timer from TIMERQUEUE list */
+  ldr r1, =TIMERQUEUE
+  ldr r2, [r0, #TM_LINK]
+  str r2, [r1]
+  
+  /* Put timer into TIMERFREE list */
+  ldr r1, =TIMERFREE
+  ldr r2, [r1]
+  str r2, [r0, #TM_LINK]
+  str r0, [r1]
+  
+  /* clear timer flags */
+  ldr r1, [r0, #TM_TASK]
+  ldr r2, [r1, #T_FLAG]
+  bic r2, r2, #TWAIT
+  str r2, [r1, #T_FLAG]
+
+  ldmfd sp!, {r0-r2,r12,pc}
+
+  
 /**
  * Registers a new timer.
  *
@@ -87,40 +92,34 @@ register_timer:
   adds r0, r0, r2
   bvs __done              /* If timer would overflow, we are done */
   
-  DISABLE_IRQ
+  /* Make new place for current and move TIMERFREE to next in free list*/
   ldr r2, =TIMERFREE
-  ldr r3, [r2]            /* Load first timer base into r3 */
-  cmp r3, #0              /* Check if it is not NULL */
-  beq __done
-  ldr r4, [r3, #TM_LINK]  /* Get next timer in line */
-  str r4, [r2]            /* Now we hold our own timer */
+  ldr r3, [r2]			  /* read pointer to first in TIMERFREE */
+  
+  str r0, [r3, #TM_COUNT]
+  str r1, [r3, #TM_TASK]  /* save current COUNT and TASK in list */
+  
+  DISABLE_IRQ
+  ldr r1, [r3, #TM_LINK]
+  str r1, [r2]			  /* move TIMERFREE to next in list */
   ENABLE_IRQ
   
-  /* Push data to timer structure */
-  str r0, [r3, #TM_COUNT]
-  str r1, [r3, #TM_TASK]
-  
-  /* Put it into the queue */
   ldr r1, =TIMERQUEUE
-  
-  DISABLE_IRQ
-__find_queue:
-  ldr r2, [r1, #TM_LINK]    /* Get link pointer */
-  cmp r2, #0
-  beq __place_found         /* If there are no more, we are done */
-  
-  /* Check if we should insert it before this one */
-  ldr r4, [r2, #TM_COUNT]
-  cmp r4, r0
-  bhi __place_found
-  
-  /* Continue via links */
-  mov r1, r2
-  b __find_queue
 
-__place_found:
-  /* Put our timer into the queue */
-  str r2, [r3, #TM_LINK]
+  /* sort full list and change TIMERQUEUE if necessary */
+  DISABLE_IRQ
+__jump_to_next:
+  ldr r2, [r1, #TM_LINK]  /* read pointer to first in TIMERQUEUE */
+  cmp r2, #0
+  beq __out_of_loop
+  
+  ldr r4, [r2, #TM_COUNT]
+  cmp r4, r0			  /* compare current COUNT with COUNT in list at current position */
+  movls r1, r2
+  bls __jump_to_next
+  
+__out_of_loop:
+  str r2, [r3, #TM_LINK]  /* add in list before */
   str r3, [r1, #TM_LINK]
   ENABLE_IRQ
 
