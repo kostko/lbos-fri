@@ -21,7 +21,7 @@ __td1_loop:
   swi #SYS_LED
   
   /* Delay 100 ms */
-  mov r0, #8000
+  mov r0, #100
   swi #SYS_DELAY
   
   /* Turn LED off */
