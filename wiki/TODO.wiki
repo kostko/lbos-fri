@@ -70,8 +70,8 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * merge code with source
 
 = Group ? / 2.7 =
-  * directory structure - ?
-  * svc_mkdir, svc_rmdir, svc_chdir, svc_dirup - ?
+  * ~~directory structure
+  * ~~svc_mkdir, svc_rmdir, svc_chdir, svc_dirup - ?
   * ...
 
 = Group ? / 2.8 =
