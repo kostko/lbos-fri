@@ -69,10 +69,11 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * monitor process
   * merge code with source
 
-= Group ? / 2.7 =
-  * ~~directory structure
-  * ~~svc_mkdir, svc_rmdir, svc_chdir, svc_dirup - ?
-  * ...
+= Group 5 / 2.7 =
+  Members: Jernej Erker, Matjaž Verbole, Peter Hrvatin, Rok Kek
+  * ~~directory structure~~
+  * ~~svc_mkdir, svc_rmdir, svc_chdir, svc_dirup~~
+  * testing with user programs
 
 = Group ? / 2.8 =
   * [FileSystemPlan FAT-ng filesystem] - ?
