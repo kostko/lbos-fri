@@ -422,7 +422,7 @@ __wait_loop2:
   ldr v4, =CURRENT 
   ldr v5, [v4]
   ldr v6, [v5, #T_FLAG]
-  orr v6, v6, #0x100
+  orr v6, v6, #SWAIT
   str v6, [v5, #T_FLAG]
   
           
@@ -484,7 +484,7 @@ svc_signal:
    ter pomaknemo ostale navzgor*/
   ldr v6, [v5]
   ldr v7, [v6, #T_FLAG]
-  bic v7, v7, #0x100
+  bic v7, v7, #SWAIT
   str v7, [v6, #T_FLAG]                                                                                                       
   
   /* vse elemente premaknemo za ena navzgor, tako ga prepisemo in popravimo 
