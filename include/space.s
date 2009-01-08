@@ -69,3 +69,9 @@ PAGEOFFSET: .long __PAGE_OFFSET__
 .align 2
 STACK_SUPM_END: .long __STACK_END__ - STACK_SIZE*4
 STACK_IRQM_END: .long __STACK_END__
+
+/* Memory allocation for directories, files... */
+.align 2
+ROOT:	.space D_SIZE
+DIRLIST: .space 50*D_SIZE
+FS_ISFILE .space 4
