@@ -13,219 +13,218 @@
             <ASMSyntaxFile type="String"></ASMSyntaxFile>
           </ColorSyntax>
           <PI.0>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\vm.s</P>
-            <VL type="Integer">180</VL>
+            <L type="Integer">471</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\vm.s</P>
+            <VL type="Integer">466</VL>
           </PI.0>
           <PI.1>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\vectors.s</P>
+            <L type="Integer">15</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\vectors.s</P>
+            <VL type="Integer">2</VL>
           </PI.1>
           <PI.10>
-            <L type="Integer">7</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\dummy.s</P>
+            <L type="Integer">26</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\syscall.s</P>
+            <VL type="Integer">26</VL>
           </PI.10>
           <PI.11>
-            <C type="Integer">20</C>
-            <L type="Integer">486</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\syscall.s</P>
-            <VL type="Integer">490</VL>
+            <L type="Integer">170</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\sched.s</P>
+            <VL type="Integer">158</VL>
           </PI.11>
           <PI.12>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\sched.s</P>
-            <VL type="Integer">138</VL>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\printk.s</P>
           </PI.12>
           <PI.13>
-            <C type="Integer">49</C>
-            <L type="Integer">48</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\printk.s</P>
-            <VL type="Integer">21</VL>
+            <L type="Integer">22</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\main.s</P>
+            <VL type="Integer">12</VL>
           </PI.13>
           <PI.14>
-            <C type="Integer">26</C>
-            <L type="Integer">58</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\main.s</P>
-            <VL type="Integer">52</VL>
-          </PI.14>
-          <PI.15>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\debugger.s</P>
-          </PI.15>
-          <PI.16>
-            <C type="Integer">10</C>
-            <L type="Integer">78</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\include\structures.s</P>
-            <VL type="Integer">63</VL>
-          </PI.16>
-          <PI.17>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\include\space.s</P>
-            <VL type="Integer">84</VL>
-          </PI.17>
-          <PI.18>
-            <C type="Integer">28</C>
-            <L type="Integer">57</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\config\layout.ind</P>
-            <VL type="Integer">36</VL>
-          </PI.18>
-          <PI.19>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\config\init.ini</P>
-          </PI.19>
-          <PI.2>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task6.s</P>
-          </PI.2>
-          <PI.20>
             <C type="Integer">18</C>
             <L type="Integer">100</L>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\debugger.s</P>
             <VL type="Integer">89</VL>
-          </PI.20>
-          <PI.21>
-            <L type="Integer">471</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\vm.s</P>
-            <VL type="Integer">466</VL>
-          </PI.21>
-          <PI.22>
-            <L type="Integer">15</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\vectors.s</P>
-            <VL type="Integer">2</VL>
-          </PI.22>
-          <PI.23>
-            <L type="Integer">4</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task8.s</P>
-          </PI.23>
-          <PI.24>
-            <L type="Integer">5</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task7.s</P>
-          </PI.24>
-          <PI.25>
-            <L type="Integer">5</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task6.s</P>
-          </PI.25>
-          <PI.26>
-            <L type="Integer">5</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task5.s</P>
-          </PI.26>
-          <PI.27>
-            <L type="Integer">6</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task4.s</P>
-          </PI.27>
-          <PI.28>
-            <L type="Integer">6</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task3.s</P>
-          </PI.28>
-          <PI.29>
-            <L type="Integer">8</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task2.s</P>
-          </PI.29>
-          <PI.3>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task5.s</P>
-          </PI.3>
-          <PI.30>
-            <L type="Integer">5</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task1.s</P>
-          </PI.30>
-          <PI.31>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\msgtest.s</P>
-          </PI.31>
-          <PI.32>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\iotest.s</P>
-          </PI.32>
-          <PI.33>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\dummy.s</P>
-          </PI.33>
-          <PI.34>
-            <L type="Integer">430</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\syscall.s</P>
-            <VL type="Integer">420</VL>
-          </PI.34>
-          <PI.35>
-            <L type="Integer">170</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\sched.s</P>
-            <VL type="Integer">158</VL>
-          </PI.35>
-          <PI.36>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\printk.s</P>
-          </PI.36>
-          <PI.37>
-            <L type="Integer">22</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\main.s</P>
-            <VL type="Integer">12</VL>
-          </PI.37>
-          <PI.38>
+          </PI.14>
+          <PI.15>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\include\structures.s</P>
+          </PI.15>
+          <PI.16>
             <C type="Integer">71</C>
             <L type="Integer">44</L>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\include\space.s</P>
             <VL type="Integer">33</VL>
-          </PI.38>
-          <PI.39>
+          </PI.16>
+          <PI.17>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\config\layout.ind</P>
             <VL type="Integer">54</VL>
-          </PI.39>
-          <PI.4>
+          </PI.17>
+          <PI.18>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\config\init.ini</P>
+          </PI.18>
+          <PI.19>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\vm.s</P>
+            <VL type="Integer">180</VL>
+          </PI.19>
+          <PI.2>
+            <L type="Integer">5</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task5.s</P>
+          </PI.2>
+          <PI.20>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\vectors.s</P>
+          </PI.20>
+          <PI.21>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task6.s</P>
+          </PI.21>
+          <PI.22>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task5.s</P>
+          </PI.22>
+          <PI.23>
             <L type="Integer">6</L>
             <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task4.s</P>
+          </PI.23>
+          <PI.24>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task3.s</P>
+          </PI.24>
+          <PI.25>
+            <L type="Integer">11</L>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task2.s</P>
+          </PI.25>
+          <PI.26>
+            <C type="Integer">32</C>
+            <L type="Integer">22</L>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task1.s</P>
+          </PI.26>
+          <PI.27>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\msgtest.s</P>
+          </PI.27>
+          <PI.28>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\iotest.s</P>
+          </PI.28>
+          <PI.29>
+            <L type="Integer">7</L>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\dummy.s</P>
+          </PI.29>
+          <PI.3>
+            <L type="Integer">6</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task4.s</P>
+          </PI.3>
+          <PI.30>
+            <C type="Integer">20</C>
+            <L type="Integer">486</L>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\syscall.s</P>
+            <VL type="Integer">490</VL>
+          </PI.30>
+          <PI.31>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\sched.s</P>
+            <VL type="Integer">138</VL>
+          </PI.31>
+          <PI.32>
+            <C type="Integer">49</C>
+            <L type="Integer">48</L>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\printk.s</P>
+            <VL type="Integer">21</VL>
+          </PI.32>
+          <PI.33>
+            <C type="Integer">26</C>
+            <L type="Integer">58</L>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\main.s</P>
+            <VL type="Integer">52</VL>
+          </PI.33>
+          <PI.34>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\debugger.s</P>
+          </PI.34>
+          <PI.35>
+            <C type="Integer">10</C>
+            <L type="Integer">78</L>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\include\structures.s</P>
+            <VL type="Integer">63</VL>
+          </PI.35>
+          <PI.36>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\include\space.s</P>
+            <VL type="Integer">84</VL>
+          </PI.36>
+          <PI.37>
+            <C type="Integer">28</C>
+            <L type="Integer">57</L>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\config\layout.ind</P>
+            <VL type="Integer">36</VL>
+          </PI.37>
+          <PI.38>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\config\init.ini</P>
+          </PI.38>
+          <PI.39>
+            <L type="Integer">4</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task8.s</P>
+          </PI.39>
+          <PI.4>
+            <L type="Integer">17</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task3.s</P>
+            <VL type="Integer">7</VL>
           </PI.4>
           <PI.40>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\config\init.ini</P>
+            <L type="Integer">5</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task7.s</P>
           </PI.40>
           <PI.41>
-            <C type="Integer">9</C>
-            <L type="Integer">9</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task8.s</P>
+            <L type="Integer">5</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task6.s</P>
           </PI.41>
           <PI.42>
             <C type="Integer">9</C>
             <L type="Integer">9</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task7.s</P>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task8.s</P>
           </PI.42>
           <PI.43>
             <C type="Integer">9</C>
             <L type="Integer">9</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task6.s</P>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task7.s</P>
           </PI.43>
           <PI.44>
+            <C type="Integer">9</C>
+            <L type="Integer">9</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task6.s</P>
+          </PI.44>
+          <PI.45>
             <C type="Integer">26</C>
             <L type="Integer">7</L>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\vectors.s</P>
-          </PI.44>
-          <PI.45>
+          </PI.45>
+          <PI.46>
             <C type="Integer">14</C>
             <L type="Integer">466</L>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\vm.s</P>
             <VL type="Integer">462</VL>
-          </PI.45>
-          <PI.46>
+          </PI.46>
+          <PI.47>
             <C type="Integer">14</C>
             <L type="Integer">4</L>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task5.s</P>
-          </PI.46>
-          <PI.47>
-            <L type="Integer">12</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task4.s</P>
           </PI.47>
           <PI.48>
-            <L type="Integer">11</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task3.s</P>
+            <L type="Integer">12</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task4.s</P>
           </PI.48>
           <PI.49>
-            <C type="Integer">2</C>
-            <L type="Integer">7</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task2.s</P>
+            <L type="Integer">11</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group6\src\tasks\task3.s</P>
           </PI.49>
           <PI.5>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task3.s</P>
+            <L type="Integer">8</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task2.s</P>
           </PI.5>
           <PI.6>
-            <L type="Integer">11</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task2.s</P>
+            <L type="Integer">5</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task1.s</P>
           </PI.6>
           <PI.7>
-            <C type="Integer">32</C>
-            <L type="Integer">22</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task1.s</P>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\msgtest.s</P>
           </PI.7>
           <PI.8>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\msgtest.s</P>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\iotest.s</P>
           </PI.8>
           <PI.9>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\iotest.s</P>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\dummy.s</P>
           </PI.9>
         </REG_ROOT>
       </EditorOptions>
@@ -300,7 +299,7 @@
             <RelativeFileName type="String">..\src\tasks\task2.s</RelativeFileName>
           </Editor.13>
           <Editor.14>
-            <FileBarIndex type="Integer">17</FileBarIndex>
+            <FileBarIndex type="Integer">16</FileBarIndex>
             <RectPosBottom type="Integer">401</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">975</RectPosRight>
@@ -308,7 +307,7 @@
             <RelativeFileName type="String">..\src\tasks\task3.s</RelativeFileName>
           </Editor.14>
           <Editor.15>
-            <FileBarIndex type="Integer">18</FileBarIndex>
+            <FileBarIndex type="Integer">17</FileBarIndex>
             <RectPosBottom type="Integer">372</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">953</RectPosRight>
@@ -316,7 +315,7 @@
             <RelativeFileName type="String">..\src\tasks\task4.s</RelativeFileName>
           </Editor.15>
           <Editor.16>
-            <FileBarIndex type="Integer">19</FileBarIndex>
+            <FileBarIndex type="Integer">18</FileBarIndex>
             <RectPosBottom type="Integer">401</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">998</RectPosRight>
@@ -324,29 +323,21 @@
             <RelativeFileName type="String">..\src\tasks\task5.s</RelativeFileName>
           </Editor.16>
           <Editor.17>
-            <FileBarIndex type="Integer">16</FileBarIndex>
-            <RectPosBottom type="Integer">294</RectPosBottom>
-            <RectPosLeft type="Integer">44</RectPosLeft>
-            <RectPosRight type="Integer">998</RectPosRight>
-            <RectPosTop type="Integer">58</RectPosTop>
-            <RelativeFileName type="String">..\src\tasks\task6.s</RelativeFileName>
-          </Editor.17>
-          <Editor.18>
             <FileBarIndex type="Integer">5</FileBarIndex>
             <RectPosBottom type="Integer">265</RectPosBottom>
             <RectPosLeft type="Integer">22</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
             <RectPosTop type="Integer">29</RectPosTop>
             <RelativeFileName type="String">..\src\vectors.s</RelativeFileName>
-          </Editor.18>
-          <Editor.19>
+          </Editor.17>
+          <Editor.18>
             <FileBarIndex type="Integer">6</FileBarIndex>
             <RectPosBottom type="Integer">236</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">954</RectPosRight>
             <RectPosTop type="Integer">0</RectPosTop>
             <RelativeFileName type="String">..\src\vm.s</RelativeFileName>
-          </Editor.19>
+          </Editor.18>
           <Editor.2>
             <FileBarIndex type="Integer">4</FileBarIndex>
             <RectPosBottom type="Integer">287</RectPosBottom>
@@ -425,10 +416,10 @@
           </EditorHistoryFile.3>
         </Documents.0>
         <Progress>
-          <b type="Integer">676</b>
+          <b type="Integer">549</b>
           <l type="Integer">392</l>
           <r type="Integer">888</r>
-          <t type="Integer">317</t>
+          <t type="Integer">190</t>
         </Progress>
         <Watches>
           <ActiveWatchPane type="Integer">0</ActiveWatchPane>
@@ -691,20 +682,20 @@
             <DisplayMessage type="String">True</DisplayMessage>
             <BP.0>
               <__>
-                <Active type="String">True</Active>
-                <Condition type="String"></Condition>
-                <Condition_Count type="Integer">0</Condition_Count>
-                <ConditionEnabled type="String">False</ConditionEnabled>
-                <Name type="String">&quot;..\src\syscall.s&quot;::431</Name>
-              </__>
-            </BP.0>
-            <BP.1>
-              <__>
                 <Active type="String">False</Active>
                 <Condition type="String"></Condition>
                 <Condition_Count type="Integer">0</Condition_Count>
                 <ConditionEnabled type="String">False</ConditionEnabled>
                 <Name type="String">&quot;..\src\tasks\task1.s&quot;::6</Name>
+              </__>
+            </BP.0>
+            <BP.1>
+              <__>
+                <Active type="String">True</Active>
+                <Condition type="String"></Condition>
+                <Condition_Count type="Integer">0</Condition_Count>
+                <ConditionEnabled type="String">False</ConditionEnabled>
+                <Name type="String">&quot;..\src\syscall.s&quot;::27</Name>
               </__>
             </BP.1>
           </Fetch>
@@ -1166,24 +1157,12 @@
                   <__>
                     <Name type="String">Linker files</Name>
                     <Options type="Integer">1</Options>
-                    <Items.0>
-                      <__>
-                        <Name type="String">layout.ind</Name>
-                        <Options type="Integer">4</Options>
-                      </__>
-                    </Items.0>
                   </__>
                 </Items.1>
                 <Items.2>
                   <__>
                     <Name type="String">Tasks</Name>
                     <Options type="Integer">1</Options>
-                    <Items.0>
-                      <__>
-                        <Name type="String">dummy.s</Name>
-                        <Options type="Integer">4</Options>
-                      </__>
-                    </Items.0>
                   </__>
                 </Items.2>
               </__>
@@ -1861,7 +1840,7 @@
               <Port type="Integer">1</Port>
               <Speed type="Integer">0</Speed>
               <TCPPortNumber type="Integer">5313</TCPPortNumber>
-              <USBDeviceName type="String">iONE (SN 51877)</USBDeviceName>
+              <USBDeviceName type="String">iONE (SN 51780)</USBDeviceName>
             </Communication>
           </HW>
           <LA>
