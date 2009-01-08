@@ -5,7 +5,9 @@
 
 task2:
 
-  
+     /* Delay 500 ms */
+  mov r0, #220
+  swi #SYS_DELAY
 
   
   b task2
