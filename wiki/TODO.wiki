@@ -63,7 +63,7 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * ~~Implement 'Requirements' from plan~~
   * ~~[planOfDelay Plan for SVC_DELAY]~~
 
-= Group ? / 2.6 =
+= Group 4 / 2.6 =
   * svc_getchar, svc_putchar for communication with the serial port - ?
   * monitor process - ?
   * ...
