@@ -4,16 +4,6 @@
 /* Include structure definitions and static variables */
 .include "include/structures.s"
 
-mov r0, #0
-mov r1, #1
-
-ldr r10, TESTBUF
-str r10, MEM
-ldr r10, MEM
-add r10, r10, #12
-str r10, ID
-
-swi #SYS_SIGNAL
 swi #SYS_EXIT
 
 

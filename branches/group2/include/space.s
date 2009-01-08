@@ -39,10 +39,10 @@ MCBAREA:  .space MCBSIZE*NMCBS
 TASK_INITDATA:
       /* TCB | Status register | Task address  | Task size in pages (currently statically defined) | Priority*/ 
 .long TASK1,   PSR_MODE_USER,    _task1_paddr,   256*1024 / PAGESIZE, 2
-.long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE, 3   
-.long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE, 3
-.long TASK4,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE, 3
-.long TASK5,   PSR_MODE_USER,    _task5_paddr,   256*1024 / PAGESIZE, 3
+.long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE, 1   
+.long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE, 1
+.long TASK4,   PSR_MODE_USER,    _task4_paddr,   256*1024 / PAGESIZE, 1
+.long TASK5,   PSR_MODE_USER,    _task5_paddr,   256*1024 / PAGESIZE, 1
 .long TASK6,   PSR_MODE_USER,    _task5_paddr,   256*1024 / PAGESIZE, 1
 .long TASK7,   PSR_MODE_USER,    _task5_paddr,   256*1024 / PAGESIZE, 1
 .long TASK8,   PSR_MODE_USER,    _task5_paddr,   256*1024 / PAGESIZE, 1
