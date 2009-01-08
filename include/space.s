@@ -72,6 +72,6 @@ STACK_IRQM_END: .long __STACK_END__
 
 /* Memory allocation for directories, files... */
 .align 2
-ROOT:	.space D_SIZE
-DIRLIST: .space 50*D_SIZE
-FS_ISFILE .space 4
+D_ROOT:	.space D_SIZE
+D_DIRLIST: .space 50*D_SIZE
+FS_ISFILE: .space 4
