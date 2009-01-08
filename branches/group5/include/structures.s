@@ -16,7 +16,9 @@
 .equ T_FLAG, T_SSP + 4                /* flag word */
 .equ T_PRIO, T_FLAG + 4               /* task priority or something */
 .equ T_TTB, T_PRIO + 4                /* translation table base for this task */
-.equ TCBSIZE, T_TTB + 4               /* size of tcb in bytes */
+.equ T_CURDIR, T_TTB + 4              /* directory, currently opened by the task */
+.equ TCBSIZE, T_CURDIR + 4            /* size of tcb in bytes */
+
 
 
 /* ================================================================
@@ -169,3 +171,38 @@
 .equ SYS_MMC_READ, 7
 .equ SYS_MMC_WRITE, 8
 .equ SYS_EXIT, 9
+
+
+
+/* ================================================================
+                           DIRECTORY STRUCTURE
+   ================================================================
+*/
+.equ D_NAME,0 			/* ime direktorija */
+.equ D_TYPE, D_NAME + 4 	/* tip datoteka ali imenik (if D_TYPE == 0 then directory else file)*/
+.equ D_PARENT, D_TYPE + 4 	/* starš */
+.equ D_CHILD_T, D_PARENT + 4	/* tabela otrok */
+.equ D_SIZE, D_PARENT + 4	/* velikost direktorija */
+
+
+/* ================================================================
+                           DIRECTORY CHILD TABLE
+   ================================================================
+*/
+.equ C_CHILD1, 0  /* otrok 1*/
+.equ C_CHILD2, C_CHILD1 + 4  /* otrok 2*/
+.equ C_CHILD3, C_CHILD2 + 4  /* otrok 3*/
+.equ C_CHILD_T, C_CHILD3 + 4 /* tabela otrok */
+
+
+/* ================================================================
+                           DIRECTORY ERROR CODES
+   ================================================================
+*/
+.equ E_DIR_ODMIK, -9  		/* odmik error code*/
+.equ E_NO_DIR, E_DIR_ODMIK - 1
+.equ E_NO_CHILD, E_NO_DIR - 1
+.equ E_DIR_NOT_EXIST, E_NO_CHILD - 1
+.equ E_CHILD_EXIST, E_DIR_NOT_EXIST - 1
+.equ E_NO_ATR, E_CHILD_EXIST - 1		/* chdir has no input parameters */
+.equ E_END_CHILD_T, E_NO_ATR - 1		/* chdir doesn't have requested dir */
