@@ -64,9 +64,10 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * ~~[planOfDelay Plan for SVC_DELAY]~~
 
 = Group 4 / 2.6 =
-  * svc_getchar, svc_putchar for communication with the serial port - ?
-  * monitor process - ?
-  * ...
+  Members: Nejc Potrebuješ, Andrej Šušmelj, Gorazd Štamcar, Klemen Rade
+  * svc_getchar, svc_putchar for communication with the serial port
+  * monitor process
+  * merge code with source
 
 = Group ? / 2.7 =
   * directory structure - ?
