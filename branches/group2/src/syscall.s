@@ -46,20 +46,19 @@ __bad_svc:
  * New task syscall.
  */
 svc_newtask:
-  DISABLE_IRQ
-
-  mov r1, #SCHEDULER  /* Load scheduling discipline */
-  cmp r1, #0
-  bne prio_dispatch   /* If priority scheduler, enter priority dispatch */
-
-  /* Give the remaining time of the quantum to the next task */
-  ldr r2, =Q_LEFT
-  mov r1, #1
-  str r1, [r2]
-
-  b wrr_dispatch      /* Enter weighted round robin dispatch */
-
-
+  /* Load current task TCB pointer */
+  LOAD_CURRENT_TCB r0
+  cmp r0, #0
+  beq dispatch      /* No current process, enter dispatch */
+  
+  /* Save current task's context. */
+  DISABLE_PIT_IRQ
+  GET_SP #PSR_MODE_SYS, r3    /* Get USP */
+  str r3, [r0, #T_USP]        /* Store USP */
+  str sp, [r0, #T_SSP]        /* Store SSP */
+  
+  /* Branch to scheduler */
+  b dispatch
 
 /**
  * Print line syscall.
@@ -356,173 +355,173 @@ svc_exit:
   b svc_newtask
 
 /**
-  * Check the semaphore's status and enqueue task if status = 0
-  */ 
-   
+* Check the semaphore's status and enqueue task if status = 0
+*/
+
 svc_wait:
-  /*
-  podajanje parametrov:
-  1. stevilka semaforja v r0  (0..9)
-  2. stevilka procesa v CURRENT
-  3. navadni ali syn dolocimo z stanjem v r1   ...recimo
-  (ce r1 == 0 => navaden semafor) 5,6,7,8,9
-  (ce r1 == 1 => Synchro semafor) 0,1,2,3,4
-  oba tipa klicemo 0-4
-  
-  POSTOPEK:         
-  pogledamo stanje semaforja
-  ce je >0 spustimo proces v  KO
-  ce je <0 postavimo proces v vrsto cakanja
-  zmanjsamo stanje  
-  */
-  
-  DISABLE_IRQ
-                                    
-  mov v1, #0x190      /* offset za statusno tabelo */ 
-  ldr v2, =SEMA_TABLES 
-  add v2, v2, v1      /* v2 kaze na statusno tabelo */
- 
-  cmp r1, #0
-  addeq r0, r0, #5    /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
-  
-  mov v1, #4          /* odmik 4B=32bit*/
-  mul v3, v1, r0      /* izracunamo pravi odmik glede na st. semaforja*/
-  add v2, v2, v3      /* smo v statusni tabelci v pravi celici */
+/*
+podajanje parametrov:
+1. stevilka semaforja v r0 (0..9)
+2. stevilka procesa v CURRENT
+3. navadni ali syn dolocimo z stanjem v r1 ...recimo
+(ce r1 == 0 => navaden semafor) 5,6,7,8,9
+(ce r1 == 1 => Synchro semafor) 0,1,2,3,4
+oba tipa klicemo 0-4
 
-  cmp r1, #1
-  beq __wait_syntype   /* mogoce to niti ni potrebno*/           
+POSTOPEK:
+pogledamo stanje semaforja
+ce je >0 spustimo proces v KO
+ce je <0 postavimo proces v vrsto cakanja
+zmanjsamo stanje
+*/
 
-  /* navaden semafor */
-  ldr v3, [v2]
-  cmp v3, #1
-  beq __wait_konec            /* semafor ima se eno prazno mesto=>zmanjsamo status in koncamo  */
-                      
+DISABLE_IRQ
+
+mov v1, #0x190 /* offset za statusno tabelo */
+ldr v2, =SEMA_TABLES
+add v2, v2, v1 /* v2 kaze na statusno tabelo */
+
+cmp r1, #0
+addeq r0, r0, #5 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
+
+mov v1, #4 /* odmik 4B=32bit*/
+mul v3, v1, r0 /* izracunamo pravi odmik glede na st. semaforja*/
+add v2, v2, v3 /* smo v statusni tabelci v pravi celici */
+
+cmp r1, #1
+beq __wait_syntype /* mogoce to niti ni potrebno*/
+
+/* navaden semafor */
+ldr v3, [v2]
+cmp v3, #1
+beq __wait_konec /* semafor ima se eno prazno mesto=>zmanjsamo status in koncamo */
+
 __wait_syntype:
 
-/* dodajanje elementa */  
-  mov v4, #0x28
-  mul v6, v4, r0       /* izracunamo offset za pravo tabelo */ 
-	ldr v5, =SEMA_TABLES 
-  add v5, v5, v6       /* v5 kaze na pravo tabelo semaforja */ 
-  
-  /* najdi prazen prostor in dodaj element */ 
-  mov v6, #10          
-             
-__wait_loop1:	
-  ldr v4, [v5] 
-  cmp v4, #0
-  beq __wait_loop2 
-  add v5, v5, #4 
-  subs v6, v6, #1 
-	bne __wait_loop1   
-  b __wait_konec 
-  
-/* shrani element */ 
-__wait_loop2:
-  ldr v4, =CURRENT 
-  ldr v5, [v4]
-  ldr v6, [v5, #T_FLAG]
-  orr v6, v6, #SWAIT
-  str v6, [v5, #T_FLAG]
-  
-          
-__wait_konec: 
-  sub v3, v3, #1
-  str v3, [v2]
-  
-  ENABLE_IRQ
-  
-  swi #SYS_NEWTASK
+/* dodajanje elementa */
+mov v4, #0x28
+mul v6, v4, r0 /* izracunamo offset za pravo tabelo */
+ldr v5, =SEMA_TABLES
+add v5, v5, v6 /* v5 kaze na pravo tabelo semaforja */
 
-  POP_CONTEXT 
-  
+/* najdi prazen prostor in dodaj element */
+mov v6, #10
+
+__wait_loop1:
+ldr v4, [v5]
+cmp v4, #0
+beq __wait_loop2
+add v5, v5, #4
+subs v6, v6, #1
+bne __wait_loop1
+b __wait_konec
+
+/* shrani element */
+__wait_loop2:
+ldr v4, =CURRENT
+ldr v5, [v4]
+ldr v6, [v5, #T_FLAG]
+orr v6, v6, #SWAIT
+str v6, [v5, #T_FLAG]
+
+
+__wait_konec:
+sub v3, v3, #1
+str v3, [v2]
+
+ENABLE_IRQ
+
+swi #SYS_NEWTASK
+
+
+POP_CONTEXT
+
 svc_signal:
 /*
-  podajanje parametrov:
-  1. stevilka semaforja v r0
-  2. stevilka procesa v CURRENT
-  3. navadni ali syn v r1
-  (ce r1 == 0 => navaden semafor) 5,6,7,8,9
-  (ce r1 == 1 => Synchro semafor) 0,1,2,3,4
-  oba tipa klicemo 0-4
-  
-  POSTOPEK:         
-  prvo povecamo stanje spr.
-  ce je <=0 vzamemo prvi cakajoc proces iz vrste in ga spustimo v KO (BIT_CLR)
-  ce je ==1 pustimo statusno spr. in koncamo
-  */                                        
+podajanje parametrov:
+1. stevilka semaforja v r0
+2. stevilka procesa v CURRENT
+3. navadni ali syn v r1
+(ce r1 == 0 => navaden semafor) 5,6,7,8,9
+(ce r1 == 1 => Synchro semafor) 0,1,2,3,4
+oba tipa klicemo 0-4
+
+POSTOPEK:
+prvo povecamo stanje spr.
+ce je <=0 vzamemo prvi cakajoc proces iz vrste in ga spustimo v KO (BIT_CLR)
+ce je ==1 pustimo statusno spr. in koncamo
+*/
 
 
-  mov v1, #0x190      /* offset za statusno tabelo */ 
-  ldr v2, =SEMA_TABLES 
-  add v2, v2, v1      /* v2 kaze na statusno tabelo */
- 
-  cmp r1, #0
-  addeq r0, r0, #5    /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
-  
-  mov v1, #4          /* odmik 4B=32bit*/
-  mul v3, v1, r0      /* izracunamo pravi odmik glede na st. semaforja*/
-  add v2, v2, v3      /* smo v statusni tabelci v pravi celici */
+mov v1, #0x190 /* offset za statusno tabelo */
+ldr v2, =SEMA_TABLES
+add v2, v2, v1 /* v2 kaze na statusno tabelo */
 
-/*  cmp r1, #1
-  beq __signal_syntype    */         
+cmp r1, #0
+addeq r0, r0, #5 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
 
-  /* povecamo spremenljivko za 1 in shranimo*/
-  ldr v3, [v2]
-  add v3, v3, #1
-  str v3, [v2]
-  
-  /* dodati se pogoje, ce je prej ze navaden enak 0 ali syn enak 1 => error*/
-               
-  /* Vzemanje elementa_FIFO */ 
-  mov v4, #0x28 
-  mul v4, v4, r0    /* izracunamo offset za pravo tabelo */ 
-	ldr v5, =SEMA_TABLES 
-  add v5, v5, v4    /* v5 kaze na pravo tabelo semaforja */ 
-  
-  /* prvemu elementu(FIFO) zbrisemo(BIT_CLR) flag in ga vzamemo iz vrste,
-   ter pomaknemo ostale navzgor*/
-  ldr v6, [v5]
-  ldr v7, [v6, #T_FLAG]
-  bic v7, v7, #SWAIT
-  str v7, [v6, #T_FLAG]                                                                                                       
-  
-  /* vse elemente premaknemo za ena navzgor, tako ga prepisemo in popravimo 
-vrsto*/ 
-  
-    mov v1, #9
+mov v1, #4 /* odmik 4B=32bit*/
+mul v3, v1, r0 /* izracunamo pravi odmik glede na st. semaforja*/
+add v2, v2, v3 /* smo v statusni tabelci v pravi celici */
+
+/* cmp r1, #1
+beq __signal_syntype */
+
+/* povecamo spremenljivko za 1 in shranimo*/
+ldr v3, [v2]
+add v3, v3, #1
+str v3, [v2]
+
+/* dodati se pogoje, ce je prej ze navaden enak 0 ali syn enak 1 => error*/
+
+/* Vzemanje elementa_FIFO */
+mov v4, #0x28
+mul v4, v4, r0 /* izracunamo offset za pravo tabelo */
+ldr v5, =SEMA_TABLES
+add v5, v5, v4 /* v5 kaze na pravo tabelo semaforja */
+
+/* prvemu elementu(FIFO) zbrisemo(BIT_CLR) flag in ga vzamemo iz vrste,
+ter pomaknemo ostale navzgor*/
+ldr v6, [v5]
+ldr v7, [v6, #T_FLAG]
+bic v7, v7, #SWAIT
+str v7, [v6, #T_FLAG]
+
+/* vse elemente premaknemo za ena navzgor, tako ga prepisemo in popravimo
+vrsto*/
+
+mov v1, #9
 __signal_loop1:
-  	ldr v6, [v5, #4]  /* naslednji element pomaknemo za mesto navzgor */
-    str v6, [v5],#4 
-    cmp v6, #0
-    beq __signal_konec /* smo prisli do praznega naslova => konec*/
-	  subs v1, v1, #1 
-  	bne __signal_loop1    
+ldr v6, [v5, #4] /* naslednji element pomaknemo za mesto navzgor */
+str v6, [v5],#4
+cmp v6, #0
+beq __signal_konec /* smo prisli do praznega naslova => konec*/
+subs v1, v1, #1
+bne __signal_loop1
 
 
 __signal_konec:
-    POP_CONTEXT 
+POP_CONTEXT
 
 /* ================================================================
-                           SYCALL TABLE
-   ================================================================
+SYCALL TABLE
+================================================================
 */
 .data
 .align 2
 SYSCALL_TABLE:
-.long svc_newtask   /* (0) enter dispatcher */
-.long svc_println   /* (1) print line to serial console */
-.long svc_delay     /* (2) delay */
-.long svc_send      /* (3) send message */
-.long svc_recv      /* (4) receive message */
-.long svc_reply     /* (5) reply to a message */
-.long svc_led       /* (6) LED manipulation syscall */
-.long svc_mmc_read  /* (7) MMC block read */
+.long svc_newtask /* (0) enter dispatcher */
+.long svc_println /* (1) print line to serial console */
+.long svc_delay /* (2) delay */
+.long svc_send /* (3) send message */
+.long svc_recv /* (4) receive message */
+.long svc_reply /* (5) reply to a message */
+.long svc_led /* (6) LED manipulation syscall */
+.long svc_mmc_read /* (7) MMC block read */
 .long svc_mmc_write /* (8) MMC block write */
-.long svc_exit      /* (9) exit current task */
-.long svc_wait      /* (10) semaphore wait */
-.long svc_signal    /* (11) semaphore signal */
+.long svc_exit /* (9) exit current task */
+.long svc_wait /* (10) semaphore wait */
+.long svc_signal /* (11) semaphore signal */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4
-
