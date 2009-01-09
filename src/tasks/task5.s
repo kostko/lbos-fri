@@ -4,7 +4,7 @@
 /* Include structure definitions and static variables */
 .include "include/structures.s"
 
-swi #SYS_EXIT
+
 
 
 /*************************************************************
