@@ -4,7 +4,7 @@
 /* Include structure definitions and static variables */
 .include "include/structures.s"
 
-task5:
+task8:
 
 swi #SYS_EXIT
 
