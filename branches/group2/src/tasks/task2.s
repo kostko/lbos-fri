@@ -4,16 +4,19 @@
 /* Include structure definitions and static variables */
 .include "include/structures.s"
 
+task2:
+
 mov r0, #0
 mov r1, #1
 
 swi #SYS_WAIT
 
 ldr r10, TESTBUF
-str r10, MEM
-ldr r10, MEM
-add r10, r10, #12
-str r10, ID
+adr r11, MEM 
+str r10, [r11]
+add r11, r11, #12
+ldr r9, ID
+str r9, [r11]
 
 mov r0, #1
 mov r1, #1
@@ -28,6 +31,6 @@ swi #SYS_EXIT
 .section task_data, "aw"
 /* Per-task data structures may be defined below */
 
-TESTBUF: .asciz "www"
-ID: .asciz "2"
+TESTBUF: .asciz "wwww"
+ID: .asciz "111"
 MEM: .space 20
