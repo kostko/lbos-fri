@@ -13,14 +13,13 @@
             <ASMSyntaxFile type="String"></ASMSyntaxFile>
           </ColorSyntax>
           <PI.0>
-            <C type="Integer">13</C>
-            <L type="Integer">8</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task8.s</P>
+            <L type="Integer">471</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\vm.s</P>
+            <VL type="Integer">453</VL>
           </PI.0>
           <PI.1>
-            <C type="Integer">13</C>
-            <L type="Integer">8</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task7.s</P>
+            <L type="Integer">15</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\vectors.s</P>
           </PI.1>
           <PI.10>
             <L type="Integer">8</L>
@@ -42,9 +41,9 @@
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\dummy.s</P>
           </PI.13>
           <PI.14>
-            <L type="Integer">30</L>
+            <L type="Integer">26</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\syscall.s</P>
-            <VL type="Integer">17</VL>
+            <VL type="Integer">26</VL>
           </PI.14>
           <PI.15>
             <C type="Integer">68</C>
@@ -70,8 +69,9 @@
             <VL type="Integer">144</VL>
           </PI.19>
           <PI.2>
-            <L type="Integer">8</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task6.s</P>
+            <C type="Integer">26</C>
+            <L type="Integer">20</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\vmtest.s</P>
           </PI.2>
           <PI.20>
             <C type="Integer">68</C>
@@ -120,9 +120,9 @@
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task1.s</P>
           </PI.29>
           <PI.3>
-            <L type="Integer">471</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\vm.s</P>
-            <VL type="Integer">453</VL>
+            <C type="Integer">13</C>
+            <L type="Integer">8</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task8.s</P>
           </PI.3>
           <PI.30>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\msgtest.s</P>
@@ -167,8 +167,9 @@
             <VL type="Integer">33</VL>
           </PI.39>
           <PI.4>
-            <L type="Integer">15</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\vectors.s</P>
+            <C type="Integer">13</C>
+            <L type="Integer">8</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task7.s</P>
           </PI.4>
           <PI.40>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\config\layout.ind</P>
@@ -207,9 +208,8 @@
             <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task1.s</P>
           </PI.49>
           <PI.5>
-            <C type="Integer">26</C>
-            <L type="Integer">20</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\vmtest.s</P>
+            <L type="Integer">8</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task6.s</P>
           </PI.5>
           <PI.6>
             <L type="Integer">8</L>
@@ -254,10 +254,10 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\src\tasks\task3.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\vectors.s</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
-            <FileBarIndex type="Integer">4</FileBarIndex>
+            <FileBarIndex type="Integer">1</FileBarIndex>
             <RectPosBottom type="Integer">372</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
@@ -265,7 +265,7 @@
             <RelativeFileName type="String">..\config\init.ini</RelativeFileName>
           </Editor.0>
           <Editor.1>
-            <FileBarIndex type="Integer">5</FileBarIndex>
+            <FileBarIndex type="Integer">4</FileBarIndex>
             <RectPosBottom type="Integer">314</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">909</RectPosRight>
@@ -281,7 +281,7 @@
             <RelativeFileName type="String">..\src\tasks\iotest.s</RelativeFileName>
           </Editor.10>
           <Editor.11>
-            <FileBarIndex type="Integer">17</FileBarIndex>
+            <FileBarIndex type="Integer">16</FileBarIndex>
             <RectPosBottom type="Integer">310</RectPosBottom>
             <RectPosLeft type="Integer">92</RectPosLeft>
             <RectPosRight type="Integer">813</RectPosRight>
@@ -329,7 +329,7 @@
             <RelativeFileName type="String">..\src\tasks\task5.s</RelativeFileName>
           </Editor.16>
           <Editor.17>
-            <FileBarIndex type="Integer">2</FileBarIndex>
+            <FileBarIndex type="Integer">5</FileBarIndex>
             <RectPosBottom type="Integer">421</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
@@ -337,7 +337,7 @@
             <RelativeFileName type="String">..\src\tasks\task6.s</RelativeFileName>
           </Editor.17>
           <Editor.18>
-            <FileBarIndex type="Integer">1</FileBarIndex>
+            <FileBarIndex type="Integer">2</FileBarIndex>
             <RectPosBottom type="Integer">450</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">998</RectPosRight>
@@ -353,7 +353,7 @@
             <RelativeFileName type="String">..\src\tasks\task8.s</RelativeFileName>
           </Editor.19>
           <Editor.2>
-            <FileBarIndex type="Integer">8</FileBarIndex>
+            <FileBarIndex type="Integer">6</FileBarIndex>
             <RectPosBottom type="Integer">287</RectPosBottom>
             <RectPosLeft type="Integer">69</RectPosLeft>
             <RectPosRight type="Integer">790</RectPosRight>
@@ -369,7 +369,7 @@
             <RelativeFileName type="String">..\src\tasks\vmtest.s</RelativeFileName>
           </Editor.20>
           <Editor.21>
-            <FileBarIndex type="Integer">16</FileBarIndex>
+            <FileBarIndex type="Integer">17</FileBarIndex>
             <RectPosBottom type="Integer">265</RectPosBottom>
             <RectPosLeft type="Integer">22</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
@@ -385,7 +385,7 @@
             <RelativeFileName type="String">..\src\vm.s</RelativeFileName>
           </Editor.22>
           <Editor.3>
-            <FileBarIndex type="Integer">6</FileBarIndex>
+            <FileBarIndex type="Integer">7</FileBarIndex>
             <RectPosBottom type="Integer">429</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">954</RectPosRight>
@@ -393,7 +393,7 @@
             <RelativeFileName type="String">..\include\structures.s</RelativeFileName>
           </Editor.3>
           <Editor.4>
-            <FileBarIndex type="Integer">7</FileBarIndex>
+            <FileBarIndex type="Integer">8</FileBarIndex>
             <RectPosBottom type="Integer">236</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">954</RectPosRight>
@@ -738,13 +738,22 @@
             </BP.1>
             <BP.2>
               <__>
-                <Active type="String">True</Active>
+                <Active type="String">False</Active>
                 <Condition type="String"></Condition>
                 <Condition_Count type="Integer">0</Condition_Count>
                 <ConditionEnabled type="String">False</ConditionEnabled>
                 <Name type="String">&quot;..\src\vectors.s&quot;::16</Name>
               </__>
             </BP.2>
+            <BP.3>
+              <__>
+                <Active type="String">True</Active>
+                <Condition type="String"></Condition>
+                <Condition_Count type="Integer">0</Condition_Count>
+                <ConditionEnabled type="String">False</ConditionEnabled>
+                <Name type="String">&quot;..\src\syscall.s&quot;::27</Name>
+              </__>
+            </BP.3>
           </Fetch>
         </Breakpoints>
         <CASETool>
