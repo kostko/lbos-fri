@@ -15,7 +15,7 @@
           <PI.0>
             <L type="Integer">471</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\vm.s</P>
-            <VL type="Integer">453</VL>
+            <VL type="Integer">456</VL>
           </PI.0>
           <PI.1>
             <L type="Integer">15</L>
@@ -44,12 +44,12 @@
           <PI.14>
             <L type="Integer">60</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\syscall.s</P>
-            <VL type="Integer">45</VL>
+            <VL type="Integer">49</VL>
           </PI.14>
           <PI.15>
-            <L type="Integer">41</L>
+            <L type="Integer">37</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\sched.s</P>
-            <VL type="Integer">18</VL>
+            <VL type="Integer">14</VL>
           </PI.15>
           <PI.16>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\printk.s</P>
@@ -62,7 +62,7 @@
           <PI.18>
             <L type="Integer">99</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\debugger.s</P>
-            <VL type="Integer">84</VL>
+            <VL type="Integer">69</VL>
           </PI.18>
           <PI.19>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\include\structures.s</P>
@@ -167,8 +167,8 @@
             <VL type="Integer">33</VL>
           </PI.39>
           <PI.4>
-            <C type="Integer">13</C>
-            <L type="Integer">8</L>
+            <C type="Integer">64</C>
+            <L type="Integer">18</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task7.s</P>
           </PI.4>
           <PI.40>
@@ -216,8 +216,7 @@
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task5.s</P>
           </PI.6>
           <PI.7>
-            <C type="Integer">71</C>
-            <L type="Integer">19</L>
+            <L type="Integer">17</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task4.s</P>
           </PI.7>
           <PI.8>
@@ -254,7 +253,7 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\src\tasks\task4.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\sched.s</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
             <FileBarIndex type="Integer">1</FileBarIndex>
@@ -273,7 +272,7 @@
             <RelativeFileName type="String">..\config\layout.ind</RelativeFileName>
           </Editor.1>
           <Editor.10>
-            <FileBarIndex type="Integer">15</FileBarIndex>
+            <FileBarIndex type="Integer">14</FileBarIndex>
             <RectPosBottom type="Integer">430</RectPosBottom>
             <RectPosLeft type="Integer">88</RectPosLeft>
             <RectPosRight type="Integer">997</RectPosRight>
@@ -281,7 +280,7 @@
             <RelativeFileName type="String">..\src\tasks\iotest.s</RelativeFileName>
           </Editor.10>
           <Editor.11>
-            <FileBarIndex type="Integer">16</FileBarIndex>
+            <FileBarIndex type="Integer">15</FileBarIndex>
             <RectPosBottom type="Integer">310</RectPosBottom>
             <RectPosLeft type="Integer">92</RectPosLeft>
             <RectPosRight type="Integer">813</RectPosRight>
@@ -297,7 +296,7 @@
             <RelativeFileName type="String">..\src\tasks\task1.s</RelativeFileName>
           </Editor.12>
           <Editor.13>
-            <FileBarIndex type="Integer">19</FileBarIndex>
+            <FileBarIndex type="Integer">18</FileBarIndex>
             <RectPosBottom type="Integer">343</RectPosBottom>
             <RectPosLeft type="Integer">22</RectPosLeft>
             <RectPosRight type="Integer">931</RectPosRight>
@@ -305,7 +304,7 @@
             <RelativeFileName type="String">..\src\tasks\task2.s</RelativeFileName>
           </Editor.13>
           <Editor.14>
-            <FileBarIndex type="Integer">20</FileBarIndex>
+            <FileBarIndex type="Integer">19</FileBarIndex>
             <RectPosBottom type="Integer">401</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">975</RectPosRight>
@@ -329,7 +328,7 @@
             <RelativeFileName type="String">..\src\tasks\task5.s</RelativeFileName>
           </Editor.16>
           <Editor.17>
-            <FileBarIndex type="Integer">8</FileBarIndex>
+            <FileBarIndex type="Integer">16</FileBarIndex>
             <RectPosBottom type="Integer">421</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
@@ -337,7 +336,7 @@
             <RelativeFileName type="String">..\src\tasks\task6.s</RelativeFileName>
           </Editor.17>
           <Editor.18>
-            <FileBarIndex type="Integer">4</FileBarIndex>
+            <FileBarIndex type="Integer">8</FileBarIndex>
             <RectPosBottom type="Integer">450</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">998</RectPosRight>
@@ -353,7 +352,7 @@
             <RelativeFileName type="String">..\src\tasks\task8.s</RelativeFileName>
           </Editor.19>
           <Editor.2>
-            <FileBarIndex type="Integer">5</FileBarIndex>
+            <FileBarIndex type="Integer">4</FileBarIndex>
             <RectPosBottom type="Integer">287</RectPosBottom>
             <RectPosLeft type="Integer">69</RectPosLeft>
             <RectPosRight type="Integer">790</RectPosRight>
@@ -369,7 +368,7 @@
             <RelativeFileName type="String">..\src\tasks\vmtest.s</RelativeFileName>
           </Editor.20>
           <Editor.21>
-            <FileBarIndex type="Integer">18</FileBarIndex>
+            <FileBarIndex type="Integer">20</FileBarIndex>
             <RectPosBottom type="Integer">265</RectPosBottom>
             <RectPosLeft type="Integer">22</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
@@ -385,7 +384,7 @@
             <RelativeFileName type="String">..\src\vm.s</RelativeFileName>
           </Editor.22>
           <Editor.3>
-            <FileBarIndex type="Integer">6</FileBarIndex>
+            <FileBarIndex type="Integer">5</FileBarIndex>
             <RectPosBottom type="Integer">429</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">954</RectPosRight>
@@ -393,7 +392,7 @@
             <RelativeFileName type="String">..\include\structures.s</RelativeFileName>
           </Editor.3>
           <Editor.4>
-            <FileBarIndex type="Integer">7</FileBarIndex>
+            <FileBarIndex type="Integer">6</FileBarIndex>
             <RectPosBottom type="Integer">236</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">954</RectPosRight>
@@ -401,7 +400,7 @@
             <RelativeFileName type="String">..\src\debugger.s</RelativeFileName>
           </Editor.4>
           <Editor.5>
-            <FileBarIndex type="Integer">10</FileBarIndex>
+            <FileBarIndex type="Integer">7</FileBarIndex>
             <RectPosBottom type="Integer">241</RectPosBottom>
             <RectPosLeft type="Integer">23</RectPosLeft>
             <RectPosRight type="Integer">744</RectPosRight>
@@ -409,7 +408,7 @@
             <RelativeFileName type="String">..\src\main.s</RelativeFileName>
           </Editor.5>
           <Editor.6>
-            <FileBarIndex type="Integer">11</FileBarIndex>
+            <FileBarIndex type="Integer">10</FileBarIndex>
             <RectPosBottom type="Integer">264</RectPosBottom>
             <RectPosLeft type="Integer">46</RectPosLeft>
             <RectPosRight type="Integer">767</RectPosRight>
@@ -417,7 +416,7 @@
             <RelativeFileName type="String">..\src\printk.s</RelativeFileName>
           </Editor.6>
           <Editor.7>
-            <FileBarIndex type="Integer">12</FileBarIndex>
+            <FileBarIndex type="Integer">11</FileBarIndex>
             <RectPosBottom type="Integer">241</RectPosBottom>
             <RectPosLeft type="Integer">23</RectPosLeft>
             <RectPosRight type="Integer">744</RectPosRight>
@@ -425,7 +424,7 @@
             <RelativeFileName type="String">..\src\sched.s</RelativeFileName>
           </Editor.7>
           <Editor.8>
-            <FileBarIndex type="Integer">13</FileBarIndex>
+            <FileBarIndex type="Integer">12</FileBarIndex>
             <RectPosBottom type="Integer">287</RectPosBottom>
             <RectPosLeft type="Integer">69</RectPosLeft>
             <RectPosRight type="Integer">790</RectPosRight>
@@ -433,7 +432,7 @@
             <RelativeFileName type="String">..\src\syscall.s</RelativeFileName>
           </Editor.8>
           <Editor.9>
-            <FileBarIndex type="Integer">14</FileBarIndex>
+            <FileBarIndex type="Integer">13</FileBarIndex>
             <RectPosBottom type="Integer">241</RectPosBottom>
             <RectPosLeft type="Integer">23</RectPosLeft>
             <RectPosRight type="Integer">744</RectPosRight>
