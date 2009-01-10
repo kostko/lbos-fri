@@ -9,11 +9,8 @@ task1:
 mov r0, #0
 mov r1, #1
 
-ldr r10, TESTBUF
-adr r11, MEM 
-str r10, [r11]
-add r11, r11, #12
-ldr r9, ID
+ldr r11, =MEM 
+mov r9, #0xAA
 str r9, [r11]
 
 swi #SYS_SIGNAL
@@ -26,6 +23,6 @@ swi #SYS_EXIT
 .section task_data, "aw"
 /* Per-task data structures may be defined below */
 
-TESTBUF: .asciz "wwww"
+TESTBUF: .asciz "ssss"
 ID: .asciz "111"
-MEM: .space 20
+MEM: .space 5

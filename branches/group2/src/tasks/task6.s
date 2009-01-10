@@ -14,7 +14,3 @@ swi #SYS_EXIT
  *************************************************************/
 .section task_data, "aw"
 /* Per-task data structures may be defined below */
-
-TESTBUF: .asciz "www"
-ID: .asciz "1"
-MEM: .space 20
