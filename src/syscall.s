@@ -484,7 +484,6 @@ add v5, v5, v4 /* v5 kaze na pravo tabelo semaforja */
 ter pomaknemo ostale navzgor*/
 ldr v6, [v5]
 ldr v7, [v6, #T_FLAG]
-mov v7, #0
 bic v7, v7, #SWAIT
 str v7, [v6, #T_FLAG]
 
@@ -495,6 +494,7 @@ mov v1, #9
 __signal_loop1:
 ldr v6, [v5, #4] /* naslednji element pomaknemo za mesto navzgor */
 str v6, [v5],#4
+cmp v6, #0
 beq __signal_konec /* smo prisli do praznega naslova => konec*/
 subs v1, v1, #1
 bne __signal_loop1
