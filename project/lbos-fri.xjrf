@@ -22,7 +22,8 @@
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\vectors.s</P>
           </PI.1>
           <PI.10>
-            <L type="Integer">8</L>
+            <C type="Integer">70</C>
+            <L type="Integer">7</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task1.s</P>
             <VL type="Integer">3</VL>
           </PI.10>
@@ -41,15 +42,14 @@
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\dummy.s</P>
           </PI.13>
           <PI.14>
-            <L type="Integer">26</L>
+            <L type="Integer">60</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\syscall.s</P>
-            <VL type="Integer">26</VL>
+            <VL type="Integer">45</VL>
           </PI.14>
           <PI.15>
-            <C type="Integer">68</C>
-            <L type="Integer">33</L>
+            <L type="Integer">41</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\sched.s</P>
-            <VL type="Integer">9</VL>
+            <VL type="Integer">18</VL>
           </PI.15>
           <PI.16>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\printk.s</P>
@@ -60,7 +60,7 @@
             <VL type="Integer">22</VL>
           </PI.17>
           <PI.18>
-            <L type="Integer">96</L>
+            <L type="Integer">99</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\debugger.s</P>
             <VL type="Integer">84</VL>
           </PI.18>
@@ -80,10 +80,10 @@
             <VL type="Integer">30</VL>
           </PI.20>
           <PI.21>
-            <C type="Integer">34</C>
-            <L type="Integer">13</L>
+            <C type="Integer">52</C>
+            <L type="Integer">60</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\config\layout.ind</P>
-            <VL type="Integer">30</VL>
+            <VL type="Integer">36</VL>
           </PI.21>
           <PI.22>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\config\init.ini</P>
@@ -216,21 +216,21 @@
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task5.s</P>
           </PI.6>
           <PI.7>
-            <C type="Integer">14</C>
-            <L type="Integer">31</L>
+            <C type="Integer">71</C>
+            <L type="Integer">19</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task4.s</P>
-            <VL type="Integer">3</VL>
           </PI.7>
           <PI.8>
-            <L type="Integer">20</L>
+            <C type="Integer">13</C>
+            <L type="Integer">15</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task3.s</P>
-            <VL type="Integer">6</VL>
+            <VL type="Integer">3</VL>
           </PI.8>
           <PI.9>
-            <C type="Integer">14</C>
-            <L type="Integer">35</L>
+            <C type="Integer">13</C>
+            <L type="Integer">15</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task2.s</P>
-            <VL type="Integer">9</VL>
+            <VL type="Integer">3</VL>
           </PI.9>
         </REG_ROOT>
       </EditorOptions>
@@ -254,7 +254,7 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\src\vectors.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\tasks\task4.s</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
             <FileBarIndex type="Integer">1</FileBarIndex>
@@ -265,7 +265,7 @@
             <RelativeFileName type="String">..\config\init.ini</RelativeFileName>
           </Editor.0>
           <Editor.1>
-            <FileBarIndex type="Integer">4</FileBarIndex>
+            <FileBarIndex type="Integer">2</FileBarIndex>
             <RectPosBottom type="Integer">314</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">909</RectPosRight>
@@ -289,7 +289,7 @@
             <RelativeFileName type="String">..\src\tasks\msgtest.s</RelativeFileName>
           </Editor.11>
           <Editor.12>
-            <FileBarIndex type="Integer">18</FileBarIndex>
+            <FileBarIndex type="Integer">17</FileBarIndex>
             <RectPosBottom type="Integer">314</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">909</RectPosRight>
@@ -329,7 +329,7 @@
             <RelativeFileName type="String">..\src\tasks\task5.s</RelativeFileName>
           </Editor.16>
           <Editor.17>
-            <FileBarIndex type="Integer">5</FileBarIndex>
+            <FileBarIndex type="Integer">8</FileBarIndex>
             <RectPosBottom type="Integer">421</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
@@ -337,7 +337,7 @@
             <RelativeFileName type="String">..\src\tasks\task6.s</RelativeFileName>
           </Editor.17>
           <Editor.18>
-            <FileBarIndex type="Integer">2</FileBarIndex>
+            <FileBarIndex type="Integer">4</FileBarIndex>
             <RectPosBottom type="Integer">450</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">998</RectPosRight>
@@ -353,7 +353,7 @@
             <RelativeFileName type="String">..\src\tasks\task8.s</RelativeFileName>
           </Editor.19>
           <Editor.2>
-            <FileBarIndex type="Integer">6</FileBarIndex>
+            <FileBarIndex type="Integer">5</FileBarIndex>
             <RectPosBottom type="Integer">287</RectPosBottom>
             <RectPosLeft type="Integer">69</RectPosLeft>
             <RectPosRight type="Integer">790</RectPosRight>
@@ -369,7 +369,7 @@
             <RelativeFileName type="String">..\src\tasks\vmtest.s</RelativeFileName>
           </Editor.20>
           <Editor.21>
-            <FileBarIndex type="Integer">17</FileBarIndex>
+            <FileBarIndex type="Integer">18</FileBarIndex>
             <RectPosBottom type="Integer">265</RectPosBottom>
             <RectPosLeft type="Integer">22</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
@@ -385,7 +385,7 @@
             <RelativeFileName type="String">..\src\vm.s</RelativeFileName>
           </Editor.22>
           <Editor.3>
-            <FileBarIndex type="Integer">7</FileBarIndex>
+            <FileBarIndex type="Integer">6</FileBarIndex>
             <RectPosBottom type="Integer">429</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">954</RectPosRight>
@@ -393,7 +393,7 @@
             <RelativeFileName type="String">..\include\structures.s</RelativeFileName>
           </Editor.3>
           <Editor.4>
-            <FileBarIndex type="Integer">8</FileBarIndex>
+            <FileBarIndex type="Integer">7</FileBarIndex>
             <RectPosBottom type="Integer">236</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">954</RectPosRight>
@@ -625,7 +625,7 @@
               <Type type="Integer">0</Type>
               <TypeOfWnd type="Integer">6</TypeOfWnd>
               <Data>
-                <Address type="Integer">539492352</Address>
+                <Address type="Integer">539754496</Address>
                 <AddrMode type="Integer">1</AddrMode>
                 <Area type="Integer">0</Area>
                 <Bits type="Integer">8</Bits>
@@ -634,12 +634,12 @@
                 <LimitMAUsPerLine type="Integer">0</LimitMAUsPerLine>
                 <Low type="Integer">0</Low>
                 <RealTime type="Integer">0</RealTime>
-                <strAddress type="String">0x20280000</strAddress>
+                <strAddress type="String">0x202c0000</strAddress>
                 <SwapFloat type="String">True</SwapFloat>
                 <SwapInt type="String">True</SwapInt>
                 <API.0>
-                  <Address type="Integer">539492352</Address>
-                  <AddressOffset type="Integer">539492352</AddressOffset>
+                  <Address type="Integer">539754496</Address>
+                  <AddressOffset type="Integer">539754496</AddressOffset>
                   <DisplayMode type="Integer">0</DisplayMode>
                   <FloatLowFirst type="Integer">1</FloatLowFirst>
                   <IntLowFirst type="Integer">1</IntLowFirst>

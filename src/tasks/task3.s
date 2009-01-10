@@ -11,11 +11,8 @@ mov r1, #1
 
 swi #SYS_WAIT
 
-ldr r10, TESTBUF
-adr r11, MEM 
-str r10, [r11]
-add r11, r11, #12
-ldr r9, ID
+ldr r11, =MEM 
+mov r9, #0xAA
 str r9, [r11]
 
 mov r0, #2
@@ -31,6 +28,6 @@ swi #SYS_EXIT
 .section task_data, "aw"
 /* Per-task data structures may be defined below */
 
-TESTBUF: .asciz "wwww"
-ID: .asciz "111"
-MEM: .space 20
+TESTBUF: .asciz "ssss"
+ID: .asciz "333"
+MEM: .space 5
