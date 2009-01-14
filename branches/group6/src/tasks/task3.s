@@ -6,13 +6,10 @@
 task3:
 
 
-  
-
-  
   b task3
 
 /*************************************************************
  *      TASK DATA SECTION - For static task structures       *
  *************************************************************/
 .section task_data, "aw"
-NEKI: .asciz "Bla bla"
+

@@ -111,11 +111,6 @@ init_sysc_irq:
      the task scheduler. This timer will generate "System Controller
      Interrupt" (peripheral = 1) type interrupt which is shared with
      some other devices (such as the debug unit)! */
-	 
-  /* Skip initialization of the Periodic Interval Timer if priority sheduler is used*/
-  mov r0, #SCHEDULER
-  cmp r0, #0
-  bne init_timer
   
 init_pit:
   ldr r0, =PIT_BASE

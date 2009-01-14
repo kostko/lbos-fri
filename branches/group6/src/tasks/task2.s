@@ -5,14 +5,14 @@
 
 task2:
 
-     /* Delay 500 ms */
-  mov r0, #220
+  /* Delay 200 ms */
+  mov r0, #200
   swi #SYS_DELAY
-
-  
+ 
   b task2
 
 /*************************************************************
  *      TASK DATA SECTION - For static task structures       *
  *************************************************************/
 .section task_data, "aw"
+
