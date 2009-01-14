@@ -33,7 +33,6 @@ dispatch:
 
   cmp r1, #0
   beq wrr_dispatch   /* If current task has no quanta left, enter wrr_dispatch */
-
  
   sub r1, r1, #1     /* decrement quanta left */
   str r1, [r2]       /* store new Q_LEFT */
@@ -88,14 +87,6 @@ __no_wrap:
   bne __continue_wrr     /* If not, try another one */
 
   /* Found a task to switch to (TCB in r2) */ 
-   ldr r0, =MSG_1
-   mov r8, r1, lsr #2
-   mov r9, r8, lsl #3
-   add r0, r0, r9
-   mov r9, r8, lsl #1
-   add r0, r0, r9       
-   bl printk 
-  
   str r2, [r4]              /* Set task as current (CURRENT's address in r4) */
   ldr r3, [r2, #T_PRIO]     /* Load "or something" (That something is a number
                                of quanta this task will be executing before
@@ -164,14 +155,7 @@ __continue_prio:
   b __continue_prio
  
 __end_prio:
-  /* Found a task to switch to (TCB in r5) */
-  
-   ldr r0, =MSG_1       
-   mov r9, r8, lsl #3
-   add r0, r0, r9
-   mov r9, r8, lsl #1
-   add r0, r0, r9       
-   bl printk 
+  /* Found a task to switch to (TCB in r5) */ 
   
   str r5, [r4]              /* Set task as current (CURRENT's address in r4) */
   ldr r3, [r5, #T_USP]      /* Load task's USP */
@@ -198,13 +182,3 @@ __no_dis_task:
 __forever_d:
   b __forever_d
   
-
-  .data
-/* Messages */
-MSG_1: .asciz "\n\rTask1\n\r"
-MSG_2: .asciz "\n\rTask2\n\r"
-MSG_3: .asciz "\n\rTask3\n\r"
-MSG_4: .asciz "\n\rTask4\n\r"
-MSG_5: .asciz "\n\rTask5\n\r"                   
-
-
