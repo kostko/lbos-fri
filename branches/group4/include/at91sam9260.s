@@ -64,6 +64,9 @@
 .equ DBGU_IMR, 0x10 /* (DBGU) Interrupt Mask Register */
 .equ DBGU_IER, 0x08 /* (DBGU) Interrupt Enable Register */
 .equ DBGU_CR, 0x00 /* (DBGU) Control Register */
+.equ DBGU_TPR, 0x108 /* (PDC) Transmit Pointer Register */
+.equ DBGU_TCR, 0x10C /* (PDC) Transmit Counter Register */
+.equ DBGU_PTCR, 0x120 /* (PDC) Periph. Transfer Control Register */
 
 .equ PDC_RPR, 0x100 /* (PDC) Receive Pointer Register */
 .equ PDC_RCR, 0x104 /* (PDC) Receive Counter Register */
