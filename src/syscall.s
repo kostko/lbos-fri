@@ -63,9 +63,12 @@ svc_newtask:
 /**
  * Print line syscall.
  */
+ 
 svc_println:
-  /* TODO */
-  b svc_println
+
+    bl printk  
+  
+  b svc_newtask
 
 /**
  * Delay syscall.
@@ -354,6 +357,72 @@ svc_exit:
   /* This task is finished, let's go somewhere else */
   b svc_newtask
 
+
+/* REGISTER USAGE (values)
+ *
+ * - r10 - current TCB = if 0 then get TCBLIST 
+ * - r11:
+ *      - 0 = TCBLIST
+ *      - 1 = T_LINK
+ *      - 2 = T_NAME
+ *      - 3 = T_MSG
+ *      - 4 = T_SSP
+ *      - 5 = T_FLAG
+ *      - 6 = T_PRIO
+ *      - 7 = M_LINK for T_MSG
+ *      - 8 = M_LINK for T_RPLY
+ *      - 9 = T_RPLY
+ */
+   
+svc_getc:
+  
+    cmp r10, #0
+    cmpeq r1, #0
+    ldreq r11, = TCBLIST
+    beq svc_getc_end
+    
+    cmp r11, #1
+    ldreq r11, [r10, #T_LINK]
+    beq svc_getc_end
+    
+    cmp r11, #2
+    ldreq r11, [r10, #T_NAME]
+    beq svc_getc_end
+
+    cmp r11, #3
+    ldreq r11, [r10, #T_MSG]
+    beq svc_getc_end
+
+    cmp r11, #4
+    ldreq r11, [r10, #T_SSP]
+    beq svc_getc_end
+
+    cmp r11, #5
+    ldreq r11, [r10, #T_FLAG]
+    beq svc_getc_end 
+    
+    cmp r11, #6
+    ldreq r11, [r10, #T_PRIO]
+    beq svc_getc_end
+
+    cmp r11, #7
+    ldreq r12, [r10, #T_MSG]
+    ldreq r11, [r12, #M_LINK]
+    beq svc_getc_end
+    
+    cmp r11, #8
+    ldreq r12, [r10, #T_RPLY]
+    ldreq r11, [r12, #M_LINK]
+    beq svc_getc_end 
+    
+    cmp r11, #9
+    ldreq r11, [r10, #T_RPLY]
+    
+  svc_getc_end:
+
+ 
+  b svc_newtask
+  
 /* ================================================================
                            SYCALL TABLE
    ================================================================
@@ -371,6 +440,7 @@ SYSCALL_TABLE:
 .long svc_mmc_read  /* (7) MMC block read */
 .long svc_mmc_write /* (8) MMC block write */
 .long svc_exit      /* (9) exit current task */
+.long svc_getc      /* (10) get value from memory address  */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4
