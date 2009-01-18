@@ -1,7 +1,8 @@
 /*
  * FRI-LBOS ;-)
- * general OS framework (C) 2008 by FRI/OS1/Group8
+ * general OS framework (C) 2008 by FRI/OS1/Group4
  */
+
 .section task_code, "ax"
 .code 32
 
@@ -17,83 +18,74 @@ task_iotest:
 
   MAIN_LOOP:
 
-/* ==============================================================================================================*/
-/* ============================== MONITOR =======================================================================*/
-/* ==============================================================================================================*/
-  mov r1, #0
+/* ==============================================================================================================*
+ * ============================== MONITOR =======================================================================*
+ * ==============================================================================================================*/
   
-  /* V R11 DOBIMO NASLOV TCBLIST ----------------------*/
-  mov r10, #0
+  /* V R0 DOBIMO NASLOV TCBLIST-a ----------------------*/
+  /*++++++++++++++++++*/
+  mov r0, #0
   swi #SYS_GETC
-  mov r2, r11
-  mov r10, r11
+  /*++++++++++++++++++*/
 
+  ldr r1, = CURRTCB
+  str r0, [r1]
+  
 	ldr r1, = LINE
-    
-  ldr r4, = TLINK
-  str r11, [r4]
-  
-  @ldr r2, = TCBLIST2 						        /*   R2 <-- Address of the first TCB  */
 
-/* REGISTER USAGE
- * R1 - Line Address
- * R2 - TCB Pointer
-*/
-
-  @ CHANGING TCBSEQ
-  
+  @ CHANGING TCBSEQ  
   ldr r3, = TCBSEQ
   mov r4, #1
   str r4, [r3]
+  
                    
-  MONITOR_LOOP:									                /* Reading TCBs and their parameters and storing them to LINE */
- 
-    ldr r1, = LINE
-    
-    /* V R11 DOBIMO T_LINK --------------------------*/
-    /* trenutni naslov TCB damo v r10 */
-    
-    ldr r4, = TLINK
-    ldr r10, [r4]
-    
-    /* v r11 damo 1, da bomo dobili T_LINK */
-    mov r11, #1
-    swi #SYS_GETC
-    /* vrednost T_LINK-a damo v r3*/    
-    mov r3, r11
-    
-    /* Saving T_LINK */
-    ldr r4, = TLINK
-    str r11, [r4]
+  MONITOR_LOOP:									   
 
-    cmp r11, #0
+    /* v r0 damo 1, da bomo dobili T_LINK */
+    /*++++++++++++++++++++*/
+    mov r0, #1
+    swi #SYS_GETC
+    /*++++++++++++++++++++*/
+
+    ldr r4, = NEXTTCB
+    str r0, [r4]
+    
+    /* vrednost T_LINK-a damo v r3 t.j vrednost naslednjega TCB-ja */    
+    
+    cmp r0, #0
     beq LAST_TCB
               
-    @ INITIALIZING LINE
+    /* INITIALIZING LINE */
            
-    mov r4, #32			/* ASCII code for ' ' */
+    mov r4, #32			                        /* ASCII code for ' ' */
     mov r5, #0
     init_loop_not_last:	
       	strb r4, [r1, r5]
         add r5, r5, #1
       	cmp r5, #79
       	blt init_loop_not_last
-    mov r4, #0
+    mov r4, #0                              /* Insertnig NULL Character*/
     strb r4, [r1, r5]
         
-    @ INITIALIZING LINE OVER
+    /* INITIALIZING LINE OVER */
                                					            
-    b WRITE_TO_LINE_AND_TERMINAL 		/* Print current TCB */
+    b WRITE_TO_LINE_AND_TERMINAL 		        /* Saving current TCB parameters to LINE */
     
     MORE_TCB:
 
+      /* zamenjamo NEXTTCB --> CURRTCB */
+      ldr r4, = NEXTTCB
+      ldr r5, [r4]
+      ldr r6, = CURRTCB
+      str r5, [r6]
+      
       ldr r0, = LINE
       swi #SYS_PRINTLN 
 
       b MONITOR_LOOP
     
     LAST_TCB:
-                
+               
         @ CHANGING TCBSEQ
         
         ldr r6, = TCBSEQ
@@ -168,10 +160,8 @@ REGISTER USAGE:
   - R3: Next TCB Address
 */
 
-  ldr r4, = TLINK
-  ldr r10, [r4]
 /*------------------------------------------------------------*/  
-  @ PROCESS NAME	( TEMP_NAME )
+  @ PROCESS NAME	( T_NAME )
  
   ldr r5, = V_NAME
   
@@ -182,12 +172,15 @@ REGISTER USAGE:
   strb r4, [r1, r5]
   add r5, r5, #1   
 
-  /* V R11 DOBIMO T_NAME --------------------------*/
-  /* v r10 imamo naslov trenutnega TCB-ja*/
-  
-  mov r11, #2
+  /* V R0 DOBIMO T_NAME --------------------------*/
+  /*++++++++++++++++++++*/
+
+  mov r0, #2
   swi #SYS_GETC
-  mov r6, r11
+
+  /*++++++++++++++++++++*/
+
+  mov r6, r0
 
   and r4, r6, #127
   cmp r4, #0
@@ -214,68 +207,20 @@ REGISTER USAGE:
   addeq r4, r4, #48
   strb r4, [r1, r5]
   add r5, r5, #1
-  
-/*------------------------------------------------------------*/
-
-  @ PROCESS SSP	( TEMP_SSP )
-    
-  ldr r5, = V_SSP
-    
-  mov r4, #83                 @ ASCII --> 'S' 	 
-  strb r4, [r1, r5]
-  add r5, r5, #1
-  mov r4, #58  						    @ ASCII --> ':' 	
-  strb r4, [r1, r5]
-  add r5, r5, #1
-
-  /* V R11 DOBIMO T_SSP --------------------------*/
-  /* v r10 imamo naslov trenutnega TCB-ja*/
-  mov r11, #4
-  swi #SYS_GETC
-  mov r6, r11
-
-  ldr r12, = TMPSTR1
-  mov r9, #7
-  
-  lth_ssp_loop:
-  
-  cmp r9, #0
-  blt lth_ssp_end  
-  and r4, r6, #15
-  cmp r4, #10
-  addge r4, r4, #55
-  addlt r4, r4, #48
-  strb r4, [r12, r9]
-  sub r9, r9, #1
-  mov r6, r6, LSR #4
-  b lth_ssp_loop
-
-  lth_ssp_end:
-
-  ldr r6, = TMPSTR1
-  mov r4, #0
-  
-  SSP_loop:
-  
-  ldrb r7, [r6, r4]
-  strb r7, [r1, r5]
-  add r5, r5, #1
-  add r4, r4, #1
-  cmp r4, #7
-  ble SSP_loop
 
 /*------------------------------------------------------------*/
-
   @ PROCESS PRIOITY
       
   ldr r5, = V_PRIO
   mov r8, #0
 
-  /* V R11 DOBIMO T_PRIO --------------------------*/
-  /* v r10 imamo naslov trenutnega TCB-ja*/
-  mov r11, #6
+  /* V R0 DOBIMO T_PRIO --------------------------*/
+  /*++++++++++++++++++++*/
+  mov r0, #6
   swi #SYS_GETC
-  mov r6, r11
+  /*++++++++++++++++++++*/
+
+  mov r6, r0
     
   mov r4, #80                 @ ASCII --> 'P'
   strb r4, [r1, r5]
@@ -312,8 +257,7 @@ REGISTER USAGE:
   PRIO_end:
 
 /*------------------------------------------------------------*/
-
-  @ PROCESS MSG POINTER	( ????? )		
+  @ PROCESS MSG POINTER	
     
   ldr r5, = V_MSG
   
@@ -325,14 +269,18 @@ REGISTER USAGE:
   add r5, r5, #1
   
   /* V R11 DOBIMO T_MSG --------------------------*/
-  /* v r10 imamo naslov trenutnega TCB-ja */
-  mov r11, #3
+  /*++++++++++++++++++++*/
+  mov r0, #3
   swi #SYS_GETC
-  mov r6, r11
+  /*++++++++++++++++++++*/
+  
+  mov r6, r0
 
+  /* MSG_LOG_TO_HEX -----------*/
+  
   ldr r12, = TMPSTR1
   mov r9, #7
-  
+
   lth_msg_loop:
   
   cmp r9, #0
@@ -347,7 +295,9 @@ REGISTER USAGE:
   b lth_msg_loop
 
   lth_msg_end:
-  
+
+  /* --------------------------*/
+    
   ldr r6, = TMPSTR1
   mov r4, #0
   
@@ -360,63 +310,52 @@ REGISTER USAGE:
   cmp r4, #8
   blt msg_loop
 
-/*------------------------------------------------------------*/  
-  @ PROCESS NUMBER OF MSGs  ( M_COUNT )
-  b nmsg_finish
+  ldr r5, = V_NMSG
+  mov r6, #48
+  add r5, r5, #1
+  strb r6, [r1, r5]
+    
+  cmp r0, #0
+  beq CONT_TO_RPLY_POINTER
+
+/*------------------------------------------------------------*/
+
+  @ PROCESS NMSG
+  
   ldr r5, = V_NMSG
 
-  mov r11, #3
+  /* V R0 DOBIMO Stevilo sporocil-------------*/
+  /*++++++++++++++++++++*/
+  mov r0, #7
   swi #SYS_GETC
-  mov r6, r11
-  mov r0, r10
+  /*++++++++++++++++++++*/
+  
+  and r6, r0, #3
+  mov r7, #0
+
+  nmsg_loop:
+    
+  cmp r6, #10
+  blt nmsg_loop_over
+  add r7, r7, #1
+  sub r6, r6, #10
+
+  b nmsg_loop
+  
+  nmsg_loop_over:
+  
+  cmp r7, #0
+  moveq r7, #32
+  addne r7, r7, #48
+  strb r7, [r1, r5]
+  add r5, r5, #1
+  
+  add r6, r6, #40
+  strb r6, [r1, r5]
       
-  @ldr r6, [r2, #TEMP_MSG]
-  mov r4, #0
-  mov r8, #0
-  cmp r6, #0
-  beq nmsg_0
+  CONT_TO_RPLY_POINTER:
   
-  nmsg_loop:       
-    add r4, r4, #1
-    
-    mov r11, #7
-    swi #SYS_GETC
-    mov r6, r11
-    mov r10, r11
-    
-    @ldr r6, [r6, #TEMPM_LINK]
-    cmp r6, #0
-    bgt nmsg_loop
-        
-  nmsg_0:      
-    cmp r4, #10
-    bge nmsg_10
-    mov r7, #32
-    strb r7, [r1, r5]
-    add r5, r5, #1
-    add r4, r4, #48
-    strb r4, [r1, r5]
-    b nmsg_finish
-  
-  nmsg_10:
-  
-    sub r4, r4, #10
-    add r8, r8, #1
-    cmp r4, #10
-    bge nmsg_10
-    
-    add r8, r8, #48  
-    strb r8, [r1, r5]
-    add r5, r5, #1
-    add r4, r4, #48
-    strb r4, [r1, r5]
-    add r5, r5, #1
-    
-  nmsg_finish:
-  
-  @mov r10, r0
-/*------------------------------------------------------------*/  
- 
+/*------------------------------------------------------------*/
   @ PROCESS RPLY POINTER ( TEMP_RPLY )
 
   ldr r5, = V_RPLY
@@ -428,12 +367,17 @@ REGISTER USAGE:
   strb r4, [r1, r5]
   add r5, r5, #1
 
-  /* V R11 DOBIMO T_RPLY --------------------------*/
-  /* v r10 imamo naslov trenutnega TCB-ja*/
-  mov r11, #9
+  /* V R0 DOBIMO T_RPLY --------------------------*/
+  /*++++++++++++++++++++*/
+  mov r0, #9
   swi #SYS_GETC
-  mov r6, r11
+  /*++++++++++++++++++++*/
+  
+  mov r6, r0
 
+
+  /* RPLY_LOG_TO_HEX -----------*/
+  
   ldr r12, = TMPSTR1
   mov r9, #7
   
@@ -451,7 +395,9 @@ REGISTER USAGE:
   b lth_rply_loop
 
   lth_rply_end:
-    
+
+  /* ----------------------------*/
+      
   ldr r6, = TMPSTR1
   mov r4, #0
 
@@ -464,74 +410,115 @@ REGISTER USAGE:
   cmp r4, #8
   blt rply_loop
 
-/*------------------------------------------------------------*/
-  @ PROCESS NUMBER OF RPLYs  ( ????? )		TODO
-  b nrply_finish
+
   ldr r5, = V_NRPLY
+  mov r6, #48
+  add r5, r5, #1
+  strb r6, [r1, r5]
+  
+  cmp r0, #0
+  beq CONT_TO_SSP
+  
+/*------------------------------------------------------------*/
 
-  mov r11, #9
-  swi #SYS_GETC  
-  mov r6, r11
-  mov r0, r10
-    
-  @ldr r6, [r2, #TEMP_RPLY]
-  mov r4, #0
-  mov r8, #0
-  cmp r6, #0
-  beq nrply_0
+  @ PROCESS NRPLY
   
+  /* V R0 DOBIMO Stevilo sporocil-------------*/
+  /*++++++++++++++++++++*/
+  mov r0, #8
+  swi #SYS_GETC
+  /*++++++++++++++++++++*/
+  
+  and r6, r0, #3
+  mov r7, #0
+
   nrply_loop:
-    add r4, r4, #1
     
-    mov r11, #8
-    swi #SYS_GETC
-    mov r6, r11
-    mov r10, r11
-    
-    @ldr r6, [r6, #TEMPM_LINK]
-    cmp r6, #0
-    bne nrply_loop
-    
-  nrply_0:
+  cmp r6, #10
+  blt nrply_loop_over
+  add r7, r7, #1
+  sub r6, r6, #10
+
+  b nrply_loop
   
-    cmp r4, #10
-    bge nrply_10
-    mov r7, #32
-    strb r7, [r1, r5]
-    add r5, r5, #1
-    add r4, r4, #48
-    strb r4, [r1, r5]
-    b nrply_finish
+  nrply_loop_over:
   
-  nrply_10:
+  cmp r7, #0
+  moveq r7, #32
+  addne r7, r7, #48
+  strb r7, [r1, r5]
+  add r5, r5, #1
   
-    sub r4, r4, #10
-    add r8, r8, #1
-    cmp r4, #10
-    bge nrply_10
+  add r6, r6, #40
+  strb r6, [r1, r5]
+  
+  CONT_TO_SSP:
+  
+/*------------------------------------------------------------*/
+
+  @ PROCESS SSP	( T_SSP )
     
-    add r8, r8, #48  
-    strb r8, [r1, r5]
-    add r5, r5, #1
-    add r4, r4, #48
-    strb r4, [r1, r5]
-    add r5, r5, #1
+  ldr r5, = V_SSP
     
-  nrply_finish:
+  mov r4, #83                 @ ASCII --> 'S' 	 
+  strb r4, [r1, r5]
+  add r5, r5, #1
+  mov r4, #58  						    @ ASCII --> ':' 	
+  strb r4, [r1, r5]
+  add r5, r5, #1
+
+  /* V R0 DOBIMO T_SSP --------------------------*/
+  /*++++++++++++++++++++*/
+  mov r0, #4
+  swi #SYS_GETC
+  /*++++++++++++++++++++*/
   
-  @mov r10, r0
+  mov r6, r0
+
+  /* SSP_LOG_TO_HEX -----------*/
+  
+  ldr r12, = TMPSTR1
+  mov r9, #7
+  
+  lth_ssp_loop:
+  
+  cmp r9, #0
+  blt lth_ssp_end  
+  and r4, r6, #15
+  cmp r4, #10
+  addge r4, r4, #55
+  addlt r4, r4, #48
+  strb r4, [r12, r9]
+  sub r9, r9, #1
+  mov r6, r6, LSR #4
+  b lth_ssp_loop
+
+  lth_ssp_end:
+
+  /* --------------------------*/
+  
+  ldr r6, = TMPSTR1
+  mov r4, #0
+  
+  SSP_loop:
+  
+  ldrb r7, [r6, r4]
+  strb r7, [r1, r5]
+  add r5, r5, #1
+  add r4, r4, #1
+  cmp r4, #7
+  ble SSP_loop
 
 /*------------------------------------------------------------*/
-  
   @ PROCESS FLAGS
 
-  @ldr r10, [r2, #TEMP_FLAG]
-  
-  /* V R11 DOBIMO T_FLAG --------------------------*/
-  /* v r10 imamo naslov trenutnega TCB-ja*/
-  mov r11, #5
+  /* V R0 DOBIMO T_FLAG --------------------------*/
+  /*++++++++++++++++++++*/
+  mov r0, #5
   swi #SYS_GETC
-  mov r12, r11
+  /*++++++++++++++++++++*/
+  
+  mov r12, r0
     
   mov r4, #0						    @ Offset 		
   ldr r5, = V_FLAGS
@@ -581,7 +568,6 @@ REGISTER USAGE:
   add r5, r5, #1  
 
 /*------------------------------------------------------------*/
-  
   @ PROCESS LINK
   
   ldr r5, = V_LINK
@@ -593,11 +579,13 @@ REGISTER USAGE:
   strb r4, [r1, r5]
   add r5, r5, #1
   
-  /* V R11 DOBIMO T_LINK --------------------------*/
-  /* v r10 imamo naslov trenutnega TCB-ja */
-  mov r11, #1
+  /* V R0 DOBIMO T_LINK --------------------------*/
+  /*++++++++++++++++++++*/
+  mov r0, #1
   swi #SYS_GETC
-  mov r6, r11
+  /*++++++++++++++++++++*/
+  
+  mov r6, r0
 
   ldr r12, = TMPSTR1
   mov r9, #7
@@ -629,7 +617,11 @@ REGISTER USAGE:
   cmp r4, #8
   blt link_loop
 
- 
+/*------------------------------------------------------------*/
+
+  mov r0, #10
+  swi #SYS_GETC
+  
   NEW_LINE:
   
   mov r7, #10					      @ ASCII --> '\n'	
@@ -657,25 +649,18 @@ REGISTER USAGE:
 /* Per-task data structures may be defined below */
 
 .align 2
-LINE:	        .space 80
-TMPSTR1:      .space 8
-TCBDA:         .asciz "TCBDA\n"
-TCBNE:         .asciz "TCBNE\n"
-TEST1:         .asciz "TEST1"
-TEST2:          .asciz "TEST2"
-ERRORM:         .asciz "ERROR!!!\n"
+CURRTCB:                .space 4
+NEXTTCB:                .space 4
+LINE:	                  .space 80
+TMPSTR1:                .space 8
+TEST1:                  .asciz "TEST1"
+TEST2:                  .asciz "TEST2"
+LTCB:                   .asciz "ZADNJI TCB!!!\n"
+NLTCB:                  .asciz "NI ZADNJI TCB!!!!\n"
+ERRORM:                 .asciz "ERROR IN WRITE_TO_LINE_AND_TERMINAL!\n"
 
-TASK11:       .skip TCBSIZE
-TASK12:       .skip TCBSIZE
-TASK13:       .skip TCBSIZE
-
-IME1:         .ascii "Nejc"
-IME2:         .ascii "Stme"
-
-MSGA11:       .skip MCBSIZE
-MSGA12:       .skip MCBSIZE
-
-TCBLIST2:               .word 0
 TCBSEQ:                 .word 1
 LONG_TO_HEX_SEQ:        .word 1
+
 TLINK:                  .space 4
+

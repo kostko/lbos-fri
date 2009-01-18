@@ -113,4 +113,3 @@
   ldr \reg, =CURRENT
   ldr \reg, [\reg]
 .endm
-
