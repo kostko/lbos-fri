@@ -356,7 +356,177 @@ svc_exit:
   
   /* This task is finished, let's go somewhere else */
   b svc_newtask
+  
+/* REGISTER USAGE (values)
+ *
+ * - r0:
+ *      - 0 = TCBLIST
+ *      - 1 = T_LINK
+ *      - 2 = T_NAME
+ *      - 3 = T_MSG
+ *      - 4 = T_SSP
+ *      - 5 = T_FLAG
+ *      - 6 = T_PRIO
+ *      - 7 = M_LINK for T_MSG
+ *      - 8 = M_LINK for T_RPLY
+ *      - 9 = T_RPLY
+ */
+ 
+svc_getc:
+  
+  DISABLE_IRQ
 
+  mov r4, r0
+    
+  ldr r1, = TEMPCURRTCB
+  ldr r2, = TEMPNEXTTCB
+
+  /* |||||||||||||||||| GET TCBLIST |||||||||||||||||*/
+  cmp r4, #0
+  bne get_tcb_addr_end
+  
+  ldr r4, = TCBLIST
+  ldr r5, [r4]
+  SVC_RETURN_CODE r5
+  str r5, [r1]
+  b svc_getc_end
+
+  get_tcb_addr_end:
+
+  /* |||||||||||||||||| GET T_LINK ||||||||||||||||||*/
+  cmp r4, #1
+  bne get_tlink_end
+  
+  ldr r0, [r1]
+  ldr r5, [r0, #T_LINK]
+  SVC_RETURN_CODE r5
+  str r5, [r2]
+  b svc_getc_end
+
+  get_tlink_end:
+  
+  /* |||||||||||||||||| GET T_NAME ||||||||||||||||||*/
+  cmp r4, #2
+  bne get_tname_end
+  
+  ldr r0, [r1]
+  ldr r5, [r0, #T_NAME]
+  SVC_RETURN_CODE r5
+  b svc_getc_end 
+  
+  get_tname_end:   
+
+  /* |||||||||||||||||| GET T_MSG |||||||||||||||||||*/
+  cmp r4, #3
+  bne get_tmsg_end
+  
+  ldr r0, [r1]
+  ldr r5, [r0, #T_MSG]
+  SVC_RETURN_CODE r5
+  b svc_getc_end
+  
+  get_tmsg_end:
+
+  /* |||||||||||||||||| GET T_SSP |||||||||||||||||||*/  
+  cmp r4, #4
+  bne get_tssp_end
+  
+  ldr r0, [r1]
+  ldr r5, [r0, #T_SSP]
+  SVC_RETURN_CODE r5
+  b svc_getc_end
+
+  get_tssp_end:
+
+  /* |||||||||||||||||| GET T_FLAG ||||||||||||||||||*/
+  cmp r4, #5
+  bne get_tflag_end
+  
+  ldr r0, [r1]
+  ldr r5, [r0, #T_FLAG]
+  SVC_RETURN_CODE r5
+  b svc_getc_end
+
+  get_tflag_end:
+  
+  /* |||||||||||||||||| GET T_PRIO ||||||||||||||||||*/
+  cmp r4, #6
+  bne get_tprio_end
+  
+  ldr r0, [r1]
+  ldr r5, [r0, #T_PRIO]
+  SVC_RETURN_CODE r5
+  b svc_getc_end
+
+  get_tprio_end:
+
+  /* |||||||||||||||| GET N_MGS |||||||||||||||||||||*/
+  cmp r4, #7
+  bne get_nmsg_end
+  
+  ldr r0, [r1]
+  ldr r5, [r0, #T_MSG]
+  
+  mov r6, #0
+  
+  get_nmsg_loop:
+  
+  add r6, r6, #1
+  ldr r5, [r5, #M_LINK]
+  cmp r5, #0
+  bne get_nmsg_loop
+  
+  SVC_RETURN_CODE r6
+  
+  get_nmsg_end:
+
+  /* |||||||||||||||| GET N_MGS |||||||||||||||||||||*/
+  cmp r4, #8
+  bne get_nrply_end
+  
+  ldr r0, [r1]
+  ldr r5, [r0, #T_RPLY]
+  
+  mov r6, #0
+  
+  get_nrply_loop:
+  
+  add r6, r6, #1
+  ldr r5, [r5, #M_LINK]
+  cmp r5, #0
+  bne get_nrply_loop
+  
+  SVC_RETURN_CODE r6
+    
+  get_nrply_end:
+    
+  /* |||||||||||||||||| GET T_RPLY ||||||||||||||||||*/
+  cmp r4, #9
+  bne get_trply_end
+  
+  ldr r0, [r1]
+  ldr r5, [r0, #T_RPLY]
+  SVC_RETURN_CODE r5
+  b svc_getc_end
+
+  get_trply_end:
+
+  /* ||||| CHANGE TEMPNEXTTCB --> TEMPCURRTCB |||||||*/
+  cmp r4, #10
+  bne get_change_end
+  
+  ldr r3, [r2]
+  str r3, [r1]
+  SVC_RETURN_CODE r3
+  b svc_getc_end
+
+  get_change_end:
+    
+  svc_getc_end:
+
+  ENABLE_IRQ
+    
+  b svc_newtask
 
 /* REGISTER USAGE (values)
  *
@@ -373,56 +543,60 @@ svc_exit:
  *      - 8 = M_LINK for T_RPLY
  *      - 9 = T_RPLY
  */
-   
+/*   
 svc_getc:
   
     cmp r10, #0
-    cmpeq r1, #0
-    ldreq r11, = TCBLIST
+    ldreq r0, = TCBLIST
     beq svc_getc_end
     
-    cmp r11, #1
-    ldreq r11, [r10, #T_LINK]
+    cmp r0, #1
+    ldreq r0, [r10, #T_LINK]
     beq svc_getc_end
     
-    cmp r11, #2
-    ldreq r11, [r10, #T_NAME]
+    cmp r0, #2
+    ldreq r0, [r10, #T_NAME]
     beq svc_getc_end
 
-    cmp r11, #3
-    ldreq r11, [r10, #T_MSG]
+    cmp r0, #3
+    ldreq r0, [r10, #T_MSG]
     beq svc_getc_end
 
-    cmp r11, #4
-    ldreq r11, [r10, #T_SSP]
+    cmp r0, #4
+    ldreq r0, [r10, #T_SSP]
     beq svc_getc_end
 
-    cmp r11, #5
-    ldreq r11, [r10, #T_FLAG]
+    cmp r0, #5
+    ldreq r0, [r10, #T_FLAG]
     beq svc_getc_end 
     
-    cmp r11, #6
-    ldreq r11, [r10, #T_PRIO]
+    cmp r0, #6
+    ldreq r0, [r10, #T_PRIO]
     beq svc_getc_end
 
-    cmp r11, #7
+    cmp r0, #7
     ldreq r12, [r10, #T_MSG]
-    ldreq r11, [r12, #M_LINK]
+    ldreq r0, [r12, #M_LINK]
     beq svc_getc_end
     
-    cmp r11, #8
+    cmp r0, #8
     ldreq r12, [r10, #T_RPLY]
-    ldreq r11, [r12, #M_LINK]
+    ldreq r0, [r12, #M_LINK]
     beq svc_getc_end 
     
-    cmp r11, #9
-    ldreq r11, [r10, #T_RPLY]
+    cmp r0, #9
+    ldreq r0, [r10, #T_RPLY]
+    beq svc_getc_end
+    
+    cmp r0, #10
+    LOAD_NEXTTCB r1
+    SAVE_CURRTCB r1
     
   svc_getc_end:
 
  
   b svc_newtask
-  
+*/  
 /* ================================================================
                            SYCALL TABLE
    ================================================================
@@ -444,3 +618,7 @@ SYSCALL_TABLE:
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4
+
+.align 2
+TEMPCURRTCB:   .space 4
+TEMPNEXTTCB:   .space 4
