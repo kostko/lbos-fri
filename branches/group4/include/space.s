@@ -21,6 +21,18 @@ TASK2: .space TCBSIZE
 TASK3: .space TCBSIZE
 TASK4: .space TCBSIZE
 
+/*Disk and file-system*/
+FS_FAT:     .space 1280
+FS_MEMORY:  .space 320000
+FS_WORKING: .space 16000
+
+FS_ISFILE:      .word 0
+FS_ENDO:        .word 0
+FS_END:         .word 0
+FS_CLUSTERS:    .word 320
+FS_OPENED:      .word 0
+FS_CLUSTERS:    .word 0    
+
 /* Task map table (if you change this, please update MAXTASK in globals.s) */
 .align 2
 TASKTAB: .long TASK1, TASK2, TASK3, TASK4

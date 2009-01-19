@@ -19,6 +19,15 @@
 .global PAGEOFFSET
 .global STACK_SUPM_END
 
+.global FS_FAT
+.global FS_MEMORY
+.global FS_WORKING
+.global FS_ISFILE
+.global FS_ENDO
+.global FS_END
+.global FS_CLUSTERS
+.global FS_OPENED
+
 .equ MAXPAGES, 3840
 .equ MAXTASK, 4
 .equ NMCBS, 5
