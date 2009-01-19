@@ -13,34 +13,34 @@
             <ASMSyntaxFile type="String"></ASMSyntaxFile>
           </ColorSyntax>
           <PI.0>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\vsprintf.s</P>
+          </PI.0>
+          <PI.1>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\vm.s</P>
+          </PI.1>
+          <PI.10>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\panic.s</P>
+          </PI.10>
+          <PI.11>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\main.s</P>
+          </PI.11>
+          <PI.12>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\irq.s</P>
+          </PI.12>
+          <PI.13>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\debugger.s</P>
+          </PI.13>
+          <PI.14>
+            <C type="Integer">12</C>
+            <L type="Integer">25</L>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\include\space.s</P>
+            <VL type="Integer">15</VL>
+          </PI.14>
+          <PI.15>
             <C type="Integer">40</C>
             <L type="Integer">21</L>
             <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\include\globals.s</P>
             <VL type="Integer">10</VL>
-          </PI.0>
-          <PI.1>
-            <C type="Integer">12</C>
-            <L type="Integer">25</L>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\include\space.s</P>
-            <VL type="Integer">18</VL>
-          </PI.1>
-          <PI.10>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\sched.s</P>
-          </PI.10>
-          <PI.11>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\printk.s</P>
-          </PI.11>
-          <PI.12>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\panic.s</P>
-          </PI.12>
-          <PI.13>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\main.s</P>
-          </PI.13>
-          <PI.14>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\irq.s</P>
-          </PI.14>
-          <PI.15>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\debugger.s</P>
           </PI.15>
           <PI.16>
             <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\include\clock_init.s</P>
@@ -62,7 +62,7 @@
             <VL type="Integer">265</VL>
           </PI.19>
           <PI.2>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\vsprintf.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\timers.s</P>
           </PI.2>
           <PI.20>
             <L type="Integer">27</L>
@@ -112,7 +112,7 @@
             <VL type="Integer">28</VL>
           </PI.29>
           <PI.3>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\vm.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\vmtest.s</P>
           </PI.3>
           <PI.30>
             <L type="Integer">25</L>
@@ -164,7 +164,7 @@
             <VL type="Integer">16</VL>
           </PI.39>
           <PI.4>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\timers.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\msgtest.s</P>
           </PI.4>
           <PI.40>
             <L type="Integer">11</L>
@@ -215,21 +215,22 @@
             <VL type="Integer">773</VL>
           </PI.49>
           <PI.5>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\vmtest.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\iotest.s</P>
           </PI.5>
           <PI.6>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\msgtest.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\dummy.s</P>
           </PI.6>
           <PI.7>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\iotest.s</P>
+            <C type="Integer">56</C>
+            <L type="Integer">248</L>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\syscall.s</P>
+            <VL type="Integer">239</VL>
           </PI.7>
           <PI.8>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\dummy.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\sched.s</P>
           </PI.8>
           <PI.9>
-            <C type="Integer">25</C>
-            <L type="Integer">44</L>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\syscall.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\printk.s</P>
           </PI.9>
         </REG_ROOT>
       </EditorOptions>
@@ -253,7 +254,7 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\include\globals.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\syscall.s</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
             <FileBarIndex type="Integer">3</FileBarIndex>
@@ -368,7 +369,7 @@
             <RelativeFileName type="String">..\src\panic.s</RelativeFileName>
           </Editor.6>
           <Editor.7>
-            <FileBarIndex type="Integer">10</FileBarIndex>
+            <FileBarIndex type="Integer">9</FileBarIndex>
             <RectPosBottom type="Integer">330</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">943</RectPosRight>
@@ -376,7 +377,7 @@
             <RelativeFileName type="String">..\src\printk.s</RelativeFileName>
           </Editor.7>
           <Editor.8>
-            <FileBarIndex type="Integer">9</FileBarIndex>
+            <FileBarIndex type="Integer">10</FileBarIndex>
             <RectPosBottom type="Integer">429</RectPosBottom>
             <RectPosLeft type="Integer">110</RectPosLeft>
             <RectPosRight type="Integer">1254</RectPosRight>
