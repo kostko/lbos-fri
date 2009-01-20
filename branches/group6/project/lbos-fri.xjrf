@@ -13,213 +13,201 @@
             <ASMSyntaxFile type="String"></ASMSyntaxFile>
           </ColorSyntax>
           <PI.0>
-            <L type="Integer">15</L>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\vectors.s</P>
+            <C type="Integer">1221</C>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\trunk\src\sched.s</P>
           </PI.0>
           <PI.1>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\timers.s</P>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\trunk\src\vsprintf.s</P>
           </PI.1>
           <PI.10>
-            <L type="Integer">22</L>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\main.s</P>
-            <VL type="Integer">12</VL>
+            <L type="Integer">28</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\vsprintf.s</P>
+            <VL type="Integer">16</VL>
           </PI.10>
           <PI.11>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\config\layout.ind</P>
+            <L type="Integer">22</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\main.s</P>
+            <VL type="Integer">22</VL>
           </PI.11>
           <PI.12>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\config\init.ini</P>
+            <L type="Integer">36</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\printk.s</P>
+            <VL type="Integer">22</VL>
           </PI.12>
           <PI.13>
-            <L type="Integer">37</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\printk.s</P>
-            <VL type="Integer">24</VL>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\tasks\stask1.s</P>
           </PI.13>
           <PI.14>
-            <L type="Integer">44</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\dummy.s</P>
-            <VL type="Integer">9</VL>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\tasks\stask5.s</P>
           </PI.14>
           <PI.15>
-            <L type="Integer">59</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\syscall.s</P>
-            <VL type="Integer">192</VL>
+            <C type="Integer">17</C>
+            <L type="Integer">8</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\tasks\stask2.s</P>
           </PI.15>
           <PI.16>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\iotest.s</P>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\tasks\stask4.s</P>
           </PI.16>
           <PI.17>
-            <L type="Integer">33</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\timers.s</P>
-            <VL type="Integer">33</VL>
+            <L type="Integer">34</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\include\clock_init.s</P>
+            <VL type="Integer">21</VL>
           </PI.17>
           <PI.18>
-            <L type="Integer">10</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\task5.s</P>
+            <C type="Integer">21</C>
+            <L type="Integer">194</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\sched.s</P>
+            <VL type="Integer">24</VL>
           </PI.18>
           <PI.19>
-            <C type="Integer">16</C>
-            <L type="Integer">10</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\task4.s</P>
+            <L type="Integer">15</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\vectors.s</P>
           </PI.19>
           <PI.2>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\task5.s</P>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\trunk\src\tasks\stask5.s</P>
           </PI.2>
           <PI.20>
-            <C type="Integer">16</C>
+            <C type="Integer">24</C>
             <L type="Integer">10</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\task3.s</P>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\tasks\task5.s</P>
           </PI.20>
           <PI.21>
-            <L type="Integer">11</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\task2.s</P>
+            <L type="Integer">12</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\tasks\task1.s</P>
           </PI.21>
           <PI.22>
-            <L type="Integer">14</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\task1.s</P>
+            <L type="Integer">8</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\tasks\task2.s</P>
           </PI.22>
           <PI.23>
-            <L type="Integer">34</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\msgtest.s</P>
-            <VL type="Integer">12</VL>
+            <C type="Integer">12</C>
+            <L type="Integer">8</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\tasks\task4.s</P>
           </PI.23>
           <PI.24>
-            <L type="Integer">152</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\sched.s</P>
-            <VL type="Integer">39</VL>
+            <C type="Integer">2</C>
+            <L type="Integer">7</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\tasks\task3.s</P>
+            <VL type="Integer">4</VL>
           </PI.24>
           <PI.25>
-            <L type="Integer">22</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\main.s</P>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\tasks\stask3.s</P>
           </PI.25>
           <PI.26>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\config\layout.ind</P>
-            <VL type="Integer">66</VL>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\config\layout.ind</P>
           </PI.26>
           <PI.27>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\config\init.ini</P>
-            <VL type="Integer">18</VL>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\timers.s</P>
           </PI.27>
           <PI.28>
-            <L type="Integer">34</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\include\clock_init.s</P>
-            <VL type="Integer">21</VL>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\config\init.ini</P>
           </PI.28>
           <PI.29>
-            <L type="Integer">628</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\vm.s</P>
-            <VL type="Integer">623</VL>
+            <L type="Integer">15</L>
+            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\vectors.s</P>
           </PI.29>
           <PI.3>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\task4.s</P>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\trunk\src\tasks\stask4.s</P>
           </PI.3>
           <PI.30>
-            <C type="Integer">34</C>
-            <L type="Integer">110</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\debugger.s</P>
-            <VL type="Integer">95</VL>
+            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\timers.s</P>
           </PI.30>
           <PI.31>
-            <L type="Integer">69</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\vsprintf.s</P>
-            <VL type="Integer">56</VL>
+            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\task5.s</P>
           </PI.31>
           <PI.32>
-            <L type="Integer">25</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\panic.s</P>
-            <VL type="Integer">12</VL>
+            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\task4.s</P>
           </PI.32>
           <PI.33>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\include\space.s</P>
+            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\task3.s</P>
           </PI.33>
           <PI.34>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\msgtest.s</P>
-          </PI.34>
-          <PI.35>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\iotest.s</P>
-          </PI.35>
-          <PI.36>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\dummy.s</P>
-          </PI.36>
-          <PI.37>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\include\space.s</P>
-          </PI.37>
-          <PI.38>
-            <L type="Integer">9</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\tasks\task5.s</P>
-          </PI.38>
-          <PI.39>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\config\init.ini</P>
-          </PI.39>
-          <PI.4>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\task3.s</P>
-          </PI.4>
-          <PI.40>
-            <L type="Integer">12</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\tasks\task4.s</P>
-          </PI.40>
-          <PI.41>
-            <L type="Integer">7</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\tasks\task3.s</P>
-          </PI.41>
-          <PI.42>
-            <L type="Integer">10</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\tasks\task2.s</P>
-          </PI.42>
-          <PI.43>
-            <C type="Integer">14</C>
-            <L type="Integer">21</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\tasks\task1.s</P>
-          </PI.43>
-          <PI.44>
-            <L type="Integer">26</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\tasks\msgtest.s</P>
-            <VL type="Integer">15</VL>
-          </PI.44>
-          <PI.45>
-            <L type="Integer">42</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\tasks\iotest.s</P>
-            <VL type="Integer">35</VL>
-          </PI.45>
-          <PI.46>
-            <C type="Integer">20</C>
-            <L type="Integer">32</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\tasks\dummy.s</P>
-            <VL type="Integer">4</VL>
-          </PI.46>
-          <PI.47>
-            <L type="Integer">50</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\syscall.s</P>
-            <VL type="Integer">39</VL>
-          </PI.47>
-          <PI.48>
-            <C type="Integer">13</C>
-            <L type="Integer">23</L>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\sched.s</P>
-            <VL type="Integer">10</VL>
-          </PI.48>
-          <PI.49>
-            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\LBOS-READ\LBOS-READONLY\trunk\src\printk.s</P>
-            <VL type="Integer">9</VL>
-          </PI.49>
-          <PI.5>
             <L type="Integer">8</L>
             <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\task2.s</P>
-          </PI.5>
-          <PI.6>
+          </PI.34>
+          <PI.35>
             <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\tasks\task1.s</P>
-          </PI.6>
-          <PI.7>
+          </PI.35>
+          <PI.36>
             <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\syscall.s</P>
-          </PI.7>
-          <PI.8>
+          </PI.36>
+          <PI.37>
             <C type="Integer">45</C>
             <L type="Integer">157</L>
             <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\sched.s</P>
             <VL type="Integer">169</VL>
+          </PI.37>
+          <PI.38>
+            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\printk.s</P>
+          </PI.38>
+          <PI.39>
+            <L type="Integer">22</L>
+            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\main.s</P>
+            <VL type="Integer">12</VL>
+          </PI.39>
+          <PI.4>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\trunk\src\tasks\stask2.s</P>
+          </PI.4>
+          <PI.40>
+            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\config\layout.ind</P>
+          </PI.40>
+          <PI.41>
+            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\config\init.ini</P>
+          </PI.41>
+          <PI.42>
+            <L type="Integer">37</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\printk.s</P>
+            <VL type="Integer">24</VL>
+          </PI.42>
+          <PI.43>
+            <L type="Integer">44</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\dummy.s</P>
+            <VL type="Integer">9</VL>
+          </PI.43>
+          <PI.44>
+            <L type="Integer">59</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\syscall.s</P>
+            <VL type="Integer">192</VL>
+          </PI.44>
+          <PI.45>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\iotest.s</P>
+          </PI.45>
+          <PI.46>
+            <L type="Integer">33</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\timers.s</P>
+            <VL type="Integer">33</VL>
+          </PI.46>
+          <PI.47>
+            <L type="Integer">10</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\task5.s</P>
+          </PI.47>
+          <PI.48>
+            <C type="Integer">16</C>
+            <L type="Integer">10</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\task4.s</P>
+          </PI.48>
+          <PI.49>
+            <C type="Integer">16</C>
+            <L type="Integer">10</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\My Documents\ARM\New Folder\Branch\src\tasks\task3.s</P>
+          </PI.49>
+          <PI.5>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\trunk\src\tasks\stask1.s</P>
+          </PI.5>
+          <PI.6>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\trunk\src\syscall.s</P>
+          </PI.6>
+          <PI.7>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\trunk\src\printk.s</P>
+          </PI.7>
+          <PI.8>
+            <L type="Integer">22</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\trunk\src\main.s</P>
           </PI.8>
           <PI.9>
-            <P type="String">C:\Documents and Settings\romana\My Documents\Romy\FRI\OS1\Projekt\Branch\src\printk.s</P>
+            <L type="Integer">252</L>
+            <P type="String">C:\Documents and Settings\janezk.JANEZDOMA\Desktop\Delujoci_trunk\trunk\src\syscall.s</P>
+            <VL type="Integer">238</VL>
           </PI.9>
         </REG_ROOT>
       </EditorOptions>
@@ -243,123 +231,91 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\src\tasks\task2.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\sched.s</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
-            <FileBarIndex type="Integer">2</FileBarIndex>
-            <RectPosBottom type="Integer">392</RectPosBottom>
+            <FileBarIndex type="Integer">3</FileBarIndex>
+            <RectPosBottom type="Integer">422</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">998</RectPosRight>
             <RectPosTop type="Integer">87</RectPosTop>
-            <RelativeFileName type="String">..\config\init.ini</RelativeFileName>
+            <RelativeFileName type="String">..\src\main.s</RelativeFileName>
           </Editor.0>
           <Editor.1>
             <FileBarIndex type="Integer">4</FileBarIndex>
-            <RectPosBottom type="Integer">363</RectPosBottom>
+            <RectPosBottom type="Integer">393</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
             <RectPosTop type="Integer">58</RectPosTop>
-            <RelativeFileName type="String">..\config\layout.ind</RelativeFileName>
+            <RelativeFileName type="String">..\src\printk.s</RelativeFileName>
           </Editor.1>
-          <Editor.10>
-            <FileBarIndex type="Integer">12</FileBarIndex>
-            <RectPosBottom type="Integer">401</RectPosBottom>
-            <RectPosLeft type="Integer">66</RectPosLeft>
-            <RectPosRight type="Integer">998</RectPosRight>
-            <RectPosTop type="Integer">87</RectPosTop>
-            <RelativeFileName type="String">..\src\tasks\task5.s</RelativeFileName>
-          </Editor.10>
-          <Editor.11>
-            <FileBarIndex type="Integer">5</FileBarIndex>
-            <RectPosBottom type="Integer">392</RectPosBottom>
-            <RectPosLeft type="Integer">66</RectPosLeft>
-            <RectPosRight type="Integer">998</RectPosRight>
-            <RectPosTop type="Integer">87</RectPosTop>
-            <RelativeFileName type="String">..\src\timers.s</RelativeFileName>
-          </Editor.11>
-          <Editor.12>
-            <FileBarIndex type="Integer">0</FileBarIndex>
-            <RectPosBottom type="Integer">293</RectPosBottom>
-            <RectPosLeft type="Integer">44</RectPosLeft>
-            <RectPosRight type="Integer">998</RectPosRight>
-            <RectPosTop type="Integer">58</RectPosTop>
-            <RelativeFileName type="String">..\src\vectors.s</RelativeFileName>
-          </Editor.12>
           <Editor.2>
-            <FileBarIndex type="Integer">6</FileBarIndex>
-            <RectPosBottom type="Integer">241</RectPosBottom>
-            <RectPosLeft type="Integer">23</RectPosLeft>
-            <RectPosRight type="Integer">744</RectPosRight>
-            <RectPosTop type="Integer">23</RectPosTop>
-            <RelativeFileName type="String">..\src\main.s</RelativeFileName>
+            <FileBarIndex type="Integer">0</FileBarIndex>
+            <RectPosBottom type="Integer">422</RectPosBottom>
+            <RectPosLeft type="Integer">66</RectPosLeft>
+            <RectPosRight type="Integer">998</RectPosRight>
+            <RectPosTop type="Integer">87</RectPosTop>
+            <RelativeFileName type="String">..\src\sched.s</RelativeFileName>
           </Editor.2>
           <Editor.3>
-            <FileBarIndex type="Integer">1</FileBarIndex>
-            <RectPosBottom type="Integer">334</RectPosBottom>
-            <RectPosLeft type="Integer">22</RectPosLeft>
-            <RectPosRight type="Integer">954</RectPosRight>
-            <RectPosTop type="Integer">29</RectPosTop>
-            <RelativeFileName type="String">..\src\printk.s</RelativeFileName>
-          </Editor.3>
-          <Editor.4>
-            <FileBarIndex type="Integer">7</FileBarIndex>
-            <RectPosBottom type="Integer">241</RectPosBottom>
-            <RectPosLeft type="Integer">23</RectPosLeft>
-            <RectPosRight type="Integer">744</RectPosRight>
-            <RectPosTop type="Integer">23</RectPosTop>
-            <RelativeFileName type="String">..\src\sched.s</RelativeFileName>
-          </Editor.4>
-          <Editor.5>
-            <FileBarIndex type="Integer">3</FileBarIndex>
-            <RectPosBottom type="Integer">450</RectPosBottom>
+            <FileBarIndex type="Integer">2</FileBarIndex>
+            <RectPosBottom type="Integer">480</RectPosBottom>
             <RectPosLeft type="Integer">110</RectPosLeft>
             <RectPosRight type="Integer">1042</RectPosRight>
             <RectPosTop type="Integer">145</RectPosTop>
             <RelativeFileName type="String">..\src\syscall.s</RelativeFileName>
+          </Editor.3>
+          <Editor.4>
+            <FileBarIndex type="Integer">5</FileBarIndex>
+            <RectPosBottom type="Integer">364</RectPosBottom>
+            <RectPosLeft type="Integer">22</RectPosLeft>
+            <RectPosRight type="Integer">954</RectPosRight>
+            <RectPosTop type="Integer">29</RectPosTop>
+            <RelativeFileName type="String">..\src\tasks\stask1.s</RelativeFileName>
+          </Editor.4>
+          <Editor.5>
+            <FileBarIndex type="Integer">6</FileBarIndex>
+            <RectPosBottom type="Integer">480</RectPosBottom>
+            <RectPosLeft type="Integer">110</RectPosLeft>
+            <RectPosRight type="Integer">1042</RectPosRight>
+            <RectPosTop type="Integer">145</RectPosTop>
+            <RelativeFileName type="String">..\src\tasks\stask2.s</RelativeFileName>
           </Editor.5>
           <Editor.6>
             <FileBarIndex type="Integer">8</FileBarIndex>
-            <RectPosBottom type="Integer">314</RectPosBottom>
-            <RectPosLeft type="Integer">0</RectPosLeft>
-            <RectPosRight type="Integer">909</RectPosRight>
-            <RectPosTop type="Integer">0</RectPosTop>
-            <RelativeFileName type="String">..\src\tasks\task1.s</RelativeFileName>
+            <RectPosBottom type="Integer">451</RectPosBottom>
+            <RectPosLeft type="Integer">88</RectPosLeft>
+            <RectPosRight type="Integer">1020</RectPosRight>
+            <RectPosTop type="Integer">116</RectPosTop>
+            <RelativeFileName type="String">..\src\tasks\stask4.s</RelativeFileName>
           </Editor.6>
           <Editor.7>
-            <FileBarIndex type="Integer">9</FileBarIndex>
-            <RectPosBottom type="Integer">343</RectPosBottom>
-            <RectPosLeft type="Integer">22</RectPosLeft>
-            <RectPosRight type="Integer">931</RectPosRight>
-            <RectPosTop type="Integer">29</RectPosTop>
-            <RelativeFileName type="String">..\src\tasks\task2.s</RelativeFileName>
+            <FileBarIndex type="Integer">7</FileBarIndex>
+            <RectPosBottom type="Integer">335</RectPosBottom>
+            <RectPosLeft type="Integer">0</RectPosLeft>
+            <RectPosRight type="Integer">932</RectPosRight>
+            <RectPosTop type="Integer">0</RectPosTop>
+            <RelativeFileName type="String">..\src\tasks\stask5.s</RelativeFileName>
           </Editor.7>
           <Editor.8>
-            <FileBarIndex type="Integer">10</FileBarIndex>
-            <RectPosBottom type="Integer">401</RectPosBottom>
-            <RectPosLeft type="Integer">66</RectPosLeft>
-            <RectPosRight type="Integer">975</RectPosRight>
-            <RectPosTop type="Integer">87</RectPosTop>
-            <RelativeFileName type="String">..\src\tasks\task3.s</RelativeFileName>
+            <FileBarIndex type="Integer">1</FileBarIndex>
+            <RectPosBottom type="Integer">451</RectPosBottom>
+            <RectPosLeft type="Integer">88</RectPosLeft>
+            <RectPosRight type="Integer">1020</RectPosRight>
+            <RectPosTop type="Integer">116</RectPosTop>
+            <RelativeFileName type="String">..\src\vsprintf.s</RelativeFileName>
           </Editor.8>
-          <Editor.9>
-            <FileBarIndex type="Integer">11</FileBarIndex>
-            <RectPosBottom type="Integer">372</RectPosBottom>
-            <RectPosLeft type="Integer">44</RectPosLeft>
-            <RectPosRight type="Integer">953</RectPosRight>
-            <RectPosTop type="Integer">58</RectPosTop>
-            <RelativeFileName type="String">..\src\tasks\task4.s</RelativeFileName>
-          </Editor.9>
           <EditorHistoryFile.0>
-            <RelativeFileName type="String">..\src\syscall.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\vsprintf.s</RelativeFileName>
           </EditorHistoryFile.0>
           <EditorHistoryFile.1>
-            <RelativeFileName type="String">..\src\tasks\dummy.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\printk.s</RelativeFileName>
           </EditorHistoryFile.1>
           <EditorHistoryFile.2>
-            <RelativeFileName type="String">..\src\vm.s</RelativeFileName>
+            <RelativeFileName type="String">..\include\clock_init.s</RelativeFileName>
           </EditorHistoryFile.2>
           <EditorHistoryFile.3>
-            <RelativeFileName type="String">..\include\clock_init.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\sched.s</RelativeFileName>
           </EditorHistoryFile.3>
         </Documents.0>
         <Watches>
@@ -454,7 +410,7 @@
           </DockRect.1>
           <DockRect.2>
             <AreHorz type="Integer">0</AreHorz>
-            <Percent type="Integer">379</Percent>
+            <Percent type="Integer">508</Percent>
             <Type type="Integer">0</Type>
             <TypeOfWnd type="Integer">-1</TypeOfWnd>
             <DockRect.0>
@@ -491,7 +447,7 @@
           </DockRect.3>
           <DockRect.4>
             <AreHorz type="Integer">0</AreHorz>
-            <Percent type="Integer">104</Percent>
+            <Percent type="Integer">25</Percent>
             <Type type="Integer">0</Type>
             <TypeOfWnd type="Integer">-1</TypeOfWnd>
             <DockRect.0>
@@ -578,7 +534,7 @@
           </DockRect.5>
           <DockRect.6>
             <AreHorz type="Integer">0</AreHorz>
-            <Percent type="Integer">163</Percent>
+            <Percent type="Integer">341</Percent>
             <Type type="Integer">0</Type>
             <TypeOfWnd type="Integer">-1</TypeOfWnd>
             <DockRect.0>
@@ -971,8 +927,8 @@
           </SFRWindow>
           <TerminalWindow>
             <CurrentDownloadFile type="Integer">-1</CurrentDownloadFile>
-            <OutputFileName type="String"></OutputFileName>
-            <SaveToDisk type="Integer">0</SaveToDisk>
+            <OutputFileName type="String">testiranje.txt</OutputFileName>
+            <SaveToDisk type="Integer">1</SaveToDisk>
             <SessionOptions>
               <AppendNewline type="Integer">0</AppendNewline>
               <AppendNewlineOut type="Integer">0</AppendNewlineOut>
@@ -983,7 +939,7 @@
               <LocalEcho type="Integer">0</LocalEcho>
               <Parity type="Integer">0</Parity>
               <RTS_CTS type="Integer">0</RTS_CTS>
-              <Screen type="IntegerArray">BIAAAAAAFAAAAAAAPEABAAAA</Screen>
+              <Screen type="IntegerArray">DMAAAAAADCAAAAAAPEABAAAA</Screen>
               <StopBits type="Integer">0</StopBits>
               <TerminalEmulation type="Integer">0</TerminalEmulation>
               <XON_XOFF type="Integer">1</XON_XOFF>
@@ -1074,7 +1030,7 @@
                     <Options type="Integer">1</Options>
                     <Items.0>
                       <__>
-                        <Name type="String">mmc.s</Name>
+                        <Name type="String">io.s</Name>
                         <Options type="Integer">4</Options>
                       </__>
                     </Items.0>
@@ -1083,21 +1039,39 @@
                 <Items.1>
                   <__>
                     <Name type="String">Init files</Name>
-                    <Options type="Integer">4</Options>
+                    <Options type="Integer">5</Options>
+                    <Items.0>
+                      <__>
+                        <Name type="String">init.ini</Name>
+                        <Options type="Integer">4</Options>
+                      </__>
+                    </Items.0>
                   </__>
                 </Items.1>
                 <Items.2>
                   <__>
-                    <Name type="String">Tasks</Name>
+                    <Name type="String">Linker files</Name>
                     <Options type="Integer">1</Options>
                     <Items.0>
                       <__>
-                        <Name type="String">dummy.s</Name>
+                        <Name type="String">layout.ind</Name>
                         <Options type="Integer">4</Options>
                       </__>
                     </Items.0>
                   </__>
                 </Items.2>
+                <Items.3>
+                  <__>
+                    <Name type="String">Tasks</Name>
+                    <Options type="Integer">1</Options>
+                    <Items.0>
+                      <__>
+                        <Name type="String">task1.s</Name>
+                        <Options type="Integer">4</Options>
+                      </__>
+                    </Items.0>
+                  </__>
+                </Items.3>
               </__>
             </Items.0>
           </ProjectWindow>

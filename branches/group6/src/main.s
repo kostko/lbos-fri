@@ -107,11 +107,14 @@ init_sysc_irq:
   mov r1, #(1 << 1)
   str r1, [r0, #AIC_IECR]
   
+  
+  
   /* Initialize the Periodic Interval Timer (PIT) that will be used by
      the task scheduler. This timer will generate "System Controller
      Interrupt" (peripheral = 1) type interrupt which is shared with
      some other devices (such as the debug unit)! */
-  
+
+
 init_pit:
   ldr r0, =PIT_BASE
   ldr r1, =PIT_MODE     /* PITEN = 1, PITIEN = 1, PIV = FFFFF */
@@ -224,9 +227,9 @@ __init_tcb:
   /* Push context to stack */
   mov r5, #0x30000000     /* Set task's PC */
   str r5, [r4, #-4]!      /* Push task's PC to the stack */
-  sub r4, r4, #(13 << 2)  /* Move stack pointer since regs should be there */
+  sub r4, r4, #(15 << 2)  /* Move stack pointer since regs should be there */
   ldr r6, [r0], #4        /* Load task's status register */
-  str r6, [r4, #-4]!      /* Push task's PC and PSR to the stack */
+  str r6, [r4, #-4]!      /* Push task's PSR to the stack */
   
   /* Set r4 to be task's System Stack Pointer */
   str r4, [r2, #T_SSP]
@@ -241,8 +244,10 @@ __init_tcb:
   mov r0, r7
   mov r1, r8
   
+  /* Setup task priority/quanta */
   ldr r8, [r0], #4
   str r8, [r2, #T_PRIO]
+  
   /* Setup TCB linkage */
   str r2, [r1, #T_LINK]   /* Set previous TCB link word; note that first loop */
                           /* iteration only works because T_LINK is 0! */

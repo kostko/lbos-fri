@@ -34,7 +34,7 @@ MCBAREA:  .space MCBSIZE*NMCBS
 /* Task initialization data (see main.s/task_init) */
 .align 2
 TASK_INITDATA:
-/* TCB | Status register | Task address  | Task size in pages (currently statically defined) | Task Priority */ 
+/* TCB | Status register | Task address  | Task size in pages (currently statically defined) | Task priority/quanta */
 .long TASK1,   PSR_MODE_USER,    _task1_paddr,   256*1024 / PAGESIZE, 5
 .long TASK2,   PSR_MODE_USER,    _task2_paddr,   256*1024 / PAGESIZE, 4
 .long TASK3,   PSR_MODE_USER,    _task3_paddr,   256*1024 / PAGESIZE, 3
