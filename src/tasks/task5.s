@@ -5,9 +5,8 @@
 
 task5:
 
-   /* Turn LED OFF */
-  mov r0, #0
-  swi #SYS_LED
+   swi #SYS_RECV
+   swi #SYS_REPLY
   
   b task5
 
