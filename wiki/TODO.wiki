@@ -35,8 +35,9 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * ~~priority scheduler - *Hari*~~
   * ~~Bubble sort -for priority scheduler - *Hari*~~
   * ~~Debugging - *everyone*~~
-  * User programs - *Barbara, Anita*
-  * Testing with user programs ?
+  * ~~ User programs - *Barbara, Anita, Romana* ~~
+  * ~~ Testing with user programs - *Romana* ~~
+  * Documentation - Barbara, ?
 
 = Group 2 / 2.5 =
   * svc_signal and svc_wait for dynamic lock objects aquisitions - *Andrej, Miha*
