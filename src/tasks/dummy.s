@@ -46,7 +46,17 @@ task_dummy:
   mov r1, #6
   mov r2, #1
   swi #SYS_SEND
+
+  mov r0, #TESTBUF
+  mov r1, #6
+  mov r2, #1
+  swi #SYS_SEND
   
+  mov r0, #TESTBUF
+  mov r1, #6
+  mov r2, #1
+  swi #SYS_SEND
+    
   b task_dummy
 
 /*************************************************************

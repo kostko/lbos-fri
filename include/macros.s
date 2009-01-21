@@ -43,9 +43,7 @@
 .macro PUSH_CONTEXT
   str lr, [sp, #-4]!      /* Push return address to stack */
   sub sp, sp, #4          /* Adjust stack pointer (no supervisor link reg.) */
-  stmfd sp, {r14}^        /* Push user link register to stack */
-  nop                     /* NOP for previous instruction neeed because of */
-  sub sp, sp, #4          /* register bank switch! */
+  stmfd sp!, {r14}^       /* Push user link register to stack */
   stmfd sp!, {r0-r12}     /* Push r0-r12 to stack */
   mrs r12, spsr           /* Get current SPSR */
   stmfd sp!, {r12}        /* Push SPSR to stack */
@@ -67,9 +65,7 @@
   
   stmfd sp!, {r0}         /* Push return address to stack */
   stmfd sp!, {lr}         /* Push supervisor link register to stack */
-  stmfd sp, {lr}^         /* Push user link register to stack */
-  nop                     /* NOP for previous instruction neeed because of */
-  sub sp, sp, #4          /* register bank switch! */
+  stmfd sp!, {lr}^        /* Push user link register to stack */
   stmfd sp!, {r4-r12}     /* Push r4-r12 to SVC stack */
   ldmfd r1!, {r9-r12}     /* Pop orig. r0-r3 previously saved */
   stmfd sp!, {r3,r9-r12}  /* Push r0-r3, SPSR to SVC stack */
@@ -79,9 +75,7 @@
   ldmfd sp!, {r12}          /* Pop PSR from stack */
   msr spsr_all, r12         /* Save PSR in SPSR */
   ldmfd sp!, {r0-r12}       /* Restore registers r0-r12 */
-  ldmfd sp, {lr}^           /* Restore user mode link register */
-  nop                       /* NOP for previous instruction needed because of */
-  add sp, sp, #4            /* register bank switch! */
+  ldmfd sp!, {lr}^          /* Restore user mode link register */
   ldmfd sp!, {lr}           /* Restore supervisor mode link register */
   ldmfd sp!, {pc}^          /* Restore PC and CPSR */
 .endm
@@ -119,4 +113,3 @@
   ldr \reg, =CURRENT
   ldr \reg, [\reg]
 .endm
-

@@ -79,7 +79,7 @@ __timers_done:
  * @param r1 Pointer to TCB
  */
 register_timer:
-  stmfd sp!, {r0-r4,r12,lr}
+  stmfd sp!, {r0-r4,r14}
   
   /* Calculate point in time where timer should fire */
   ldr r2, =CUR_JIFFIES
@@ -116,7 +116,6 @@ __find_queue:
   
   /* Continue via links */
   mov r1, r2
-  b __find_queue
 
 __place_found:
   /* Put our timer into the queue */
@@ -125,4 +124,4 @@ __place_found:
   ENABLE_IRQ
 
 __done:
-  ldmfd sp!, {r0-r4,r12,pc}
+  ldmfd sp!, {r0-r4,pc}
