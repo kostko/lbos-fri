@@ -80,7 +80,8 @@ svc_open:
   adr r4, FS_WORKING
   
   str r0,[r1]     /*shranemo st. gruce v FS_OPENED*/
-  
+  str r0,[r9]     /* st. prve gruce shranimo v r9, tako da bo na voljo tudi za operacijo WRITE */
+
 __op1fs_loop:
   mov r5,#256    /*steje navzdol od 256( 256*4B=1024 B), da se nalozi gruca*/
   
@@ -134,7 +135,8 @@ svc_write:
   adr r3, FS_MEMORY
   adr r4, FS_WORKING
   
-  str r1,[r0]           /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
+  ldr r0,[r9]    		 /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
+
   
 __wr1fs_loop:
   
@@ -170,8 +172,8 @@ svc_append:
   adr r2, FS_FAT
   adr r10, FS_CLUSTERS
   
-  str r1,[r0]           /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
-  str r10,[r8]              /* V r8 shranimo st. novih gruc  */
+  ldr r0,[r9]     				/* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
+	ldr r8,[r10]            /* V r8 shranimo st. novih gruc  */
   
   
   /* Prvi korak:  Pregledamo tabelo FAT in si zapomnimo st. zadnje gruce ter naslov gruce, ki oznacuje konec datoteke ...  */
@@ -226,8 +228,8 @@ svc_truncate:
   adr r2, FS_FAT
   adr r10, FS_CLUSTERS
   
-  str r1,[r0]               /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
-  str r10,[r8]              /* V r8 shranimo st. gruc, ki se jih zelimo znebiti  */ 
+  ldr r0,[r9]     				/* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
+	ldr r8,[r10]            /* V r8 shranimo st. novih gruc  */
   
   /* Prvi korak:  Pregledamo tabelo FAT in poiscemo konec datoteke ter si zapomnimo naslov gruce, ki oznacuje konec datoteke ...  */
 __trun1fs_loop:
