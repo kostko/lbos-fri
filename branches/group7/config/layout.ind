@@ -1,0 +1,78 @@
+OUTPUT_FORMAT("elf32-littlearm", "elf32-bigarm", "elf32-littlearm")
+OUTPUT_ARCH(arm)
+ENTRY(start)
+
+INPUT(&& &&Assembler Files&)   
+INPUT(&& &&Source Files&)
+INPUT(&& &&Tasks&)
+
+__VECTORS_START__ = 0x00000000;
+__TEXT_START__    = 0x20000000;
+__DATA_START__    = 0x20080000;
+__STACK_END__     = 0x20180000;
+__TASKS_START__   = 0x20200000;
+__TASKS_VM__      = 0x30000000;
+__RAM_END__       = 0x22000000;
+
+SECTIONS
+{
+  /***********************************************
+   *            KERNEL CODE SECTION              *
+   ***********************************************/
+  .vecs __VECTORS_START__ :
+  {
+    *vectors.o(.text)
+  }
+  
+  .text __TEXT_START__ :
+  {
+    *(EXCLUDE_FILE (*vectors.o) .text)
+  }
+  
+  PROVIDE (__etext = .);
+  
+  /***********************************************
+   *        KERNEL READ-ONLY DATA SECTION        *
+   *         (merged after kernel code)          *
+   ***********************************************/
+  .rodata : 
+  { 
+    *(.rodata) 
+    *(.rodata.*) 
+  }
+  
+  /***********************************************
+   *            KERNEL DATA SECTION              *
+   ***********************************************/
+  .data __DATA_START__ :
+  {
+    *(.data)
+    *(.data.*)
+  }
+  . = ALIGN(4);
+  __DATA_END__ = .;
+  
+  /***********************************************
+   *                TASKS SECTION                *
+   ***********************************************/
+  .task1 __TASKS_VM__ : AT( __TASKS_START__           ) { *dummy.o(task_code)   *dummy.o(task_data) }
+  .task2 __TASKS_VM__ : AT( __TASKS_START__ + 0x40000 ) { *msgtest.o(task_code) *msgtest.o(task_data) }
+  .task3 __TASKS_VM__ : AT( __TASKS_START__ + 0x80000 ) { *iotest.o(task_code)  *iotest.o(task_data) }
+  .task4 __TASKS_VM__ : AT( __TASKS_START__ + 0xC0000 ) { *vmtest.o(task_code)  *vmtest.o(task_data) }
+  
+  _task1_paddr = LOADADDR(.task1);
+  _task2_paddr = LOADADDR(.task2);
+  _task3_paddr = LOADADDR(.task3);
+  _task4_paddr = LOADADDR(.task4);
+  
+  /* Set current position just beyond task 4 physical space */
+  . = LOADADDR(.task4) + 0x40000;
+  
+  /***********************************************
+   * FOLLOWING MEMORY IS FOR DYNAMIC ALLOCATION  *
+   ***********************************************/
+  __PAGE_OFFSET__ = .;
+  
+  PROVIDE (end = .);
+}
+
