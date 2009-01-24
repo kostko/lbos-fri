@@ -215,7 +215,7 @@ __rcv_wait:
   mov r2, r5  
   bl memcpy
   
-  /* Return TCB address to userspace */
+  /* Return MCB address to userspace */
   SVC_RETURN_CODE r6
   POP_CONTEXT
 
