@@ -81,3 +81,11 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * svc_fread, svc_fwrite, svc_fappend, (svc_fopen) - ?
   * ...
   
+= Group 1 / 2.3 =
+  Members: Luka Kacil, Štefan Šimec, Grega Kešpret, Nino Ostrc
+  * ~~svc_send, svc_receive, svc_reply~~
+  * ~~testing with 2 user processes~~
+  * ~~testing with 4 user processes~~
+  * ~~modification to support virtual memory~~
+  * ~~testing with 2 user processes~~
+  * testing with 4 user processes => waitin 4 whoever s got the damn terminal...
