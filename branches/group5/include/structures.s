@@ -206,3 +206,4 @@
 .equ E_CHILD_EXIST, E_DIR_NOT_EXIST - 1
 .equ E_NO_ATR, E_CHILD_EXIST - 1		/* chdir has no input parameters */
 .equ E_END_CHILD_T, E_NO_ATR - 1		/* chdir doesn't have requested dir */
+.equ E_ROOT_DIRUP, E_END_CHILD_T - 1 	/* dir up while in root folder  */

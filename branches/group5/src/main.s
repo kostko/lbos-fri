@@ -208,6 +208,8 @@ __init_tcb:
   ldr r2, [r0], #4  /* Load first long move r0 to next field */
   cmp r2, #0
   beq __init_done   /* We are done if r2 is zero */
+	
+	bl set_current_dir	/* set current directory to root for every tcb */
   
   /* r2 now contains pointer to task's TCB */
   str r3, [r2, #T_USP]    /* Clear task's User Stack Pointer */
@@ -276,6 +278,14 @@ init_mmc:
   
   /* Call the init function */
   bl mmc_init
+	
+	/* Initialize directory structure */
+init_dir:
+  ldr r0, =MSG_INIT_DIR
+  bl printk
+  
+  /* Call the dir_init function */
+  bl dir_init
 
   /* All initializations completed */
 done:
@@ -298,4 +308,5 @@ MSG_INIT_PER: .asciz ">>> Initializing peripherals (LED, timers)...\n\r"
 MSG_INIT_TCB: .asciz ">>> Initializing tasks...\n\r"
 MSG_INIT_MCB: .asciz ">>> Initializing message passing...\n\r"
 MSG_INIT_MMC: .asciz ">>> Initializing MMC driver...\n\r"
+MSG_INIT_DIR: .asciz ">>> Initializing directory structure...\n\r"
 MSG_INIT_DONE: .asciz "All done! Entering the dispatcher.\n\r"

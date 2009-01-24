@@ -5,10 +5,15 @@
 .include "include/globals.s"
 
 
+
 .text
 .code 32
-SVC_MKDIR:
-	/* v R1 je podano ime imenika 
+/* ================================================================
+                           SYSTEM CALL MAKE DIR
+   ================================================================
+*/
+dir_mkdir:
+	/* v R1 je podano ime imenika, v r11 je podan tip, ce 0 -> direktorij, ce razlicen od 0, potem file
 	disable interrupts
 	pogledamo DIRLIST, ki kaze na prvi prazen dir, èe ga ne -> (error),
 	èe ga vsebuje, potem ta kazalec shranimo v register R2, DIRLIST pa posodobimo na (*dirlist) //na kocu bo to nekaj èudnega
@@ -19,22 +24,28 @@ SVC_MKDIR:
 	postavimo D_NAME = R1. 
 	
 	*/
+	
+	stmfd sp!, {r1-r12,lr}
+	
+	DISABLE_IRQ
 	ldr r3, =DIRLIST
-	ldr r2, [r3]			/* naslov praznega DIR */
-	cmp r2, #0			/* preverimo ce je naslov enak 0 - smo na koncu*/
-	bne OK				/* ERROR  */
+	ldr r2, [r3]				/* naslov praznega DIR */
+	cmp r2, #0					/* preverimo ce je naslov enak 0 - smo na koncu*/
+	bne OK						/* ERROR  */
 NO_DIR:	ldr r0, =E_NO_DIR
-		b KONEC
+	ENABLE_IRQ
+	b KONEC
 	
 OK:	ldr r4, [r2]
-	str r4, [r3]			/* RLIST pa posodobimo na naslednji prazen dir */
-
-	ldr r10, =CURRENT		/*current od trenutnega procesa*/ 
+	str r4, [r3]				/* RLIST pa posodobimo na naslednji prazen dir */
+	ENABLE_IRQ
+	
+	ldr r10, =CURRENT			/*current od trenutnega procesa*/ 
 	ldr r10, [r10, #T_CURDIR]  	/*naslov trenutnega direktorija*/
 	str r10, [r2, #D_PARENT]	/* praznemu direktoriju nastavimo pointer na oceta */
 	str r1, [r2, #D_NAME]		/* nastavimo ime novoustvarjenemu direktoriju */
+	str r11, [r2, #D_TYPE]		/* nastavimo na imenik ali datoteko */
 	mov r4, #0
-	str r4, [r2, #D_TYPE]		/* nastavimo da je to imenik */
 	str r4, [r2, #D_CHILD_T]   	/* nastavimo da je imenik prazen */
 
 	ldr r5, [r10, #D_CHILD_T]		/* naslov current tabele otrok*/
@@ -42,7 +53,7 @@ OK:	ldr r4, [r2]
 	beq	NAREDI_TABELO
 	
 PONOVI:	ldr r7, [r5], #4		/* zacnemo iskanje po tabeli otrok, r5 avtomatsko povecamo na naslednje mesto */
-	cmp r7, #0			/* ce je otrok prazen, ga zapisemo */
+	cmp r7, #0					/* ce je otrok prazen, ga zapisemo */
 	beq ZAPISEMO
 	ldr r7, [r5], #4		/* drugace se premaknemo na naslednje mesto v tabeli */
 	cmp r7, #0
@@ -50,13 +61,14 @@ PONOVI:	ldr r7, [r5], #4		/* zacnemo iskanje po tabeli otrok, r5 avtomatsko pove
 	ldr r7, [r5], #4
 	cmp r7, #0
 	beq ZAPISEMO
-	ldr r7, [r5], #4
+	ldr r7, [r5]
 	cmp r7, #0
 	beq NAREDI_TABELO
 	ldr r5, [r7]
 	b PONOVI
 	
-ZAPISEMO:				/* v r5 imamo naslov praznega mesta */
+ZAPISEMO:				/* v r5 imamo naslov praznega mesta, ki je prevelik za 4, ker smo ga ze povecali */
+	sub r5, r5, #4
 	str r2, [r5]			/* shranimo novonarejeni imenik na to mesto */
 	mov r0, #0
 	b KONEC
@@ -77,9 +89,11 @@ NAREDI_TABELO:
 
 	
 
-	
-	
-SVC_REMDIR:
+/* ================================================================
+                           SYSTEM CALL REMOVE DIR
+   ================================================================
+*/
+dir_remdir:
 	/*
 	V registru R1 imamo podano ime direktorija, ki ga zelimo zbrisati in smo v current direktoriju. 
 	-najdemo zadnjega (je pravi?)
@@ -89,6 +103,7 @@ SVC_REMDIR:
 	-èe je bil zadnji prvi v tabeli, pobrišemo tabelo in nastavimo child_table_p na niè
 	*/
 
+	stmfd sp!, {r1-r12,lr}
 	
 	ldr r10, =CURRENT		/*current od trenutnega procesa*/ 
 	ldr r10, [r10, #T_CURDIR]  	/*naslov trenutnega direktorija*/
@@ -208,15 +223,13 @@ NO_CHILD_ERR:
                            SYSTEM CALL CHANGE DIR
    ================================================================
 */	 
-SVC_CHGDIR:
+dir_chdir:
 	/*
 	V registrih R1, R2 in R3 so imena direktorijev po vrsti. Vsi trije registri morajo ali vsebovati ime dira, ali pa biti prazni.
-
 	Popravimo CURRENT, tako da kaže na imenik ki je èim nižje v hierarhiji (ampak ni niè -> register R2 ali R3 ne vsebuje 0)
 	*/
 
-	/* ce so v registrih imena direktorijev, je treba najprej dobiti njihove naslove !!!!!!!!!!!!!!!!!!!!!! */
-
+	stmfd sp!, {r1-r12,lr}
 
 	ldr r6, =D_ROOT
 	ldr r6, [r6, #D_CHILD_T]
@@ -224,11 +237,11 @@ SVC_CHGDIR:
 	cmp r1, #0
 	beq NO_ATR_ERR
 	
-SEARCH:						/*zacnemo z iskanjem po tabeli z naslovi (sprehod 3x) */
+SEARCH:							/*zacnemo z iskanjem po tabeli z naslovi (sprehod 3x) */
 	ldr r7, [r6,#D_NAME]
 	cmp r7,r1
 	beq NAJDENO
-	cmp r7, #-1				/* check if child table has no more entries */
+	cmp r7, #-1					/* check if child table has no more entries */
 	beq END_CHILD_T_ERR
 	add r6, r6, #4
 	
@@ -245,7 +258,7 @@ SEARCH:						/*zacnemo z iskanjem po tabeli z naslovi (sprehod 3x) */
 	cmp r7, #-1
 	beq END_CHILD_T_ERR
 
-JUMP:						/*ce ne najdemo pravega se premaknemo na naslednjo tabelo sinov ter ponovimo search */
+JUMP:							/*ce ne najdemo pravega se premaknemo na naslednjo tabelo sinov ter ponovimo search */
 	add r6, r6, #4
 	ldr r6, [r6]
 	b SEARCH
@@ -303,45 +316,48 @@ SVC_APPENDF:
    ================================================================
 */	
 
-/* V r0 dobimo ime datoteke, ki jo moramo poiskati in v r0 podati naslov prvega clustra. */
+/* r0 <- name of the file we have to search and put a handle of first cluster of data into r0 */
 
 SUB_SEARCH:
 
-	ldr r6, =D_ROOT
-	ldr r6, [r6, #D_CHILD_T]
+	stmfd sp!, {r1-r2,lr}
+
+	ldr r1, =D_ROOT
+	ldr r1, [r1, #D_CHILD_T]
 	
-	cmp r1, #0
+	cmp r0, #0
 	beq NO_ATR_ERR
 	
-SEARCH1:						/*zacnemo z iskanjem po tabeli z naslovi (sprehod 3x) */
-	ldr r7, [r6,#D_NAME]
-	cmp r7,r1
+SEARCH1:						/* zacnemo z iskanjem po tabeli z naslovi (sprehod 3x) */
+	ldr r2, [r1,#D_NAME]
+	cmp r2,r0
 	beq NAJDENO1
-	cmp r7, #-1				/* check if child table has no more entries */
+	cmp r2, #-1					/* check if child table has no more entries */
 	beq END_CHILD_T_ERR
-	add r6, r6, #4
+	add r1, r1, #4
 	
-	ldr r7, [r6,#D_NAME]
-	cmp r7,r1
+	ldr r2, [r1,#D_NAME]
+	cmp r2,r0
 	beq NAJDENO1
-	cmp r7, #-1
+	cmp r2, #-1
 	beq END_CHILD_T_ERR
-	add r6, r6, #4
+	add r1, r1, #4
 	
-	ldr r7, [r6,#D_NAME]
-	cmp r7,r1
+	ldr r2, [r1,#D_NAME]
+	cmp r2,r0
 	beq NAJDENO1
-	cmp r7, #-1
+	cmp r2, #-1
 	beq END_CHILD_T_ERR
 
-						/*ce ne najdemo pravega se premaknemo na naslednjo tabelo sinov ter ponovimo search */
-	add r6, r6, #4
-	ldr r6, [r6]
+								/*ce ne najdemo pravega se premaknemo na naslednjo tabelo sinov ter ponovimo search */
+	add r1, r1, #4
+	ldr r1, [r1]
 	b SEARCH1
 	
-NAJDENO1:						/*element je najden - premaknemo se globje v strukturi, v r6 imamo naslov pravega dira */
-	ldr r0, [r6, #D_TYPE]
-	mov r15,r14 				/* shranimo povratni naslov */
+NAJDENO1:						/*element je najden - premaknemo se globje v strukturi, v r1 imamo naslov pravega dira */
+	ldr r0, [r1, #D_TYPE]
+	
+	ldmfd sp!, {r1-r2,pc} 				/* nalozimo povratni naslov */
 
 
 
@@ -349,34 +365,87 @@ NAJDENO1:						/*element je najden - premaknemo se globje v strukturi, v r6 imam
                            SYSTEM CALL DIR UP
    ================================================================
 */
-SVC_DIRUP:
+dir_dirup:
 	/*
 	CURRENT_DIR nastavimo na oèeta od CURRENT_DIR
 	*/
+	
+	stmfd sp!, {r1-r12,lr}
+	
 	ldr r9, =CURRENT
 	ldr r10, [r9, #T_CURDIR]		/* r10 <- address of current dir*/
 	ldr r11, [r10, #D_PARENT]		/* r11 <- pointer to current dir's parent*/
+	cmp r11, #0						/* check if not root */
+	beq ROOT_DIR_UP_ERR
 	str r11, [r9, #T_CURDIR]		/* save this pointer to current dir of current task */
-	mov r0, #0				/* no error */
+	mov r0, #0						/* no error */
+	b KONEC
 
+ROOT_DIR_UP_ERR:
+	ldr r0, E_ROOT_DIRUP
+	b KONEC
 
 KONEC:
-	/* Switch to some other task */
-	b svc_newtask
+	/* go back from where you came -> to syscall*/
+	ldmfd sp!, {r1-r12,pc}
+		
 	
-	
-	
-/*	INIT:
- treba se je sprehodit po strukturi in nastavit kazalce, zadnjega pa na 0.
 
-	TODO!!!
-	INIT metoda!!! - current, dirlist (name->name...->name->0), nastavi root,
+set_current_dir:					/* for every task, set current dir = root, r2 contains pointer to task's TCB */
+	stmfd sp!, {r1-r2,lr}		/* store work registers */
+	
+	ldr r1, =D_ROOT
+	str r1, [r2, #T_CURDIR]
+	
+	ldmfd sp!, {r1-r2,pc}
+
+	
+dir_init:									/* initialize needed data structures etc. */
+
+	stmfd sp!, {r3-r5,lr}		/* store work registers */
+	
+	ldr r3, =D_ROOT			/* set up root directory */
+	mov r4, #ROOT_NAME
+	str r4, [r3, #D_NAME]
+	mov r4, #0
+	str r4, [r3, #D_TYPE]
+	str r4, [r3, #D_PARENT]
+	str r4, [r3, #D_CHILD_T]
+	
+	
+	ldr r5, #50					/* set up pointers for list of empty directories */
+  ldr r3, =D_DIRLIST
+	
+__dir_inti_loop:
+	add r4, r3, #D_SIZE
+	str r4, [r3]
+	mov r3, r4
+	sub r5, #1
+	bne __dir_init_loop
+	mov r4, #0
+	str r4, [r3]	
+
+	
+	ldmfd sp!, {r3-r5,pc}
+	
+ROOT_NAME: .asciz "ROOT"
+	
+/*
+	
+	TODO:
+	INIT metoda!!! - current, dirlist (name->name...->name->0), nastavi root
 	child table ->morajo bit nièle
 	remdir treba nastavit to sranje
-	disable interrupts
-	mkdir remdir za 6 skupino
+	
+	
+	space -> fs_isfile je se potreben?	
+	disable interrupts	
 	current proc + current dir pa te fore
 	inlcudi pa to sranje
+	
+	
+	DONE:
+	mkdir remdir za 6 skupino
 	dir up ne preverja ce je ze na vrhu
 	chdir se sprehaja od currenta dol, ne od roota...
 	

@@ -10,6 +10,7 @@
 .include "include/macros.s"
 .include "include/at91sam9260.s"
 .include "include/globals.s"
+.include "include/directories.s"
 
 .text
 .code 32
@@ -41,6 +42,42 @@ __bad_svc:
                        SYSTEM CALLS GO HERE
    ================================================================
 */
+
+/**
+ * Make new directory syscall.
+ */
+svc_mkdir:
+	DISABLE_IRQ
+	bl dir_mkdir
+	ENABLE_IRQ
+	b svc_newtask
+	
+/**
+ * Remove directory syscall.
+ */
+svc_remdir:
+	DISABLE_IRQ
+	bl dir_remdir
+	ENABLE_IRQ
+	b svc_newtask
+	
+/**
+ * Change directory syscall.
+ */
+svc_chdir:
+	DISABLE_IRQ
+	bl dir_chdir
+	ENABLE_IRQ
+	b svc_newtask
+
+/**
+ * Move one directory up syscall.
+ */
+svc_dirup:
+	DISABLE_IRQ
+	bl dir_dirup
+	ENABLE_IRQ
+	b svc_newtask
 
 /**
  * New task syscall.

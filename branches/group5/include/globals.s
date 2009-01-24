@@ -18,6 +18,8 @@
 .global PAGEBITMAP
 .global PAGEOFFSET
 .global STACK_SUPM_END
+.global D_ROOT
+.global D_DIRLIST
 
 .equ MAXPAGES, 3840
 .equ MAXTASK, 4
