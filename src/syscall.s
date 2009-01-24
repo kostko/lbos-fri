@@ -103,7 +103,7 @@ svc_send:
      error is detected. */
   cmp r2, #MAXTASK
   bhs __err_badtask
-  
+    
 
   mov r3, r0
   mov r4, r1
@@ -114,7 +114,7 @@ svc_send:
   
   DISABLE_IRQ  
   ldr r3, =MCBLIST
-  ldr r4, [r3]          /* Load first MCB base into r3 */
+  ldr r4, [r3]          /* Load first MCB base into r4 */
   cmp r4, #0            /* Check if it is not NULL */
   beq __err_nomcbs
   ldr r5, [r4, #M_LINK] /* Get next MCB in line */
@@ -179,6 +179,9 @@ __err_badtask:
  * @param r1 Buffer size
  */
 svc_recv:
+  cmp r0, #0x30000000	/* Check if buffer address is valid (is in process' virtual address space) */
+  blo __err_badaddress  
+
   mov r4, r0            
   mov r5, r1
 
@@ -206,6 +209,10 @@ __rcv_wait:
   cmp r3,r5
   movls r5, r3  
   str r5, [r1, #M_COUNT] 
+  
+  add r6, r5, r0		/* Check if buffer address is valid (is in process' virtual address space) */
+  cmp r6, #0xF0000000
+  bhi __err_badaddress  
 
   mov r6, r1 /* MCB */
   
@@ -215,7 +222,7 @@ __rcv_wait:
   mov r2, r5  
   bl memcpy
   
-  /* Return TCB address to userspace */
+  /* Return MCB address to userspace */
   SVC_RETURN_CODE r6
   POP_CONTEXT
 
@@ -228,6 +235,11 @@ __wait_for_msg:
   /* Switch to other task and retry receive */
   swi #SYS_NEWTASK
   b __rcv_wait
+
+__err_badaddress:
+  /* Return E_BADADDRESS error code in r0 */
+  SVC_RETURN_CODE #E_BADADDRESS
+  POP_CONTEXT
 
 /**
  * Reply to a message syscall.

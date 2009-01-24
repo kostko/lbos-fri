@@ -86,6 +86,7 @@
 .equ E_NOMCB, -2      /* No MCB available for request */
 .equ E_BADTASK, -3    /* Invalid task number */
 .equ E_BADMCB, -4     /* Invalid MCB address on reply */
+.equ E_BADADDRESS, -5 /* Invalid buffer address on receive */
 
 /* ================================================================
                        ON-STACK CONTEXT LAYOUT
