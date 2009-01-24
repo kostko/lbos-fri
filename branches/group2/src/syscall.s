@@ -419,6 +419,8 @@ b __wait_konec
 /* shrani element */
 __wait_loop2:
 ldr v4, =CURRENT
+ldr v6, [v4]                 /*nalozimo naslov TCB-ja*/
+str v6, [v5]                 /*shranimo naslov v tabelo*/
 ldr v5, [v4]
 ldr v6, [v5, #T_FLAG]
 orr v6, v6, #SWAIT

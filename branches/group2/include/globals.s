@@ -21,5 +21,5 @@
 .global SEMA_TABLES
 
 .equ MAXPAGES, 3840
-.equ MAXTASK, 4
+.equ MAXTASK, 8
 .equ NMCBS, 5
