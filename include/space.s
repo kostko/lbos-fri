@@ -74,4 +74,3 @@ STACK_IRQM_END: .long __STACK_END__
 .align 2
 D_ROOT:	.space D_SIZE
 D_DIRLIST: .space 50*D_SIZE
-FS_ISFILE: .space 4
