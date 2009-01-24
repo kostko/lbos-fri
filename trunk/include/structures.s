@@ -86,6 +86,7 @@
 .equ E_NOMCB, -2      /* No MCB available for request */
 .equ E_BADTASK, -3    /* Invalid task number */
 .equ E_BADMCB, -4     /* Invalid MCB address on reply */
+.equ E_BADADDRESS, -5 /* Invalid buffer address on receive */
 
 /* ================================================================
                        ON-STACK CONTEXT LAYOUT
@@ -94,9 +95,7 @@
 */
 .equ SCTX_PSR, 0x00
 .equ SCTX_REG, 0x04
-.equ SCTX_USR_LR, 0x38
-.equ SCTX_SVC_LR, 0x3C
-.equ SCTX_PC, 0x40
+.equ SCTX_PC, 0x38
 
 /* ================================================================
                        MMU RELATED CONSTANTS
