@@ -66,9 +66,9 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
 
 = Group 4 / 2.6 =
   Members: Nejc Potrebuješ, Andrej Šušmelj, Gorazd Štamcar, Klemen Rade
-  * svc_getchar, svc_putchar for communication with the serial port
-  * monitor process
-  * merge code with source
+  * ~~svc_getchar, svc_putchar for communication with the serial port~~
+  * ~~monitor process~~
+  * ~~merge code with source~~
 
 = Group 5 / 2.7 =
   Members: Jernej Erker, Matjaž Verbole, Peter Hrvatin, Rok Kek
