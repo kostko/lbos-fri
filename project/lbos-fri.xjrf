@@ -14,222 +14,218 @@
           </ColorSyntax>
           <PI.0>
             <L type="Integer">471</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\vm.s</P>
-            <VL type="Integer">456</VL>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\vm.s</P>
+            <VL type="Integer">466</VL>
           </PI.0>
           <PI.1>
             <L type="Integer">15</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\vectors.s</P>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\vectors.s</P>
+            <VL type="Integer">2</VL>
           </PI.1>
           <PI.10>
-            <C type="Integer">70</C>
-            <L type="Integer">7</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task1.s</P>
-            <VL type="Integer">3</VL>
+            <L type="Integer">5</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task1.s</P>
           </PI.10>
           <PI.11>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\msgtest.s</P>
-            <VL type="Integer">15</VL>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\msgtest.s</P>
           </PI.11>
           <PI.12>
-            <C type="Integer">64</C>
-            <L type="Integer">43</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\iotest.s</P>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\iotest.s</P>
           </PI.12>
           <PI.13>
-            <C type="Integer">26</C>
-            <L type="Integer">57</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\dummy.s</P>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\dummy.s</P>
           </PI.13>
           <PI.14>
-            <L type="Integer">60</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\syscall.s</P>
-            <VL type="Integer">49</VL>
+            <L type="Integer">387</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\syscall.s</P>
+            <VL type="Integer">372</VL>
           </PI.14>
           <PI.15>
-            <L type="Integer">37</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\sched.s</P>
-            <VL type="Integer">14</VL>
+            <C type="Integer">13</C>
+            <L type="Integer">56</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\sched.s</P>
           </PI.15>
           <PI.16>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\printk.s</P>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\printk.s</P>
           </PI.16>
           <PI.17>
             <L type="Integer">22</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\main.s</P>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\main.s</P>
             <VL type="Integer">22</VL>
           </PI.17>
           <PI.18>
-            <L type="Integer">99</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\debugger.s</P>
-            <VL type="Integer">69</VL>
-          </PI.18>
-          <PI.19>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\include\structures.s</P>
-            <VL type="Integer">144</VL>
-          </PI.19>
-          <PI.2>
-            <C type="Integer">26</C>
-            <L type="Integer">20</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\vmtest.s</P>
-          </PI.2>
-          <PI.20>
-            <C type="Integer">68</C>
-            <L type="Integer">47</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\include\space.s</P>
-            <VL type="Integer">30</VL>
-          </PI.20>
-          <PI.21>
-            <C type="Integer">52</C>
-            <L type="Integer">60</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\config\layout.ind</P>
-            <VL type="Integer">36</VL>
-          </PI.21>
-          <PI.22>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\config\init.ini</P>
-          </PI.22>
-          <PI.23>
-            <L type="Integer">471</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\vm.s</P>
-            <VL type="Integer">466</VL>
-          </PI.23>
-          <PI.24>
-            <L type="Integer">15</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\vectors.s</P>
-            <VL type="Integer">2</VL>
-          </PI.24>
-          <PI.25>
-            <L type="Integer">5</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task5.s</P>
-          </PI.25>
-          <PI.26>
-            <L type="Integer">6</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task4.s</P>
-          </PI.26>
-          <PI.27>
-            <L type="Integer">17</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task3.s</P>
-            <VL type="Integer">7</VL>
-          </PI.27>
-          <PI.28>
-            <L type="Integer">8</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task2.s</P>
-          </PI.28>
-          <PI.29>
-            <L type="Integer">5</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task1.s</P>
-          </PI.29>
-          <PI.3>
-            <C type="Integer">13</C>
-            <L type="Integer">8</L>
-            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task8.s</P>
-          </PI.3>
-          <PI.30>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\msgtest.s</P>
-          </PI.30>
-          <PI.31>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\iotest.s</P>
-          </PI.31>
-          <PI.32>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\dummy.s</P>
-          </PI.32>
-          <PI.33>
-            <L type="Integer">26</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\syscall.s</P>
-            <VL type="Integer">26</VL>
-          </PI.33>
-          <PI.34>
-            <L type="Integer">170</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\sched.s</P>
-            <VL type="Integer">158</VL>
-          </PI.34>
-          <PI.35>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\printk.s</P>
-          </PI.35>
-          <PI.36>
-            <L type="Integer">22</L>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\main.s</P>
-            <VL type="Integer">12</VL>
-          </PI.36>
-          <PI.37>
             <C type="Integer">18</C>
             <L type="Integer">100</L>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\debugger.s</P>
             <VL type="Integer">89</VL>
-          </PI.37>
-          <PI.38>
+          </PI.18>
+          <PI.19>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\include\structures.s</P>
-          </PI.38>
-          <PI.39>
+          </PI.19>
+          <PI.2>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\vmtest.s</P>
+          </PI.2>
+          <PI.20>
             <C type="Integer">71</C>
             <L type="Integer">44</L>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\include\space.s</P>
             <VL type="Integer">33</VL>
-          </PI.39>
-          <PI.4>
+          </PI.20>
+          <PI.21>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\config\layout.ind</P>
+            <VL type="Integer">54</VL>
+          </PI.21>
+          <PI.22>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\config\init.ini</P>
+          </PI.22>
+          <PI.23>
+            <L type="Integer">471</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\vm.s</P>
+            <VL type="Integer">456</VL>
+          </PI.23>
+          <PI.24>
+            <L type="Integer">15</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\vectors.s</P>
+          </PI.24>
+          <PI.25>
+            <C type="Integer">26</C>
+            <L type="Integer">20</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\vmtest.s</P>
+          </PI.25>
+          <PI.26>
+            <C type="Integer">13</C>
+            <L type="Integer">8</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task8.s</P>
+          </PI.26>
+          <PI.27>
             <C type="Integer">64</C>
             <L type="Integer">18</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task7.s</P>
-          </PI.4>
-          <PI.40>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\config\layout.ind</P>
-            <VL type="Integer">54</VL>
-          </PI.40>
-          <PI.41>
-            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\config\init.ini</P>
-          </PI.41>
-          <PI.42>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\vm.s</P>
-            <VL type="Integer">180</VL>
-          </PI.42>
-          <PI.43>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\vectors.s</P>
-          </PI.43>
-          <PI.44>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task6.s</P>
-          </PI.44>
-          <PI.45>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task5.s</P>
-          </PI.45>
-          <PI.46>
-            <L type="Integer">6</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task4.s</P>
-          </PI.46>
-          <PI.47>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task3.s</P>
-          </PI.47>
-          <PI.48>
-            <L type="Integer">11</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task2.s</P>
-          </PI.48>
-          <PI.49>
-            <C type="Integer">32</C>
-            <L type="Integer">22</L>
-            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task1.s</P>
-          </PI.49>
-          <PI.5>
+          </PI.27>
+          <PI.28>
             <L type="Integer">8</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task6.s</P>
-          </PI.5>
-          <PI.6>
+          </PI.28>
+          <PI.29>
             <L type="Integer">8</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task5.s</P>
-          </PI.6>
-          <PI.7>
+          </PI.29>
+          <PI.3>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task8.s</P>
+          </PI.3>
+          <PI.30>
             <L type="Integer">17</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task4.s</P>
-          </PI.7>
-          <PI.8>
+          </PI.30>
+          <PI.31>
             <C type="Integer">13</C>
             <L type="Integer">15</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task3.s</P>
             <VL type="Integer">3</VL>
-          </PI.8>
-          <PI.9>
+          </PI.31>
+          <PI.32>
             <C type="Integer">13</C>
             <L type="Integer">15</L>
             <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task2.s</P>
             <VL type="Integer">3</VL>
+          </PI.32>
+          <PI.33>
+            <C type="Integer">70</C>
+            <L type="Integer">7</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\task1.s</P>
+            <VL type="Integer">3</VL>
+          </PI.33>
+          <PI.34>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\msgtest.s</P>
+            <VL type="Integer">15</VL>
+          </PI.34>
+          <PI.35>
+            <C type="Integer">64</C>
+            <L type="Integer">43</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\iotest.s</P>
+          </PI.35>
+          <PI.36>
+            <C type="Integer">26</C>
+            <L type="Integer">57</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\tasks\dummy.s</P>
+          </PI.36>
+          <PI.37>
+            <L type="Integer">60</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\syscall.s</P>
+            <VL type="Integer">49</VL>
+          </PI.37>
+          <PI.38>
+            <L type="Integer">37</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\sched.s</P>
+            <VL type="Integer">14</VL>
+          </PI.38>
+          <PI.39>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\printk.s</P>
+          </PI.39>
+          <PI.4>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task7.s</P>
+          </PI.4>
+          <PI.40>
+            <L type="Integer">22</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\main.s</P>
+            <VL type="Integer">22</VL>
+          </PI.40>
+          <PI.41>
+            <L type="Integer">99</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\src\debugger.s</P>
+            <VL type="Integer">69</VL>
+          </PI.41>
+          <PI.42>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\include\structures.s</P>
+            <VL type="Integer">144</VL>
+          </PI.42>
+          <PI.43>
+            <C type="Integer">68</C>
+            <L type="Integer">47</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\include\space.s</P>
+            <VL type="Integer">30</VL>
+          </PI.43>
+          <PI.44>
+            <C type="Integer">52</C>
+            <L type="Integer">60</L>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\config\layout.ind</P>
+            <VL type="Integer">36</VL>
+          </PI.44>
+          <PI.45>
+            <P type="String">C:\Documents and Settings\Zlatko-Vladana\Desktop\group2\config\init.ini</P>
+          </PI.45>
+          <PI.46>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\vm.s</P>
+            <VL type="Integer">180</VL>
+          </PI.46>
+          <PI.47>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\vectors.s</P>
+          </PI.47>
+          <PI.48>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task6.s</P>
+          </PI.48>
+          <PI.49>
+            <P type="String">C:\Documents and Settings\kosicuros\Desktop\desktop2\src\tasks\task5.s</P>
+          </PI.49>
+          <PI.5>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task6.s</P>
+          </PI.5>
+          <PI.6>
+            <L type="Integer">5</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task5.s</P>
+          </PI.6>
+          <PI.7>
+            <L type="Integer">6</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task4.s</P>
+          </PI.7>
+          <PI.8>
+            <L type="Integer">17</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task3.s</P>
+            <VL type="Integer">7</VL>
+          </PI.8>
+          <PI.9>
+            <L type="Integer">8</L>
+            <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\task2.s</P>
           </PI.9>
         </REG_ROOT>
       </EditorOptions>
@@ -253,7 +249,7 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\src\sched.s</RelativeFileName>
+            <RelativeFileName type="String">..\src\syscall.s</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
             <FileBarIndex type="Integer">1</FileBarIndex>
@@ -288,7 +284,7 @@
             <RelativeFileName type="String">..\src\tasks\msgtest.s</RelativeFileName>
           </Editor.11>
           <Editor.12>
-            <FileBarIndex type="Integer">17</FileBarIndex>
+            <FileBarIndex type="Integer">16</FileBarIndex>
             <RectPosBottom type="Integer">314</RectPosBottom>
             <RectPosLeft type="Integer">0</RectPosLeft>
             <RectPosRight type="Integer">909</RectPosRight>
@@ -296,7 +292,7 @@
             <RelativeFileName type="String">..\src\tasks\task1.s</RelativeFileName>
           </Editor.12>
           <Editor.13>
-            <FileBarIndex type="Integer">18</FileBarIndex>
+            <FileBarIndex type="Integer">17</FileBarIndex>
             <RectPosBottom type="Integer">343</RectPosBottom>
             <RectPosLeft type="Integer">22</RectPosLeft>
             <RectPosRight type="Integer">931</RectPosRight>
@@ -304,7 +300,7 @@
             <RelativeFileName type="String">..\src\tasks\task2.s</RelativeFileName>
           </Editor.13>
           <Editor.14>
-            <FileBarIndex type="Integer">19</FileBarIndex>
+            <FileBarIndex type="Integer">18</FileBarIndex>
             <RectPosBottom type="Integer">401</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">975</RectPosRight>
@@ -312,7 +308,7 @@
             <RelativeFileName type="String">..\src\tasks\task3.s</RelativeFileName>
           </Editor.14>
           <Editor.15>
-            <FileBarIndex type="Integer">21</FileBarIndex>
+            <FileBarIndex type="Integer">19</FileBarIndex>
             <RectPosBottom type="Integer">372</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">953</RectPosRight>
@@ -328,7 +324,7 @@
             <RelativeFileName type="String">..\src\tasks\task5.s</RelativeFileName>
           </Editor.16>
           <Editor.17>
-            <FileBarIndex type="Integer">16</FileBarIndex>
+            <FileBarIndex type="Integer">20</FileBarIndex>
             <RectPosBottom type="Integer">421</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
@@ -336,7 +332,7 @@
             <RelativeFileName type="String">..\src\tasks\task6.s</RelativeFileName>
           </Editor.17>
           <Editor.18>
-            <FileBarIndex type="Integer">8</FileBarIndex>
+            <FileBarIndex type="Integer">11</FileBarIndex>
             <RectPosBottom type="Integer">450</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">998</RectPosRight>
@@ -368,7 +364,7 @@
             <RelativeFileName type="String">..\src\tasks\vmtest.s</RelativeFileName>
           </Editor.20>
           <Editor.21>
-            <FileBarIndex type="Integer">20</FileBarIndex>
+            <FileBarIndex type="Integer">21</FileBarIndex>
             <RectPosBottom type="Integer">265</RectPosBottom>
             <RectPosLeft type="Integer">22</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
@@ -408,7 +404,7 @@
             <RelativeFileName type="String">..\src\main.s</RelativeFileName>
           </Editor.5>
           <Editor.6>
-            <FileBarIndex type="Integer">10</FileBarIndex>
+            <FileBarIndex type="Integer">8</FileBarIndex>
             <RectPosBottom type="Integer">264</RectPosBottom>
             <RectPosLeft type="Integer">46</RectPosLeft>
             <RectPosRight type="Integer">767</RectPosRight>
@@ -416,7 +412,7 @@
             <RelativeFileName type="String">..\src\printk.s</RelativeFileName>
           </Editor.6>
           <Editor.7>
-            <FileBarIndex type="Integer">11</FileBarIndex>
+            <FileBarIndex type="Integer">10</FileBarIndex>
             <RectPosBottom type="Integer">241</RectPosBottom>
             <RectPosLeft type="Integer">23</RectPosLeft>
             <RectPosRight type="Integer">744</RectPosRight>
@@ -453,10 +449,10 @@
           </EditorHistoryFile.3>
         </Documents.0>
         <Progress>
-          <b type="Integer">676</b>
+          <b type="Integer">549</b>
           <l type="Integer">392</l>
           <r type="Integer">888</r>
-          <t type="Integer">317</t>
+          <t type="Integer">190</t>
         </Progress>
         <Watches>
           <ActiveWatchPane type="Integer">0</ActiveWatchPane>
@@ -624,22 +620,22 @@
               <Type type="Integer">0</Type>
               <TypeOfWnd type="Integer">6</TypeOfWnd>
               <Data>
-                <Address type="Integer">539754496</Address>
+                <Address type="Integer">537396760</Address>
                 <AddrMode type="Integer">1</AddrMode>
                 <Area type="Integer">0</Area>
                 <Bits type="Integer">8</Bits>
-                <DisplayMode type="Integer">0</DisplayMode>
+                <DisplayMode type="Integer">2</DisplayMode>
                 <High type="Integer">-1</High>
                 <LimitMAUsPerLine type="Integer">0</LimitMAUsPerLine>
                 <Low type="Integer">0</Low>
                 <RealTime type="Integer">0</RealTime>
-                <strAddress type="String">0x202c0000</strAddress>
+                <strAddress type="String">0x20080628</strAddress>
                 <SwapFloat type="String">True</SwapFloat>
                 <SwapInt type="String">True</SwapInt>
                 <API.0>
-                  <Address type="Integer">539754496</Address>
-                  <AddressOffset type="Integer">539754496</AddressOffset>
-                  <DisplayMode type="Integer">0</DisplayMode>
+                  <Address type="Integer">537396776</Address>
+                  <AddressOffset type="Integer">537396760</AddressOffset>
+                  <DisplayMode type="Integer">2</DisplayMode>
                   <FloatLowFirst type="Integer">1</FloatLowFirst>
                   <IntLowFirst type="Integer">1</IntLowFirst>
                 </API.0>
@@ -746,13 +742,22 @@
             </BP.2>
             <BP.3>
               <__>
-                <Active type="String">True</Active>
+                <Active type="String">False</Active>
                 <Condition type="String"></Condition>
                 <Condition_Count type="Integer">0</Condition_Count>
                 <ConditionEnabled type="String">False</ConditionEnabled>
                 <Name type="String">&quot;..\src\syscall.s&quot;::27</Name>
               </__>
             </BP.3>
+            <BP.4>
+              <__>
+                <Active type="String">True</Active>
+                <Condition type="String"></Condition>
+                <Condition_Count type="Integer">0</Condition_Count>
+                <ConditionEnabled type="String">False</ConditionEnabled>
+                <Name type="String">&quot;..\src\syscall.s&quot;::385</Name>
+              </__>
+            </BP.4>
           </Fetch>
         </Breakpoints>
         <CASETool>
