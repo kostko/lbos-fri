@@ -377,12 +377,12 @@ zmanjsamo stanje
 
 DISABLE_IRQ
 
-mov v1, #0x188 /* offset za statusno tabelo */
+mov v1, #0x190 /* offset za statusno tabelo */
 ldr v2, =SEMA_TABLES
 add v2, v2, v1 /* v2 kaze na statusno tabelo */
 
 cmp r1, #0
-addeq v2, v2, #28 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
+addeq v2, v2, #20 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
 
 mov v1, #4 /* odmik 4B=32bit*/
 mul v3, v1, r0 /* izracunamo pravi odmik glede na st. semaforja*/
@@ -432,6 +432,8 @@ ENABLE_IRQ
 
 swi #SYS_NEWTASK
 
+POP_CONTEXT
+
 __wait_konec2:
 sub v3, v3, #1
 str v3, [v2]
@@ -458,12 +460,12 @@ ce je ==1 pustimo statusno spr. in koncamo
 */
 
 
-mov v1, #0x188 /* offset za statusno tabelo */
+mov v1, #0x190 /* offset za statusno tabelo */
 ldr v2, =SEMA_TABLES
 add v2, v2, v1 /* v2 kaze na statusno tabelo */
 
 cmp r1, #0
-addeq v2, v2, #28 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
+addeq v2, v2, #20 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
 
 mov v1, #4 /* odmik 4B=32bit*/
 mul v3, v1, r0 /* izracunamo pravi odmik glede na st. semaforja*/
