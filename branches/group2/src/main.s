@@ -280,8 +280,8 @@ init_mmc:
 init_st:
   mov r1, #1
   mov r2, #5
-  mov r3, #0x188
-  add r3, r3, #28
+  mov r3, #0x190
+  add r3, r3, #20
   ldr r4, =SEMA_TABLES
   add r4, r4, r3
   
