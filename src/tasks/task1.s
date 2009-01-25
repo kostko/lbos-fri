@@ -9,9 +9,9 @@ task1:
   mov r0, #1
   swi #SYS_LED
   
-  /* Delay 500 ms */
-  mov r0, #500
-  swi #SYS_DELAY
+  /* Delay 100 ms */
+  mov r0, #100
+  swi #SYS_DELAY     
                      
   b task1
 
