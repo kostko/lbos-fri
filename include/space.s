@@ -23,8 +23,8 @@ TASK4: .space TCBSIZE
 
 /*Disk and file-system*/
 FS_FAT:     .space 1280
-FS_MEMORY:  .space 320000
-FS_WORKING: .space 16000
+FS_MEMORY:  .space 327.680
+FS_WORKING: .space 16.384
 
 FS_ISFILE:      .word 0
 FS_ENDO:        .word 0
