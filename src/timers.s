@@ -70,6 +70,25 @@ __timers_done:
   ldr r0, =AIC_BASE
   str r0, [r0, #AIC_EOICR]
   
+  /* Load current task TCB pointer */
+  ldr r4, =CURRENT
+  ldr r0, [r4]
+
+  /* If there is a current task do nothing... */
+  cmp r0, #0
+  bne __no_no_task
+
+  /* ...else switch to SVC mode... */
+  mrs r2, cpsr
+  bic r2, r2, #PSR_MODE_MASK
+  orr r2, r2, #PSR_MODE_SVC
+  msr cpsr_c, r2
+
+  /* ...and jump to scheduler */
+  b dispatch
+
+__no_no_task:
+
   ldmfd sp!, {r0-r4,pc}^
 
 /**
