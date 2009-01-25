@@ -40,9 +40,9 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * Documentation - Barbara, ?
 
 = Group 2 / 2.5 =
-  * svc_signal and svc_wait for dynamic lock objects aquisitions - *Andrej, Miha*
-  * User programs - *Uros*
-  * Documentation - ?
+  * ~~svc_signal and svc_wait for dynamic lock objects aquisitions~~
+  * ~~User programs~~
+  * Documentation
 
 
 = Group 3 / 2.4 =
