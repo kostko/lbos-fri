@@ -158,7 +158,7 @@ __wr2fs_loop:
   sub r0,r0,#2             
   mov r0,r0, LSL #2      
   add r0,r0,r2             
-  ldr r0,[r0]                 /* V r0 sedaj shranimo se vsebino iz naslova od r0 (st. naslednje gruce) */
+  ldr r0,[r0]                 
   
   cmp r0,#1                 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
   bne __wr1fs_loop       /* Ponavljamo dokler nismo dosegli konec fajla... */
@@ -187,12 +187,14 @@ __app1fs_loop:
   add r0,r0,r2            
   /* V register r5 shranimo naslov, kjer bo po koncu zanke oznacen konec datoteke. Potrebovali ga bomo v koraku 2: */
   mov r5,r0                 
-  ldr r0,[r0]                 /* V r0 sedaj shranimo se vsebino iz naslova od r0 (st. naslednje gruce) */
+  ldr r0,[r0]                 
   
   cmp r0,#1                 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
   bne __app1fs_loop      /* Ponavljamo dokler nismo dosegli konec fajla ... */
   
-  
+  mov r0,r4             /* v r0 zapišemo št. zadnje gruèe -> z njo bomo izraèunali naslov naslednje */
+
+
   
   /* Drugi korak:  V tabelo FAT dodamo nove gruce...  */
 __app2fs_loop:     
@@ -253,9 +255,9 @@ __trun2fs_loop:
   mov r3, #0            /* Z niclo bomo oznacili prosto gruco */
   str r3,[r5]             /* Na naslov trenutne gruce vpisemo 0 (prosta gruca)  */
   
-  mov r3, #1            /* Z enico bomo oznacili nov konec datoteke */
-  sub r5, r5, #4        /* Prestavimo se eno polje visje */
-  str r3,[r5]             /* Gruco na naslovu r5 oznacimo kot nov konec datoteke (vpisemo 1)  */
+  mov r3, #1            /* Gruco na naslovu r5 oznacimo kot nov konec datoteke (vpisemo 1)  */
+  sub r5, r5, #4        
+  str r3,[r5]           
   
   sub r8, r8, #1        /* St. praznih gruc zmanjsamo za 1 (eno gruco smo pravkar odstranili) */
   sub r5,r5,#4           /* Prestavimo se eno polje visje */
