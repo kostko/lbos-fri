@@ -382,7 +382,7 @@ ldr v2, =SEMA_TABLES
 add v2, v2, v1 /* v2 kaze na statusno tabelo */
 
 cmp r1, #0
-addeq r0, r0, #5 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
+addeq v2, v2, #5 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
 
 mov v1, #4 /* odmik 4B=32bit*/
 mul v3, v1, r0 /* izracunamo pravi odmik glede na st. semaforja*/
@@ -401,7 +401,7 @@ __wait_syntype:
 /* dodajanje elementa */
 mov v4, #0x28
 mul v6, v4, r0 /* izracunamo offset za pravo tabelo */
-ldr v5, =SEMA_TABLES
+ldr v5, =SEMA_TABLES          
 add v5, v5, v6 /* v5 kaze na pravo tabelo semaforja */
 
 /* najdi prazen prostor in dodaj element */
