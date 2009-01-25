@@ -391,7 +391,7 @@ add v2, v2, v3 /* smo v statusni tabelci v pravi celici */
 /* navaden semafor */
 ldr v3, [v2]
 cmp v3, #1
-beq __wait_konec /* semafor ima se eno prazno mesto=>zmanjsamo status in koncamo */
+beq __wait_konec2 /* semafor ima se eno prazno mesto=>zmanjsamo status in koncamo */
 
 __wait_syntype:
 
@@ -432,6 +432,12 @@ ENABLE_IRQ
 
 swi #SYS_NEWTASK
 
+__wait_konec2:
+sub v3, v3, #1
+str v3, [v2]
+
+ENABLE_IRQ
+
 
 POP_CONTEXT
 
@@ -452,12 +458,12 @@ ce je ==1 pustimo statusno spr. in koncamo
 */
 
 
-mov v1, #0x190 /* offset za statusno tabelo */
+mov v1, #0x188 /* offset za statusno tabelo */
 ldr v2, =SEMA_TABLES
 add v2, v2, v1 /* v2 kaze na statusno tabelo */
 
 cmp r1, #0
-addeq v2, v2, #5 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
+addeq v2, v2, #28 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
 
 mov v1, #4 /* odmik 4B=32bit*/
 mul v3, v1, r0 /* izracunamo pravi odmik glede na st. semaforja*/
@@ -500,7 +506,7 @@ bne __signal_loop1
 
 
 __signal_konec:
-  swi SYS_NEWTASK /*Is that OK?? :o*/
+  swi #SYS_NEWTASK
   POP_CONTEXT
 
 /* ================================================================
