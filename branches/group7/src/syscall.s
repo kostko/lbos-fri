@@ -528,75 +528,18 @@ svc_getc:
     
   b svc_newtask
 
-/* REGISTER USAGE (values)
- *
- * - r10 - current TCB = if 0 then get TCBLIST 
- * - r11:
- *      - 0 = TCBLIST
- *      - 1 = T_LINK
- *      - 2 = T_NAME
- *      - 3 = T_MSG
- *      - 4 = T_SSP
- *      - 5 = T_FLAG
- *      - 6 = T_PRIO
- *      - 7 = M_LINK for T_MSG
- *      - 8 = M_LINK for T_RPLY
- *      - 9 = T_RPLY
- */
-/*   
-svc_getc:
+svc_getchar:
+
+  ldr r1, = DBGU_BASE
   
-    cmp r10, #0
-    ldreq r0, = TCBLIST
-    beq svc_getc_end
-    
-    cmp r0, #1
-    ldreq r0, [r10, #T_LINK]
-    beq svc_getc_end
-    
-    cmp r0, #2
-    ldreq r0, [r10, #T_NAME]
-    beq svc_getc_end
-
-    cmp r0, #3
-    ldreq r0, [r10, #T_MSG]
-    beq svc_getc_end
-
-    cmp r0, #4
-    ldreq r0, [r10, #T_SSP]
-    beq svc_getc_end
-
-    cmp r0, #5
-    ldreq r0, [r10, #T_FLAG]
-    beq svc_getc_end 
-    
-    cmp r0, #6
-    ldreq r0, [r10, #T_PRIO]
-    beq svc_getc_end
-
-    cmp r0, #7
-    ldreq r12, [r10, #T_MSG]
-    ldreq r0, [r12, #M_LINK]
-    beq svc_getc_end
-    
-    cmp r0, #8
-    ldreq r12, [r10, #T_RPLY]
-    ldreq r0, [r12, #M_LINK]
-    beq svc_getc_end 
-    
-    cmp r0, #9
-    ldreq r0, [r10, #T_RPLY]
-    beq svc_getc_end
-    
-    cmp r0, #10
-    LOAD_NEXTTCB r1
-    SAVE_CURRTCB r1
-    
-  svc_getc_end:
-
- 
-  b svc_newtask
-*/  
+  getchar_test:
+    ldr r2, [r1, #DBGU_SR]
+    tst r2, #1              @ Preverjamo RXRDY
+    beq getchar_test
+  ldr r0, [r1, #DBGU_RHR]   @ Reciever Holding Register
+  SVC_RETURN_CODE r0
+  
+  b svc_newtask  
 /* ================================================================
                            SYCALL TABLE
    ================================================================
@@ -615,6 +558,7 @@ SYSCALL_TABLE:
 .long svc_mmc_write /* (8) MMC block write */
 .long svc_exit      /* (9) exit current task */
 .long svc_getc      /* (10) get value from memory address  */
+.long svc_getchar	/* (11) read a character from a keyboard*/
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4
