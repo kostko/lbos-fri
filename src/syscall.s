@@ -534,12 +534,26 @@ svc_getchar:
   
   getchar_test:
     ldr r2, [r1, #DBGU_SR]
-    tst r2, #1              @ Preverjamo RXRDY
+    tst r2, #1              
     beq getchar_test
-  ldr r0, [r1, #DBGU_RHR]   @ Reciever Holding Register
+  ldr r0, [r1, #DBGU_RHR]   
   SVC_RETURN_CODE r0
   
   b svc_newtask  
+  
+svc_printchar:
+	
+	mov r4, r0
+	
+	ldr r0, = DBGU_BASE
+	
+    printchar_test:
+      ldr r2, [r1, #DBGU_SR]
+      tst r2, #2              
+      beq printchar_test
+    str r4, [r1, #DBGU_THR]   
+
+  b svc_newtask
 /* ================================================================
                            SYCALL TABLE
    ================================================================
@@ -559,6 +573,7 @@ SYSCALL_TABLE:
 .long svc_exit      /* (9) exit current task */
 .long svc_getc      /* (10) get value from memory address  */
 .long svc_getchar	/* (11) read a character from a keyboard*/
+.long svc_printchar	/* (11) write a character to a keyboard*/
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4
