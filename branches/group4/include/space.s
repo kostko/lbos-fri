@@ -14,24 +14,24 @@ TCBLIST: .space 4   /* Pointer to list of TCBs */
 CURRENT: .space 4   /* Pointer to current task's TCB */
 MCBLIST: .space 4   /* Pointer to free list of MCBs */
 
+.align 2
+FS_FAT:     .space 1280
+FS_MEMORY:  .space 320000
+FS_WORKING: .space 16000
+
+FS_ISFILE:      .word 0
+FS_ENDO:        .word 0
+FS_END:         .word 0
+FS_CLUSTERS:    .word 0
+FS_OPENED:      .word 0   
+
+
 /* Task TCB placeholders */
 .align 2
 TASK1: .space TCBSIZE
 TASK2: .space TCBSIZE
 TASK3: .space TCBSIZE
 TASK4: .space TCBSIZE
-
-/*Disk and file-system*/
-FS_FAT:     .space 1280
-FS_MEMORY:  .space 327.680
-FS_WORKING: .space 16.384
-
-FS_ISFILE:      .word 0
-FS_ENDO:        .word 0
-FS_END:         .word 0
-FS_CLUSTERS:    .word 320
-FS_OPENED:      .word 0
-FS_CLUSTERS:    .word 0    
 
 /* Task map table (if you change this, please update MAXTASK in globals.s) */
 .align 2
@@ -81,4 +81,3 @@ PAGEOFFSET: .long __PAGE_OFFSET__
 .align 2
 STACK_SUPM_END: .long __STACK_END__ - STACK_SIZE*4
 STACK_IRQM_END: .long __STACK_END__
-

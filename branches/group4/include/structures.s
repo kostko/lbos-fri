@@ -9,8 +9,7 @@
    ================================================================
 */
 .equ T_LINK, 0                        /* link word for task list thread */
-.equ T_NAME, T_LINK + 4
-.equ T_MSG, T_NAME + 4                /* link to waiting messages */
+.equ T_MSG, T_LINK + 4                /* link to waiting messages */
 .equ T_RPLY, T_MSG + 4                /* link to message received */
 .equ T_USP, T_RPLY + 4                /* user stack pointer area */
 .equ T_SSP, T_USP + 4                 /* system stack pointer area */
@@ -18,6 +17,7 @@
 .equ T_PRIO, T_FLAG + 4               /* task priority or something */
 .equ T_TTB, T_PRIO + 4                /* translation table base for this task */
 .equ TCBSIZE, T_TTB + 4               /* size of tcb in bytes */
+
 
 /* ================================================================
              MESSAGE CONTROL BLOCK STRUCTURE / OFFSETS 
@@ -86,6 +86,7 @@
 .equ E_NOMCB, -2      /* No MCB available for request */
 .equ E_BADTASK, -3    /* Invalid task number */
 .equ E_BADMCB, -4     /* Invalid MCB address on reply */
+.equ E_BADADDRESS, -5 /* Invalid buffer address on receive */
 
 /* ================================================================
                        ON-STACK CONTEXT LAYOUT
@@ -94,9 +95,7 @@
 */
 .equ SCTX_PSR, 0x00
 .equ SCTX_REG, 0x04
-.equ SCTX_USR_LR, 0x38
-.equ SCTX_SVC_LR, 0x3C
-.equ SCTX_PC, 0x40
+.equ SCTX_PC, 0x38
 
 /* ================================================================
                        MMU RELATED CONSTANTS
@@ -155,26 +154,6 @@
 .equ ABORT_SRC_EXT_A, 0b1000          /* External abort */
 .equ ABORT_SRC_EXT_B, 0b1010
 
-
-/* =================================================================
-                    OUTPUT FORMAT FOR MONITOR PROCESS
-   =================================================================
-*/
-
-.equ V_NAME, 0					  /*	N:PR01_ 			*/
-.equ V_PRIO, V_NAME + 7 		  /*	P:01_			*/
-.equ V_MSG, V_PRIO + 5			  /* 	M:12345678_ 		*/
-.equ V_NMSG, V_MSG + 11			  /*    10_				*/
-.equ V_RPLY, V_NMSG + 3			  /*	R:12345678_		*/
-.equ V_NRPLY, V_RPLY + 11		  /*	12_				*/
-.equ V_SSP, V_NRPLY + 3		      /*	S:12345678_		*/
-.equ V_FLAGS, V_SSP + 11		  /*	F:IMRDS         */
-.equ V_LINK, V_FLAGS + 9
-.equ PRT_LENGTH, V_FLAGS + 11	  /*	69 characters	*/
-
-.equ FLAG_MASK, 31
-
-
 /* ================================================================
                     SYSCALL NUMBERS FOR USERSPACE
    ================================================================
@@ -189,4 +168,9 @@
 .equ SYS_MMC_READ, 7
 .equ SYS_MMC_WRITE, 8
 .equ SYS_EXIT, 9
-.equ SYS_GETC, 10
+.equ SYS_CREATEF, 10
+.equ SYS_OPEN, 11
+.equ SYS_DEL, 12
+.equ SYS_WRITE, 13
+.equ SYS_APPEND, 14
+.equ SYS_TRUNCATE, 15
