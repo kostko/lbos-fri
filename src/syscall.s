@@ -42,6 +42,226 @@ __bad_svc:
    ================================================================
 */
 
+svc_createf:
+/* v r1 se poda ime file-a */
+  ldr r10,=FS_FAT
+
+  ldr r11,=FS_MEMORY
+
+  mov r2,#2    /*ker je v FATu prvi slot oznacen z 2*/
+
+__cf1fs_loop:
+  ldr r3,[r10],#4
+  cmp r3,#0
+    
+  bne __cf2fs_loop
+  sub r10,r10,#4
+  mov r3,#1
+  str r3,[r10]
+  b __cf3fs_loop
+  
+__cf2fs_loop:
+  add r2,r2,#1
+  cmp r10,r11
+  bne __cf1fs_loop
+      
+__cf3fs_loop:
+  /*SVC_MKDIR*/
+
+svc_open:
+
+  /*SVC_OPENF ki klice to funkcijo v r0 poda stevilko prve gruce file-a  */
+  
+  ldr r2,=FS_FAT
+  ldr r1,=FS_OPENED    /*hranimo st. prve gruce odprtega file-a*/
+  ldr r3,=FS_MEMORY
+  ldr r4,=FS_WORKING
+  
+  str r0,[r1]     /*shranemo st. gruce v FS_OPENED*/
+  str r0,[r9]     /* st. prve gruce shranimo v r9, tako da bo na voljo tudi za operacijo WRITE */
+
+__op1fs_loop:
+  mov r5,#256    /*steje navzdol od 256( 256*4B=1024 B), da se nalozi gruca*/
+  
+  /*ti trije ukazi racunajo: DATA=(st. gruce-2)*1024 + FS_MEMORY*/   
+  sub r6,r0,#2   
+  mov r6,r6, LSL #10
+  add r6,r6,r3
+      
+__op2fs_loop:    /*nalozi iz MEMORY v WORKING trenutno gruco- 1024B */
+  ldr r7,[r6],#4
+  str r7,[r4],#4
+  subs r5,r5,#1
+  bne __op2fs_loop
+  
+  
+  
+  /*naslov stevilke od naslednje gruce: NASL. =FS_FAT + 4*(st. gruce-2)*/
+  sub r0,r0,#2
+  mov r0,r0, LSL #2
+  add r0,r0,r2
+  ldr r0,[r0]
+  
+  cmp r0,#1  /*st. gruce==1, pomeni konec file-a*/
+  bne __op1fs_loop
+  
+svc_del: /*v r0 podana stevilka prve gruce v datoteki (od 2 naprej)*/
+
+  cmp r0, #1                  /*preverimo, ce je stevilka gruce vecja od 1*/
+  ble __del2fs_loop          /*ce ni, je napaka*/
+  ldr r1,=FS_FAT             /*nalozimo zacetek FAT*/
+  mov r2, #0                  /*0 za oznacevanje praznih gruc*/
+__del1fs_loop:   
+  sub r0, r0, #2              /*odstejemo 2, ker sta 0 in 1 rezervirani za oznacevanje*/
+  add r3, r1, r0, LSL #2    /*izracunamo naslov gruce v FAT (FAT + stevilka gruce * 4)*/
+  ldr r0, [r3]                   /*nalozimo vrednost gruce*/
+  str r2, [r3]                   /*v gruco zapisemo 0 (oznacimo kot prazno gruco)*/
+  cmp r0, #1                  /*preverimo, ce je zadnja gruca v datoteki*/
+  bne __del1fs_loop         /*ce ni zadnja, ponovimo, sicer smo koncali*/
+__del2fs_loop:     
+  nop
+  
+svc_write:
+
+  ldr r2,=FS_FAT
+  ldr r1,=FS_OPENED     
+  ldr r3,=FS_MEMORY
+  ldr r4,=FS_WORKING
+  
+  ldr r0,[r9]    		 /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
+
+  
+__wr1fs_loop:
+  
+  mov r5,#256        /* Stevec, ki bo odsteval navzdol od 256 (256*4B=1024B) */
+  
+  /* Izracunamo naslov prve gruce fajla, ki se nahaja v MEMORY in ga shranimo v r6:  */    
+  sub r6,r0,#2              /* DATA = (st. gruce-2)*1024 + FS_MEMORY  */
+  mov r6,r6, LSL #10   
+  add r6,r6,r3             
+     
+__wr2fs_loop:    
+  /* Trenutno gruco (1024B) prepisemo iz WORKING v MEMORY ... */
+  ldr r7,[r4],#4             /* V r7 nalozimo vsebino na naslovu WORKING */
+  str r7,[r6],#4             /* V MEMORY na naslovu DATA shranimo vsebino r7 */
+  subs r5,r5,#1             /* Stevec v r5 zmanjsamo za 1 (prenesli smo 4B). */
+  bne __wr2fs_loop        /* Ponavljamo dokler nismo prenesli vseh 1024B */
+  
+  /* V tabeli FAT poiscemo naslednjo gruco: */
+  sub r0,r0,#2             
+  mov r0,r0, LSL #2      
+  add r0,r0,r2             
+  ldr r0,[r0]                 
+  
+  cmp r0,#1                 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
+  bne __wr1fs_loop       /* Ponavljamo dokler nismo dosegli konec fajla... */
+  
+svc_append:
+
+  /* Uporabnik bo V register r10 shranil stevilo novih gruc, ki jih zeli dodati */
+  
+  ldr r2,=FS_FAT
+  ldr r10,=FS_CLUSTERS
+  
+  ldr r0,[r9] /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
+  ldr r8,[r10] /* V r8 shranimo st. novih gruc */
+  
+  
+  /* Prvi korak: Pregledamo tabelo FAT in si zapomnimo st. zadnje gruce ter naslov gruce, ki oznacuje konec datoteke ... */
+__app1fs_loop:
+  
+  mov r4, r0 /* V r4 shranimo st. trenutne gruce */
+  
+  /* V tabeli FAT poiscemo naslednjo gruco: */
+  sub r0,r0,#2
+  mov r0,r0, LSL #2
+  add r0,r0,r2
+  /* V register r5 shranimo naslov, kjer bo po koncu zanke oznacen konec datoteke. Potrebovali ga bomo v koraku 2: */
+  mov r5,r0
+  ldr r0,[r0]
+  
+  cmp r0,#1 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
+  bne __app1fs_loop /* Ponavljamo dokler nismo dosegli konec fajla ... */
+  
+  mov r0,r4 /* v r0 zapi?emo ?t. zadnje grue`e -> z njo bomo izrae`unali naslov naslednje */
+  
+  
+  
+  /* Drugi korak: V tabelo FAT dodamo nove gruce... */
+__app2fs_loop:
+
+
+  add r4, r4, #1 /* St. zadnje gruce povecamo za 1. To bo sedaj nova (naslednja) gruca. */
+  str r4,[r5] /* Na naslov trenutne gruce shranimo naslednjo gruco */
+  sub r8, r8, #1 /* St. novih gruc zmanjsamo za 1 (eno smo pravkar dodali) */
+  
+  /* V tabeli FAT poiscemo naslednjo gruco: */
+  sub r0,r0,#2
+  mov r0,r0, LSL #2
+  add r0,r0,r2
+  
+  mov r5,r0 /* V register r5 shranimo naslov gruce */
+  ldr r0,[r0] /* V r0 sedaj shranimo se vsebino iz naslova od r0 (st. naslednje gruce) */
+  
+  cmp r8, #0 /* Preverimo, ce smo dodali ze vse nove gruce. */
+  bne __app2fs_loop /* Ponavljamo, dokler nismo dodali vseh gruc ... */
+  
+  mov r3, #1 /* Z enico bomo oznacili nov konec datoteke */
+  str r3, [r5] /* Oznacimo nov konec datoteke. */
+  
+  
+  /* Tretji korak: Iz delovnega pomnilnika prenesemo vse v glavni pomnilnik... */
+  swi #SYS_WRITE /* Klicemo funkcijo WRITE */
+
+
+
+
+svc_truncate:
+  /* Uporabnik bo V register r10 shranil stevilo gruc, ki jih zeli odstraniti */
+  
+  ldr r2,=FS_FAT
+  ldr r10,=FS_CLUSTERS
+  
+  ldr r0,[r9] /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
+  ldr r8,[r10] /* V r8 shranimo st. novih gruc */
+  
+  /* Prvi korak: Pregledamo tabelo FAT in poiscemo konec datoteke ter si zapomnimo naslov gruce, ki oznacuje konec datoteke ... */
+__trun1fs_loop:
+
+  /* V tabeli FAT poiscemo naslednjo gruco: */
+  sub r0,r0,#2
+  mov r0,r0, LSL #2
+  add r0,r0,r2
+  /* V register r5 shranimo naslov, kjer bo po koncu zanke oznacen konec datoteke. Potrebovali ga bomo v koraku 2: */
+  mov r5,r0
+  ldr r0,[r0] /* V r0 sedaj shranimo se vsebino iz naslova od r0 (st. naslednje gruce) */
+  
+  cmp r0,#1 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
+  bne __trun1fs_loop /* Ponavljamo dokler nismo dosegli konec fajla ... */
+
+
+
+/* Drugi korak: V tabeli FAT odstranimo odvecne gruce... */
+__trun2fs_loop:
+
+  mov r3, #0 /* Z niclo bomo oznacili prosto gruco */
+  str r3,[r5] /* Na naslov trenutne gruce vpisemo 0 (prosta gruca) */
+  
+  mov r3, #1 /* Gruco na naslovu r5 oznacimo kot nov konec datoteke (vpisemo 1) */
+  sub r5, r5, #4
+  str r3,[r5]
+  
+  sub r8, r8, #1 /* St. praznih gruc zmanjsamo za 1 (eno gruco smo pravkar odstranili) */
+  sub r5,r5,#4 /* Prestavimo se eno polje visje */
+  
+  cmp r8, #0 /* Preverimo, ce smo odstranili ze vse gruce. */
+  bne __trun2fs_loop /* Ponavljamo, dokler nismo odstranili vseh gruc ... */
+  
+  
+  
+  /* Tretji korak: Iz delovnega pomnilnika prenesemo vse v glavni pomnilnik... */
+  swi #SYS_WRITE /* Klicemo funkcijo WRITE */
+
 /**
  * New task syscall.
  */
@@ -398,6 +618,8 @@ svc_exit:
   
   /* This task is finished, let's go somewhere else */
   b svc_newtask
+  
+  
 
 /* ================================================================
                            SYCALL TABLE
@@ -416,6 +638,12 @@ SYSCALL_TABLE:
 .long svc_mmc_read  /* (7) MMC block read */
 .long svc_mmc_write /* (8) MMC block write */
 .long svc_exit      /* (9) exit current task */
+.long svc_createf   /* (10) create file */
+.long svc_open      /* (11) open file */
+.long svc_del       /* (12) delete data */
+.long svc_write     /* (13) write data */
+.long svc_append    /* (14) append data */
+.long svc_truncate  /* (15) truncate file */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4

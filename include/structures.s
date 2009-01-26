@@ -168,3 +168,9 @@
 .equ SYS_MMC_READ, 7
 .equ SYS_MMC_WRITE, 8
 .equ SYS_EXIT, 9
+.equ SYS_CREATEF, 10
+.equ SYS_OPEN, 11
+.equ SYS_DEL, 12
+.equ SYS_WRITE, 13
+.equ SYS_APPEND, 14
+.equ SYS_TRUNCATE, 15
