@@ -64,11 +64,12 @@ Please note, if there were previous assignments you were supposed to fulfil, it 
   * ~~Implement 'Requirements' from plan~~
   * ~~[planOfDelay Plan for SVC_DELAY]~~
 
-= Group 4 / 2.6 =
+= Group 7 / 2.6 =
   Members: Nejc Potrebuješ, Andrej Šušmelj, Gorazd Štamcar, Klemen Rade
   * ~~svc_getchar, svc_putchar for communication with the serial port~~
   * ~~monitor process~~
-  * ~~merge code with source~~
+  * ~~commit to branch~~
+  * commit to trunk
 
 = Group 5 / 2.7 =
   Members: Jernej Erker, Matjaž Verbole, Peter Hrvatin, Rok Kek
