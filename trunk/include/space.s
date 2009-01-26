@@ -14,6 +14,18 @@ TCBLIST: .space 4   /* Pointer to list of TCBs */
 CURRENT: .space 4   /* Pointer to current task's TCB */
 MCBLIST: .space 4   /* Pointer to free list of MCBs */
 
+.align 2
+FS_FAT:     .space 1280
+FS_MEMORY:  .space 320000
+FS_WORKING: .space 16000
+
+FS_ISFILE:      .word 0
+FS_ENDO:        .word 0
+FS_END:         .word 0
+FS_CLUSTERS:    .word 0
+FS_OPENED:      .word 0   
+
+
 /* Task TCB placeholders */
 .align 2
 TASK1: .space TCBSIZE
