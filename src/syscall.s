@@ -43,41 +43,39 @@ __bad_svc:
 */
 
 svc_createf:
+/* v r1 se poda ime file-a */
+  ldr r10,=FS_FAT
 
-  adr r1, FS_FAT
-  /*adr r4, FS_ISFILE*/
+  ldr r11,=FS_MEMORY
 
-  adr r2, FS_MEMORY
-
-  mov r5,#2    /*ker je v FATu prvi slot oznacen z 2*/
+  mov r2,#2    /*ker je v FATu prvi slot oznacen z 2*/
 
 __cf1fs_loop:
-  ldr r3,[r1],#4
+  ldr r3,[r10],#4
   cmp r3,#0
     
   bne __cf2fs_loop
-  sub r1,r1,#4
+  sub r10,r10,#4
   mov r3,#1
-  str r3,[r1]
+  str r3,[r10]
   b __cf3fs_loop
   
 __cf2fs_loop:
-  add r5,r5,#1
-  cmp r1,r2
+  add r2,r2,#1
+  cmp r10,r11
   bne __cf1fs_loop
       
 __cf3fs_loop:
-  SVC_MKDIR
-
+  /*SVC_MKDIR*/
 
 svc_open:
 
   /*SVC_OPENF ki klice to funkcijo v r0 poda stevilko prve gruce file-a  */
   
-  adr r2, FS_FAT
-  adr r1, FS_OPENED    /*hranimo st. prve gruce odprtega file-a*/
-  adr r3, FS_MEMORY
-  adr r4, FS_WORKING
+  ldr r2,=FS_FAT
+  ldr r1,=FS_OPENED    /*hranimo st. prve gruce odprtega file-a*/
+  ldr r3,=FS_MEMORY
+  ldr r4,=FS_WORKING
   
   str r0,[r1]     /*shranemo st. gruce v FS_OPENED*/
   str r0,[r9]     /* st. prve gruce shranimo v r9, tako da bo na voljo tudi za operacijo WRITE */
@@ -94,7 +92,7 @@ __op2fs_loop:    /*nalozi iz MEMORY v WORKING trenutno gruco- 1024B */
   ldr r7,[r6],#4
   str r7,[r4],#4
   subs r5,r5,#1
-  bne __op2fs_loop:
+  bne __op2fs_loop
   
   
   
@@ -106,15 +104,12 @@ __op2fs_loop:    /*nalozi iz MEMORY v WORKING trenutno gruco- 1024B */
   
   cmp r0,#1  /*st. gruce==1, pomeni konec file-a*/
   bne __op1fs_loop
-
-    
-
-
+  
 svc_del: /*v r0 podana stevilka prve gruce v datoteki (od 2 naprej)*/
 
   cmp r0, #1                  /*preverimo, ce je stevilka gruce vecja od 1*/
   ble __del2fs_loop          /*ce ni, je napaka*/
-  adr r1, FS_FAT             /*nalozimo zacetek FAT*/
+  ldr r1,=FS_FAT             /*nalozimo zacetek FAT*/
   mov r2, #0                  /*0 za oznacevanje praznih gruc*/
 __del1fs_loop:   
   sub r0, r0, #2              /*odstejemo 2, ker sta 0 in 1 rezervirani za oznacevanje*/
@@ -125,15 +120,13 @@ __del1fs_loop:
   bne __del1fs_loop         /*ce ni zadnja, ponovimo, sicer smo koncali*/
 __del2fs_loop:     
   nop
-
-
-
+  
 svc_write:
 
-  adr r2, FS_FAT
-  adr r1, FS_OPENED     
-  adr r3, FS_MEMORY
-  adr r4, FS_WORKING
+  ldr r2,=FS_FAT
+  ldr r1,=FS_OPENED     
+  ldr r3,=FS_MEMORY
+  ldr r4,=FS_WORKING
   
   ldr r0,[r9]    		 /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
 
@@ -162,117 +155,112 @@ __wr2fs_loop:
   
   cmp r0,#1                 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
   bne __wr1fs_loop       /* Ponavljamo dokler nismo dosegli konec fajla... */
-
-
-
+  
 svc_append:
 
   /* Uporabnik bo V register r10 shranil stevilo novih gruc, ki jih zeli dodati */
   
-  adr r2, FS_FAT
-  adr r10, FS_CLUSTERS
+  ldr r2,=FS_FAT
+  ldr r10,=FS_CLUSTERS
   
-  ldr r0,[r9]     				/* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
-	ldr r8,[r10]            /* V r8 shranimo st. novih gruc  */
+  ldr r0,[r9] /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
+  ldr r8,[r10] /* V r8 shranimo st. novih gruc */
   
   
-  /* Prvi korak:  Pregledamo tabelo FAT in si zapomnimo st. zadnje gruce ter naslov gruce, ki oznacuje konec datoteke ...  */
-__app1fs_loop:        
+  /* Prvi korak: Pregledamo tabelo FAT in si zapomnimo st. zadnje gruce ter naslov gruce, ki oznacuje konec datoteke ... */
+__app1fs_loop:
   
-  mov r4, r0                /* V r4 shranimo st. trenutne gruce */
+  mov r4, r0 /* V r4 shranimo st. trenutne gruce */
   
   /* V tabeli FAT poiscemo naslednjo gruco: */
-  sub r0,r0,#2             
-  mov r0,r0, LSL #2      
-  add r0,r0,r2            
+  sub r0,r0,#2
+  mov r0,r0, LSL #2
+  add r0,r0,r2
   /* V register r5 shranimo naslov, kjer bo po koncu zanke oznacen konec datoteke. Potrebovali ga bomo v koraku 2: */
-  mov r5,r0                 
-  ldr r0,[r0]                 
+  mov r5,r0
+  ldr r0,[r0]
   
-  cmp r0,#1                 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
-  bne __app1fs_loop      /* Ponavljamo dokler nismo dosegli konec fajla ... */
+  cmp r0,#1 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
+  bne __app1fs_loop /* Ponavljamo dokler nismo dosegli konec fajla ... */
   
-  mov r0,r4             /* v r0 zapišemo št. zadnje gruèe -> z njo bomo izraèunali naslov naslednje */
+  mov r0,r4 /* v r0 zapi?emo ?t. zadnje grue`e -> z njo bomo izrae`unali naslov naslednje */
+  
+  
+  
+  /* Drugi korak: V tabelo FAT dodamo nove gruce... */
+__app2fs_loop:
 
 
-  
-  /* Drugi korak:  V tabelo FAT dodamo nove gruce...  */
-__app2fs_loop:     
-
-  add r4, r4, #1        /* St. zadnje gruce povecamo za 1. To bo sedaj nova (naslednja) gruca. */
-  str r4,[r5]              /* Na naslov trenutne gruce shranimo naslednjo gruco  */
-  sub r8, r8, #1         /* St. novih gruc zmanjsamo za 1 (eno smo pravkar dodali)  */
+  add r4, r4, #1 /* St. zadnje gruce povecamo za 1. To bo sedaj nova (naslednja) gruca. */
+  str r4,[r5] /* Na naslov trenutne gruce shranimo naslednjo gruco */
+  sub r8, r8, #1 /* St. novih gruc zmanjsamo za 1 (eno smo pravkar dodali) */
   
   /* V tabeli FAT poiscemo naslednjo gruco: */
-  sub r0,r0,#2            
-  mov r0,r0, LSL #2     
-  add r0,r0,r2             
+  sub r0,r0,#2
+  mov r0,r0, LSL #2
+  add r0,r0,r2
   
-  mov r5,r0                 /* V register r5 shranimo naslov gruce */
-  ldr r0,[r0]                 /* V r0 sedaj shranimo se vsebino iz naslova od r0 (st. naslednje gruce) */
+  mov r5,r0 /* V register r5 shranimo naslov gruce */
+  ldr r0,[r0] /* V r0 sedaj shranimo se vsebino iz naslova od r0 (st. naslednje gruce) */
   
-  cmp r8, #0               /* Preverimo, ce smo dodali ze vse nove gruce. */
-  bne __app2fs_loop     /* Ponavljamo, dokler nismo dodali vseh gruc ... */
+  cmp r8, #0 /* Preverimo, ce smo dodali ze vse nove gruce. */
+  bne __app2fs_loop /* Ponavljamo, dokler nismo dodali vseh gruc ... */
   
-  mov r3, #1               /* Z enico bomo oznacili nov konec datoteke */
-  str r3, [r5]               /* Oznacimo nov konec datoteke. */
+  mov r3, #1 /* Z enico bomo oznacili nov konec datoteke */
+  str r3, [r5] /* Oznacimo nov konec datoteke. */
   
   
-  /* Tretji korak:  Iz delovnega pomnilnika prenesemo vse v glavni pomnilnik...  */
-  svc_write             /* Klicemo funkcijo WRITE */
-  
+  /* Tretji korak: Iz delovnega pomnilnika prenesemo vse v glavni pomnilnik... */
+  swi #SYS_WRITE /* Klicemo funkcijo WRITE */
+
 
 
 
 svc_truncate:
   /* Uporabnik bo V register r10 shranil stevilo gruc, ki jih zeli odstraniti */
   
-  adr r2, FS_FAT
-  adr r10, FS_CLUSTERS
+  ldr r2,=FS_FAT
+  ldr r10,=FS_CLUSTERS
   
-  ldr r0,[r9]     				/* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
-	ldr r8,[r10]            /* V r8 shranimo st. novih gruc  */
+  ldr r0,[r9] /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
+  ldr r8,[r10] /* V r8 shranimo st. novih gruc */
   
-  /* Prvi korak:  Pregledamo tabelo FAT in poiscemo konec datoteke ter si zapomnimo naslov gruce, ki oznacuje konec datoteke ...  */
+  /* Prvi korak: Pregledamo tabelo FAT in poiscemo konec datoteke ter si zapomnimo naslov gruce, ki oznacuje konec datoteke ... */
 __trun1fs_loop:
- 
+
   /* V tabeli FAT poiscemo naslednjo gruco: */
-  sub r0,r0,#2             
-  mov r0,r0, LSL #2      
-  add r0,r0,r2             
+  sub r0,r0,#2
+  mov r0,r0, LSL #2
+  add r0,r0,r2
   /* V register r5 shranimo naslov, kjer bo po koncu zanke oznacen konec datoteke. Potrebovali ga bomo v koraku 2: */
-  mov r5,r0              
-  ldr r0,[r0]                /* V r0 sedaj shranimo se vsebino iz naslova od r0 (st. naslednje gruce) */
+  mov r5,r0
+  ldr r0,[r0] /* V r0 sedaj shranimo se vsebino iz naslova od r0 (st. naslednje gruce) */
   
-  cmp r0,#1               /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
-  bne _trun1fs_loop     /* Ponavljamo dokler nismo dosegli konec fajla ... */
-  
-  
-  
-  /* Drugi korak:  V tabeli FAT odstranimo odvecne gruce...  */
-__trun2fs_loop:        
-  
-  mov r3, #0            /* Z niclo bomo oznacili prosto gruco */
-  str r3,[r5]             /* Na naslov trenutne gruce vpisemo 0 (prosta gruca)  */
-  
-  mov r3, #1            /* Gruco na naslovu r5 oznacimo kot nov konec datoteke (vpisemo 1)  */
-  sub r5, r5, #4        
-  str r3,[r5]           
-  
-  sub r8, r8, #1        /* St. praznih gruc zmanjsamo za 1 (eno gruco smo pravkar odstranili) */
-  sub r5,r5,#4           /* Prestavimo se eno polje visje */
-  
-  cmp r8, #0             /* Preverimo, ce smo odstranili ze vse gruce. */
-  bne _trun2fs_loop    /* Ponavljamo, dokler nismo odstranili vseh gruc ... */
-  
-  
-  
-  /* Tretji korak:  Iz delovnega pomnilnika prenesemo vse v glavni pomnilnik...  */
-  svc_write             /* Klicemo funkcijo WRITE */
+  cmp r0,#1 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
+  bne __trun1fs_loop /* Ponavljamo dokler nismo dosegli konec fajla ... */
 
 
 
+/* Drugi korak: V tabeli FAT odstranimo odvecne gruce... */
+__trun2fs_loop:
 
+  mov r3, #0 /* Z niclo bomo oznacili prosto gruco */
+  str r3,[r5] /* Na naslov trenutne gruce vpisemo 0 (prosta gruca) */
+  
+  mov r3, #1 /* Gruco na naslovu r5 oznacimo kot nov konec datoteke (vpisemo 1) */
+  sub r5, r5, #4
+  str r3,[r5]
+  
+  sub r8, r8, #1 /* St. praznih gruc zmanjsamo za 1 (eno gruco smo pravkar odstranili) */
+  sub r5,r5,#4 /* Prestavimo se eno polje visje */
+  
+  cmp r8, #0 /* Preverimo, ce smo odstranili ze vse gruce. */
+  bne __trun2fs_loop /* Ponavljamo, dokler nismo odstranili vseh gruc ... */
+  
+  
+  
+  /* Tretji korak: Iz delovnega pomnilnika prenesemo vse v glavni pomnilnik... */
+  swi #SYS_WRITE /* Klicemo funkcijo WRITE */
 
 /**
  * New task syscall.
@@ -295,12 +283,9 @@ svc_newtask:
 /**
  * Print line syscall.
  */
- 
 svc_println:
-
-    bl printk  
-  
-  b svc_newtask
+  /* TODO */
+  b svc_println
 
 /**
  * Delay syscall.
@@ -338,10 +323,18 @@ svc_send:
      error is detected. */
   cmp r2, #MAXTASK
   bhs __err_badtask
+    
+
+  mov r3, r0
+  mov r4, r1
+  mov r5, r2
   
-  DISABLE_IRQ
+  /* Resolve physical address for buffer address that sender put in MCB */
+  bl vm_get_phyaddr 
+  
+  DISABLE_IRQ  
   ldr r3, =MCBLIST
-  ldr r4, [r3]          /* Load first MCB base into r3 */
+  ldr r4, [r3]          /* Load first MCB base into r4 */
   cmp r4, #0            /* Check if it is not NULL */
   beq __err_nomcbs
   ldr r5, [r4, #M_LINK] /* Get next MCB in line */
@@ -401,13 +394,23 @@ __err_badtask:
 
 /**
  * Receive message syscall.
+
+ * @param r0 Buffer address
+ * @param r1 Buffer size
  */
 svc_recv:
+  cmp r0, #0x30000000	/* Check if buffer address is valid (is in process' virtual address space) */
+  blo __err_badaddress  
+
+  mov r4, r0            
+  mov r5, r1
+
+__rcv_wait:
   /* Get current task's TCB */
   LOAD_CURRENT_TCB r0
   
   DISABLE_IRQ
-  ldr r1, [r0, #T_MSG]
+  ldr r1, [r0, #T_MSG]  /* MCB */
   cmp r1, #0            /* Check if there are any messages */
   beq __wait_for_msg    /* If none, wait */
   
@@ -416,9 +419,31 @@ svc_recv:
   ldr r2, [r0, #T_RPLY] /* Load address of first MCB in reply queue */
   str r2, [r1, #M_LINK]
   str r1, [r0, #T_RPLY] /* Insert message into reply queue */
+    
+  ldr r2, [r1, #M_BUFF] /* Load address that sender put in MCB (svc_send translated it from virtual to physical) */
+  ldr r3, [r1, #M_COUNT] /* Load buffer size that sender put in MCB */
+  str r4, [r1, #M_BUFF] /* Save virtual buffer address, where receiver wants to get data */
   
-  /* Return TCB address to userspace */
-  SVC_RETURN_CODE r1
+  /* Compare sender's buffer size with receiver's buffer size. 
+     Lower of both values is now in r5 and we store it back to MCB. */
+  cmp r3,r5
+  movls r5, r3  
+  str r5, [r1, #M_COUNT] 
+  
+  add r6, r5, r0		/* Check if buffer address is valid (is in process' virtual address space) */
+  cmp r6, #0xF0000000
+  bhi __err_badaddress  
+
+  mov r6, r1 /* MCB */
+  
+  /* Copy to receiver's data section */ 
+  mov r1, r2 
+  mov r0, r4
+  mov r2, r5  
+  bl memcpy
+  
+  /* Return MCB address to userspace */
+  SVC_RETURN_CODE r6
   POP_CONTEXT
 
 __wait_for_msg:
@@ -429,7 +454,12 @@ __wait_for_msg:
   
   /* Switch to other task and retry receive */
   swi #SYS_NEWTASK
-  b svc_recv
+  b __rcv_wait
+
+__err_badaddress:
+  /* Return E_BADADDRESS error code in r0 */
+  SVC_RETURN_CODE #E_BADADDRESS
+  POP_CONTEXT
 
 /**
  * Reply to a message syscall.
@@ -589,246 +619,8 @@ svc_exit:
   /* This task is finished, let's go somewhere else */
   b svc_newtask
   
-/* REGISTER USAGE (values)
- *
- * - r0:
- *      - 0 = TCBLIST
- *      - 1 = T_LINK
- *      - 2 = T_NAME
- *      - 3 = T_MSG
- *      - 4 = T_SSP
- *      - 5 = T_FLAG
- *      - 6 = T_PRIO
- *      - 7 = M_LINK for T_MSG
- *      - 8 = M_LINK for T_RPLY
- *      - 9 = T_RPLY
- */
- 
-svc_getc:
   
-  DISABLE_IRQ
 
-  mov r4, r0
-    
-  ldr r1, = TEMPCURRTCB
-  ldr r2, = TEMPNEXTTCB
-
-  /* |||||||||||||||||| GET TCBLIST |||||||||||||||||*/
-  cmp r4, #0
-  bne get_tcb_addr_end
-  
-  ldr r4, = TCBLIST
-  ldr r5, [r4]
-  SVC_RETURN_CODE r5
-  str r5, [r1]
-  b svc_getc_end
-
-  get_tcb_addr_end:
-
-  /* |||||||||||||||||| GET T_LINK ||||||||||||||||||*/
-  cmp r4, #1
-  bne get_tlink_end
-  
-  ldr r0, [r1]
-  ldr r5, [r0, #T_LINK]
-  SVC_RETURN_CODE r5
-  str r5, [r2]
-  b svc_getc_end
-
-  get_tlink_end:
-  
-  /* |||||||||||||||||| GET T_NAME ||||||||||||||||||*/
-  cmp r4, #2
-  bne get_tname_end
-  
-  ldr r0, [r1]
-  ldr r5, [r0, #T_NAME]
-  SVC_RETURN_CODE r5
-  b svc_getc_end 
-  
-  get_tname_end:   
-
-  /* |||||||||||||||||| GET T_MSG |||||||||||||||||||*/
-  cmp r4, #3
-  bne get_tmsg_end
-  
-  ldr r0, [r1]
-  ldr r5, [r0, #T_MSG]
-  SVC_RETURN_CODE r5
-  b svc_getc_end
-  
-  get_tmsg_end:
-
-  /* |||||||||||||||||| GET T_SSP |||||||||||||||||||*/  
-  cmp r4, #4
-  bne get_tssp_end
-  
-  ldr r0, [r1]
-  ldr r5, [r0, #T_SSP]
-  SVC_RETURN_CODE r5
-  b svc_getc_end
-
-  get_tssp_end:
-
-  /* |||||||||||||||||| GET T_FLAG ||||||||||||||||||*/
-  cmp r4, #5
-  bne get_tflag_end
-  
-  ldr r0, [r1]
-  ldr r5, [r0, #T_FLAG]
-  SVC_RETURN_CODE r5
-  b svc_getc_end
-
-  get_tflag_end:
-  
-  /* |||||||||||||||||| GET T_PRIO ||||||||||||||||||*/
-  cmp r4, #6
-  bne get_tprio_end
-  
-  ldr r0, [r1]
-  ldr r5, [r0, #T_PRIO]
-  SVC_RETURN_CODE r5
-  b svc_getc_end
-
-  get_tprio_end:
-
-  /* |||||||||||||||| GET N_MGS |||||||||||||||||||||*/
-  cmp r4, #7
-  bne get_nmsg_end
-  
-  ldr r0, [r1]
-  ldr r5, [r0, #T_MSG]
-  
-  mov r6, #0
-  
-  get_nmsg_loop:
-  
-  add r6, r6, #1
-  ldr r5, [r5, #M_LINK]
-  cmp r5, #0
-  bne get_nmsg_loop
-  
-  SVC_RETURN_CODE r6
-  
-  get_nmsg_end:
-
-  /* |||||||||||||||| GET N_MGS |||||||||||||||||||||*/
-  cmp r4, #8
-  bne get_nrply_end
-  
-  ldr r0, [r1]
-  ldr r5, [r0, #T_RPLY]
-  
-  mov r6, #0
-  
-  get_nrply_loop:
-  
-  add r6, r6, #1
-  ldr r5, [r5, #M_LINK]
-  cmp r5, #0
-  bne get_nrply_loop
-  
-  SVC_RETURN_CODE r6
-    
-  get_nrply_end:
-    
-  /* |||||||||||||||||| GET T_RPLY ||||||||||||||||||*/
-  cmp r4, #9
-  bne get_trply_end
-  
-  ldr r0, [r1]
-  ldr r5, [r0, #T_RPLY]
-  SVC_RETURN_CODE r5
-  b svc_getc_end
-
-  get_trply_end:
-
-  /* ||||| CHANGE TEMPNEXTTCB --> TEMPCURRTCB |||||||*/
-  cmp r4, #10
-  bne get_change_end
-  
-  ldr r3, [r2]
-  str r3, [r1]
-  SVC_RETURN_CODE r3
-  b svc_getc_end
-
-  get_change_end:
-    
-  svc_getc_end:
-
-  ENABLE_IRQ
-    
-  b svc_newtask
-
-/* REGISTER USAGE (values)
- *
- * - r10 - current TCB = if 0 then get TCBLIST 
- * - r11:
- *      - 0 = TCBLIST
- *      - 1 = T_LINK
- *      - 2 = T_NAME
- *      - 3 = T_MSG
- *      - 4 = T_SSP
- *      - 5 = T_FLAG
- *      - 6 = T_PRIO
- *      - 7 = M_LINK for T_MSG
- *      - 8 = M_LINK for T_RPLY
- *      - 9 = T_RPLY
- */
-/*   
-svc_getc:
-  
-    cmp r10, #0
-    ldreq r0, = TCBLIST
-    beq svc_getc_end
-    
-    cmp r0, #1
-    ldreq r0, [r10, #T_LINK]
-    beq svc_getc_end
-    
-    cmp r0, #2
-    ldreq r0, [r10, #T_NAME]
-    beq svc_getc_end
-
-    cmp r0, #3
-    ldreq r0, [r10, #T_MSG]
-    beq svc_getc_end
-
-    cmp r0, #4
-    ldreq r0, [r10, #T_SSP]
-    beq svc_getc_end
-
-    cmp r0, #5
-    ldreq r0, [r10, #T_FLAG]
-    beq svc_getc_end 
-    
-    cmp r0, #6
-    ldreq r0, [r10, #T_PRIO]
-    beq svc_getc_end
-
-    cmp r0, #7
-    ldreq r12, [r10, #T_MSG]
-    ldreq r0, [r12, #M_LINK]
-    beq svc_getc_end
-    
-    cmp r0, #8
-    ldreq r12, [r10, #T_RPLY]
-    ldreq r0, [r12, #M_LINK]
-    beq svc_getc_end 
-    
-    cmp r0, #9
-    ldreq r0, [r10, #T_RPLY]
-    beq svc_getc_end
-    
-    cmp r0, #10
-    LOAD_NEXTTCB r1
-    SAVE_CURRTCB r1
-    
-  svc_getc_end:
-
- 
-  b svc_newtask
-*/  
 /* ================================================================
                            SYCALL TABLE
    ================================================================
@@ -846,11 +638,12 @@ SYSCALL_TABLE:
 .long svc_mmc_read  /* (7) MMC block read */
 .long svc_mmc_write /* (8) MMC block write */
 .long svc_exit      /* (9) exit current task */
-.long svc_getc      /* (10) get value from memory address  */
+.long svc_createf   /* (10) create file */
+.long svc_open      /* (11) open file */
+.long svc_del       /* (12) delete data */
+.long svc_write     /* (13) write data */
+.long svc_append    /* (14) append data */
+.long svc_truncate  /* (15) truncate file */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4
-
-.align 2
-TEMPCURRTCB:   .space 4
-TEMPNEXTTCB:   .space 4
