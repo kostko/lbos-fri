@@ -10,7 +10,6 @@
 .include "include/macros.s"
 .include "include/at91sam9260.s"
 .include "include/globals.s"
-.include "include/directories.s"
 
 .text
 .code 32
@@ -47,36 +46,50 @@ __bad_svc:
  * Make new directory syscall.
  */
 svc_mkdir:
-	DISABLE_IRQ
 	bl dir_mkdir
-	ENABLE_IRQ
 	b svc_newtask
+
 	
 /**
  * Remove directory syscall.
  */
 svc_remdir:
-	DISABLE_IRQ
 	bl dir_remdir
-	ENABLE_IRQ
 	b svc_newtask
 	
 /**
  * Change directory syscall.
  */
 svc_chdir:
-	DISABLE_IRQ
 	bl dir_chdir
-	ENABLE_IRQ
 	b svc_newtask
 
 /**
  * Move one directory up syscall.
  */
 svc_dirup:
-	DISABLE_IRQ
 	bl dir_dirup
-	ENABLE_IRQ
+	b svc_newtask
+	
+/**
+ * Open file syscall.
+ */
+svc_openf:
+	bl dir_openf
+	b svc_newtask
+	
+/**
+ * Delete file syscall.
+ */
+svc_delf:
+	bl dir_delf
+	b svc_newtask
+	
+/**
+ * Append to file syscall.
+ */
+svc_appendf:
+	bl dir_appendf
 	b svc_newtask
 
 /**
@@ -408,6 +421,13 @@ SYSCALL_TABLE:
 .long svc_mmc_read  /* (7) MMC block read */
 .long svc_mmc_write /* (8) MMC block write */
 .long svc_exit      /* (9) exit current task */
+.long svc_mkdir     /* (10) make new directory */
+.long svc_remdir    /* (11) remove directory */
+.long svc_chdir     /* (12) change current directory */
+.long svc_dirup     /* (13) go one directory up */
+.long svc_openf     /* (14) open file */
+.long svc_delf      /* (15) delete file */
+.long svc_appendf   /* (16) append to file */
 
 END_SYSCALL_TABLE:
 .equ MAX_SVC_NUMBER, (END_SYSCALL_TABLE-SYSCALL_TABLE)/4

@@ -171,6 +171,13 @@
 .equ SYS_MMC_READ, 7
 .equ SYS_MMC_WRITE, 8
 .equ SYS_EXIT, 9
+.equ SYS_MKDIR, 10
+.equ SYS_REMDIR, 11
+.equ SYS_CHDIR, 12
+.equ SYS_DIRUP, 13
+.equ SYS_OPENF, 14
+.equ SYS_DELF, 15
+.equ SYS_APPENDF, 16
 
 
 
@@ -178,32 +185,35 @@
                            DIRECTORY STRUCTURE
    ================================================================
 */
-.equ D_NAME,0 			/* ime direktorija */
-.equ D_TYPE, D_NAME + 4 	/* tip datoteka ali imenik (if D_TYPE == 0 then directory else file)*/
-.equ D_PARENT, D_TYPE + 4 	/* starš */
-.equ D_CHILD_T, D_PARENT + 4	/* tabela otrok */
-.equ D_SIZE, D_PARENT + 4	/* velikost direktorija */
+.equ D_NAME,0 														/* name of the directory or file */
+.equ D_TYPE, D_NAME + 4 									/* 0 if directory, !0 if file*/
+.equ D_PARENT, D_TYPE + 4 								/* parent of this directory or file */
+.equ D_CHILD_T, D_PARENT + 4							/* table of all children of this directory, empty if file */
+.equ D_SIZE, D_CHILD_T + 4								/* size of this structure */
 
 
 /* ================================================================
                            DIRECTORY CHILD TABLE
    ================================================================
 */
-.equ C_CHILD1, 0  /* otrok 1*/
-.equ C_CHILD2, C_CHILD1 + 4  /* otrok 2*/
-.equ C_CHILD3, C_CHILD2 + 4  /* otrok 3*/
-.equ C_CHILD_T, C_CHILD3 + 4 /* tabela otrok */
+.equ C_CHILD1, 0  												/* pointer to first child */
+.equ C_CHILD2, C_CHILD1 + 4  							/* pointer to second child */
+.equ C_CHILD3, C_CHILD2 + 4  							/* pointer to third child */
+.equ C_CHILD_T, C_CHILD3 + 4 							/* pointer to next table */
 
 
 /* ================================================================
                            DIRECTORY ERROR CODES
    ================================================================
 */
-.equ E_DIR_ODMIK, -9  		/* odmik error code*/
-.equ E_NO_DIR, E_DIR_ODMIK - 1
-.equ E_NO_CHILD, E_NO_DIR - 1
-.equ E_DIR_NOT_EXIST, E_NO_CHILD - 1
-.equ E_CHILD_EXIST, E_DIR_NOT_EXIST - 1
-.equ E_NO_ATR, E_CHILD_EXIST - 1		/* chdir has no input parameters */
-.equ E_END_CHILD_T, E_NO_ATR - 1		/* chdir doesn't have requested dir */
-.equ E_ROOT_DIRUP, E_END_CHILD_T - 1 	/* dir up while in root folder  */
+.equ E_INDEX, -9  												/* directory error codes index*/
+.equ E_NO_DIR, E_INDEX - 1								/* no directories left in dirlist */
+.equ E_NO_DIR_IN_LIST, E_NO_DIR - 1				/* child table has no dirs in it */
+.equ E_NO_CHILD, E_NO_DIR_IN_LIST - 1			/* can't delete dir, if the current dir has no children */
+.equ E_DIR_NOT_EXIST, E_NO_CHILD - 1			/* dir that we want to delete doesn't exist */
+.equ E_CHILD_EXIST, E_DIR_NOT_EXIST - 1		/* cannot delete dir if it has children */
+.equ E_NO_ATR, E_CHILD_EXIST - 1					/* chdir has no input parameters */
+.equ E_END_CHILD_T, E_NO_ATR - 1					/* chdir doesn't have requested dir */
+.equ E_ROOT_DIRUP, E_END_CHILD_T - 1 			/* dir up while in root folder  */
+.equ E_ROOT_DEL, E_ROOT_DIRUP - 1					/* remdir tries to delete root dir */
+
