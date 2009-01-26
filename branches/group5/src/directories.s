@@ -1,3 +1,18 @@
+/*
+ * FRI-LBOS ;-)
+ * general OS framework (C) 2008 by FRI/OS1/Group8
+ */
+.global dir_mkdir
+.global dir_remdir
+.global dir_chdir
+.global dir_dirup
+.global dir_openf
+.global dir_delf
+.global dir_appendf
+.global dir_init
+.global set_current_dir
+
+
 /* Include structure definitions and static variables */
 .include "include/structures.s"
 .include "include/at91sam9260.s"
@@ -8,91 +23,98 @@
 
 .text
 .code 32
-/* ================================================================
-                           SYSTEM CALL MAKE DIR
-   ================================================================
-*/
+/**
+ * Creates a new directory.
+ *
+ * @param r1 Name of the directory to create
+ * @param r2 Set to 0, if directory, or to number of the first cluster in FAT table if file
+ */
 dir_mkdir:
-	/* v R1 je podano ime imenika, v r11 je podan tip, ce 0 -> direktorij, ce razlicen od 0, potem file
-	disable interrupts
-	pogledamo DIRLIST, ki kaze na prvi prazen dir, èe ga ne -> (error),
-	èe ga vsebuje, potem ta kazalec shranimo v register R2, DIRLIST pa posodobimo na (*dirlist) //na kocu bo to nekaj èudnega
-	enable interrupts
-	
-	Gremo do prvega njegovega prostega sina s katerega pokazemo na novo ustvarjeni imenik (R2). Nastavimo D_PARENT na CURRENT_DIR (ce ni nobenega 	praznega vzamemo z DIRLIST nov prostor, katerega uporabimo za hranjenje kazalcev na nove potomce), ki je shranjen v glavi
-	glavi trenutnega procesa. Nastavimo D_TYPE na 0; in postavimo C_CHILD_T tudi na 0, kar pomeni da nima nobenega podimenika ali vsebovane datoteke. 
-	postavimo D_NAME = R1. 
-	
-	*/
 	
 	stmfd sp!, {r1-r12,lr}
 	
 	DISABLE_IRQ
-	ldr r3, =DIRLIST
-	ldr r2, [r3]				/* naslov praznega DIR */
-	cmp r2, #0					/* preverimo ce je naslov enak 0 - smo na koncu*/
-	bne OK						/* ERROR  */
-NO_DIR:	ldr r0, =E_NO_DIR
-	ENABLE_IRQ
-	b KONEC
+	ldr r3, =D_DIRLIST
+	ldr r8, [r3]									/* r8 <- address of an empty directory */
+	cmp r8, #0										/* check if 0, there is no more space */
+	bne __mkd_cont1								/* error  */
 	
-OK:	ldr r4, [r2]
-	str r4, [r3]				/* RLIST pa posodobimo na naslednji prazen dir */
+__mkd_no_dir_err:
+	ldr r0, =E_NO_DIR
+	b return_from_sys
+	
+__mkd_cont1:
+	ldr r4, [r8]									/* r4 <- address of the next empty directory */
+	str r4, [r3]									/* update dirlist to next empty dir */
 	ENABLE_IRQ
 	
-	ldr r10, =CURRENT			/*current od trenutnega procesa*/ 
-	ldr r10, [r10, #T_CURDIR]  	/*naslov trenutnega direktorija*/
-	str r10, [r2, #D_PARENT]	/* praznemu direktoriju nastavimo pointer na oceta */
-	str r1, [r2, #D_NAME]		/* nastavimo ime novoustvarjenemu direktoriju */
-	str r11, [r2, #D_TYPE]		/* nastavimo na imenik ali datoteko */
+	ldr r9, =CURRENT							/* r9 <- address of the current process */
+	ldr r10, [r9, #T_CURDIR]  		/* r10 <- address of the current directory */
+  cmp r10, #0										/* if current dir is not yet set */
+  bne __mkd_cont2
+    
+  LOAD_ROOT_DIR r5   						/* set current dir to root dir */
+	str r5, [r9, #T_CURDIR]
+  ldr r10, [r9, #T_CURDIR]
+  
+__mkd_cont2:
+	str r10, [r8, #D_PARENT]			/* set the empty dir's pointer to parent */
+	str r1, [r8, #D_NAME]					/* set name */
+	str r2, [r8, #D_TYPE]					/* set type */
 	mov r4, #0
-	str r4, [r2, #D_CHILD_T]   	/* nastavimo da je imenik prazen */
-
-	ldr r5, [r10, #D_CHILD_T]		/* naslov current tabele otrok*/
-	cmp r5, #0
-	beq	NAREDI_TABELO
+	str r4, [r8, #D_CHILD_T]   		/* clear his child table, he has no children yet */
+  
+  add r5, r10, #D_CHILD_T       /* r5 <- address of the current dir's child table */
+	ldr r10, [r5]		
+	cmp r10, #0										/* if empty, create table */
+	beq	__mkd_make_table
 	
-PONOVI:	ldr r7, [r5], #4		/* zacnemo iskanje po tabeli otrok, r5 avtomatsko povecamo na naslednje mesto */
-	cmp r7, #0					/* ce je otrok prazen, ga zapisemo */
-	beq ZAPISEMO
-	ldr r7, [r5], #4		/* drugace se premaknemo na naslednje mesto v tabeli */
+  mov r5, r10                   /* else move address in r10 into r5 */
+__mkd_search:
+	ldr r7, [r5], #4							/* start searching for an empty space, automatically increase r5 */
+	cmp r7, #0										/* if a child is empty, we found the spot */
+	beq __mkd_write
+	ldr r7, [r5], #4							/* else we check the next one */
 	cmp r7, #0
-	beq ZAPISEMO
+	beq __mkd_write
 	ldr r7, [r5], #4
 	cmp r7, #0
-	beq ZAPISEMO
+	beq __mkd_write
 	ldr r7, [r5]
-	cmp r7, #0
-	beq NAREDI_TABELO
-	ldr r5, [r7]
-	b PONOVI
+	cmp r7, #0										/* is there another child table? */
+	beq __mkd_make_table
+	ldr r5, [r7]									/* go to next child table */
+	b __mkd_search
 	
-ZAPISEMO:				/* v r5 imamo naslov praznega mesta, ki je prevelik za 4, ker smo ga ze povecali */
+__mkd_write:										/* r5 - 4 = address of an empty space in child table */
 	sub r5, r5, #4
-	str r2, [r5]			/* shranimo novonarejeni imenik na to mesto */
+	str r8, [r5]									/* store the newly made dir to this address */
 	mov r0, #0
-	b KONEC
+	b return_from_sys
 
 
-NAREDI_TABELO:
-	ldr r6, [r3]			/* naslov prazne tabele */
-	cmp r6, #0			/* preverimo ce je naslov enak 0 - smo na koncu*/
-	beq NO_DIR			/* ERROR  */
-	ldr r4, [r6]			/* popravimo dirlist */
+__mkd_make_table:								/* r5 = address for the pointer to new table */
+	DISABLE_IRQ
+	ldr r6, [r3]									/* r6 <- take another one from the dirlist */
+	cmp r6, #0										/* if 0, no more space */
+	beq __mkd_no_dir_err							/* error */
+	ldr r4, [r6]									/* update dirlist to next empty dir */
 	str r4, [r3]
+	ENABLE_IRQ
 
-	str r6, [r5]			/* nastavimo child_table na novo tabelo, ki je v r6 */
-	str r2, [r6]			/* shranimo novonarejeni imenik na prvega v tabeli */
+	str r6, [r5]			            /* store the new table to the address */
+	str r8, [r6]									/* store the newly made dir to the first space in the table */
 
 	mov r0, #0
-	b KONEC
+	b return_from_sys
 
 	
 
-/* ================================================================
-                           SYSTEM CALL REMOVE DIR
-   ================================================================
-*/
+/**
+ * Deletes a directory.
+ *
+ * @param r1 Name of the directory to delete
+ */
 dir_remdir:
 	/*
 	V registru R1 imamo podano ime direktorija, ki ga zelimo zbrisati in smo v current direktoriju. 
@@ -105,307 +127,371 @@ dir_remdir:
 
 	stmfd sp!, {r1-r12,lr}
 	
-	ldr r10, =CURRENT		/*current od trenutnega procesa*/ 
-	ldr r10, [r10, #T_CURDIR]  	/*naslov trenutnega direktorija*/
-	ldr r5, [r10, #D_CHILD_T]		/* naslov current tabele otrok*/
-	ldr r8, [r10, #D_CHILD_T]		/* zapomnimo si zadnji obhod -> ce brisemo tudi tabelo, je potrebno zbrisati tudi kaalec prejsnje tabele */
-	cmp r5, #0
-	beq	NO_CHILD_ERR
+	LOAD_ROOT_DIR r2
+	ldr r2, [r2, #D_NAME]
+	cmp r2, r1
+	beq __rmd_root_del
 	
-PONOVI2:
-	ldr r7, [r5], #4		/* zacnemo iskanje po tabeli otrok, r5 avtomatsko povecamo na naslednje mesto */
-	ldr r7, [r7, #D_NAME]
-	cmp r7, r1
-	beq NAJDEN
-	ldr r7, [r5], #4		/* zacnemo iskanje po tabeli otrok, r5 avtomatsko povecamo na naslednje mesto */
-	cmp r7, #0
-	beq	DIR_NOT_EXIST					/* tega imenika sploh ni */
-	ldr r7, [r7, #D_NAME]
-	cmp r7, r1
-	beq NAJDEN
-	ldr r7, [r5], #4		/* zacnemo iskanje po tabeli otrok, r5 avtomatsko povecamo na naslednje mesto */
-	cmp r7, #0
-	beq	DIR_NOT_EXIST					/* tega imenika sploh ni */
-	ldr r7, [r7, #D_NAME]
-	cmp r7, r1
-	beq NAJDEN
-	ldr r7, [r5]			/* zacnemo iskanje po tabeli otrok, r5 avtomatsko povecamo na naslednje mesto */
-	cmp r7, #0
-	beq	DIR_NOT_EXIST					/* tega imenika sploh ni */
-	ldr	r5, [r7]
-	b	PONOVI2	
-	
-	
-NAJDEN:					/* nasli smo svojega za brisanje */
-	sub r5, r5, #4		/* v r5 je za 4 prevelik naslov direktorija, ki ga zelimo brisati */
-	ldr r6, [r5, #D_CHILD_T]
-	cmp r6, #0			/* ali ima sinove */
-	bne	CHILD_EXIST_ERR
-BRISI_VSE:
-	sub r11,r11,r11					/* v r11 shranimo nièlo */
-	str r11, [r5, #D_NAME]			/* brisemo ime */
-	str r11, [r5, #D_TYPE]		/* brisemo tip */
-	str r11, [r5, #D_PARENT]		/* brisemo fotra */
-	str r11, [r5, #D_CHILD_T]		/* brisemo otroke */
-	
-BACK_TO_DIRLIST:
-	ldr r3, =DIRLIST
-	str r3, [r5]			/* nastavimo pointer izbrisanega dira na naslednjega praznega !!!!!!!!!!!!!!!!!! ->	ERROR???*/
-	str r5, [r3]			/* popravimo DIRLIST, da kaze na r5 - praznega */
-	
-	ldr r6, [r10, #D_CHILD_T]		/* naslov current tabele otrok*/
-	cmp r6, #0
-	beq	NO_CHILD_ERR
+	LOAD_CURRENT_DIR r10
+	ldr r2, [r10, #D_CHILD_T]			/* r2 <- child table of the current dir */
+	ldr r8, [r10, #D_CHILD_T]
+	cmp r2, #0
+	beq	__rmd_no_child_err
 
-PONOVI3:					/* iscemo zadnjega, da ga prestavimo na mesto zbrisanega */
-	ldr r7, [r6], #4		/* zacnemo iskanje po tabeli otrok, r5 avtomatsko povecamo na naslednje mesto */
-	cmp r7, #0
-	beq	ZADNJI_X
-	ldr r7, [r6], #4		/* zacnemo iskanje po tabeli otrok, r5 avtomatsko povecamo na naslednje mesto */
-	cmp r7, #0
-	beq	ZADNJI	
-	ldr r7, [r6], #4		/* zacnemo iskanje po tabeli otrok, r5 avtomatsko povecamo na naslednje mesto */
-	cmp r7, #0
-	beq	ZADNJI
-	ldr r7, [r6], #4		/* zacnemo iskanje po tabeli otrok, r5 avtomatsko povecamo na naslednje mesto */
-	cmp r7, #0
-	beq	ZADNJI
-	ldr r6, [r7]
-	ldr r8, [r7]			/* zapomnimo si zadnji obhod -> ce brisemo tudi tabelo, je potrebno zbrisati tudi kaalec prejsnje tabele */ 
-	b	PONOVI3
+__rmd_search1:									/* searching for the last dir in the child table */
+	ldr r3, [r2], #4
+	cmp r3, #0
+	beq	__rmd_no_dir_in_list			/* error - no dirs in child table */
+	ldr r3, [r2], #4
+	add r12, r8, #0								/* if != 0, then we have to delete whole table, r12 <- pointer to the last child table */
+	cmp r3, #0
+	beq	__rmd_last								/* we found the last one */
+	ldr r3, [r2], #4
+	mov r12, #0
+	cmp r3, #0
+	beq	__rmd_last
+	ldr r3, [r2], #4
+	mov r12, #0
+	cmp r3, #0
+	beq	__rmd_last
+	ldr r2, [r3]									/* jump to next table */
+	ldr r8, [r3]									/* pointer to the last child table we went to */ 
+	b	__rmd_search1
 	
-ZADNJI_X:					/* prestavljanje zadnjega, ce je le ta edini v tabeli -> potrebno je brisanje tabele */
-	sub r6, r6, #8			/* v r6 imamo naslov zadnjega */
-	str r6, [r5]
-	sub r11,r11,r11					/* v r11 shranimo nièlo */
-	str r11, [r6]			/* zbrisemo mesto v tabeli, kjer se je nahajal zadnji */
 	
-	sub r11,r11,r11					/* v r11 shranimo nièlo */
-	str r11, [r6, #C_CHILD1]			/* brisemo tabelo */
+__rmd_last:											/* r2 - 8 <- address of the last dir in child table */
+	sub r2, r2, #8
+	ldr r3, [r2]
+  ldr r4, [r3, #D_NAME]					/* check if it is the dir we want to delete */
+	cmp r4, r1
+	beq __rmd_del_last
+	b __rmd_find_correct
+	
+__rmd_del_last:
+	ldr r5, [r3, #D_CHILD_T]			/* check if it has children -> error */
+	cmp r5, #0
+	bne __rmd_child_exist_err
+	
+	mov r11, #0
+	str r11, [r3, #D_NAME]				/* delete name */
+	str r11, [r3, #D_TYPE]				/* delete type */
+	str r11, [r3, #D_PARENT]			/* delete parent */
+	str r11, [r3, #D_CHILD_T]			/* delete child table */
+	str r11, [r2]									/* delete pointer to deleted dir */
+	
+	DISABLE_IRQ
+	ldr r5, =D_DIRLIST						/* move the empty dir back to dirlist */
+	ldr r6, [r5]
+	str r6, [r3]
+	str r3, [r5]
+	ENABLE_IRQ
+	
+	b return_from_sys
+	
+	
+__rmd_find_correct:							/* find the dir we want to delete */
+	ldr r3, [r10, #D_CHILD_T]
+__rmd_search2:
+	ldr r4, [r3], #4
+	ldr r4, [r4, #D_NAME]
+	cmp r4, r1
+	beq __rmd_found								/* we found it */
+	cmp r4, #0
+	beq	__rmd_dir_not_exist				/* the dir we want to delete doesn't exist at all */
+	
+	ldr r4, [r3], #4
+	ldr r4, [r4, #D_NAME]
+	cmp r4, r1
+	beq __rmd_found
+	cmp r4, #0
+	beq	__rmd_dir_not_exist
+	
+	ldr r4, [r3], #4
+	ldr r4, [r4, #D_NAME]
+	cmp r4, r1
+	beq __rmd_found
+	cmp r4, #0
+	beq	__rmd_dir_not_exist
+	
+	ldr r4, [r3]
+	ldr	r3, [r4]
+	b	__rmd_search2		
+	
+__rmd_found:										/* we found the one we want to delete */
+	sub r3, r3, #4								/* r3 - 4 <- address of the dir in child table */
+	ldr r4, [r3]									/* r4 <- address of the dir we want to delete */
+	ldr r5, [r4, #D_CHILD_T]
+	cmp r5, #0										/* check if it has children */
+	bne	__rmd_child_exist_err
+
+	mov r11, #0										/* delete all dir data */
+	str r11, [r4, #D_NAME]
+	str r11, [r4, #D_TYPE]
+	str r11, [r4, #D_PARENT]
+	str r11, [r4, #D_CHILD_T]
+	
+	DISABLE_IRQ
+	ldr r5, =D_DIRLIST						/* move the empty dir back to dirlist */
+	ldr r6, [r5]
+	str r6, [r4]
+	str r4, [r5]
+	ENABLE_IRQ
+	
+	str r11, [r2]									/* clear the pointer to the last one */
+	ldr r2, [r2]
+	str r2, [r3]									/* save last one to the place, where the deleted dir has been */
+	
+	cmp r12, #0
+	bne __rmd_delete_table
+	b return_from_sys
+	
+	
+__rmd_delete_table:							/* r12 <- pointer to table */
+	ldr r6, [r12]
+	mov r11, #0
+	str r11, [r6, #C_CHILD1]			/* delete the child table */
 	str r11, [r6, #C_CHILD2]	
 	str r11, [r6, #C_CHILD3]	
 	str r11, [r6, #C_CHILD_T]
+	str r11, [r12]
 	
-	ldr r3, =DIRLIST		/* tabelo vrnemo v DIRLIST */ 
-	ldr r4, =DIRLIST
-	str r3, [r6]			/* nastavimo pointer izbrisanega dira na naslednjega praznega !!!!!!!!!!!!!!!!!! ->	ERROR???*/
-	str r6, [r3]			/* popravimo DIRLIST, da kaze na r6 - praznega */
+	DISABLE_IRQ
+	ldr r3, =D_DIRLIST						/* return the child table back to dirlist */ 
+	ldr r4, [r3]
+	str r4, [r6]
+	str r6, [r3]
+	ENABLE_IRQ
 	
-	str r11, [r8]			/* brisanje kazalca na naslednjo tabelo */
-	b	KONEC
-	
-
-ZADNJI:						/* prestavljanje zadnjega, ce ni edini v tabeli */
-	sub r6, r6, #8			/* v r6 imamo naslov zadnjega */
-	str r6, [r5]
-	
-	sub r11,r11,r11					/* v r11 shranimo nièlo */
-	str r11, [r6]			/* zbrisemo mesto v tabeli, kjer se je nahajal zadnji */
-	
-	b	KONEC
+	b	return_from_sys
 	
 	
-CHILD_EXIST_ERR:
+__rmd_child_exist_err:
 	ldr r0, =E_CHILD_EXIST
-	b	KONEC
+	b	return_from_sys
 	
-DIR_NOT_EXIST:
+__rmd_dir_not_exist:
 	ldr r0, =E_DIR_NOT_EXIST
-	b	KONEC
+	b	return_from_sys
 	
-NO_CHILD_ERR:
+__rmd_no_child_err:
 	ldr r0, =E_NO_CHILD
-	b	KONEC
+	b	return_from_sys
+
+__rmd_no_dir_in_list:
+	ldr r0, =E_NO_DIR_IN_LIST
+	b	return_from_sys
 	
+__rmd_root_del:
+	ldr r0, =E_ROOT_DEL
+	b	return_from_sys
 
-
-/* ================================================================
-                           SYSTEM CALL CHANGE DIR
-   ================================================================
-*/	 
+/**
+ * Changes the current directory.
+ *
+ * @param r1 Name of the highest directory in the hierarchy, under root
+ * @param r2 Name of the directory in the second level or 0
+ * @param r3 Name of the directory in the third level or 0
+ * @param r4 Name of the directory in the forth level or 0
+ */ 
 dir_chdir:
-	/*
-	V registrih R1, R2 in R3 so imena direktorijev po vrsti. Vsi trije registri morajo ali vsebovati ime dira, ali pa biti prazni.
-	Popravimo CURRENT, tako da kaže na imenik ki je èim nižje v hierarhiji (ampak ni niè -> register R2 ali R3 ne vsebuje 0)
-	*/
 
 	stmfd sp!, {r1-r12,lr}
+	
+	mov r5, #0										/* to stop */
 
-	ldr r6, =D_ROOT
-	ldr r6, [r6, #D_CHILD_T]
+	LOAD_ROOT_DIR r6
+	ldr r6, [r6, #D_CHILD_T]      /* r6 <- address of the child table */
+  ldr r8, [r6]                  /* jump to first in child table */
 	
-	cmp r1, #0
-	beq NO_ATR_ERR
+	cmp r1, #0										/* no attributes */
+	beq __chd_no_atr_err
 	
-SEARCH:							/*zacnemo z iskanjem po tabeli z naslovi (sprehod 3x) */
-	ldr r7, [r6,#D_NAME]
-	cmp r7,r1
-	beq NAJDENO
-	cmp r7, #-1					/* check if child table has no more entries */
-	beq END_CHILD_T_ERR
+__chd_search:										/* search the child table */
+	ldr r7, [r8,#D_NAME]
+	cmp r7,r1											/* is this the dir we are looking for? */
+	beq __chd_found
+	cmp r7, #0	  								/* check if child table has no more entries */
+	beq __chd_end_childt_err			/* this dir doesn't have requested dir */
 	add r6, r6, #4
+  ldr r8, [r6]
+  
 	
-	ldr r7, [r6,#D_NAME]
+	ldr r7, [r8,#D_NAME]
 	cmp r7,r1
-	beq NAJDENO
-	cmp r7, #-1
-	beq END_CHILD_T_ERR
+	beq __chd_found
+	cmp r7, #0
+	beq __chd_end_childt_err
 	add r6, r6, #4
+  ldr r8, [r6]
 	
-	ldr r7, [r6,#D_NAME]
+	ldr r7, [r8,#D_NAME]
 	cmp r7,r1
-	beq NAJDENO
-	cmp r7, #-1
-	beq END_CHILD_T_ERR
+	beq __chd_found
+	cmp r7, #0
+	beq __chd_end_childt_err
 
-JUMP:							/*ce ne najdemo pravega se premaknemo na naslednjo tabelo sinov ter ponovimo search */
-	add r6, r6, #4
+
+	add r6, r6, #4								/* if we havent't found it already, move to the next child table */
 	ldr r6, [r6]
-	b SEARCH
+  ldr r8, [r6]
+	b __chd_search
 	
-NAJDENO:						/*element je najden - premaknemo se globje v strukturi, v r6 imamo naslov pravega dira */
+__chd_found:										/* found the correct dir (in r8), look for next dir r2 != 0 */
 	cmp r2, #0
-	beq SKOR_KONEC
-	ldr r6, [r6, #D_CHILD_T]
-	mov r1, r2					/* premaknemo se nivo nižje */
+	beq __chd_over
+	ldr r6, [r8, #D_CHILD_T]			/* move to this dir's child table */
+  ldr r8, [r6]
+	mov r1, r2										/* move the names of the dirs */
 	mov r2, r3
-	b SEARCH
+	mov r3, r4
+	mov r4, r5
+	b __chd_search
 	
-SKOR_KONEC:
-	str r6, [r5, #T_CURDIR]
-	b KONEC
+__chd_over:
+  STORE_CURRENT_DIR r8					/* store this dir into current dir */
+	b return_from_sys
 
-NO_ATR_ERR:
+__chd_no_atr_err:
 	ldr r0, =E_NO_ATR
-	b	KONEC
+	b	return_from_sys
 
-END_CHILD_T_ERR:	
+__chd_end_childt_err:	
 	ldr r0, =E_END_CHILD_T
-	b	KONEC
+	b	return_from_sys
 
 
-/* ================================================================	
-                           SVC_OPENF
-   ================================================================
-*/		
-SVC_OPENF:
-	bl SUB_SEARCH
-	b SVC_OPEN
-
-	
-/* ================================================================
-                           SVC_DELF
-   ================================================================
-*/		
-SVC_DELF:
-	bl SUB_SEARCH
-	b SVC_DEL
+/**
+ * Opens a file.
+ *
+ * @param r0 Name of the file to open
+ */ 	
+dir_openf:
+	bl __search_subroutine
+	/*b svc_open*/
 
 	
-/* ================================================================
-                           SVC_APPENDF
-   ================================================================
-*/		
-SVC_APPENDF:
-	bl SUB_SEARCH
-	b SVC_APPEND	
+/**
+ * Deletes a file.
+ *
+ * @param r0 Name of the file to delete
+ */ 	
+dir_delf:
+	bl __search_subroutine
+	/*b svc_del*/
+
+	
+/**
+ * Appends to a file.
+ *
+ * @param r0 Name of the file to append to
+ */ 		
+dir_appendf:
+	bl __search_subroutine
+	/*b svc_append*/
 	
 	
-/* ================================================================
-                           SUBRUTINE SEARCH
-   ================================================================
-*/	
 
-/* r0 <- name of the file we have to search and put a handle of first cluster of data into r0 */
+/**
+ * Searches for a file and puts the number of the first cluster in FAT into r0
+ *
+ * @param r0 Name of the file we are searching for
+ */
+__search_subroutine:
 
-SUB_SEARCH:
+	stmfd sp!, {r1-r3,lr}
 
-	stmfd sp!, {r1-r2,lr}
-
-	ldr r1, =D_ROOT
-	ldr r1, [r1, #D_CHILD_T]
+	LOAD_ROOT_DIR r1
+	ldr r1, [r1, #D_CHILD_T]			/* address of the child table */
+	ldr r3, [r1]									/* jump to the child table */
 	
-	cmp r0, #0
-	beq NO_ATR_ERR
+	cmp r0, #0										/* no attributes? */
+	beq __chd_no_atr_err
 	
-SEARCH1:						/* zacnemo z iskanjem po tabeli z naslovi (sprehod 3x) */
-	ldr r2, [r1,#D_NAME]
+__srch_loop:										/* search child table */
+	ldr r2, [r3,#D_NAME]
 	cmp r2,r0
-	beq NAJDENO1
-	cmp r2, #-1					/* check if child table has no more entries */
-	beq END_CHILD_T_ERR
+	beq __srch_found							/* have we found it? */
+	cmp r2, #0										/* check if child table has no more entries */
+	beq __chd_end_childt_err
 	add r1, r1, #4
+	ldr r3, [r1]
 	
-	ldr r2, [r1,#D_NAME]
+	ldr r2, [r3,#D_NAME]
 	cmp r2,r0
-	beq NAJDENO1
-	cmp r2, #-1
-	beq END_CHILD_T_ERR
+	beq __srch_found
+	cmp r2, #0
+	beq __chd_end_childt_err
 	add r1, r1, #4
+	ldr r3, [r1]
 	
-	ldr r2, [r1,#D_NAME]
+	ldr r2, [r3,#D_NAME]
 	cmp r2,r0
-	beq NAJDENO1
-	cmp r2, #-1
-	beq END_CHILD_T_ERR
+	beq __srch_found
+	cmp r2, #0
+	beq __chd_end_childt_err
 
-								/*ce ne najdemo pravega se premaknemo na naslednjo tabelo sinov ter ponovimo search */
-	add r1, r1, #4
+
+	add r1, r1, #4								/* if we havent't found it already, move to the next child table */
 	ldr r1, [r1]
-	b SEARCH1
+	ldr r3, [r1]
+	b __srch_loop
 	
-NAJDENO1:						/*element je najden - premaknemo se globje v strukturi, v r1 imamo naslov pravega dira */
-	ldr r0, [r1, #D_TYPE]
-	
-	ldmfd sp!, {r1-r2,pc} 				/* nalozimo povratni naslov */
+__srch_found:										/*we found it, load the number of the first cluster into r0 */
+	ldr r0, [r3, #D_TYPE]	
+	ldmfd sp!, {r1-r3,pc}
 
 
 
-/* ================================================================
-                           SYSTEM CALL DIR UP
-   ================================================================
-*/
+/**
+ * Changes the current directory to one directory up, to his parent.
+ */
 dir_dirup:
-	/*
-	CURRENT_DIR nastavimo na oèeta od CURRENT_DIR
-	*/
 	
 	stmfd sp!, {r1-r12,lr}
 	
 	ldr r9, =CURRENT
 	ldr r10, [r9, #T_CURDIR]		/* r10 <- address of current dir*/
 	ldr r11, [r10, #D_PARENT]		/* r11 <- pointer to current dir's parent*/
-	cmp r11, #0						/* check if not root */
-	beq ROOT_DIR_UP_ERR
-	str r11, [r9, #T_CURDIR]		/* save this pointer to current dir of current task */
-	mov r0, #0						/* no error */
-	b KONEC
+	cmp r11, #0									/* check if not root */
+	beq __du_root_dirup_err
+  STORE_CURRENT_DIR r11       /* save this pointer to current dir of current task */
+	mov r0, #0									/* no error */
+	b return_from_sys
 
-ROOT_DIR_UP_ERR:
-	ldr r0, E_ROOT_DIRUP
-	b KONEC
+__du_root_dirup_err:
+	ldr r0, =E_ROOT_DIRUP
+	b return_from_sys
 
-KONEC:
-	/* go back from where you came -> to syscall*/
+	
+return_from_sys:							/* return from system call */
+	ENABLE_IRQ
 	ldmfd sp!, {r1-r12,pc}
 		
 	
-
-set_current_dir:					/* for every task, set current dir = root, r2 contains pointer to task's TCB */
-	stmfd sp!, {r1-r2,lr}		/* store work registers */
+/**
+ * Sets current dir to root directory.
+ *
+ * @param r2 Pointer to task's TCB
+ */
+set_current_dir:
+	stmfd sp!, {r1-r2,lr}				/* store work registers */
 	
-	ldr r1, =D_ROOT
+	LOAD_ROOT_DIR r1						/* load root address */
 	str r1, [r2, #T_CURDIR]
 	
 	ldmfd sp!, {r1-r2,pc}
 
-	
-dir_init:									/* initialize needed data structures etc. */
+/**
+ * Initializes the needed data structures (root directory, list of empty directories) etc.
+ */	
+dir_init:
 
-	stmfd sp!, {r3-r5,lr}		/* store work registers */
+  DISABLE_IRQ
+
+	stmfd sp!, {r3-r5,lr}				/* store work registers */
 	
-	ldr r3, =D_ROOT			/* set up root directory */
-	mov r4, #ROOT_NAME
+	LOAD_ROOT_DIR r3						/* set up root directory */
+	ldr r4, =ROOT_NAME
 	str r4, [r3, #D_NAME]
 	mov r4, #0
 	str r4, [r3, #D_TYPE]
@@ -413,40 +499,24 @@ dir_init:									/* initialize needed data structures etc. */
 	str r4, [r3, #D_CHILD_T]
 	
 	
-	ldr r5, #50					/* set up pointers for list of empty directories */
+	mov r5, #50									/* set up pointers for list of empty directories */
   ldr r3, =D_DIRLIST
+	add r4, r3, #4
+	str r4, [r3]
+	add r3, r3, #4							/* leave a blank for the pointer to first empty structure in the list */
 	
-__dir_inti_loop:
+__dir_init_loop:
 	add r4, r3, #D_SIZE
 	str r4, [r3]
 	mov r3, r4
 	sub r5, #1
+  cmp r5, #0
 	bne __dir_init_loop
 	mov r4, #0
 	str r4, [r3]	
 
+	ENABLE_IRQ
 	
 	ldmfd sp!, {r3-r5,pc}
 	
 ROOT_NAME: .asciz "ROOT"
-	
-/*
-	
-	TODO:
-	INIT metoda!!! - current, dirlist (name->name...->name->0), nastavi root
-	child table ->morajo bit nièle
-	remdir treba nastavit to sranje
-	
-	
-	space -> fs_isfile je se potreben?	
-	disable interrupts	
-	current proc + current dir pa te fore
-	inlcudi pa to sranje
-	
-	
-	DONE:
-	mkdir remdir za 6 skupino
-	dir up ne preverja ce je ze na vrhu
-	chdir se sprehaja od currenta dol, ne od roota...
-	
-*/

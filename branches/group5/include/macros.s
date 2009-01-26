@@ -114,3 +114,18 @@
   ldr \reg, [\reg]
 .endm
 
+.macro LOAD_ROOT_DIR reg
+  ldr \reg, =D_ROOT
+.endm
+
+.macro LOAD_CURRENT_DIR reg
+  ldr \reg, =CURRENT
+  ldr \reg, [\reg, #T_CURDIR]
+.endm
+
+.macro STORE_CURRENT_DIR reg
+	stmfd sp!, {r5}         	/* push r5 to stack */
+  ldr r5, =CURRENT
+	str \reg, [r5, #T_CURDIR]
+	ldmfd sp!, {r5}						/* pop r5 from stack */
+.endm

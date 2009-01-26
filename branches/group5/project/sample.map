@@ -1,0 +1,433 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+LOAD E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+                0x00000000                __VECTORS_START__ = 0x0
+                0x20000000                __TEXT_START__ = 0x20000000
+                0x20080000                __DATA_START__ = 0x20080000
+                0x20180000                __STACK_END__ = 0x20180000
+                0x20200000                __TASKS_START__ = 0x20200000
+                0x30000000                __TASKS_VM__ = 0x30000000
+                0x22000000                __RAM_END__ = 0x22000000
+
+.vecs           0x00000000       0x38
+ *vectors.o(.text)
+ .text          0x00000000       0x38 E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+
+.text           0x20000000     0x235c
+ *(EXCLUDE_FILE(*vectors.o) .text)
+ .text          0x20000000       0xdc E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+                0x20000000                spu_irq_handler
+                0x200000cc                irq_restore
+                0x200000b4                irq_disable
+                0x20000014                sys_irq_handler
+ .text          0x200000dc      0x340 E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+                0x200000dc                start
+ .text          0x2000041c      0x438 E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+                0x2000041c                syscall_handler
+                0x200004b8                svc_newtask
+ .text          0x20000854       0xc8 E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+                0x20000854                dispatch
+ .text          0x2000091c       0x60 E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+                0x2000091c                printk
+ .text          0x2000097c      0x11c E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+                0x200009f4                register_timer
+                0x2000097c                timer_irq_handler
+ .text          0x20000a98      0x18c E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+                0x20000b58                debugger_fiqir
+                0x20000af8                debugger_dabrt
+                0x20000b28                debugger_resvt
+                0x20000ac8                debugger_abort
+                0x20000a98                debugger_undef
+ .text          0x20000c24      0x1d4 E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+                0x20000d5c                mm_alloc_block
+                0x20000c48                mm_alloc_page
+                0x20000ce4                mm_free_page
+                0x20000c24                mm_init
+ .text          0x20000df8      0x728 E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+                0x20001194                mmc_write_block
+                0x20000df8                mmc_init
+                0x20001080                mmc_read_block
+ .text          0x20001520      0x25c E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+                0x20001520                io_dispatch
+                0x2000165c                io_queue_request
+                0x200016d8                io_finish_request
+ .text          0x2000177c       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+                0x2000177c                panic
+ .text          0x2000179c      0x150 E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+                0x2000179c                vsprintf
+ .text          0x200018ec       0x78 E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+                0x200018ec                memcpy
+                0x20001918                memcmp
+                0x20001904                memset
+                0x20001944                strlen
+ .text          0x20001964      0x4e4 E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+                0x20001c2c                vm_prepare_task_ttb
+                0x20001d2c                vm_abort_handler
+                0x20001b5c                vm_get_phyaddr
+                0x20001c6c                vm_switch_ttb
+                0x20001b10                vm_map_region
+                0x20001cb8                vm_init
+                0x20001964                vm_alloc_translation_table
+ .text          0x20001e48      0x514 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+                0x2000227c                dir_dirup
+                0x20002140                dir_chdir
+                0x200021fc                dir_appendf
+                0x20001e48                dir_mkdir
+                0x20001f4c                dir_remdir
+                0x200022c4                set_current_dir
+                0x200022d4                dir_init
+                0x200021f8                dir_delf
+                0x200021f4                dir_openf
+ .text          0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .text          0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .text          0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .text          0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+                0x2000235c                PROVIDE (__etext, .)
+
+.glue_7         0x2000235c        0x0
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .glue_7        0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+
+.glue_7t        0x2000235c        0x0
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .glue_7t       0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+
+.vfp11_veneer   0x2000235c        0x0
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .vfp11_veneer  0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+
+.rodata
+ *(.rodata)
+ *(.rodata.*)
+
+.bss            0x2000235c        0x0
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .bss           0x2000235c        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+
+.data           0x20080000     0x1288
+ *(.data)
+ .data          0x20080000        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+ .data          0x20080000      0x83c E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+                0x200803ac                D_DIRLIST
+                0x20080038                TASK2
+                0x20080014                TASK1
+                0x20080008                TCBLIST
+                0x2008039c                D_ROOT
+                0x20080394                STACK_SUPM_END
+                0x20080194                CUR_JIFFIES
+                0x20080390                PAGEOFFSET
+                0x20080190                TIMERQUEUE
+                0x20080004                TINDEX
+                0x200800a4                TASKTAB
+                0x200800b4                MCBAREA
+                0x2008018c                TIMERFREE
+                0x2008005c                TASK3
+                0x200801b0                PAGEBITMAP
+                0x20080010                MCBLIST
+                0x2008000c                CURRENT
+ .data          0x2008083c       0x44 E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+ .data          0x20080880        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+ .data          0x20080880        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+ .data          0x20080880      0x604 E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+ .data          0x20080e84        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+ .data          0x20080e84       0xf1 E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+ *fill*         0x20080f75        0x3 00
+ .data          0x20080f78        0x4 E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+ .data          0x20080f7c       0xe4 E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+ .data          0x20081060       0x90 E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+ .data          0x200810f0       0x18 E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+ .data          0x20081108        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+ .data          0x20081108        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+ .data          0x20081108      0x180 E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+ .data          0x20081288        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+ .data          0x20081288        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .data          0x20081288        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .data          0x20081288        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .data          0x20081288        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+ *(.data.*)
+                0x20081288                . = ALIGN (0x4)
+                0x20081288                __DATA_END__ = .
+
+.task1          0x30000000       0x68 load address 0x20200000
+ *dummy.o(task_code)
+ task_code      0x30000000       0x60 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ *dummy.o(task_data)
+ task_data      0x30000060        0x8 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+
+.task2          0x30000000        0x4 load address 0x20240000
+ *msgtest.o(task_code)
+ task_code      0x30000000        0x4 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ *msgtest.o(task_data)
+ task_data      0x30000004        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+
+.task3          0x30000000      0x804 load address 0x20280000
+ *iotest.o(task_code)
+ task_code      0x30000000        0x4 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ *iotest.o(task_data)
+ task_data      0x30000004      0x800 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+
+.task4          0x30000000        0x4 load address 0x202c0000
+ *vmtest.o(task_code)
+ task_code      0x30000000        0x4 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+ *vmtest.o(task_data)
+ task_data      0x30000004        0x0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+                0x20200000                _task1_paddr = LOADADDR (.task1)
+                0x20240000                _task2_paddr = LOADADDR (.task2)
+                0x20280000                _task3_paddr = LOADADDR (.task3)
+                0x202c0000                _task4_paddr = LOADADDR (.task4)
+                0x20300000                . = (LOADADDR (.task4) + 0x40000)
+                0x20300000                __PAGE_OFFSET__ = .
+                0x20300000                PROVIDE (end, .)
+START GROUP
+LOAD d:/progs/winidea/gcc/arm/bin/../lib/gcc/arm-elf/4.2.2\libgcc.a
+LOAD d:/progs/winidea/gcc/arm/bin/../lib/gcc/arm-elf/4.2.2/../../../../arm-elf/lib\libc.a
+END GROUP
+OUTPUT(lbos-fri.elf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x10
+ .ARM.attributes
+                0x00000000       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+ .ARM.attributes
+                0x00000010       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+ .ARM.attributes
+                0x00000020       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+ .ARM.attributes
+                0x00000030       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+ .ARM.attributes
+                0x00000040       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+ .ARM.attributes
+                0x00000050       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+ .ARM.attributes
+                0x00000060       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+ .ARM.attributes
+                0x00000070       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+ .ARM.attributes
+                0x00000080       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+ .ARM.attributes
+                0x00000090       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+ .ARM.attributes
+                0x000000a0       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+ .ARM.attributes
+                0x000000b0       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+ .ARM.attributes
+                0x000000c0       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+ .ARM.attributes
+                0x000000d0       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+ .ARM.attributes
+                0x000000e0       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+ .ARM.attributes
+                0x000000f0       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+ .ARM.attributes
+                0x00000100       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .ARM.attributes
+                0x00000110       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .ARM.attributes
+                0x00000120       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .ARM.attributes
+                0x00000130       0x10 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+
+.debug_line     0x00000000      0xf7c
+ .debug_line    0x00000000       0x7b E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+ .debug_line    0x0000007b      0x155 E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+ .debug_line    0x000001d0      0x117 E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+ .debug_line    0x000002e7       0x67 E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+ .debug_line    0x0000034e       0x78 E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+ .debug_line    0x000003c6       0x74 E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+ .debug_line    0x0000043a       0x9a E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+ .debug_line    0x000004d4       0x90 E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+ .debug_line    0x00000564       0xd4 E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+ .debug_line    0x00000638      0x219 E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+ .debug_line    0x00000851       0xd3 E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+ .debug_line    0x00000924       0x62 E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+ .debug_line    0x00000986       0xb0 E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+ .debug_line    0x00000a36       0x82 E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+ .debug_line    0x00000ab8      0x18d E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+ .debug_line    0x00000c45      0x191 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+ .debug_line    0x00000dd6       0x76 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .debug_line    0x00000e4c       0x66 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .debug_line    0x00000eb2       0x65 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .debug_line    0x00000f17       0x65 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+
+.debug_info     0x00000000      0x9ed
+ .debug_info    0x00000000       0x7a E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+ .debug_info    0x0000007a       0x7b E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+ .debug_info    0x000000f5       0x7e E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+ .debug_info    0x00000173       0x7e E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+ .debug_info    0x000001f1       0x7c E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+ .debug_info    0x0000026d       0x7d E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+ .debug_info    0x000002ea       0x7d E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+ .debug_info    0x00000367       0x7f E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+ .debug_info    0x000003e6       0x7d E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+ .debug_info    0x00000463       0x7a E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+ .debug_info    0x000004dd       0x79 E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+ .debug_info    0x00000556       0x7c E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+ .debug_info    0x000005d2       0x7f E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+ .debug_info    0x00000651       0x7d E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+ .debug_info    0x000006ce       0x79 E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+ .debug_info    0x00000747       0x82 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+ .debug_info    0x000007c9       0x88 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .debug_info    0x00000851       0x8a E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .debug_info    0x000008db       0x89 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .debug_info    0x00000964       0x89 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+
+.debug_abbrev   0x00000000      0x190
+ .debug_abbrev  0x00000000       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+ .debug_abbrev  0x00000014       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+ .debug_abbrev  0x00000028       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+ .debug_abbrev  0x0000003c       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+ .debug_abbrev  0x00000050       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+ .debug_abbrev  0x00000064       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+ .debug_abbrev  0x00000078       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+ .debug_abbrev  0x0000008c       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+ .debug_abbrev  0x000000a0       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+ .debug_abbrev  0x000000b4       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+ .debug_abbrev  0x000000c8       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+ .debug_abbrev  0x000000dc       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+ .debug_abbrev  0x000000f0       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+ .debug_abbrev  0x00000104       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+ .debug_abbrev  0x00000118       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+ .debug_abbrev  0x0000012c       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+ .debug_abbrev  0x00000140       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .debug_abbrev  0x00000154       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .debug_abbrev  0x00000168       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .debug_abbrev  0x0000017c       0x14 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
+
+.debug_aranges  0x00000000      0x280
+ .debug_aranges
+                0x00000000       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\irq.o
+ .debug_aranges
+                0x00000020       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\main.o
+ .debug_aranges
+                0x00000040       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\syscall.o
+ .debug_aranges
+                0x00000060       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\vectors.o
+ .debug_aranges
+                0x00000080       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\sched.o
+ .debug_aranges
+                0x000000a0       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\printk.o
+ .debug_aranges
+                0x000000c0       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\timers.o
+ .debug_aranges
+                0x000000e0       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\debugger.o
+ .debug_aranges
+                0x00000100       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\memory.o
+ .debug_aranges
+                0x00000120       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\mmc.o
+ .debug_aranges
+                0x00000140       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\io.o
+ .debug_aranges
+                0x00000160       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\panic.o
+ .debug_aranges
+                0x00000180       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\vsprintf.o
+ .debug_aranges
+                0x000001a0       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\string.o
+ .debug_aranges
+                0x000001c0       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\vm.o
+ .debug_aranges
+                0x000001e0       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\directories.o
+ .debug_aranges
+                0x00000200       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\dummy.o
+ .debug_aranges
+                0x00000220       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\msgtest.o
+ .debug_aranges
+                0x00000240       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\iotest.o
+ .debug_aranges
+                0x00000260       0x20 E:\Sola\III. letnik\os1\our_branch\project\Debug\vmtest.o
