@@ -62,7 +62,7 @@ wrr_dispatch:
 
 __continue_wrr:
  
-  cmp r5, #MAXTASK    /* 3 women think this is OK */
+  cmp r5, #MAXTASK    
   beq __no_dis_task
 
   /* Load task index */
