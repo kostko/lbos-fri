@@ -83,7 +83,7 @@
           <UseExternalFilter type="String">False</UseExternalFilter>
         </AdvancedLinkerOptions>
         <Target.0>
-          <IsChanged type="String">True</IsChanged>
+          <IsChanged type="String">False</IsChanged>
           <TargetName type="String">LBOS-FRI</TargetName>
           <FileOptios>
             <AssemblerOptions type="String">$(EDNAME) -mcpu=arm926ej-s -gdwarf2 -o $(NOEXT).o -I$(IRFDIR).. -I$(IRFDIR)../include</AssemblerOptions>
@@ -231,7 +231,7 @@
               </FileOptios>
             </File.15>
             <File.16>
-              <FileName type="String">$(IRFDIR)..\include\space.s</FileName>
+              <FileName type="String">$(IRFDIR)..\include\structures.s</FileName>
               <IsChanged type="String">False</IsChanged>
               <FileOptios>
                 <AssemblerOptions type="String">$(EDNAME) -mcpu=arm926ej-s -gdwarf2 -o $(NOEXT).o -I$(IRFDIR).. -I$(IRFDIR)../include</AssemblerOptions>
@@ -416,7 +416,7 @@
           <LinkGroup.4>
             <LinkGroupName type="String">Tasks</LinkGroupName>
             <File.0>
-              <FileName type="String">$(IRFDIR)..\src\tasks\dummy.s</FileName>
+              <FileName type="String">$(IRFDIR)..\src\tasks\task1.s</FileName>
               <IsChanged type="String">False</IsChanged>
               <FileOptios>
                 <AssemblerOptions type="String">$(EDNAME) -mcpu=arm926ej-s -gdwarf2 -o $(NOEXT).o -I$(IRFDIR).. -I$(IRFDIR)../include</AssemblerOptions>
@@ -432,7 +432,7 @@
               </FileOptios>
             </File.0>
             <File.1>
-              <FileName type="String">$(IRFDIR)..\src\tasks\msgtest.s</FileName>
+              <FileName type="String">$(IRFDIR)..\src\tasks\task2.s</FileName>
               <IsChanged type="String">False</IsChanged>
               <FileOptios>
                 <AssemblerOptions type="String">$(EDNAME) -mcpu=arm926ej-s -gdwarf2 -o $(NOEXT).o -I$(IRFDIR).. -I$(IRFDIR)../include</AssemblerOptions>
@@ -448,7 +448,7 @@
               </FileOptios>
             </File.1>
             <File.2>
-              <FileName type="String">$(IRFDIR)..\src\tasks\iotest.s</FileName>
+              <FileName type="String">$(IRFDIR)..\src\tasks\task3.s</FileName>
               <IsChanged type="String">False</IsChanged>
               <FileOptios>
                 <AssemblerOptions type="String">$(EDNAME) -mcpu=arm926ej-s -gdwarf2 -o $(NOEXT).o -I$(IRFDIR).. -I$(IRFDIR)../include</AssemblerOptions>
@@ -464,7 +464,7 @@
               </FileOptios>
             </File.2>
             <File.3>
-              <FileName type="String">$(IRFDIR)..\src\tasks\vmtest.s</FileName>
+              <FileName type="String">$(IRFDIR)..\src\tasks\task4.s</FileName>
               <IsChanged type="String">False</IsChanged>
               <FileOptios>
                 <AssemblerOptions type="String">$(EDNAME) -mcpu=arm926ej-s -gdwarf2 -o $(NOEXT).o -I$(IRFDIR).. -I$(IRFDIR)../include</AssemblerOptions>
