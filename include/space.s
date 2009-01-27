@@ -81,3 +81,4 @@ STACK_IRQM_END: .long __STACK_END__
 /* Semaphore tables space */
 
 SEMA_TABLES: .space 440
+
