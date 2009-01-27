@@ -377,56 +377,56 @@ zmanjsamo stanje
 
 DISABLE_IRQ
 
-mov v1, #0x190 /* offset za statusno tabelo */
-ldr v2, =SEMA_TABLES
-add v2, v2, v1 /* v2 kaze na statusno tabelo */
+mov r4, #0x190 /* offset za statusno tabelo */
+ldr r5, =SEMA_TABLES
+add r5, r5, r4 /* r5 kaze na statusno tabelo */
 
 cmp r1, #0
-addeq v2, v2, #20 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
+addeq r5, r5, #20 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
 
-mov v1, #4 /* odmik 4B=32bit*/
-mul v3, v1, r0 /* izracunamo pravi odmik glede na st. semaforja*/
-add v2, v2, v3 /* smo v statusni tabelci v pravi celici */
+mov r4, #4 /* odmik 4B=32bit*/
+mul r6, r4, r0 /* izracunamo pravi odmik glede na st. semaforja*/
+add r5, r5, r6 /* smo v statusni tabelci v pravi celici */
 
 /* navaden semafor */
-ldr v3, [v2]
-cmp v3, #1
+ldr r6, [r5]
+cmp r6, #1
 beq __wait_konec2 /* semafor ima se eno prazno mesto=>zmanjsamo status in koncamo */
 
 __wait_syntype:
 
 /* dodajanje elementa */
-mov v4, #0x28
-mul v6, v4, r0 /* izracunamo offset za pravo tabelo */
-ldr v5, =SEMA_TABLES          
-add v5, v5, v6 /* v5 kaze na pravo tabelo semaforja */
+mov r7, #0x28
+mul r9, r7, r0 /* izracunamo offset za pravo tabelo */
+ldr r8, =SEMA_TABLES          
+add r8, r8, r9 /* r8 kaze na pravo tabelo semaforja */
 
 /* najdi prazen prostor in dodaj element */
-mov v6, #10
+mov r9, #10
 
 __wait_loop1:
-ldr v4, [v5]
-cmp v4, #0
+ldr r7, [r8]
+cmp r7, #0
 beq __wait_loop2
-add v5, v5, #4
-subs v6, v6, #1
+add r8, r8, #4
+subs r9, r9, #1
 bne __wait_loop1
 b __wait_konec
 
 /* shrani element */
 __wait_loop2:
-ldr v4, =CURRENT
-ldr v6, [v4]                 /*nalozimo naslov TCB-ja*/
-str v6, [v5]                 /*shranimo naslov v tabelo*/
-ldr v5, [v4]
-ldr v6, [v5, #T_FLAG]
-orr v6, v6, #SWAIT
-str v6, [v5, #T_FLAG]
+ldr r7, =CURRENT
+ldr r9, [r7]                 /*nalozimo naslov TCB-ja*/
+str r9, [r8]                 /*shranimo naslov v tabelo*/
+ldr r8, [r7]
+ldr r9, [r8, #T_FLAG]
+orr r9, r9, #SWAIT
+str r9, [r8, #T_FLAG]
 
 
 __wait_konec:
-sub v3, v3, #1
-str v3, [v2]
+sub r6, r6, #1
+str r6, [r5]
 
 ENABLE_IRQ
 
@@ -435,8 +435,8 @@ swi #SYS_NEWTASK
 POP_CONTEXT
 
 __wait_konec2:
-sub v3, v3, #1
-str v3, [v2]
+sub r6, r6, #1
+str r6, [r5]
 
 ENABLE_IRQ
 
@@ -460,50 +460,50 @@ ce je ==1 pustimo statusno spr. in koncamo
 */
 
 
-mov v1, #0x190 /* offset za statusno tabelo */
-ldr v2, =SEMA_TABLES
-add v2, v2, v1 /* v2 kaze na statusno tabelo */
+mov r4, #0x190 /* offset za statusno tabelo */
+ldr r5, =SEMA_TABLES
+add r5, r5, r4 /* r5 kaze na statusno tabelo */
 
 cmp r1, #0
-addeq v2, v2, #20 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
+addeq r5, r5, #20 /* ce gre za navaden semafor se doda +5 da pridemo v pravi del tabelce*/
 
-mov v1, #4 /* odmik 4B=32bit*/
-mul v3, v1, r0 /* izracunamo pravi odmik glede na st. semaforja*/
-add v2, v2, v3 /* smo v statusni tabelci v pravi celici */
+mov r4, #4 /* odmik 4B=32bit*/
+mul r6, r4, r0 /* izracunamo pravi odmik glede na st. semaforja*/
+add r5, r5, r6 /* smo v statusni tabelci v pravi celici */
 
 /* cmp r1, #1
 beq __signal_syntype */
 
 /* povecamo spremenljivko za 1 in shranimo*/
-ldr v3, [v2]
-add v3, v3, #1
-str v3, [v2]
+ldr r6, [r5]
+add r6, r6, #1
+str r6, [r5]
 
 /* dodati se pogoje, ce je prej ze navaden enak 0 ali syn enak 1 => error*/
 
 /* Vzemanje elementa_FIFO */
-mov v4, #0x28
-mul v4, v4, r0 /* izracunamo offset za pravo tabelo */
-ldr v5, =SEMA_TABLES
-add v5, v5, v4 /* v5 kaze na pravo tabelo semaforja */
+mov r7, #0x28
+mul r7, r7, r0 /* izracunamo offset za pravo tabelo */
+ldr r8, =SEMA_TABLES
+add r8, r8, r7 /* r8 kaze na pravo tabelo semaforja */
 
 /* prvemu elementu(FIFO) zbrisemo(BIT_CLR) flag in ga vzamemo iz vrste,
 ter pomaknemo ostale navzgor*/
-ldr v6, [v5]
-ldr v7, [v6, #T_FLAG]
-bic v7, v7, #SWAIT
-str v7, [v6, #T_FLAG]
+ldr r9, [r8]
+ldr r10, [r9, #T_FLAG]
+bic r10, r10, #SWAIT
+str r10, [r9, #T_FLAG]
 
 /* vse elemente premaknemo za ena navzgor, tako ga prepisemo in popravimo
 vrsto*/
 
-mov v1, #9
+mov r4, #9
 __signal_loop1:
-ldr v6, [v5, #4] /* naslednji element pomaknemo za mesto navzgor */
-str v6, [v5],#4
-cmp v6, #0
+ldr r9, [r8, #4] /* naslednji element pomaknemo za mesto navzgor */
+str r9, [r8],#4
+cmp r9, #0
 beq __signal_konec /* smo prisli do praznega naslova => konec*/
-subs v1, v1, #1
+subs r4, r4, #1
 bne __signal_loop1
 
 
