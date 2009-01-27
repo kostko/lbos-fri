@@ -68,10 +68,9 @@
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\src\tasks\vmtest.s</P>
           </PI.2>
           <PI.20>
-            <C type="Integer">71</C>
-            <L type="Integer">44</L>
+            <L type="Integer">83</L>
             <P type="String">C:\Documents and Settings\Uros\Desktop\group2\include\space.s</P>
-            <VL type="Integer">33</VL>
+            <VL type="Integer">70</VL>
           </PI.20>
           <PI.21>
             <C type="Integer">36</C>
@@ -234,7 +233,7 @@
         <Documents.0>
           <ActiveDocument>
             <Maximized type="String">True</Maximized>
-            <RelativeFileName type="String">..\src\syscall.s</RelativeFileName>
+            <RelativeFileName type="String">..\include\space.s</RelativeFileName>
           </ActiveDocument>
           <Editor.0>
             <FileBarIndex type="Integer">1</FileBarIndex>
@@ -309,7 +308,7 @@
             <RelativeFileName type="String">..\src\tasks\task5.s</RelativeFileName>
           </Editor.16>
           <Editor.17>
-            <FileBarIndex type="Integer">21</FileBarIndex>
+            <FileBarIndex type="Integer">20</FileBarIndex>
             <RectPosBottom type="Integer">421</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">976</RectPosRight>
@@ -317,7 +316,7 @@
             <RelativeFileName type="String">..\src\tasks\task6.s</RelativeFileName>
           </Editor.17>
           <Editor.18>
-            <FileBarIndex type="Integer">20</FileBarIndex>
+            <FileBarIndex type="Integer">21</FileBarIndex>
             <RectPosBottom type="Integer">450</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">998</RectPosRight>

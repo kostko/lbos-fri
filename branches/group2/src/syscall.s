@@ -356,18 +356,14 @@ svc_exit:
 
 /**
 * Check the semaphore's status and enqueue task if status = 0
+*
+* @param r0 Semaphore number. Can range from 0 to 4.
+* @param r1 Type of semaphore. 0=regular, 1=synch.
+*
 */
 
 svc_wait:
 /*
-podajanje parametrov:
-1. stevilka semaforja v r0 (0..9)
-2. stevilka procesa v CURRENT
-3. navadni ali syn dolocimo z stanjem v r1 ...recimo
-(ce r1 == 0 => navaden semafor) 5,6,7,8,9
-(ce r1 == 1 => Synchro semafor) 0,1,2,3,4
-oba tipa klicemo 0-4
-
 POSTOPEK:
 pogledamo stanje semaforja
 ce je >0 spustimo proces v KO
@@ -439,9 +435,16 @@ sub r6, r6, #1
 str r6, [r5]
 
 ENABLE_IRQ
-
-
 POP_CONTEXT
+
+
+/**
+* Take first waiting task from FIFO queue and mark it dispatchable.
+*
+* @param r0 Semaphore number. Can range from 0 to 4.
+* @param r1 Type of semaphore. 0=regular, 1=synch.
+*
+*/
 
 svc_signal:
 /*
