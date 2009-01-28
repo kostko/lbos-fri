@@ -167,7 +167,7 @@ svc_append:
   ldr r8,[r10] /* V r8 shranimo st. novih gruc */
   
   
-  /* Prvi korak: Pregledamo tabelo FAT in si zapomnimo st. zadnje gruce ter naslov gruce, ki oznacuje konec datoteke ... */
+/* Prvi korak:  Pregledamo tabelo FAT in si zapomnimo naslov zadnje gruèe v datoteki...  */
 __app1fs_loop:
   
   mov r4, r0 /* V r4 shranimo st. trenutne gruce */
@@ -183,37 +183,38 @@ __app1fs_loop:
   cmp r0,#1 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
   bne __app1fs_loop /* Ponavljamo dokler nismo dosegli konec fajla ... */
   
-  mov r0,r4 /* v r0 zapi?emo ?t. zadnje grue`e -> z njo bomo izrae`unali naslov naslednje */
+	mov r4, #2	/* Zaènemo na zaèetku tabele FAT */
   
-  
-  
-  /* Drugi korak: V tabelo FAT dodamo nove gruce... */
-__app2fs_loop:
-  
+/* Drugi korak: dodamo nove gruèe v tabelo */
 
-  add r4, r4, #1 /* St. zadnje gruce povecamo za 1. To bo sedaj nova (naslednja) gruca. */
-  str r4,[r5] /* Na naslov trenutne gruce shranimo naslednjo gruco */
-  sub r8, r8, #1 /* St. novih gruc zmanjsamo za 1 (eno smo pravkar dodali) */
-  
-  /* V tabeli FAT poiscemo naslednjo gruco: */
-  sub r0,r0,#2
-  mov r0,r0, LSL #2
-  add r0,r0,r2
-  
-  mov r5,r0 /* V register r5 shranimo naslov gruce */
-  ldr r0,[r0] /* V r0 sedaj shranimo se vsebino iz naslova od r0 (st. naslednje gruce) */
-  
-  cmp r8, #0 /* Preverimo, ce smo dodali ze vse nove gruce. */
-  bne __app2fs_loop /* Ponavljamo, dokler nismo dodali vseh gruc ... */
-  
-  mov r3, #1 /* Z enico bomo oznacili nov konec datoteke */
-  str r3, [r5] /* Oznacimo nov konec datoteke. */
+__app2fs_loop:      
+
+/* V tabeli FAT poišèemo naslednjo prazno gruèo: */
+
+add r4, r4, #1	/* V r4 shranimo št. naslednje gruèe v tabeli FAT */
+mov r0, r4			/* V r0 vpišemo št. naslednje gruèe*/
+
+sub r0,r0,#2             
+mov r0,r0, LSL #2      
+add r0,r0,r2             
+mov r6,r0				/* V r6 shranimo naslov trenutne gruèe */
+ldr r0,[r0]     /* V r0 sedaj shranimo še vsebino iz naslova od r0 (št. naslednje gruèe) */
+
+cmp r0, #0
+bne __app2fs_loop      /* Èe gruèa ni prazna, poišèemo naslednjo*/
+
+	str r4, [r5]		/* V gruèo, ki je prej oznaèevala konec vpišemo št. naslednje gruèe */
+	mov r0, #1			/* Z 1 bomo oznaèili nov konec datoteke */
+	str r0, [r6]		/* V prosto gruèo oznaèimo nov konec datoteke */
+	mov r5, r6			/* V r5 si zapomnimo naslov novega konca datoteke */
+	sub r8, r8, #1	/* Št. novih gruè zmanjšamo za 1, saj smo eno pravkar dodali */
+
+	cmp r8,#0             	 /* Preverimo ali smo v tabelo FAT dodali že vse nove gruèe */
+	bne __app2fs_loop        /* Ponavljamo dokler nismo dodali vseh novih gruè */
   
   
   /* Tretji korak: Iz delovnega pomnilnika prenesemo vse v glavni pomnilnik... */
   swi #SYS_WRITE /* Klicemo funkcijo WRITE */
-
-
 
 
 svc_truncate:
@@ -225,37 +226,49 @@ svc_truncate:
   ldr r0,[r9] /* Shranimo st. prve gruce v r0 -> dobimo od druge skupine */
   ldr r8,[r10] /* V r8 shranimo st. novih gruc */
   
-  /* Prvi korak: Pregledamo tabelo FAT in poiscemo konec datoteke ter si zapomnimo naslov gruce, ki oznacuje konec datoteke ... */
+/* Prvi korak:  Pregledamo tabelo FAT preštejemo koliko gruè že ima datoteka.  */
 __trun1fs_loop:
 
-  /* V tabeli FAT poiscemo naslednjo gruco: */
-  sub r0,r0,#2
-  mov r0,r0, LSL #2
-  add r0,r0,r2
-  /* V register r5 shranimo naslov, kjer bo po koncu zanke oznacen konec datoteke. Potrebovali ga bomo v koraku 2: */
-  mov r5,r0
-  ldr r0,[r0] /* V r0 sedaj shranimo se vsebino iz naslova od r0 (st. naslednje gruce) */
-  
-  cmp r0,#1 /* V kolikor je st. gruce enaka 1, pomeni da je to konec fajla */
-  bne __trun1fs_loop /* Ponavljamo dokler nismo dosegli konec fajla ... */
+	add r4, r4, #1					/* Števec gruè */
 
+	/* V tabeli FAT poišèemo naslednjo gruèo: */
+	sub r0,r0,#2             
+	mov r0,r0, LSL #2      
+	add r0,r0,r2             
+	ldr r0,[r0]             /* V r0 sedaj shranimo še vsebino iz naslova od r0 (št. naslednje gruèe) */
 
+	cmp r0,#1               /* V kolikor je št. gruèe enaka 1, pomeni da je to konec fajla */
+	bne _trun1fs_loop       /* Ponavljamo dokler nismo dosegli konec fajla ... */
 
-/* Drugi korak: V tabeli FAT odstranimo odvecne gruce... */
-__trun2fs_loop:
+/* Drugi korak:  V tabeli FAT odstranimo odveène gruèe...  */
 
-  mov r3, #0 /* Z niclo bomo oznacili prosto gruco */
-  str r3,[r5] /* Na naslov trenutne gruce vpisemo 0 (prosta gruca) */
-  
-  mov r3, #1 /* Gruco na naslovu r5 oznacimo kot nov konec datoteke (vpisemo 1) */
-  sub r5, r5, #4
-  str r3,[r5]
-  
-  sub r8, r8, #1 /* St. praznih gruc zmanjsamo za 1 (eno gruco smo pravkar odstranili) */
-  sub r5,r5,#4 /* Prestavimo se eno polje visje */
-  
-  cmp r8, #0 /* Preverimo, ce smo odstranili ze vse gruce. */
-  bne __trun2fs_loop /* Ponavljamo, dokler nismo odstranili vseh gruc ... */
+ldr r0,[r9]             /* Še enkrat bomo šli èez vse gruèe odprte datoteke ...*/
+sub r4, r4, r8	   			/* Koliko gruè pustimo? -> št. vseh gruè v fajlu minus št. gruè, ki jih želi odstraniti uporabnik */
+add r8, r8, #1	   			/* Št. gruè, ki je zapisano v r8 poveèamo za 1, samo zato, ker potrebujemo dodaten obhod zanke */
+mov r5, #0	   					/* Pomagali si bomo še z enim števcem */
+mov r3, #1	   					/* Z 1 bomo oznaèili nov konec datoteke */
+
+_trun2fs_loop:        
+
+add r5, r5, #1
+
+/* V tabeli FAT poišèemo naslednjo gruèo: */
+sub r0,r0,#2             
+mov r0,r0, LSL #2      
+add r0,r0,r2             
+mov r6,r0	    					/* V r6 shranimo naslov trenutne gruèe */
+ldr r0,[r0]             /* V r0 sedaj shranimo še vsebino iz naslova od r0 (št. naslednje gruèe) */
+
+cmp r5, r4	    				/* Preverimo èe smo že šli mimo vseh gruè, ki bodo ostale v datoteki */
+bne _trun2fs_loop       /* Ponavljamo, dokler nismo šli mimo vseh gruè, ki bodo ostale */
+	
+		str r3, [r6]				/* Oznaèimo nov konec datoteke */
+		mov r3, #0					/* Vse naslednje gruèe v datoteki bomo oznaèili kot prazne... */
+		add r4, r4, #1			/* Èe hoèemo, da bo pogoj izpolnjen tudi ob naslednjem obhodu, ko vpisujemo nièle, moramo poveèati tudi števec r4 */
+		sub r8, r8, #1			/* Odstranili smo gruèo */
+	
+		cmp r8, #0          /* Preverimo, èe smo odstranili že vse gruèe. */
+		bne _trun2fs_loop   /* Ponavljamo, dokler nismo odstranili vseh gruè ... */
   
   
   
