@@ -238,7 +238,7 @@ __trun1fs_loop:
 	ldr r0,[r0]             /* V r0 sedaj shranimo še vsebino iz naslova od r0 (št. naslednje gruèe) */
 
 	cmp r0,#1               /* V kolikor je št. gruèe enaka 1, pomeni da je to konec fajla */
-	bne _trun1fs_loop       /* Ponavljamo dokler nismo dosegli konec fajla ... */
+	bne __trun1fs_loop       /* Ponavljamo dokler nismo dosegli konec fajla ... */
 
 /* Drugi korak:  V tabeli FAT odstranimo odveène gruèe...  */
 
