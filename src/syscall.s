@@ -93,9 +93,10 @@ svc_delay:
 /**
  * Send message syscall.
  *
- * @param r0 Buffer address
- * @param r1 Buffer size
- * @param r2 Task number
+ * @param  r0 Buffer address
+ * @param  r1 Buffer size
+ * @param  r2 Task number
+ * @return r0 Error code
  */
 svc_send:
   /* Check if task number is valid before grabbing any MCBs,
@@ -175,8 +176,9 @@ __err_badtask:
 /**
  * Receive message syscall.
 
- * @param r0 Buffer address
- * @param r1 Buffer size
+ * @param  r0 Buffer address
+ * @param  r1 Buffer size
+ * @return r0 MCB address or error code
  */
 svc_recv:
   cmp r0, #0x30000000	/* Check if buffer address is valid (is in process' virtual address space) */
@@ -244,7 +246,8 @@ __err_badaddress:
 /**
  * Reply to a message syscall.
  *
- * @param r0 MCB address
+ * @param  r0 MCB address
+ * @return r0 Error code
  */
 svc_reply:
   /* Get current task's TCB */
