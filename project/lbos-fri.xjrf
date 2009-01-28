@@ -13,199 +13,178 @@
             <ASMSyntaxFile type="String"></ASMSyntaxFile>
           </ColorSyntax>
           <PI.0>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\vsprintf.s</P>
+            <C type="Integer">26</C>
+            <L type="Integer">10</L>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\tasks\task1.s</P>
           </PI.0>
           <PI.1>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\vm.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\vsprintf.s</P>
           </PI.1>
           <PI.10>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\printk.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\printk.s</P>
           </PI.10>
           <PI.11>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\panic.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\panic.s</P>
           </PI.11>
           <PI.12>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\main.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\main.s</P>
           </PI.12>
           <PI.13>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\irq.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\irq.s</P>
           </PI.13>
           <PI.14>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\debugger.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\debugger.s</P>
           </PI.14>
           <PI.15>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\include\structures.s</P>
+            <C type="Integer">29</C>
+            <L type="Integer">168</L>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\include\structures.s</P>
+            <VL type="Integer">157</VL>
           </PI.15>
           <PI.16>
-            <C type="Integer">64</C>
-            <L type="Integer">13</L>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\include\space.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\include\space.s</P>
           </PI.16>
           <PI.17>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\include\globals.s</P>
-            <VL type="Integer">12</VL>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\include\globals.s</P>
           </PI.17>
           <PI.18>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\include\clock_init.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\include\clock_init.s</P>
           </PI.18>
           <PI.19>
-            <C type="Integer">85</C>
-            <L type="Integer">60</L>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\config\layout.ind</P>
-            <VL type="Integer">53</VL>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\config\layout.ind</P>
+            <VL type="Integer">50</VL>
           </PI.19>
           <PI.2>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\timers.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\vm.s</P>
           </PI.2>
           <PI.20>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\vsprintf.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\vsprintf.s</P>
           </PI.20>
           <PI.21>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\vm.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\vm.s</P>
           </PI.21>
           <PI.22>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\timers.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\timers.s</P>
           </PI.22>
           <PI.23>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\vmtest.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\tasks\vmtest.s</P>
           </PI.23>
           <PI.24>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\msgtest.s</P>
-          </PI.24>
-          <PI.25>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\iotest.s</P>
-          </PI.25>
-          <PI.26>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\dummy.s</P>
-          </PI.26>
-          <PI.27>
-            <C type="Integer">56</C>
-            <L type="Integer">248</L>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\syscall.s</P>
-            <VL type="Integer">239</VL>
-          </PI.27>
-          <PI.28>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\sched.s</P>
-          </PI.28>
-          <PI.29>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\printk.s</P>
-          </PI.29>
-          <PI.3>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\tasks\vmtest.s</P>
-          </PI.3>
-          <PI.30>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\panic.s</P>
-          </PI.30>
-          <PI.31>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\main.s</P>
-          </PI.31>
-          <PI.32>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\irq.s</P>
-          </PI.32>
-          <PI.33>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\debugger.s</P>
-          </PI.33>
-          <PI.34>
-            <C type="Integer">12</C>
-            <L type="Integer">25</L>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\include\space.s</P>
-            <VL type="Integer">15</VL>
-          </PI.34>
-          <PI.35>
-            <C type="Integer">40</C>
-            <L type="Integer">21</L>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\include\globals.s</P>
-            <VL type="Integer">10</VL>
-          </PI.35>
-          <PI.36>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\include\clock_init.s</P>
-          </PI.36>
-          <PI.37>
-            <C type="Integer">27</C>
-            <L type="Integer">26</L>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\LBOS\include\space.s</P>
-            <VL type="Integer">15</VL>
-          </PI.37>
-          <PI.38>
-            <L type="Integer">21</L>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\LBOS\include\globals.s</P>
-            <VL type="Integer">15</VL>
-          </PI.38>
-          <PI.39>
-            <L type="Integer">268</L>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\LBOS\src\syscall.s</P>
-            <VL type="Integer">265</VL>
-          </PI.39>
-          <PI.4>
             <C type="Integer">57</C>
             <L type="Integer">27</L>
             <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\tasks\task1.s</P>
             <VL type="Integer">24</VL>
-          </PI.4>
-          <PI.40>
-            <L type="Integer">27</L>
-            <P type="String">D:\LBOS-Branch4\src\vsprintf.s</P>
-            <VL type="Integer">14</VL>
-          </PI.40>
-          <PI.41>
-            <L type="Integer">364</L>
-            <P type="String">D:\LBOS-Branch4\src\vm.s</P>
-            <VL type="Integer">356</VL>
-          </PI.41>
-          <PI.42>
-            <P type="String">D:\LBOS-Branch4\src\timers.s</P>
-          </PI.42>
-          <PI.43>
-            <P type="String">D:\LBOS-Branch4\src\tasks\vmtest.s</P>
-          </PI.43>
-          <PI.44>
-            <L type="Integer">15</L>
-            <P type="String">D:\LBOS-Branch4\src\tasks\msgtest.s</P>
-            <VL type="Integer">5</VL>
-          </PI.44>
-          <PI.45>
-            <L type="Integer">35</L>
-            <P type="String">D:\LBOS-Branch4\src\tasks\iotest.s</P>
-            <VL type="Integer">27</VL>
-          </PI.45>
-          <PI.46>
-            <C type="Integer">2</C>
-            <L type="Integer">54</L>
-            <P type="String">D:\LBOS-Branch4\src\tasks\dummy.s</P>
-            <VL type="Integer">42</VL>
-          </PI.46>
-          <PI.47>
-            <L type="Integer">376</L>
-            <P type="String">D:\LBOS-Branch4\src\syscall.s</P>
-            <VL type="Integer">376</VL>
-          </PI.47>
-          <PI.48>
-            <L type="Integer">56</L>
-            <P type="String">D:\LBOS-Branch4\src\sched.s</P>
-            <VL type="Integer">45</VL>
-          </PI.48>
-          <PI.49>
-            <L type="Integer">37</L>
-            <P type="String">D:\LBOS-Branch4\src\printk.s</P>
-            <VL type="Integer">28</VL>
-          </PI.49>
-          <PI.5>
+          </PI.24>
+          <PI.25>
             <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\tasks\msgtest.s</P>
-          </PI.5>
-          <PI.6>
+          </PI.25>
+          <PI.26>
             <L type="Integer">46</L>
             <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\tasks\iotest.s</P>
             <VL type="Integer">37</VL>
-          </PI.6>
-          <PI.7>
+          </PI.26>
+          <PI.27>
             <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\tasks\dummy.s</P>
-          </PI.7>
-          <PI.8>
+          </PI.27>
+          <PI.28>
             <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\syscall.s</P>
             <VL type="Integer">183</VL>
+          </PI.28>
+          <PI.29>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\sched.s</P>
+          </PI.29>
+          <PI.3>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\timers.s</P>
+          </PI.3>
+          <PI.30>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\printk.s</P>
+          </PI.30>
+          <PI.31>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\panic.s</P>
+          </PI.31>
+          <PI.32>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\main.s</P>
+          </PI.32>
+          <PI.33>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\irq.s</P>
+          </PI.33>
+          <PI.34>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\debugger.s</P>
+          </PI.34>
+          <PI.35>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\include\structures.s</P>
+          </PI.35>
+          <PI.36>
+            <C type="Integer">64</C>
+            <L type="Integer">13</L>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\include\space.s</P>
+          </PI.36>
+          <PI.37>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\include\globals.s</P>
+            <VL type="Integer">12</VL>
+          </PI.37>
+          <PI.38>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\include\clock_init.s</P>
+          </PI.38>
+          <PI.39>
+            <C type="Integer">85</C>
+            <L type="Integer">60</L>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\config\layout.ind</P>
+            <VL type="Integer">53</VL>
+          </PI.39>
+          <PI.4>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\tasks\vmtest.s</P>
+          </PI.4>
+          <PI.40>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\vsprintf.s</P>
+          </PI.40>
+          <PI.41>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\vm.s</P>
+          </PI.41>
+          <PI.42>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\timers.s</P>
+          </PI.42>
+          <PI.43>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\vmtest.s</P>
+          </PI.43>
+          <PI.44>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\msgtest.s</P>
+          </PI.44>
+          <PI.45>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\iotest.s</P>
+          </PI.45>
+          <PI.46>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\tasks\dummy.s</P>
+          </PI.46>
+          <PI.47>
+            <C type="Integer">56</C>
+            <L type="Integer">248</L>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\syscall.s</P>
+            <VL type="Integer">239</VL>
+          </PI.47>
+          <PI.48>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\sched.s</P>
+          </PI.48>
+          <PI.49>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group 4\src\printk.s</P>
+          </PI.49>
+          <PI.5>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\tasks\msgtest.s</P>
+          </PI.5>
+          <PI.6>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\tasks\iotest.s</P>
+          </PI.6>
+          <PI.7>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\tasks\dummy.s</P>
+          </PI.7>
+          <PI.8>
+            <C type="Integer">56</C>
+            <L type="Integer">648</L>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\syscall.s</P>
+            <VL type="Integer">630</VL>
           </PI.8>
           <PI.9>
-            <P type="String">C:\Documents and Settings\Daniel\Desktop\New Folder\src\sched.s</P>
+            <P type="String">C:\Documents and Settings\Daniel\Desktop\group4\src\sched.s</P>
           </PI.9>
         </REG_ROOT>
       </EditorOptions>
@@ -240,7 +219,7 @@
             <RelativeFileName type="String">..\config\layout.ind</RelativeFileName>
           </Editor.0>
           <Editor.1>
-            <FileBarIndex type="Integer">3</FileBarIndex>
+            <FileBarIndex type="Integer">2</FileBarIndex>
             <RectPosBottom type="Integer">418</RectPosBottom>
             <RectPosLeft type="Integer">132</RectPosLeft>
             <RectPosRight type="Integer">1031</RectPosRight>
@@ -312,7 +291,7 @@
             <RelativeFileName type="String">..\src\timers.s</RelativeFileName>
           </Editor.17>
           <Editor.18>
-            <FileBarIndex type="Integer">5</FileBarIndex>
+            <FileBarIndex type="Integer">6</FileBarIndex>
             <RectPosBottom type="Integer">287</RectPosBottom>
             <RectPosLeft type="Integer">88</RectPosLeft>
             <RectPosRight type="Integer">525</RectPosRight>
@@ -320,7 +299,7 @@
             <RelativeFileName type="String">..\src\vm.s</RelativeFileName>
           </Editor.18>
           <Editor.19>
-            <FileBarIndex type="Integer">9</FileBarIndex>
+            <FileBarIndex type="Integer">10</FileBarIndex>
             <RectPosBottom type="Integer">352</RectPosBottom>
             <RectPosLeft type="Integer">66</RectPosLeft>
             <RectPosRight type="Integer">965</RectPosRight>
@@ -336,7 +315,7 @@
             <RelativeFileName type="String">..\include\globals.s</RelativeFileName>
           </Editor.2>
           <Editor.3>
-            <FileBarIndex type="Integer">6</FileBarIndex>
+            <FileBarIndex type="Integer">5</FileBarIndex>
             <RectPosBottom type="Integer">253</RectPosBottom>
             <RectPosLeft type="Integer">22</RectPosLeft>
             <RectPosRight type="Integer">894</RectPosRight>
@@ -344,7 +323,7 @@
             <RelativeFileName type="String">..\include\space.s</RelativeFileName>
           </Editor.3>
           <Editor.4>
-            <FileBarIndex type="Integer">2</FileBarIndex>
+            <FileBarIndex type="Integer">3</FileBarIndex>
             <RectPosBottom type="Integer">302</RectPosBottom>
             <RectPosLeft type="Integer">44</RectPosLeft>
             <RectPosRight type="Integer">938</RectPosRight>
@@ -368,7 +347,7 @@
             <RelativeFileName type="String">..\src\irq.s</RelativeFileName>
           </Editor.6>
           <Editor.7>
-            <FileBarIndex type="Integer">10</FileBarIndex>
+            <FileBarIndex type="Integer">9</FileBarIndex>
             <RectPosBottom type="Integer">308</RectPosBottom>
             <RectPosLeft type="Integer">22</RectPosLeft>
             <RectPosRight type="Integer">921</RectPosRight>
