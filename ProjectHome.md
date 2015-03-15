@@ -1,0 +1,1 @@
+Small and completely useless operating system used for studying operating systems at **FRI** _(Fakulteta za Računalništvo in Informatiko)_. It is written in ARM ASM and only works on AT91SAM9260 that is part of the FRI-SMS development board.
